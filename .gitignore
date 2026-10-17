@@ -1,0 +1,16 @@
+# Editors
+.vscode/
+.idea/
+.docs/
+
+# Logs
+*.log
+
+# Environment
+.env
+.env.*
+
+# Node.js
+node_modules/
+dist/
+
