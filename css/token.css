@@ -1,22 +1,123 @@
-* {
-  box-sizing: border-box;
+/*
+ * VIỆT KÝ - Design Tokens v1.0
+ * Forged in THIÊN ĐÌNH org
+ * by Thái Thượng Lão Quân.
+ */
+
+:root {
+  /* Colors */
+  --vk-paper: #FFF9F1;
+  --vk-paper-aged: #EADCC7;
+  --vk-ink: #2B2B2B;
+  --vk-ink-soft: #66615B;
+  --vk-son: #8B1E1E;
+  --vk-son-deep: #651919;
+  --vk-earth: #B1957A;
+  --vk-line: #D8C6AC;
+  --vk-white: #FFFFFF;
+
+  /* Natural accents */
+  --vk-moss: #6B7F5B;
+  --vk-river: #5F808F;
+  --vk-ceramic: #548579;
+  --vk-lotus: #DCA3AE;
+  --vk-gold: #C99A43;
+  --vk-brick: #A65C3E;
+
+  /* Semantic colors */
+  --vk-bg: var(--vk-paper);
+  --vk-surface: var(--vk-white);
+  --vk-surface-muted: #F7F1E8;
+  --vk-surface-aged: var(--vk-paper-aged);
+  --vk-surface-glass: rgb(255 249 241 / 88%);
+
+  --vk-text: var(--vk-ink);
+  --vk-text-muted: var(--vk-ink-soft);
+  --vk-text-inverse: var(--vk-paper);
+
+  --vk-border: var(--vk-line);
+  --vk-border-strong: var(--vk-earth);
+
+  --vk-action: var(--vk-son);
+  --vk-action-hover: var(--vk-son-deep);
+  --vk-on-action: var(--vk-paper);
+
+  --vk-link: var(--vk-son);
+  --vk-link-hover: var(--vk-son-deep);
+  --vk-focus: var(--vk-son);
+
+  /* Fonts */
+  --vk-serif: "Noto Serif Display", Georgia, "Times New Roman", serif;
+  --vk-sans: "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Font sizes */
+  --vk-type-display: clamp(3rem, 5vw, 4rem);
+  --vk-type-h1: clamp(2.25rem, 3.5vw, 2.75rem);
+  --vk-type-h2: clamp(1.75rem, 2.8vw, 2rem);
+  --vk-type-h3: 1.5rem;
+  --vk-type-lead: 1.25rem;
+  --vk-type-reading: 1.125rem;
+  --vk-type-body: 1rem;
+  --vk-type-label: 0.875rem;
+  --vk-type-caption: 0.8125rem;
+
+  /* Line heights */
+  --vk-leading-display: 1.12;
+  --vk-leading-heading: 1.2;
+  --vk-leading-body: 1.55;
+  --vk-leading-reading: 1.65;
+  --vk-leading-caption: 1.4;
+
+  /* Font weights */
+  --vk-weight-regular: 400;
+  --vk-weight-medium: 500;
+  --vk-weight-semibold: 600;
+  --vk-weight-bold: 700;
+
+  /* Letter spacing */
+  --vk-tracking-tight: -0.02em;
+  --vk-tracking-normal: 0;
+  --vk-tracking-label: 0.08em;
+
+  /* Spacing */
+  --vk-space-1: 0.25rem;
+  --vk-space-2: 0.5rem;
+  --vk-space-3: 0.75rem;
+  --vk-space-4: 1rem;
+  --vk-space-6: 1.5rem;
+  --vk-space-8: 2rem;
+  --vk-space-12: 3rem;
+  --vk-space-20: 5rem;
+
+  /* Borders */
+  --vk-radius-sm: 8px;
+  --vk-radius-md: 16px;
+  --vk-radius-lg: 24px;
+  --vk-radius-pill: 999px;
+  --vk-stroke: 1px;
+  --vk-stroke-strong: 2px;
+
+  /* Layout */
+  --vk-container: 1280px;
+  --vk-reading-width: 760px;
+  --vk-gutter: clamp(16px, 4vw, 32px);
+  --vk-section-gap: clamp(48px, 7vw, 80px);
+  --vk-grid-gap: var(--vk-space-6);
+
+  /* Elevation */
+  --vk-shadow-float: 0 8px 28px rgb(43 43 43 / 8%);
+
+  /* Motion */
+  --vk-motion-fast: 160ms;
+  --vk-motion-normal: 260ms;
+  --vk-motion-slow: 420ms;
+  --vk-ease: cubic-bezier(0.2, 0, 0, 1);
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  margin: 0;
-  font-family: system-ui, sans-serif;
-}
-
-img {
-  display: block;
-  max-width: 100%;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --vk-motion-fast: 0ms;
+    --vk-motion-normal: 0ms;
+    --vk-motion-slow: 0ms;
+  }
 }
