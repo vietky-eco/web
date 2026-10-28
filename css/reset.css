@@ -1,0 +1,21 @@
+/*
+ * Áp dụng border-box cho tất cả phần tử
+ * và các phần tử giả ::before, ::after.
+ * Giúp thống nhất cách tính kích thước phần tử.
+ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Loại bỏ margin mặc định của body */
+body {
+  margin: 0;
+}
+
+/* Chuẩn hóa cách hiển thị hình ảnh */
+img {
+  display: block;
+  max-width: 100%;
+}
