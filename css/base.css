@@ -1,3 +1,17 @@
+@font-face {
+  font-family: "Noto Serif Display";
+  src: url("../assets/fonts/noto-serif-display.ttf") format("truetype");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: url("../assets/fonts/be-vietnam-pro.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -8,7 +22,7 @@ html {
 
 body {
   margin: 0;
-  font-family: system-ui, sans-serif;
+  font-family: var(--vk-sans);
 }
 
 img {

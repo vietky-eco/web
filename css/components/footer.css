@@ -1,5 +1,4 @@
 .site-footer {
-  --vk-serif: "Noto Serif", Georgia, serif;
   background: var(--vk-action);
   color: var(--vk-on-action);
 }

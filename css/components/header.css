@@ -1,20 +1,4 @@
-@font-face {
-  font-family: "Noto Serif";
-  src: url("../../assets/fonts/noto-serif.ttf") format("truetype");
-  font-weight: 400;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Be Vietnam Pro";
-  src: url("../../assets/fonts/be-vietnam-pro.ttf") format("truetype");
-  font-weight: 400;
-  font-display: swap;
-}
-
-
 .site-header {
-  --vk-serif: "Noto Serif", Georgia, serif;
   position: relative;
   z-index: 10;
   background: var(--vk-surface);
