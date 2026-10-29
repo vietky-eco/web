@@ -653,6 +653,19 @@
         .instructions summary { cursor: pointer; font-weight: 700; }
         input { accent-color: var(--black); }
         .case small { display: block; margin-top: 3px; color: var(--gray); }
+        .passed-engines { margin: 16px 0; }
+        .passed-engines .panel-title { flex-wrap: wrap; }
+        .passed-engine-list { max-height: 340px; overflow-y: auto; }
+        .passed-engine { padding: 14px 16px; border-top: 1px solid var(--light-line); }
+        .passed-engine:first-child { border-top: 0; }
+        .passed-engine-heading { display: flex; justify-content: space-between; align-items: start; gap: 12px; flex-wrap: wrap; }
+        .passed-engine-heading p { margin-top: 4px; font-size: 12px; color: var(--gray); }
+        .passed-case-list { list-style: none; margin: 10px 0 0; padding: 0; }
+        .passed-case { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-top: 1px solid var(--light-line); }
+        .passed-case-preview { flex: 1; min-width: 0; padding: 6px; text-align: left; background: #fff; border: 1px solid transparent; }
+        .passed-case-preview:hover, .passed-case-preview[aria-current="true"] { border-color: var(--black); }
+        .passed-case-preview strong, .passed-case-preview small { display: block; overflow-wrap: anywhere; }
+        .passed-case-preview small { margin-top: 3px; color: var(--gray); }
         #run-again { margin: 0 0 12px; }
         .result-text, .history-button strong, .checks li { overflow-wrap: anywhere; }
         .message {
@@ -832,6 +845,19 @@
                 <div class="metric"><strong id="stat-pass">0</strong><small>PASS</small></div>
                 <div class="metric"><strong id="stat-fail">0</strong><small>FAIL</small></div>
                 <div class="metric"><strong id="stat-blocked">0</strong><small>BLOCKED</small></div>
+            </section>
+
+            <section class="panel passed-engines" aria-labelledby="passed-engines-title">
+                <div class="panel-title">
+                    <h2 id="passed-engines-title">Engine / module đã PASS</h2>
+                    <button id="rerun-passed" class="btn btn-quiet" type="button" disabled>Chạy lại các PASS</button>
+                </div>
+                <div class="panel-body">
+                    <p id="passed-engines-summary" role="status" aria-live="polite">Chưa có kịch bản PASS.</p>
+                    <p class="muted">Dựa trên kết quả mới nhất của từng kịch bản. Bấm tên để xem preview và assertions;
+                        Chạy lại để dựng tương tác thật và kiểm tra lỗi mới.</p>
+                </div>
+                <div id="passed-engine-list" class="passed-engine-list"></div>
             </section>
 
             <div class="workspace-grid">
@@ -1237,6 +1263,55 @@
         function updateStats() {
             $('stat-total').textContent = String(CASES.length);
             for (const status of ['pass', 'fail', 'blocked']) $('stat-' + status).textContent = String([...state.latest.values()].filter(item => item.status === status).length);
+            renderPassedEngines();
+        }
+        const latestPasses = () => CASES.map(test => state.latest.get(test.id)).filter(result => result?.status === 'pass');
+        function renderPassedEngines() {
+            const list = $('passed-engine-list'); list.replaceChildren();
+            const passes = latestPasses();
+            const complete = MODULES.filter(module => casesOf(module.id).every(test => state.latest.get(test.id)?.status === 'pass'));
+            $('passed-engines-summary').textContent = passes.length
+                ? `${passes.length} kịch bản PASS · ${complete.length}/${MODULES.length} engine/module đạt toàn bộ kịch bản.`
+                : 'Chưa có kịch bản PASS. Chạy module hoặc các kịch bản đã chọn để có kết quả.';
+            $('rerun-passed').disabled = state.busy || !passes.length;
+            if (!passes.length) {list.append(el('p', 'Engine/module có kịch bản PASS sẽ xuất hiện ở đây.', 'message')); return;}
+            for (const module of MODULES) {
+                const tests = casesOf(module.id);
+                const results = passes.filter(result => result.test.module === module.id);
+                if (!results.length) continue;
+                const group = el('div', '', 'passed-engine'); group.dataset.module = module.id;
+                const heading = el('div', '', 'passed-engine-heading');
+                const name = el('div');
+                name.append(el('h3', module.title));
+                const fail = tests.filter(test => state.latest.get(test.id)?.status === 'fail').length;
+                const blocked = tests.filter(test => state.latest.get(test.id)?.status === 'blocked').length;
+                const pending = tests.filter(test => !state.latest.has(test.id)).length;
+                name.append(el('p', results.length === tests.length
+                    ? `PASS toàn bộ ${tests.length}/${tests.length} kịch bản`
+                    : `${results.length}/${tests.length} kịch bản PASS · ${fail} FAIL · ${blocked} BLOCKED · ${pending} chưa chạy`));
+                const rerun = el('button', 'Kiểm tra lại module', 'btn btn-quiet'); rerun.type = 'button'; rerun.disabled = state.busy;
+                rerun.setAttribute('aria-label', `Kiểm tra lại module ${module.title}`);
+                rerun.addEventListener('click', () => {selectModule(module.id); void runCases(tests);});
+                heading.append(name, rerun); group.append(heading);
+                const items = el('ul', '', 'passed-case-list');
+                for (const result of results) {
+                    const row = el('li', '', 'passed-case'); row.dataset.case = result.test.id;
+                    const view = el('button', '', 'passed-case-preview'); view.type = 'button'; view.disabled = state.busy;
+                    view.setAttribute('aria-current', String(state.viewed === result));
+                    view.setAttribute('aria-label', `Xem preview và assertions: ${module.title} · ${result.test.title}`);
+                    view.append(el('strong', result.test.title), el('small', `${result.test.caseId} · ${dateText(result.when)} · ${result.duration} ms`));
+                    view.addEventListener('click', () => {
+                        selectModule(module.id); showResult(result);
+                        $('preview-title').setAttribute('tabindex', '-1'); $('preview-title').focus({preventScroll: true});
+                        $('preview-title').scrollIntoView({block: 'start'});
+                    });
+                    const again = el('button', 'Chạy lại', 'btn btn-quiet'); again.type = 'button'; again.disabled = state.busy;
+                    again.setAttribute('aria-label', `Chạy lại ${result.test.caseId} · ${result.test.title}`);
+                    again.addEventListener('click', () => {selectModule(module.id); void runCases([result.test]);});
+                    row.append(view, again); items.append(row);
+                }
+                group.append(items); list.append(group);
+            }
         }
         function resetPreview() {
             const wrap = el('div', '', 'preview-empty'); wrap.append(el('strong', 'Chưa có kết quả'), el('p', 'Chọn kịch bản rồi nhấn Chạy đã chọn.'));
@@ -1276,13 +1351,13 @@
             } else $('preview').inert = false;
             $('preview-mode').textContent = live ? 'Preview vừa chạy · Tương tác renderer đang hoạt động.' : 'History · Bản DOM tĩnh. Run Again để kiểm tra tương tác thật.';
             $('run-again').disabled = state.busy;
-            renderHistory();
+            renderHistory(); renderPassedEngines();
         }
         function setBusy(busy) {
             state.busy = busy; $('module-search').disabled = busy;
             for (const id of ['run-selected', 'run-module', 'run-all', 'clear-results', 'select-all', 'select-none']) $(id).disabled = busy;
             for (const id of ['module-readiness', 'jira-issue', 'error-name', 'error-code', 'error-confirmed', 'empty-selector', 'empty-confirmed']) $(id).disabled = busy;
-            renderModules(); renderCases(); renderHistory();
+            renderModules(); renderCases(); renderHistory(); renderPassedEngines();
         }
         async function fetchResource(path) {
             const url = new URL(path, import.meta.url);
@@ -1455,6 +1530,7 @@
         }
         // Events
         $('module-search').addEventListener('input', renderModules);
+        $('rerun-passed').addEventListener('click', () => {void runCases(latestPasses().map(result => result.test));});
         $('module-readiness').addEventListener('change', event => readiness.set(state.moduleId, event.target.value));
         $('jira-issue').addEventListener('input', event => jiraIssues.set(state.moduleId, event.target.value.trim()));
         for (const [id, property] of [['error-name', 'name'], ['error-code', 'code']]) $(id).addEventListener('input', event => {
