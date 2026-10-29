@@ -1,0 +1,1486 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Việt Ký — Development Playground</title>
+    <link rel="stylesheet" href="../css/token.css">
+    <style>
+        /* VIỆT KÝ — wireframe-only internal workbench. No product header/footer. */
+        :root {
+            color-scheme: light;
+            --black: #111;
+            --gray: #555;
+            --line: #aaa;
+            --light-line: #d8d8d8;
+            --surface: #fff;
+            --surface-2: #f5f5f5;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: auto;
+        }
+
+        body {
+            margin: 0;
+            min-width: 320px;
+            color: var(--black);
+            background: var(--surface);
+            font: 14px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+        }
+
+        button,
+        input {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        button:disabled {
+            cursor: not-allowed;
+            opacity: .48;
+        }
+
+        button:focus-visible,
+        input:focus-visible,
+        a:focus-visible,
+        [tabindex]:focus-visible {
+            outline: 2px solid var(--black);
+            outline-offset: 3px;
+        }
+
+        h1,
+        h2,
+        h3,
+        p {
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 22px;
+            line-height: 1.25;
+        }
+
+        h2 {
+            font-size: 17px;
+        }
+
+        h3 {
+            font-size: 14px;
+        }
+
+        small {
+            font-size: 12px;
+        }
+
+        .muted {
+            color: var(--gray);
+        }
+
+        .micro {
+            font-size: 12px;
+            text-transform: uppercase;
+            font-weight: 750;
+            letter-spacing: .07em;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            padding: 0;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .shell {
+            display: grid;
+            grid-template-columns: 265px minmax(0, 1fr);
+            min-height: 100vh;
+        }
+
+        .side {
+            border-right: 1px solid var(--black);
+            background: var(--surface-2);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .side-top {
+            padding: 23px 18px 17px;
+            border-bottom: 1px solid var(--black);
+        }
+
+        .side-top p {
+            margin-top: 7px;
+            font-size: 12px;
+            color: var(--gray);
+        }
+
+        .side-search {
+            margin: 16px 14px 10px;
+        }
+
+        .side-search input {
+            display: block;
+            width: 100%;
+            min-width: 0;
+            padding: 10px;
+            border: 1px solid var(--black);
+            background: #fff;
+            border-radius: 0;
+        }
+
+        .side-hint {
+            padding: 0 15px 10px;
+            font-size: 12px;
+            color: var(--gray);
+        }
+
+        .module-list {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 0 10px 22px;
+        }
+
+        .module-group {
+            padding: 13px 7px 4px;
+            color: var(--gray);
+            font-size: 12px;
+            text-transform: uppercase;
+            font-weight: 750;
+        }
+
+        .module-button {
+            width: 100%;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 8px;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid transparent;
+            text-align: left;
+            background: transparent;
+        }
+
+        .module-button:hover {
+            border-color: var(--line);
+            background: #fff;
+        }
+
+        .module-button[aria-current="true"] {
+            background: #fff;
+            border-color: var(--black);
+            box-shadow: inset 3px 0 0 var(--black);
+        }
+
+        .module-button strong {
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .module-button small {
+            display: block;
+            margin-top: 2px;
+            color: var(--gray);
+        }
+
+        .pill {
+            display: inline-block;
+            min-width: 28px;
+            padding: 3px 6px;
+            border: 1px solid var(--black);
+            background: #fff;
+            font-size: 10px;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        .pill[data-status="pass"] {
+            background: #111;
+            color: #fff;
+        }
+
+        .pill[data-status="fail"] {
+            border: 2px solid #111;
+            text-decoration: underline;
+        }
+
+        .pill[data-status="blocked"] {
+            border-style: dashed;
+        }
+
+        .main {
+            min-width: 0;
+            padding: 26px clamp(15px, 3vw, 40px) 40px;
+        }
+
+        .intro {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: start;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .intro p {
+            margin-top: 5px;
+            color: var(--gray);
+            font-size: 12px;
+        }
+
+        .hint-box {
+            max-width: 350px;
+            border: 1px dashed var(--line);
+            padding: 10px 12px;
+            font-size: 12px;
+        }
+
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            margin-bottom: 16px;
+            border: 1px solid var(--black);
+        }
+
+        .metric {
+            padding: 13px 17px;
+            min-width: 0;
+        }
+
+        .metric+.metric {
+            border-left: 1px solid var(--black);
+        }
+
+        .metric strong {
+            display: block;
+            font-size: 26px;
+            font-weight: 800;
+            line-height: 1.2;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .metric small {
+            color: var(--gray);
+        }
+
+        .panel {
+            border: 1px solid var(--black);
+            background: #fff;
+            min-width: 0;
+        }
+
+        .panel-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 13px 16px;
+            border-bottom: 1px solid var(--black);
+        }
+
+        .panel-title h2 {
+            font-size: 15px;
+        }
+
+        .panel-body {
+            padding: 16px;
+        }
+
+        .workspace-grid {
+            display: grid;
+            grid-template-columns: minmax(275px, .85fr) minmax(0, 1.15fr);
+            align-items: stretch;
+            gap: 16px;
+        }
+
+        .module-description {
+            color: var(--gray);
+            margin-bottom: 14px;
+            font-size: 12px;
+        }
+
+        .instructions {
+            background: var(--surface-2);
+            border: 1px dashed var(--line);
+            padding: 11px 12px;
+            margin-bottom: 13px;
+            font-size: 12px;
+        }
+
+        .instructions strong {
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .instructions code,
+        .help code {
+            padding: 0 3px;
+            background: #ededed;
+        }
+
+        .case-tools {
+            display: flex;
+            gap: 10px;
+            justify-content: space-between;
+            margin: 6px 0 10px;
+            align-items: center;
+        }
+
+        .link-button {
+            padding: 2px;
+            border: 0;
+            background: transparent;
+            color: var(--black);
+            text-decoration: underline;
+            font-size: 12px;
+        }
+
+        .case-list {
+            display: grid;
+            gap: 7px;
+        }
+
+        .case {
+            border: 1px solid var(--light-line);
+            background: #fff;
+            display: grid;
+            grid-template-columns: 19px minmax(0, 1fr) auto;
+            gap: 9px;
+            align-items: start;
+            padding: 11px;
+            cursor: pointer;
+        }
+
+        .case:has(input:focus-visible) {
+            outline: 2px solid #111;
+            outline-offset: 2px;
+        }
+
+        .case:has(input:checked) {
+            border-color: var(--black);
+        }
+
+        .case input {
+            margin: 3px 0 0;
+            accent-color: #111;
+        }
+
+        .case strong {
+            font-size: 13px;
+        }
+
+        .case p {
+            color: var(--gray);
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        .case .pill {
+            white-space: nowrap;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-top: 15px;
+        }
+
+        .btn {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            padding: 9px 12px;
+            border: 1px solid var(--black);
+            background: #fff;
+            color: #111;
+            font-size: 12px;
+            font-weight: 750;
+            border-radius: 0;
+        }
+
+        .btn:hover:not(:disabled) {
+            background: var(--surface-2);
+        }
+
+        .btn-primary {
+            background: #111;
+            color: #fff;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: #333;
+        }
+
+        .btn-quiet {
+            border-color: var(--line);
+        }
+
+        .progress {
+            margin: 12px 0 0;
+            color: var(--gray);
+            font-size: 12px;
+            min-height: 18px;
+        }
+
+        .preview {
+            display: flex;
+            flex-direction: column;
+            min-height: 470px;
+        }
+
+        .preview-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .preview-toolbar .micro {
+            color: var(--gray);
+        }
+
+        .preview-toolbar label {
+            font-size: 12px;
+        }
+
+        .preview-toolbar select {
+            font: inherit;
+            border: 1px solid var(--black);
+            padding: 6px;
+            background: white;
+        }
+
+        .preview-stage {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 18px;
+            min-height: 300px;
+            background: var(--surface-2);
+            border-bottom: 1px solid var(--light-line);
+            overflow-x: auto;
+        }
+
+        .preview-surface {
+            flex: 0 0 auto;
+            width: 100%;
+            min-width: 0;
+            min-height: 265px;
+            padding: 18px;
+            background: #fff;
+            border: 1px solid var(--black);
+            overflow-wrap: anywhere;
+        }
+
+        .preview-surface[data-width="390"] {
+            width: min(390px, 100%);
+        }
+
+        .preview-surface[data-width="768"] {
+            width: min(768px, 100%);
+        }
+
+        .preview-empty {
+            padding: 55px 5px;
+            text-align: center;
+            color: var(--gray);
+        }
+
+        .preview-empty strong {
+            display: block;
+            color: #111;
+            font-size: 14px;
+        }
+
+        .preview-note {
+            padding: 10px 16px;
+            font-size: 12px;
+            color: var(--gray);
+        }
+
+        .preview-data {
+            font: 12px/1.7 ui-monospace, Consolas, monospace;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+
+        .wire-table {
+            width: 100%;
+            border-collapse: collapse;
+            font: 12px/1.6 ui-monospace, Consolas, monospace;
+        }
+
+        .wire-table th,
+        .wire-table td {
+            text-align: left;
+            border: 1px solid var(--light-line);
+            padding: 6px;
+        }
+
+        .wire-table th {
+            background: #eee;
+        }
+
+        .bottom-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(260px, .9fr);
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .result-head {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            align-items: baseline;
+            margin-bottom: 12px;
+        }
+
+        .result-text {
+            font-size: 12px;
+        }
+
+        .checks {
+            margin: 10px 0 14px;
+            padding: 0;
+            list-style: none;
+            display: grid;
+            gap: 6px;
+        }
+
+        .checks li {
+            border-bottom: 1px solid var(--light-line);
+            padding: 5px 0;
+            font-size: 12px;
+        }
+
+        .checks li strong {
+            display: inline-block;
+            margin-right: 7px;
+        }
+
+        .log {
+            min-height: 90px;
+            max-height: 250px;
+            overflow: auto;
+            padding: 12px;
+            border: 1px solid var(--light-line);
+            background: var(--surface-2);
+            color: var(--black);
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            font: 12px/1.5 ui-monospace, Consolas, monospace;
+        }
+
+        .result-list {
+            display: grid;
+            max-height: 380px;
+            overflow-y: auto;
+        }
+
+        .history-button {
+            display: grid;
+            width: 100%;
+            grid-template-columns: 74px minmax(0, 1fr) auto;
+            gap: 9px;
+            align-items: start;
+            padding: 11px 13px;
+            background: #fff;
+            border: 0;
+            border-bottom: 1px solid var(--light-line);
+            text-align: left;
+        }
+
+        .history-button:hover,
+        .history-button[aria-current="true"] {
+            background: var(--surface-2);
+        }
+
+        .history-button strong {
+            font-size: 12px;
+        }
+
+        .history-button small {
+            display: block;
+            margin-top: 3px;
+            font-size: 12px;
+            color: var(--gray);
+        }
+
+        .history-button time {
+            font-size: 12px;
+            white-space: nowrap;
+            color: var(--gray);
+        }
+
+        .help {
+            display: none;
+            padding: 14px 16px;
+            border-top: 1px solid var(--light-line);
+            font-size: 12px;
+        }
+
+        .help[data-open="true"] {
+            display: block;
+        }
+
+        .help p+p {
+            margin-top: 8px;
+        }
+
+        .instructions p { margin-top: 8px; }
+        .instructions input[type="text"] { max-width: 100%; width: 100%; padding: 6px; border: 1px solid var(--line); }
+        .instructions summary { cursor: pointer; font-weight: 700; }
+        input { accent-color: var(--black); }
+        .case small { display: block; margin-top: 3px; color: var(--gray); }
+        #run-again { margin: 0 0 12px; }
+        .result-text, .history-button strong, .checks li { overflow-wrap: anywhere; }
+        .message {
+            border: 1px dashed var(--line);
+            padding: 12px;
+            color: var(--gray);
+            font-size: 12px;
+        }
+
+        .status-line {
+            min-height: 20px;
+            font-size: 12px;
+            margin-top: 12px;
+        }
+
+        @media (max-width: 1100px) {
+            .shell {
+                grid-template-columns: 220px minmax(0, 1fr);
+            }
+
+            .workspace-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .preview {
+                min-height: 340px;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .shell {
+                display: block;
+            }
+
+            .side {
+                border-right: 0;
+                border-bottom: 1px solid var(--black);
+            }
+
+            .side-top {
+                padding: 14px;
+            }
+
+            .side-search {
+                margin: 10px 14px 4px;
+            }
+
+            .module-list {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                padding: 0 10px 12px;
+            }
+
+            .module-group {
+                display: none;
+            }
+
+            .module-button {
+                width: auto;
+                border-color: var(--line);
+                padding: 7px 9px;
+            }
+
+            .module-button small {
+                display: none;
+            }
+
+            .main {
+                padding: 17px 12px 30px;
+            }
+
+            .bottom-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .metrics {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .metric:nth-child(3) {
+                border-left: 0;
+                border-top: 1px solid var(--black);
+            }
+
+            .metric:nth-child(4) {
+                border-top: 1px solid var(--black);
+            }
+
+            .hint-box {
+                max-width: none;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .metrics .metric {
+                padding: 9px;
+            }
+
+            .metric strong {
+                font-size: 23px;
+            }
+
+            .panel-body {
+                padding: 12px;
+            }
+
+            .panel-title {
+                padding: 11px 12px;
+            }
+
+            .preview-stage {
+                padding: 9px;
+            }
+
+            .preview-surface {
+                padding: 11px;
+            }
+
+            .case {
+                grid-template-columns: 16px minmax(0, 1fr);
+            }
+
+            .case .pill {
+                grid-column: 2;
+                justify-self: start;
+            }
+
+            .history-button {
+                grid-template-columns: 67px minmax(0, 1fr);
+            }
+
+            .history-button time {
+                grid-column: 2;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="shell">
+        <aside class="side" aria-label="Danh sách module thử nghiệm">
+            <div class="side-top">
+                <h1>Development Playground</h1>
+                <p>Việt Ký · Công cụ thử nghiệm nội bộ</p>
+            </div>
+            <label class="side-search">
+                <span class="sr-only">Tìm module</span>
+                <input id="module-search" type="search" autocomplete="off" placeholder="Tìm module…">
+            </label>
+            <p class="side-hint">Chọn một nhóm để xem kịch bản.</p>
+            <nav id="module-list" class="module-list" aria-label="Các nhóm kiểm thử"></nav>
+        </aside>
+
+        <main class="main" id="workspace">
+            <div class="intro">
+                <div>
+                    <h2>Workbench</h2>
+                    <p>Chọn test → Chạy → Xem kết quả → Sao chép báo cáo.</p>
+                </div>
+                <div class="hint-box"><strong>Điểm cần nhớ:</strong> PASS = đạt kiểm tra; FAIL = không đạt; BLOCKED =
+                    thiếu điều kiện hoặc contract chưa chốt. FAIL luôn ưu tiên khi có assertion sai. Kết quả không thay thế QA.</div>
+            </div>
+
+            <section class="metrics" aria-label="Kết quả mới nhất của từng kịch bản">
+                <div class="metric"><strong id="stat-total">0</strong><small>Tổng kịch bản</small></div>
+                <div class="metric"><strong id="stat-pass">0</strong><small>PASS</small></div>
+                <div class="metric"><strong id="stat-fail">0</strong><small>FAIL</small></div>
+                <div class="metric"><strong id="stat-blocked">0</strong><small>BLOCKED</small></div>
+            </section>
+
+            <div class="workspace-grid">
+                <section class="panel" aria-labelledby="test-panel-title">
+                    <div class="panel-title">
+                        <h2 id="test-panel-title">01 · Kịch bản kiểm thử</h2><button id="toggle-help"
+                            class="link-button" type="button" aria-expanded="false">Hướng dẫn dùng</button>
+                    </div>
+                    <div id="help" class="help">
+                        <p><strong>1.</strong> Chọn module bên trái và đánh dấu những tình huống muốn chạy.</p>
+                        <p><strong>2.</strong> Nhấn <strong>Chạy đã chọn</strong>. Hoặc chạy cả nhóm / toàn bộ test.</p>
+                        <p><strong>3.</strong> Bấm lịch sử để xem DOM tĩnh và assertions; Run Again dựng lại tương tác thật.</p>
+                        <p><strong>4.</strong> Chọn <strong>Copy báo cáo</strong> để đưa vào Jira/PR.</p>
+                        <p><strong>Điều kiện:</strong> chạy bằng HTTP server; các file JS thật cần export đúng API
+                            Contract.</p>
+                    </div>
+                    <div class="panel-body">
+                        <h3 id="module-name">Đang tải...</h3>
+                        <p class="module-description" id="module-description"></p>
+                        <div class="instructions" id="module-prerequisites" aria-live="polite"></div>
+                        <details class="instructions">
+                            <summary>Thiết lập contract cho module đang chọn</summary>
+                            <p><label>Trạng thái triển khai <select id="module-readiness">
+                                <option value="in-progress">Đang triển khai</option>
+                                <option value="ready">Đã hoàn thành</option>
+                            </select></label></p>
+                            <p><label>Jira của module (tùy chọn) <input id="jira-issue" type="text" placeholder="Mã issue hoặc liên kết Jira"></label></p>
+                            <div id="error-settings" hidden>
+                                <p><label>Error name <input id="error-name" type="text"></label></p>
+                                <p><label>Error code <input id="error-code" type="text"></label></p>
+                                <p><label><input id="error-confirmed" type="checkbox"> Nhóm đã chốt contract này (các trường có giá trị đều phải khớp)</label></p>
+                            </div>
+                            <div id="timeline-settings" hidden>
+                                <p><label>Empty state selector <input id="empty-selector" type="text"></label></p>
+                                <p><label><input id="empty-confirmed" type="checkbox"> Nhóm đã chốt selector empty state</label></p>
+                            </div>
+                            <p>Đang triển khai + thiếu export → BLOCKED; đã hoàn thành + sai export → FAIL.
+                                Lỗi cú pháp, lỗi chạy và assertion sai luôn FAIL. Giá trị error/empty state ban đầu là đề xuất;
+                                chưa xác nhận → BLOCKED. Thiết lập chỉ giữ trong phiên này.</p>
+                        </details>
+                        <div class="case-tools"><strong class="micro">Các trường hợp</strong><span><button
+                                    id="select-all" type="button" class="link-button">Chọn hết</button> · <button
+                                    id="select-none" type="button" class="link-button">Bỏ chọn</button></span></div>
+                        <div id="case-list" class="case-list" aria-label="Kịch bản của module"></div>
+                        <div class="actions">
+                            <button id="run-selected" class="btn btn-primary" type="button">Chạy đã chọn</button>
+                            <button id="run-module" class="btn" type="button">Chạy module</button>
+                            <button id="run-all" class="btn" type="button">Chạy tất cả (12)</button>
+                        </div>
+                        <p id="run-progress" class="progress" role="status" aria-live="polite">Chưa chạy.</p>
+                    </div>
+                </section>
+
+                <section class="panel preview" aria-labelledby="preview-title">
+                    <div class="panel-title">
+                        <h2 id="preview-title">02 · Preview</h2>
+                        <div class="preview-toolbar">
+                            <label for="preview-width">Độ rộng vùng chứa:</label>
+                            <select id="preview-width">
+                                <option value="auto">Tự động</option>
+                                <option value="768">768px</option>
+                                <option value="390">390px</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="preview-stage">
+                        <div id="preview" class="preview-surface" data-width="auto">
+                            <div class="preview-empty"><strong>Chưa có kết quả</strong>
+                                <p>Chọn kịch bản rồi nhấn Chạy đã chọn.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p id="preview-mode" class="preview-note" role="status">Chưa có preview.</p>
+                    <p class="preview-note">Chỉ thay chiều rộng vùng chứa, không thay viewport trình duyệt. Kiểm tra
+                        responsive thật bằng DevTools.</p>
+                </section>
+            </div>
+
+            <div class="bottom-grid">
+                <section class="panel" aria-labelledby="result-title">
+                    <div class="panel-title">
+                        <h2 id="result-title">03 · Kết quả chi tiết</h2><button id="copy-report" class="btn btn-quiet"
+                            type="button" disabled>Copy báo cáo Markdown</button>
+                    </div>
+                    <div class="panel-body">
+                        <div id="result-summary" class="result-head" aria-live="polite">
+                            <p class="muted">Chưa có kết quả nào.</p>
+                        </div>
+                        <button id="run-again" class="btn" type="button" disabled>Run Again · Chạy lại kịch bản</button>
+                        <ul id="assertions" class="checks"></ul>
+                        <pre id="test-log" class="log" tabindex="0">// Log sẽ xuất hiện ở đây.</pre>
+                        <p id="copy-status" class="status-line muted" role="status" aria-live="polite"></p>
+                    </div>
+                </section>
+                <section class="panel" aria-labelledby="history-title">
+                    <div class="panel-title">
+                        <h2 id="history-title">04 · Lịch sử chạy</h2><button id="clear-results" type="button"
+                            class="btn btn-quiet">Xóa kết quả</button>
+                    </div>
+                    <div id="history-list" class="result-list">
+                        <p class="message">Chưa chạy kịch bản nào. Bấm vào một kết quả để xem lại chi tiết.</p>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script type="module">
+        // Production modules only. Catalog input is controlled in a disposable iframe realm.
+        // Proposed error/empty-state contracts require explicit confirmation before PASS.
+        const CONTRACTS = {
+            resolver: {name: 'InvalidResourceIdError', code: '', confirmed: false},
+            content: {name: 'ResourceNotFoundError', code: '', confirmed: false},
+            timeline: {selector: '[data-timeline-empty]', confirmed: false}
+        };
+        const readiness = new Map();
+        const jiraIssues = new Map();
+        const dateText = date => date.toLocaleString('vi-VN', {timeZone: 'Asia/Ho_Chi_Minh', hour12: false});
+        function isError(value) {
+            return value instanceof Error || Object.prototype.toString.call(value) === '[object Error]';
+        }
+        async function expectContractError(ctx, action, contract) {
+            let caught;
+            try {await action();} catch (error) {caught = error;}
+            ctx.assert(isError(caught), 'API throw/reject một Error', 'Error', caught == null ? 'Không throw/reject' : String(caught));
+            ctx.assert(!['ReferenceError', 'SyntaxError', 'TypeError', 'RangeError', 'EvalError', 'URIError', 'AggregateError'].includes(caught.name),
+                'Không phải lỗi chương trình ngoài contract', 'Lỗi nghiệp vụ', caught.name);
+            ctx.assert(typeof caught.message === 'string' && caught.message.trim().length > 0, 'Error có message', 'Message không rỗng', caught.message);
+            ctx.log(`Error thực tế: name=${caught.name}; code=${caught.code ?? '(không có)'}; message=${caught.message}`);
+            if (!contract.confirmed || (!contract.name.trim() && !contract.code.trim()))
+                throw new BlockedError('Error contract chưa chốt: xác nhận name/code trong Thiết lập contract.');
+            if (contract.name.trim() === 'Error' && !contract.code.trim())
+                throw new BlockedError('Error name chung chung cần mã lỗi cụ thể trong contract để xác minh hành vi.');
+            if (contract.name.trim()) ctx.assert(caught.name === contract.name.trim(), 'Error name đúng contract', contract.name.trim(), caught.name);
+            if (contract.code.trim()) ctx.assert(caught.code === contract.code.trim(), 'Error code đúng contract', contract.code.trim(), caught.code);
+            ctx.preview.replaceChildren(el('pre', `${caught.name} [${caught.code ?? '—'}]: ${caught.message}`, 'preview-data'));
+            return 'Lỗi khớp error contract đã xác nhận.';
+        }
+        function validateCatalog(ctx, data, label) {
+            ctx.assert(Array.isArray(data), `${label}: trả về mảng`, 'Array', Object.prototype.toString.call(data));
+            const ids = new Set();
+            for (const [index, item] of data.entries()) {
+                const valid = item !== null && typeof item === 'object' && !Array.isArray(item)
+                    && typeof item.id === 'string' && item.id.trim().length > 0;
+                ctx.assert(valid, `${label}: record ${index} có ID không rỗng`, 'Object với id string không rỗng', JSON.stringify(item));
+                ctx.assert(!ids.has(item.id), `${label}: ID ${item.id} không trùng`, 'ID duy nhất', item.id);
+                ids.add(item.id);
+            }
+            if (!data.length) ctx.log(`${label}: 0 record; không có record để kiểm tra schema. Không chứng minh catalog có dữ liệu.`);
+        }
+        async function catalogData(ctx, empty = false) {
+            const loadCatalog = await ctx.catalogLoader(empty ? '[]' : null);
+            const data = await loadCatalog();
+            ctx.assert(ctx.catalogReads() > 0, 'Loader thực sự đọc fixture catalog trong realm riêng', 'Ít nhất 1 lần đọc', ctx.catalogReads());
+            return data;
+        }
+        class BlockedError extends Error {constructor(message) {super(message); this.name = 'BlockedError';} }
+        class AssertionError extends Error {constructor(message) {super(message); this.name = 'AssertionError';} }
+        const $ = id => document.getElementById(id);
+        const el = (tag, text = '', cls = '') => {const node = document.createElement(tag); node.textContent = text; if (cls) node.className = cls; return node;};
+        const MODULES = [
+            {id: 'design', group: 'Nền tảng', title: 'Design System', description: 'Kiểm tra token CSS, khai báo typography.', requires: 'Cần <code>css/token.css</code>. Có thể chạy ngay khi CSS tồn tại.'},
+            {id: 'resolver', group: 'Core', title: 'ID Resolver', description: 'Kiểm tra cách Resource ID được ánh xạ thành URL.', requires: 'Cần <code>js/core/id-resolver.js</code> export <code>resolveId(id)</code>.'},
+            {id: 'content', group: 'Core', title: 'Content Loader', description: 'Kiểm tra tải Entity JSON và xử lý tài nguyên không tồn tại.', requires: 'Cần <code>js/core/content-loader.js</code> export <code>loadContent(id)</code>; kịch bản thành công cần <code>data/evt/evt0001.json</code>.'},
+            {id: 'catalog', group: 'Core', title: 'Catalog Loader', description: 'Kiểm tra cấu trúc dữ liệu Catalog.', requires: 'Cần <code>js/core/catalog-loader.js</code> export <code>loadCatalog()</code> và file <code>data/catalog.json</code>.'},
+            {id: 'timeline', group: 'Features', title: 'Timeline', description: 'Kiểm tra renderer có hiển thị các sự kiện được truyền vào.', requires: 'Cần <code>js/features/timeline.js</code> export <code>renderTimeline(container, events)</code>.'},
+            {id: 'search', group: 'Features', title: 'Search', description: 'Kiểm tra kết quả tìm kiếm có đúng với fixture.', requires: 'Cần <code>js/features/search.js</code> export <code>searchCatalog(query, records)</code>.'},
+            {id: 'article', group: 'Engine', title: 'Article Renderer', description: 'Kiểm tra dựng Article từ dữ liệu thử nghiệm.', requires: 'Cần <code>js/engine/article-renderer.js</code> export <code>renderArticle(container, entity, article)</code>.'}
+        ];
+        const EVENTS = [
+            {id: 'evt0001', type: 'event', title: 'Sự kiện thử nghiệm Alpha', year: 968, periodId: 'per0001', summary: 'Fixture 01', sourceIds: [], relatedIds: []},
+            {id: 'evt0002', type: 'event', title: 'Sự kiện thử nghiệm Beta', year: 981, periodId: 'per0001', summary: 'Fixture 02', sourceIds: [], relatedIds: []},
+            {id: 'evt0003', type: 'event', title: 'Sự kiện thử nghiệm Gamma', year: 1010, periodId: 'per0002', summary: 'Fixture 03', sourceIds: [], relatedIds: []}
+        ];
+        const fixture = () => structuredClone(EVENTS);
+        const CASES = [
+            {
+                id: 'tokens', module: 'design', title: 'Color tokens', description: 'Các biến màu bắt buộc phải được định nghĩa.', expected: '7 token CSS có giá trị.', run: async ctx => {
+                    const names = ['--vk-paper', '--vk-paper-aged', '--vk-ink', '--vk-son', '--vk-moss', '--vk-river', '--vk-gold'];
+                    const styles = getComputedStyle(document.documentElement);
+                    const table = el('table', '', 'wire-table'); const row = el('tr'); row.append(el('th', 'Token'), el('th', 'Giá trị')); table.append(row);
+                    for (const name of names) {const value = styles.getPropertyValue(name).trim(); ctx.assert(Boolean(value), `${name} tồn tại`); const tr = el('tr'); tr.append(el('td', name), el('td', value)); table.append(tr);}
+                    ctx.preview.replaceChildren(table); return 'Các color token đã khai báo.';
+                }
+            },
+            {
+                id: 'typography', module: 'design', title: 'Typography tokens', description: 'Kiểm tra CSS variables cho font.', expected: 'Hai biến --vk-serif và --vk-sans tồn tại.', run: async ctx => {
+                    const styles = getComputedStyle(document.documentElement); const serif = styles.getPropertyValue('--vk-serif').trim(); const sans = styles.getPropertyValue('--vk-sans').trim();
+                    ctx.assert(Boolean(serif), '--vk-serif có giá trị'); ctx.assert(Boolean(sans), '--vk-sans có giá trị');
+                    ctx.preview.replaceChildren(el('pre', `serif: ${serif}\nsans:  ${sans}`, 'preview-data'));
+                    ctx.log('Lưu ý: test xác nhận khai báo CSS, không xác nhận font đã tải thành công.');
+                    return 'Typography tokens tồn tại.';
+                }
+            },
+            {
+                id: 'resolver-valid', module: 'resolver', title: 'ID hợp lệ', description: 'Phân giải evt0001 theo cấu trúc data/evt/.', expected: 'URL kết thúc bằng data/evt/evt0001.json.', run: async ctx => {
+                    const resolveId = await ctx.export('../js/core/id-resolver.js', 'resolveId'); const path = String(await resolveId('evt0001'));
+                    ctx.assert(/(?:^|\/)data\/evt\/evt0001\.json(?:$|[?#])/.test(path), 'Resource ID ánh xạ đúng path'); ctx.preview.replaceChildren(el('pre', path, 'preview-data')); return 'Đường dẫn hợp lệ.';
+                }
+            },
+            {
+                id: 'resolver-invalid', module: 'resolver', title: 'ID không hợp lệ', description: 'ID sai định dạng phải được từ chối đúng error contract.', expected: 'Error name/code khớp contract đã xác nhận.', run: async ctx => {
+                    const resolveId = await ctx.export('../js/core/id-resolver.js', 'resolveId');
+                    return expectContractError(ctx, () => resolveId('invalid-id'), CONTRACTS.resolver);
+                }
+            },
+            {
+                id: 'content-valid', module: 'content', title: 'Tải Entity', description: 'Tải evt0001 từ JSON thật.', expected: 'Kết quả là object với id = evt0001.', run: async ctx => {
+                    const loadContent = await ctx.export('../js/core/content-loader.js', 'loadContent');
+                    await ctx.resource('../data/evt/evt0001.json'); const result = await loadContent('evt0001');
+                    ctx.assert(result && typeof result === 'object' && !Array.isArray(result), 'Dữ liệu trả về là object');
+                    ctx.assert(result.id === 'evt0001', 'ID dữ liệu trùng ID yêu cầu');
+                    ctx.preview.replaceChildren(el('pre', JSON.stringify(result, null, 2), 'preview-data')); return 'Đã tải Entity.';
+                }
+            },
+            {
+                id: 'content-missing', module: 'content', title: 'Entity không tồn tại', description: 'Kiểm tra evt9999 thực sự không tồn tại và lỗi đúng contract.', expected: 'HTTP fixture = 404; loader reject đúng error name/code đã chốt.', run: async ctx => {
+                    const loadContent = await ctx.export('../js/core/content-loader.js', 'loadContent');
+                    const response = await ctx.fetch('../data/evt/evt9999.json');
+                    if (response.status !== 404) throw new BlockedError(`Fixture evt9999 phải trả HTTP 404; thực tế HTTP ${response.status}.`);
+                    ctx.assert(response.status === 404, 'Đã xác minh fixture không tồn tại', 404, response.status);
+                    return expectContractError(ctx, () => loadContent('evt9999'), CONTRACTS.content);
+                }
+            },
+            {
+                id: 'catalog-load', module: 'catalog', title: 'Catalog · Structure', description: 'Kiểu mảng, ID không rỗng và duy nhất; [] là cấu trúc hợp lệ.', expected: 'Loader bảo toàn số lượng và ID từ JSON nguồn; [] không chứng minh có dữ liệu.', run: async ctx => {
+                    const data = await catalogData(ctx);
+                    validateCatalog(ctx, data, 'Kết quả');
+                    const source = ctx.catalogSource;
+                    validateCatalog(ctx, source, 'JSON nguồn');
+                    ctx.assert(data.length === source.length, 'Không làm mất/thêm record từ nguồn', source.length, data.length);
+                    ctx.assert(source.every(row => data.some(item => item.id === row.id)), 'ID kết quả khớp JSON nguồn', source.map(x => x.id), data.map(x => x.id));
+                    ctx.preview.replaceChildren(el('pre', JSON.stringify(data.slice(0, 4), null, 2), 'preview-data'));
+                    return `Structure hợp lệ: ${data.length} record${data.length ? '' : ' (rỗng; không xác nhận có dữ liệu)'}.`;
+                }
+            },
+            {
+                id: 'catalog-populated', module: 'catalog', title: 'Catalog · Có dữ liệu', description: 'Kịch bản bắt buộc có ít nhất một record.', expected: 'JSON nguồn và loader trả ít nhất 1 record hợp lệ.', run: async ctx => {
+                    const data = await catalogData(ctx);
+                    validateCatalog(ctx, data, 'Kết quả');
+                    validateCatalog(ctx, ctx.catalogSource, 'JSON nguồn');
+                    ctx.assert(ctx.catalogSource.length > 0, 'JSON nguồn phải có dữ liệu', '>= 1 record', ctx.catalogSource.length);
+                    ctx.assert(data.length > 0, 'Catalog phải có dữ liệu trong kịch bản này', '>= 1 record', data.length);
+                    ctx.assert(data.length === ctx.catalogSource.length && ctx.catalogSource.every(row => data.some(item => item.id === row.id)),
+                        'Record khớp JSON nguồn', ctx.catalogSource.map(item => item.id), data.map(item => item.id));
+                    return `Catalog có ${data.length} record.`;
+                }
+            },
+            {
+                id: 'catalog-empty', module: 'catalog', title: 'Catalog · Empty', description: 'Loader thật đọc JSON [] trong iframe riêng, không sửa dữ liệu repo.', expected: 'Loader thực sự đọc fixture [] và trả đúng [].', run: async ctx => {
+                    const data = await catalogData(ctx, true);
+                    ctx.assert(Array.isArray(data), 'Kết quả là mảng', 'Array', Object.prototype.toString.call(data));
+                    ctx.assert(data.length === 0, 'Không chèn record khi nguồn rỗng', 0, data.length);
+                    ctx.preview.replaceChildren(el('pre', 'Nguồn: []\nKết quả: []', 'preview-data'));
+                    return 'Loader xử lý đúng catalog rỗng.';
+                }
+            },
+            {
+                id: 'timeline-valid', module: 'timeline', title: 'Timeline có dữ liệu', description: 'Render 3 sự kiện từ fixture.', expected: 'Hiển thị đủ 3 tiêu đề; không có undefined.', run: async ctx => {
+                    const render = await ctx.export('../js/features/timeline.js', 'renderTimeline'); const data = fixture();
+                    await render(ctx.preview, data); const text = ctx.preview.textContent ?? '';
+                    for (const item of data) ctx.assert(text.includes(item.title), `Có tiêu đề: ${item.title}`);
+                    ctx.assert(!text.includes('undefined'), 'Không xuất hiện undefined');
+                    return 'Đã xác nhận các tiêu đề Timeline.';
+                }
+            },
+            {
+                id: 'timeline-empty', module: 'timeline', title: 'Timeline rỗng', description: 'Render 3 sự kiện rồi render [] trong cùng container.', expected: 'Render ban đầu đủ 3 tiêu đề; sau [] không còn dữ liệu cũ và có empty state hiển thị đúng contract.', run: async ctx => {
+                    const render = await ctx.export('../js/features/timeline.js', 'renderTimeline');
+                    const data = fixture(); await render(ctx.preview, data);
+                    for (const item of data) ctx.assert(ctx.preview.textContent.includes(item.title), `Trước khi xóa: ${item.title}`, item.title, ctx.preview.textContent);
+                    const oldNodes = [...ctx.preview.querySelectorAll('*')].filter(node => data.some(item => node.textContent.includes(item.title)));
+                    await render(ctx.preview, []);
+                    for (const item of data) ctx.assert(!ctx.preview.textContent.includes(item.title), `Sau []: đã xóa ${item.id}`, 'Không còn tiêu đề cũ', ctx.preview.textContent);
+                    ctx.assert(!oldNodes.some(node => ctx.preview.contains(node) && data.some(item => node.textContent.includes(item.title))), 'Không giữ node chứa dữ liệu cũ', '0 node cũ có dữ liệu', 'Đã kiểm tra node cũ');
+                    const contract = CONTRACTS.timeline;
+                    if (!contract.confirmed || !contract.selector.trim()) throw new BlockedError('Đã kiểm tra chuyển dữ liệu → []; cần chốt selector empty state trong Thiết lập contract.');
+                    let nodes;
+                    try {nodes = [...ctx.preview.querySelectorAll(contract.selector)];}
+                    catch {throw new BlockedError('Selector empty state không hợp lệ; sửa Thiết lập contract.');}
+                    const visible = nodes.filter(node => {
+                        const style = getComputedStyle(node);
+                        return node.textContent.trim() && !node.closest('[hidden], [aria-hidden="true"]')
+                            && style.display !== 'none' && style.visibility === 'visible' && Number(style.opacity) > 0
+                            && node.getClientRects().length > 0;
+                    });
+                    ctx.assert(visible.length > 0, 'Có thông điệp empty state hiển thị', contract.selector + ' có nội dung và hiển thị', nodes.map(node => node.outerHTML));
+                    ctx.assert(!visible.some(node => /undefined|null/.test(node.textContent)), 'Empty state không chứa dữ liệu lỗi', 'Không có undefined/null', visible.map(node => node.textContent));
+                    return 'Đã kiểm tra chuyển 3 sự kiện → [] và empty state.';
+                }
+            },
+            {
+                id: 'search-match', module: 'search', title: 'Search có kết quả', description: 'Tìm 3 sự kiện có cùng cụm từ.', expected: 'Trả về đúng 3 ID.', run: async ctx => {
+                    const search = await ctx.export('../js/features/search.js', 'searchCatalog'); const data = fixture(); const result = await search('Sự kiện thử nghiệm', data);
+                    ctx.assert(Array.isArray(result), 'Kết quả dạng mảng');
+                    ctx.assert(result.length === 3, 'Đúng 3 kết quả');
+                    ctx.assert(data.every(row => result.some(item => item.id === row.id)), 'Đúng 3 ID');
+                    ctx.preview.replaceChildren(el('pre', JSON.stringify(result, null, 2), 'preview-data')); return 'Search trả về đúng bản ghi.';
+                }
+            },
+            {
+                id: 'search-empty', module: 'search', title: 'Search không kết quả', description: 'Truy vấn không khớp bất kỳ fixture nào.', expected: 'Trả về mảng rỗng.', run: async ctx => {
+                    const search = await ctx.export('../js/features/search.js', 'searchCatalog'); const result = await search('__no_match_8347__', fixture());
+                    ctx.assert(Array.isArray(result), 'Kết quả dạng mảng'); ctx.assert(result.length === 0, 'Không có kết quả không phù hợp');
+                    ctx.preview.replaceChildren(el('pre', '[]', 'preview-data')); return 'Không có kết quả thừa.';
+                }
+            },
+            {
+                id: 'article-valid', module: 'article', title: 'Render Article', description: 'Renderer nhận Entity và Article mẫu.', expected: 'Hiển thị section heading và nội dung.', run: async ctx => {
+                    const render = await ctx.export('../js/engine/article-renderer.js', 'renderArticle');
+                    const entity = fixture()[0]; const article = {id: 'art0001', entityId: entity.id, title: 'Bài viết thử nghiệm', sections: [{id: 'section-1', heading: 'Bối cảnh thử nghiệm', content: 'Nội dung kiểm tra renderer.'}]};
+                    await render(ctx.preview, entity, article); const text = ctx.preview.textContent ?? '';
+                    ctx.assert(text.includes('Bối cảnh thử nghiệm'), 'Có tiêu đề section');
+                    ctx.assert(text.includes('Nội dung kiểm tra renderer.'), 'Có nội dung section');
+                    return 'Article hiển thị đúng fixture.';
+                }
+            }
+        ];
+        const CASE_META = {
+            tokens: 'VK-DESIGN-001', typography: 'VK-DESIGN-002',
+            'resolver-valid': 'VK-RESOLVER-001', 'resolver-invalid': 'VK-RESOLVER-002',
+            'content-valid': 'VK-CONTENT-001', 'content-missing': 'VK-CONTENT-002',
+            'catalog-load': 'VK-CATALOG-001', 'catalog-populated': 'VK-CATALOG-002', 'catalog-empty': 'VK-CATALOG-003',
+            'timeline-valid': 'VK-TIMELINE-001', 'timeline-empty': 'VK-TIMELINE-002',
+            'search-match': 'VK-SEARCH-001', 'search-empty': 'VK-SEARCH-002', 'article-valid': 'VK-ARTICLE-001'
+        };
+        // No Jira mapping was supplied. Keep unknown instead of inventing issue keys or URLs.
+        for (const test of CASES) {test.caseId = CASE_META[test.id]; test.jira = '';}
+        const state = {
+            moduleId: MODULES[0].id,
+            selected: new Set(CASES.map(item => item.id)),
+            latest: new Map(),
+            history: [],
+            busy: false,
+            viewed: null,
+            liveResult: null,
+            runSequence: 0,
+            reportResults: []
+        };
+        const casesOf = moduleId => CASES.filter(item => item.module === moduleId);
+        const statusLabel = status => ({pass: 'PASS', fail: 'FAIL', blocked: 'BLOCKED', idle: 'CHƯA CHẠY'}[status] || status);
+
+        function renderSettings() {
+            const id = state.moduleId;
+            $('module-readiness').value = readiness.get(id) ?? 'in-progress';
+            $('jira-issue').value = jiraIssues.get(id) ?? '';
+            const error = id === 'resolver' || id === 'content';
+            $('error-settings').hidden = !error; $('timeline-settings').hidden = id !== 'timeline';
+            if (error) {
+                $('error-name').value = CONTRACTS[id].name; $('error-code').value = CONTRACTS[id].code;
+                $('error-confirmed').checked = CONTRACTS[id].confirmed;
+            }
+            if (id === 'timeline') {
+                $('empty-selector').value = CONTRACTS.timeline.selector;
+                $('empty-confirmed').checked = CONTRACTS.timeline.confirmed;
+            }
+        }
+        function renderModules() {
+            const query = $('module-search').value.toLocaleLowerCase('vi').trim();
+            const nav = $('module-list'); nav.replaceChildren(); let group = '';
+            for (const module of MODULES.filter(m => `${m.title} ${m.description} ${m.group}`.toLocaleLowerCase('vi').includes(query))) {
+                if (module.group !== group) {nav.append(el('div', module.group, 'module-group')); group = module.group;}
+                const btn = el('button', '', 'module-button'); btn.type = 'button'; btn.disabled = state.busy;
+                btn.setAttribute('aria-current', String(state.moduleId === module.id));
+                const name = el('span'); name.append(el('strong', module.title), el('small', `${casesOf(module.id).length} kịch bản`));
+                const results = casesOf(module.id).map(test => state.latest.get(test.id)).filter(Boolean);
+                const badged = el('span', `${results.length}/${casesOf(module.id).length}`, 'pill');
+                if (results.some(result => result.status === 'fail')) badged.dataset.status = 'fail';
+                else if (results.some(result => result.status === 'blocked')) badged.dataset.status = 'blocked';
+                else if (results.length === casesOf(module.id).length) badged.dataset.status = 'pass';
+                btn.append(name, badged); btn.addEventListener('click', () => selectModule(module.id)); nav.append(btn);
+            }
+            if (!nav.childNodes.length) nav.append(el('p', 'Không có module phù hợp.', 'message'));
+        }
+        function selectModule(moduleId) {
+            if (state.busy) return;
+            const module = MODULES.find(item => item.id === moduleId); if (!module) return;
+            state.moduleId = moduleId; $('module-name').textContent = module.title; $('module-description').textContent = module.description;
+            // Static strings defined in the file, never user input.
+            $('module-prerequisites').innerHTML = `<strong>Cần chuẩn bị</strong>${module.requires}`;
+            renderSettings(); renderCases(); renderModules();
+            const recent = state.history.find(item => item.test.module === moduleId);
+            if (recent) showResult(recent); else resetPreview();
+        }
+        function renderCases() {
+            const list = $('case-list'); list.replaceChildren();
+            for (const test of casesOf(state.moduleId)) {
+                const label = el('label', '', 'case');
+                const checkbox = document.createElement('input'); checkbox.type = 'checkbox'; checkbox.value = test.id;
+                checkbox.checked = state.selected.has(test.id); checkbox.disabled = state.busy;
+                checkbox.addEventListener('change', () => {if (checkbox.checked) state.selected.add(test.id); else state.selected.delete(test.id); updateActionButtons();});
+                const text = el('span'); text.append(el('strong', test.title), el('small', test.caseId), el('p', test.expected));
+                const last = state.latest.get(test.id); const badge = el('span', last ? statusLabel(last.status) : '—', 'pill'); if (last) badge.dataset.status = last.status;
+                label.append(checkbox, text, badge); list.append(label);
+            }
+            updateActionButtons();
+        }
+        function updateActionButtons() {
+            $('run-selected').disabled = state.busy || !casesOf(state.moduleId).some(test => state.selected.has(test.id));
+            for (const id of ['run-module', 'run-all', 'select-all', 'select-none', 'clear-results']) $(id).disabled = state.busy;
+            $('run-again').disabled = state.busy || !state.viewed;
+        }
+        function updateStats() {
+            $('stat-total').textContent = String(CASES.length);
+            for (const status of ['pass', 'fail', 'blocked']) $('stat-' + status).textContent = String([...state.latest.values()].filter(item => item.status === status).length);
+        }
+        function resetPreview() {
+            const wrap = el('div', '', 'preview-empty'); wrap.append(el('strong', 'Chưa có kết quả'), el('p', 'Chọn kịch bản rồi nhấn Chạy đã chọn.'));
+            state.liveResult = null; state.viewed = null; $('run-again').disabled = true;
+            $('preview-mode').textContent = 'Chưa có preview.';
+            $('preview').replaceChildren(wrap); $('result-summary').replaceChildren(el('p', 'Chưa có kết quả của module này.', 'muted'));
+            $('assertions').replaceChildren(); $('test-log').textContent = '// Chưa chạy thử nghiệm.';
+        }
+        function renderHistory() {
+            const list = $('history-list'); list.replaceChildren();
+            if (!state.history.length) {list.append(el('p', 'Chưa có lượt chạy.', 'message')); return;}
+            for (const result of state.history.slice(0, 60)) {
+                const btn = el('button', '', 'history-button'); btn.type = 'button'; btn.disabled = state.busy;
+                btn.setAttribute('aria-current', String(state.viewed === result));
+                const pill = el('span', statusLabel(result.status), 'pill'); pill.dataset.status = result.status;
+                const body = el('span'); body.append(el('strong', result.test.title), el('small', `${result.test.caseId} · ${MODULES.find(m => m.id === result.test.module)?.title} · ${result.duration} ms`));
+                const time = el('time', result.when.toLocaleTimeString('vi-VN', {timeZone: 'Asia/Ho_Chi_Minh', hour12: false})); time.dateTime = result.when.toISOString();
+                btn.append(pill, body, time); btn.addEventListener('click', () => showResult(result)); list.append(btn);
+            }
+        }
+        function showResult(result) {
+            state.viewed = result;
+            const sum = $('result-summary'); sum.replaceChildren();
+            const pill = el('span', statusLabel(result.status), 'pill'); pill.dataset.status = result.status;
+            sum.append(pill, el('strong', result.test.title), el('span', ` · ${result.message}`, 'result-text'));
+            const checks = $('assertions'); checks.replaceChildren();
+            for (const assertion of result.assertions) {
+                const item = el('li'); item.append(el('strong', assertion.pass ? '[OK]' : '[X]'), document.createTextNode(assertion.text)); checks.append(item);
+            }
+            $('test-log').textContent = [`CASE: ${result.test.caseId} (${result.test.id})`, `JIRA: ${result.test.jira || 'Chưa liên kết'}`, `TIME: ${dateText(result.when)} (Asia/Ho_Chi_Minh)`, `DURATION: ${result.duration} ms`, `RESULT: ${result.status.toUpperCase()}`, `EXPECTED: ${result.test.expected}`, `ACTUAL: ${result.message}`, '', ...result.logs].join('\n');
+            const live = state.liveResult === result;
+            if (!live) {
+                $('preview').replaceChildren(...result.preview.map(node => node.cloneNode(true)));
+                state.liveResult = null;
+                // A history snapshot is inert: cloned controls have no original listeners.
+                $('preview').inert = true;
+            } else $('preview').inert = false;
+            $('preview-mode').textContent = live ? 'Preview vừa chạy · Tương tác renderer đang hoạt động.' : 'History · Bản DOM tĩnh. Run Again để kiểm tra tương tác thật.';
+            $('run-again').disabled = state.busy;
+            renderHistory();
+        }
+        function setBusy(busy) {
+            state.busy = busy; $('module-search').disabled = busy;
+            for (const id of ['run-selected', 'run-module', 'run-all', 'clear-results', 'select-all', 'select-none']) $(id).disabled = busy;
+            for (const id of ['module-readiness', 'jira-issue', 'error-name', 'error-code', 'error-confirmed', 'empty-selector', 'empty-confirmed']) $(id).disabled = busy;
+            renderModules(); renderCases(); renderHistory();
+        }
+        async function fetchResource(path) {
+            const url = new URL(path, import.meta.url);
+            try {return await fetch(url, {cache: 'no-store', signal: AbortSignal.timeout(10000)});}
+            catch (e) {throw new BlockedError(`Không truy cập được ${url.pathname}; kiểm tra HTTP server/kết nối: ${e.message}`);}
+        }
+        async function moduleSource(ctx, path) {
+            const url = new URL(path, import.meta.url); ctx.log(`Module: ${url.pathname}`);
+            const response = await fetchResource(path);
+            if (response.status === 404) throw new BlockedError(`Chưa có file: ${url.pathname}`);
+            if (!response.ok) throw new Error(`HTTP ${response.status} khi đọc module: ${url.pathname}`);
+            const source = await response.text();
+            // A genuinely empty file is a prerequisite; comments-only modules still import and check exports.
+            if (!source.trim()) {
+                if (ctx.readiness === 'ready') throw new Error(`Module đã khai báo hoàn thành nhưng file rỗng: ${url.pathname}`);
+                throw new BlockedError(`Module đang rỗng: ${url.pathname}`);
+            }
+            url.searchParams.set('playgroundRun', ctx.runId);
+            return url;
+        }
+        function checkExport(ctx, imported, name) {
+            if (typeof imported[name] !== 'function') {
+                const message = `Module không export ${name}(); trạng thái: ${ctx.readiness}.`;
+                if (ctx.readiness === 'in-progress') throw new BlockedError(message);
+                throw new Error(message);
+            }
+            return imported[name];
+        }
+        async function getExport(ctx, path, name) {
+            const url = await moduleSource(ctx, path);
+            let imported;
+            try {imported = await import(url.href);}
+            catch (e) {throw new Error(`Import module thất bại: ${e.message}`, {cause: e});}
+            return checkExport(ctx, imported, name);
+        }
+        async function ensureResource(path) {
+            const res = await fetchResource(path);
+            if (res.status === 404) throw new BlockedError(`Chưa có fixture JSON: ${path}`);
+            if (!res.ok) throw new Error(`HTTP ${res.status} khi tải ${path}`);
+            const text = await res.text();
+            if (!text.trim()) throw new BlockedError(`Fixture JSON đang rỗng: ${path}`);
+            return text;
+        }
+        async function isolatedCatalog(ctx, raw, cleanup) {
+            // Every call gets a fresh module graph/cache and a realm-local fetch override.
+            // No source rewrites, global fetch patches, or changes to repository data.
+            const url = await moduleSource(ctx, '../js/core/catalog-loader.js');
+            const source = raw ?? await ensureResource('../data/catalog.json');
+            try {ctx.catalogSource = JSON.parse(source);}
+            catch (error) {throw new AssertionError(`Catalog JSON sai cú pháp: ${error.message}`);}
+            const frame = document.createElement('iframe'); frame.hidden = true;
+            frame.setAttribute('aria-hidden', 'true'); frame.title = 'Catalog test realm';
+            document.body.append(frame); cleanup.push(() => frame.remove());
+            const realm = frame.contentWindow;
+            const catalogURL = new URL('../data/catalog.json', import.meta.url);
+            let reads = 0; ctx.catalogReads = () => reads;
+            const originalFetch = realm.fetch.bind(realm);
+            realm.fetch = (input, options) => {
+                // URL/Request objects may originate in the iframe, so avoid cross-realm instanceof.
+                const target = new URL(typeof input === 'string' ? input : (input.url ?? input.href ?? String(input)), catalogURL);
+                if (target.origin === catalogURL.origin && target.pathname === catalogURL.pathname) {
+                    reads++; return Promise.resolve(new realm.Response(source, {status: 200, headers: {'Content-Type': 'application/json'}}));
+                }
+                return originalFetch(input, options);
+            };
+            const imported = await new Promise((resolve, reject) => {
+                realm.__playgroundResolve = resolve;
+                realm.__playgroundReject = error => reject(new Error(`Import catalog thất bại: ${error.message}`));
+                const script = frame.contentDocument.createElement('script'); script.type = 'module';
+                script.textContent = `import(${JSON.stringify(url.href)}).then(window.__playgroundResolve, window.__playgroundReject);`;
+                frame.contentDocument.body.append(script);
+            });
+            return checkExport(ctx, imported, 'loadCatalog');
+        }
+        async function executeCase(test) {
+            const logs = [], assertions = [], cleanup = [];
+            const start = performance.now(); let message = '', status = 'fail';
+            const stage = $('preview'); stage.replaceChildren(); stage.inert = false; state.liveResult = null;
+            const ctx = {
+                preview: stage, log: msg => logs.push(String(msg)),
+                runId: `${Date.now()}-${++state.runSequence}`,
+                readiness: readiness.get(test.module) ?? 'in-progress',
+                assert(condition, text, expected = 'true', actual = Boolean(condition)) {
+                    const pass = Boolean(condition);
+                    const describe = value => typeof value === 'string' ? value : JSON.stringify(value) ?? String(value);
+                    assertions.push({pass, text, expected: describe(expected), actual: describe(actual)});
+                    logs.push(`${pass ? '[PASS]' : '[FAIL]'} ${text} | expected: ${describe(expected)} | actual: ${describe(actual)}`);
+                    if (!pass) throw new AssertionError(text);
+                },
+                export: (path, name) => getExport(ctx, path, name), resource: ensureResource,
+                fetch: fetchResource, catalogLoader: raw => isolatedCatalog(ctx, raw, cleanup)
+            };
+            const settings = {readiness: ctx.readiness, contract: CONTRACTS[test.module] ? structuredClone(CONTRACTS[test.module]) : null};
+            logs.push(`Thiết lập lúc chạy: ${JSON.stringify(settings)}`);
+            try {
+                message = String(await test.run(ctx) ?? 'Hoàn thành.');
+                if (!assertions.length) throw new BlockedError('Không có assertion; chưa đủ bằng chứng để PASS.');
+                if (assertions.some(check => !check.pass)) throw new AssertionError('Có assertion không đạt.');
+                status = 'pass';
+            } catch (error) {
+                status = assertions.some(check => !check.pass) || !(error instanceof BlockedError) ? 'fail' : 'blocked';
+                message = error instanceof Error ? error.message : String(error);
+                logs.push(`${status.toUpperCase()}: ${message}`);
+            } finally {
+                for (const dispose of cleanup) dispose();
+            }
+            if (!stage.childNodes.length) stage.append(el('p', status === 'pass' ? 'Không có giao diện để xem (test logic).' : message, 'message'));
+            const result = {test: {...test, jira: jiraIssues.get(test.module) ?? test.jira}, status, message, logs, assertions, settings, preview: [...stage.childNodes].map(node => node.cloneNode(true)), duration: Math.round(performance.now() - start), when: new Date()};
+            state.liveResult = result;
+            state.latest.set(test.id, result); state.history.unshift(result); if (state.history.length > 100) state.history.pop();
+            updateStats(); renderCases(); renderModules(); renderHistory(); return result;
+        }
+        function reportFor(results) {
+            const counts = status => results.filter(result => result.status === status).length;
+            const safe = value => String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                .replace(/\|/g, '&#124;').replace(/`/g, '&#96;').replace(/[\n\r]/g, ' ');
+            return [
+                '## Việt Ký — Playground test report',
+                `- Xuất lúc: ${dateText(new Date())} (Asia/Ho_Chi_Minh)`,
+                `- Trang: ${safe(location.href)}`,
+                `- Trình duyệt: ${safe(navigator.userAgent)}`,
+                `- Kết quả lượt chạy: ${counts('pass')} PASS / ${counts('fail')} FAIL / ${counts('blocked')} BLOCKED (${results.length} cases)`,
+                '- PASS: có assertions, tất cả đạt và đủ contract; FAIL ưu tiên nếu assertion sai hoặc lỗi chương trình; BLOCKED: thiếu điều kiện/contract.',
+                '- Ghi chú: Playground không thay thế QA thủ công hoặc CI. Jira chưa ánh xạ sẽ ghi rõ, không tự gán issue.',
+                '', '| Test Case ID | Jira | Module | Kịch bản | Kết quả |', '|---|---|---|---|---|',
+                ...results.map(result => `| ${safe(result.test.caseId)} | ${safe(result.test.jira || 'Chưa liên kết')} | ${safe(result.test.module)} | ${safe(result.test.title)} | ${result.status.toUpperCase()} |`),
+                ...results.flatMap(result => [
+                    '', `### ${safe(result.test.caseId)} · ${safe(result.test.title)}`,
+                    `- Jira: ${safe(result.test.jira || 'Chưa liên kết')}`,
+                    `- Chạy lúc: ${dateText(result.when)} (Asia/Ho_Chi_Minh); ${result.duration} ms`,
+                    `- Status: ${result.status.toUpperCase()}`,
+                    `- Expected: ${safe(result.test.expected)}`,
+                    `- Actual: ${safe(result.message)}`,
+                    `- Thiết lập lúc chạy: ${safe(JSON.stringify(result.settings))}`,
+                    '', '| Assertion | Kết quả | Expected | Actual |', '|---|---|---|---|',
+                    ...result.assertions.map(check => `| ${safe(check.text)} | ${check.pass ? 'PASS' : 'FAIL'} | ${safe(check.expected)} | ${safe(check.actual)} |`),
+                    ...(!result.assertions.length ? [`| Chưa thực thi assertion | ${result.status.toUpperCase()} | Đủ điều kiện kiểm thử | Xem Actual |`] : []),
+                    '', 'Logs:', ...result.logs.map(line => `    ${String(line).replace(/\r?\n/g, '\n    ')}`)
+                ])
+            ].join('\n');
+        }
+        async function runCases(tests) {
+            if (state.busy || !tests.length) return;
+            setBusy(true); const results = []; $('copy-report').disabled = true;
+            try {
+                for (let index = 0; index < tests.length; index++) {
+                    $('run-progress').textContent = `Đang chạy ${index + 1}/${tests.length}: ${tests[index].title}`;
+                    const result = await executeCase(tests[index]); results.push(result); showResult(result);
+                }
+                state.reportResults = results; $('copy-report').disabled = false;
+                const count = status => results.filter(x => x.status === status).length;
+                $('run-progress').textContent = `Xong ${tests.length} test: ${count('pass')} PASS · ${count('fail')} FAIL · ${count('blocked')} BLOCKED. Bấm lịch sử để xem từng kết quả.`;
+                const important = results.find(x => x.status === 'fail') ?? results.find(x => x.status === 'blocked') ?? results.at(-1);
+                if (important) showResult(important);
+            } finally {setBusy(false);}
+        }
+        function clearResults() {
+            if (state.busy) return; state.history = []; state.latest.clear(); state.viewed = null; state.liveResult = null; state.reportResults = [];
+            $('run-progress').textContent = 'Đã xóa kết quả.'; $('copy-status').textContent = ''; $('copy-report').disabled = true;
+            updateStats(); renderModules(); renderCases(); renderHistory(); resetPreview();
+        }
+        async function copyReport() {
+            const text = reportFor(state.reportResults); if (!state.reportResults.length) return;
+            try {await navigator.clipboard.writeText(text); $('copy-status').textContent = 'Đã sao chép báo cáo Markdown.';}
+            catch {
+                const input = document.createElement('textarea'); input.value = text; input.style.position = 'fixed'; input.style.left = '-10000px'; document.body.append(input); input.select();
+                const success = document.execCommand('copy'); input.remove();
+                $('copy-status').textContent = success ? 'Đã sao chép báo cáo Markdown.' : 'Không sao chép được; dùng trình duyệt hỗ trợ Clipboard hoặc HTTPS/localhost.';
+            }
+        }
+        // Events
+        $('module-search').addEventListener('input', renderModules);
+        $('module-readiness').addEventListener('change', event => readiness.set(state.moduleId, event.target.value));
+        $('jira-issue').addEventListener('input', event => jiraIssues.set(state.moduleId, event.target.value.trim()));
+        for (const [id, property] of [['error-name', 'name'], ['error-code', 'code']]) $(id).addEventListener('input', event => {
+            CONTRACTS[state.moduleId][property] = event.target.value;
+            CONTRACTS[state.moduleId].confirmed = false; $('error-confirmed').checked = false;
+        });
+        $('error-confirmed').addEventListener('change', event => CONTRACTS[state.moduleId].confirmed = event.target.checked);
+        $('empty-selector').addEventListener('input', event => {
+            CONTRACTS.timeline.selector = event.target.value; CONTRACTS.timeline.confirmed = false; $('empty-confirmed').checked = false;
+        });
+        $('empty-confirmed').addEventListener('change', event => CONTRACTS.timeline.confirmed = event.target.checked);
+        $('run-again').addEventListener('click', () => {if (state.viewed && !state.busy) void runCases([state.viewed.test]);});
+        $('select-all').addEventListener('click', () => {for (const t of casesOf(state.moduleId)) state.selected.add(t.id); renderCases();});
+        $('select-none').addEventListener('click', () => {for (const t of casesOf(state.moduleId)) state.selected.delete(t.id); renderCases();});
+        $('run-selected').addEventListener('click', () => runCases(casesOf(state.moduleId).filter(t => state.selected.has(t.id))));
+        $('run-module').addEventListener('click', () => runCases(casesOf(state.moduleId)));
+        $('run-all').addEventListener('click', () => runCases(CASES));
+        $('clear-results').addEventListener('click', clearResults);
+        $('copy-report').addEventListener('click', copyReport);
+        $('preview-width').addEventListener('change', e => {$('preview').dataset.width = e.target.value;});
+        $('toggle-help').addEventListener('click', () => {const open = $('help').dataset.open !== 'true'; $('help').dataset.open = String(open); $('toggle-help').setAttribute('aria-expanded', String(open));});
+        document.addEventListener('keydown', e => {if ((e.ctrlKey || e.metaKey) && e.key === 'Enter' && !state.busy) {e.preventDefault(); void runCases(casesOf(state.moduleId).filter(t => state.selected.has(t.id)));} });
+        // Startup
+        $('run-all').textContent = `Chạy tất cả (${CASES.length})`;
+        updateStats(); renderHistory(); selectModule(MODULES[0].id);
+    </script>
+</body>
+
+</html>
