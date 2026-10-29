@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "IE104-45 local contract. Cross-file references and publication need separate validation and team review.",
+  "title": "Viet Ky Timeline",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "title",
+    "status",
+    "eventIds"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 7,
+      "maxLength": 7,
+      "pattern": "^(tml)[0-9]{4}$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "review",
+        "published"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "periodIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 7,
+        "maxLength": 7,
+        "pattern": "^(per)[0-9]{4}$"
+      },
+      "uniqueItems": true,
+      "minItems": 1
+    },
+    "eventIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 7,
+        "maxLength": 7,
+        "pattern": "^(evt)[0-9]{4}$"
+      },
+      "uniqueItems": true,
+      "minItems": 0
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "published"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "eventIds": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ]
+}

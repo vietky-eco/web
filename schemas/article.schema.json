@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "IE104-45 local contract. Cross-file references and publication need separate validation and team review.",
+  "title": "Viet Ky Article",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "entityId",
+    "title",
+    "status",
+    "sections",
+    "sourceIds"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 7,
+      "maxLength": 7,
+      "pattern": "^(art)[0-9]{4}$"
+    },
+    "entityId": {
+      "type": "string",
+      "minLength": 7,
+      "maxLength": 7,
+      "pattern": "^(evt|per|ppl|plc|cul)[0-9]{4}$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "review",
+        "published"
+      ]
+    },
+    "context": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "sections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "heading"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 6,
+            "maxLength": 6,
+            "pattern": "^sec[0-9]{3}$"
+          },
+          "heading": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "body": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        }
+      },
+      "uniqueItems": true,
+      "minItems": 0
+    },
+    "sourceIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 7,
+        "maxLength": 7,
+        "pattern": "^(src)[0-9]{4}$"
+      },
+      "uniqueItems": true,
+      "minItems": 0
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "published"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "context"
+        ],
+        "properties": {
+          "sections": {
+            "minItems": 1,
+            "items": {
+              "required": [
+                "body"
+              ]
+            }
+          },
+          "sourceIds": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ]
+}
