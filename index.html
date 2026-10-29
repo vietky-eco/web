@@ -35,13 +35,14 @@
 
   <!-- Styles -->
   <link rel="stylesheet" href="./css/base.css" />
+  <link rel="stylesheet" href="./css/token.css">
+  <link rel="stylesheet" href="./css/components/header.css">
+  <link rel="stylesheet" href="./css/components/footer.css">
 </head>
 
-<body>
-  <!-- Header -->
-  <header>
-    <a href="./index.html">Việt Ký</a>
-  </header>
+<body id="top">
+    <!-- Header -->
+  <div id="site-header"></div>
 
   <!-- Main -->
   <main>
@@ -49,12 +50,11 @@
   </main>
 
   <!-- Footer -->
-  <footer>
-    <p>&copy; 2026 Việt Ký</p>
-  </footer>
+ <div id="site-footer"></div>
 
   <!-- JavaScript -->
   <script type="module" src="./js/pages/home.js"></script>
+  <script type="module" src="./js/core/component-loader.js"></script>
 </body>
 
 </html>

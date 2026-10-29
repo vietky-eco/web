@@ -1,0 +1,140 @@
+.site-footer {
+  --vk-serif: "Noto Serif", Georgia, serif;
+  background: var(--vk-action);
+  color: var(--vk-on-action);
+}
+
+.vk-footer-inner {
+  max-width: 1440px;
+  margin: auto;
+  padding: 24px 80px 20px;
+}
+
+.vk-footer-next {
+  min-height: 140px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.vk-footer-next small {
+  display: block;
+  margin-bottom: 12px;
+  font: 600 12px/18px var(--vk-sans);
+}
+
+.vk-footer-next strong {
+  display: block;
+  font: 400 46px/58px var(--vk-serif);
+}
+
+.vk-footer-arrow {
+  width: 64px;
+  height: 64px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--vk-on-action);
+  color: var(--vk-action);
+  font-size: 32px;
+}
+
+.vk-footer-nav {
+  padding: 20px 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  border-top: 1px solid rgb(255 255 255 / 25%);
+}
+
+.vk-footer-nav > * {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  font: 600 17px/26px var(--vk-sans);
+}
+
+.vk-footer-utility {
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font: 400 15px/22px var(--vk-sans);
+}
+
+.vk-footer-bottom {
+  min-height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgb(255 255 255 / 25%);
+  font: 400 12px/18px var(--vk-sans);
+}
+
+.vk-footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font: 400 42px/1.2 var(--vk-serif);
+}
+
+.vk-footer-brand img {
+  width: 36px;
+  height: 36px;
+}
+
+.site-footer a:focus-visible {
+  outline: 2px solid var(--vk-on-action);
+  outline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+  .vk-footer-inner {
+    padding: 20px 24px 12px;
+  }
+
+  .vk-footer-next {
+    min-height: 116px;
+  }
+
+  .vk-footer-next strong {
+    max-width: 250px;
+    font-size: 26px;
+    line-height: 34px;
+  }
+
+  .vk-footer-arrow {
+    width: 52px;
+    height: 52px;
+    font-size: 25px;
+  }
+
+  .vk-footer-nav {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0 14px;
+  }
+
+  .vk-footer-nav > * {
+    font-size: 14px;
+  }
+
+  .vk-footer-utility {
+    font-size: 13px;
+  }
+
+  .vk-footer-brand {
+    font-size: 26px;
+  }
+
+  .vk-footer-brand img {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+/* Trang Timeline chưa có bài tiếp theo để liên kết. */
+.page-timeline .vk-footer-next {
+  display: none;
+}
