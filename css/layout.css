@@ -1,0 +1,8 @@
+.vk-container {
+  width: min(
+    calc(100% - 2 * var(--vk-gutter)),
+    var(--vk-container)
+  );
+
+  margin-inline: auto;
+}
