@@ -12,17 +12,25 @@ async function loadComponent(hostId, fileName) {
   }
 
   host.innerHTML = await response.text();
+  const projectUrl = new URL("../../", import.meta.url);
+  host.querySelectorAll("[href], [src], [action]").forEach((element) => {
+    ["href", "src", "action"].forEach((attribute) => {
+      const value = element.getAttribute(attribute);
+      if (value?.startsWith("/") && !value.startsWith("//")) {
+        element.setAttribute(attribute, new URL(value.slice(1), projectUrl).href);
+      }
+    });
+  });
   return host;
 }
 
 function markActivePage() {
-  const currentPage = location.pathname.endsWith("/pages/timeline.html")
-    ? "/pages/timeline.html"
-    : "/index.html";
-
-  document.querySelectorAll(".site-header a, .site-footer a").forEach((link) => {
-    if (link.getAttribute("href") === currentPage) {
+  const currentPage = location.pathname.replace(/\/$/, "/index.html");
+  document.querySelectorAll(".site-header nav a, .site-footer nav a").forEach((link) => {
+    if (new URL(link.href).pathname === currentPage) {
       link.setAttribute("aria-current", "page");
+    } else {
+      link.removeAttribute("aria-current");
     }
   });
 }
@@ -33,12 +41,14 @@ function setupMobileMenu() {
 
   if (!button || !menu) return;
 
+  const searchButton = document.querySelector(".vk-mobile-search-icon");
   const pageContent = document.querySelector("main");
   const footer = document.getElementById("site-footer");
 
   function setMenuOpen(isOpen) {
     menu.hidden = !isOpen;
     button.setAttribute("aria-expanded", String(isOpen));
+    searchButton?.setAttribute("aria-expanded", String(isOpen));
     button.setAttribute("aria-label", isOpen ? "Đóng menu" : "Mở menu");
     if (pageContent) pageContent.inert = isOpen;
     if (footer) footer.inert = isOpen;
@@ -48,6 +58,15 @@ function setupMobileMenu() {
 
   button.addEventListener("click", () => {
     setMenuOpen(menu.hidden);
+  });
+
+  searchButton?.addEventListener("click", () => {
+    setMenuOpen(true);
+    menu.querySelector("input")?.focus();
+  });
+
+  window.matchMedia("(max-width: 1100px)").addEventListener("change", (event) => {
+    if (!event.matches) setMenuOpen(false);
   });
 
   document.addEventListener("keydown", (event) => {
