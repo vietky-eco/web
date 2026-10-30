@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$comment": "IE104-45 local contract. Cross-file references and publication need separate validation and team review.",
+  "$comment": "Viet Ky catalogue-aligned contract. ID/reference existence, historical accuracy, asset availability and publication need separate validation and human review.",
   "title": "Viet Ky Source",
   "type": "object",
   "additionalProperties": false,
@@ -49,6 +49,38 @@
     },
     "locator": {
       "$ref": "#/$defs/text"
+    },
+    "editorialNotes": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S",
+      "description": "Ghi chú biên tập nguyên văn; không phải nội dung lịch sử đã được duyệt."
+    },
+    "referencedByIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 7,
+        "maxLength": 7,
+        "pattern": "^(evt|per|ppl|plc|cul|art|sty|tml|src|img|map)[0-9]{4}$"
+      },
+      "description": "Tham chiếu ngược trong danh mục; không tự suy ra quan hệ lịch sử hoặc quan hệ có hướng."
+    },
+    "reviewStatus": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "verified"
+      ],
+      "description": "Có URL không đồng nghĩa đã kiểm duyệt. Không suy trạng thái đã duyệt từ danh sách tham chiếu ngược."
+    },
+    "accessedOn": {
+      "type": "string",
+      "format": "date",
+      "minLength": 10,
+      "maxLength": 10,
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
     }
   },
   "allOf": [
@@ -79,6 +111,27 @@
             ]
           }
         ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "published"
+          },
+          "reviewStatus": {}
+        },
+        "required": [
+          "status",
+          "reviewStatus"
+        ]
+      },
+      "then": {
+        "properties": {
+          "reviewStatus": {
+            "const": "verified"
+          }
+        }
       }
     }
   ],

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$comment": "IE104-45 local contract. Cross-file references and publication need separate validation and team review.",
+  "$comment": "Viet Ky catalogue-aligned contract. ID/reference existence, historical accuracy, asset availability and publication need separate validation and human review.",
   "title": "Viet Ky Timeline",
   "type": "object",
   "additionalProperties": false,
@@ -55,7 +55,59 @@
         "pattern": "^(evt)[0-9]{4}$"
       },
       "uniqueItems": true,
-      "minItems": 0
+      "minItems": 0,
+      "description": "Các ID theo thứ tự dòng Mốc trong danh mục; niên đại và nguồn lấy từ Event, không suy độ chính xác lịch sử từ vị trí mảng."
+    },
+    "editorialNotes": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S",
+      "description": "Ghi chú biên tập nguyên văn; không phải nội dung lịch sử đã được duyệt."
+    },
+    "referencedByIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 7,
+        "maxLength": 7,
+        "pattern": "^(evt|per|ppl|plc|cul|art|sty|tml|src|img|map)[0-9]{4}$"
+      },
+      "description": "Tham chiếu ngược trong danh mục; không tự suy ra quan hệ lịch sử hoặc quan hệ có hướng."
+    },
+    "coverImageId": {
+      "type": "string",
+      "minLength": 7,
+      "maxLength": 7,
+      "pattern": "^(img)[0-9]{4}$",
+      "description": "Ảnh đại diện dự kiến; có ID không chứng minh tệp ảnh đã tồn tại."
+    },
+    "fallbackImageId": {
+      "type": "string",
+      "minLength": 7,
+      "maxLength": 7,
+      "pattern": "^(img)[0-9]{4}$",
+      "description": "Ảnh thay thế khi thiếu tệp; danh mục hiện dùng img0025, bản thân tệp cũng cần được tạo và duyệt."
+    },
+    "articleIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 7,
+        "maxLength": 7,
+        "pattern": "^(art)[0-9]{4}$"
+      }
+    },
+    "storyIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 7,
+        "maxLength": 7,
+        "pattern": "^(sty)[0-9]{4}$"
+      }
     }
   },
   "allOf": [
@@ -78,5 +130,6 @@
         }
       }
     }
-  ]
+  ],
+  "description": "Tập Event biên tập. Nguồn được truy qua Event; các bài và Story liên quan không thay thế tài nguyên gốc."
 }
