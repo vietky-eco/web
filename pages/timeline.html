@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dòng thời gian lịch sử | Việt Ký</title>
+  <link rel="icon" href="../assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../css/token.css">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/typography.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components/header.css">
+  <link rel="stylesheet" href="../css/components/footer.css">
+  <link rel="stylesheet" href="../css/components/timeline.css">
+  <link rel="stylesheet" href="../css/pages/timeline.css">
+</head>
+<body id="top" class="page-timeline paper-texture">
+  <div id="site-header"></div>
+  <main>
+    <div class="tl-deco deco-left" aria-hidden="true"></div>
+    <div class="tl-deco deco-right" aria-hidden="true"></div>
+    <div class="tl-deco deco-bottom" aria-hidden="true"></div>
+    <header class="tl-hero tl-container">
+      <div class="tl-hero-art" aria-hidden="true"><span class="tl-hero-layer tl-hero-layer--far"></span><span class="tl-hero-layer tl-hero-layer--near"></span></div>
+      <p class="tl-eyebrow">DÒNG CHẢY LỊCH SỬ VIỆT NAM</p>
+      <h1>Toàn cảnh lịch sử</h1>
+      <p class="tl-lead">Khám phá các thời kỳ, sự kiện và nhân vật tiêu biểu.</p>
+    </header>
+    <div class="tl-container">
+      <section class="tl-navigation" aria-label="Chọn thời kỳ lịch sử">
+        <div class="tl-scroll-selector">
+          <button class="tl-period-step" id="timeline-previous" type="button" aria-label="Chọn thời kỳ trước"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></button>
+          <div class="tl-periods" role="group" aria-label="Các thời kỳ; dùng phím mũi tên trái, phải để chọn">
+            <button class="tl-period" type="button" data-period="early" data-title="Thời kỳ dựng nước" aria-label="Thời kỳ dựng nước" aria-pressed="false" tabindex="-1"><span>Thời kỳ dựng nước</span><small>Đến 179 TCN</small></button>
+            <button class="tl-period" type="button" data-period="north" data-title="Bắc thuộc lần 1-2-3 và đấu tranh giành độc lập" aria-label="Bắc thuộc lần 1-2-3 và đấu tranh giành độc lập" aria-pressed="false" tabindex="-1"><span>Bắc thuộc</span><small>179 TCN–938</small></button>
+            <button class="tl-period" type="button" data-period="ngo" data-title="Ngô – Đinh – Tiền Lê" aria-label="Ngô – Đinh – Tiền Lê" aria-pressed="false" tabindex="-1"><span>Ngô – Đinh – Tiền Lê</span><small>939–1009</small></button>
+            <button class="tl-period" type="button" data-period="ly" data-title="Nhà Lý" aria-label="Nhà Lý" aria-pressed="false" tabindex="-1"><span>Nhà Lý</span><small>1009–1226</small></button>
+            <button class="tl-period" type="button" data-period="tran" data-title="Nhà Trần" aria-label="Nhà Trần" aria-pressed="true" tabindex="0"><span>Nhà Trần</span><small>1226–1400</small></button>
+            <button class="tl-period" type="button" data-period="ho" data-title="Nhà Hồ" aria-label="Nhà Hồ" aria-pressed="false" tabindex="-1"><span>Nhà Hồ</span><small>1400–1407</small></button>
+            <button class="tl-period" type="button" data-period="lam-son" data-title="Bắc thuộc lần 4 và khởi nghĩa Lam Sơn" aria-label="Bắc thuộc lần 4 và khởi nghĩa Lam Sơn" aria-pressed="false" tabindex="-1"><span>Khởi nghĩa Lam Sơn</span><small>1407–1428</small></button>
+            <button class="tl-period" type="button" data-period="le" data-title="Nhà Lê sơ" aria-label="Nhà Lê sơ" aria-pressed="false" tabindex="-1"><span>Nhà Lê sơ</span><small>1428–1527</small></button>
+            <button class="tl-period" type="button" data-period="north-south" data-title="Chiến tranh Nam – Bắc triều" aria-label="Chiến tranh Nam – Bắc triều" aria-pressed="false" tabindex="-1"><span>Nam – Bắc triều</span><small>1527–1592</small></button>
+            <button class="tl-period" type="button" data-period="trinh-nguyen" data-title="Trịnh – Nguyễn phân tranh" aria-label="Trịnh – Nguyễn phân tranh" aria-pressed="false" tabindex="-1"><span>Trịnh – Nguyễn</span><small>1592–1771</small></button>
+            <button class="tl-period" type="button" data-period="tay-son" data-title="Phong trào Tây Sơn" aria-label="Phong trào Tây Sơn" aria-pressed="false" tabindex="-1"><span>Phong trào Tây Sơn</span><small>1771–1802</small></button>
+            <button class="tl-period" type="button" data-period="nguyen" data-title="Nhà Nguyễn và cuộc kháng chiến chống Pháp" aria-label="Nhà Nguyễn và cuộc kháng chiến chống Pháp" aria-pressed="false" tabindex="-1"><span>Nhà Nguyễn</span><small>1802–1884</small></button>
+            <button class="tl-period" type="button" data-period="patriotic" data-title="Phong trào yêu nước chống Pháp và giải phóng dân tộc" aria-label="Phong trào yêu nước chống Pháp và giải phóng dân tộc" aria-pressed="false" tabindex="-1"><span>Phong trào yêu nước</span><small>1884–1945</small></button>
+            <button class="tl-period" type="button" data-period="resistance" data-title="Kháng chiến chống Pháp – Mỹ" aria-label="Kháng chiến chống Pháp – Mỹ" aria-pressed="false" tabindex="-1"><span>Kháng chiến Pháp – Mỹ</span><small>1945–1975</small></button>
+            <button class="tl-period" type="button" data-period="modern" data-title="Xây dựng đất nước" aria-label="Xây dựng đất nước" aria-pressed="false" tabindex="-1"><span>Xây dựng đất nước</span><small>Từ 1975</small></button>
+          </div>
+          <button class="tl-period-step" id="timeline-next" type="button" aria-label="Chọn thời kỳ tiếp theo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg></button>
+        </div>
+        <div class="tl-period-position tl-pagination"><div class="tl-page-dots" role="group" aria-label="Chọn nhanh thời kỳ"></div><span id="timeline-period-position" aria-live="polite">5 / 15</span></div>
+      </section>
+      <section class="tl-period-section" aria-labelledby="timeline-period-title">
+        <header class="tl-period-heading tl-period-heading--tran-seal">
+          <img class="tl-period-mark tl-period-seal" data-asset="tranSeal" width="50" height="50" alt="" aria-hidden="true">
+          <svg class="tl-period-mark tl-period-mark--fallback" hidden width="22" height="22" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M16 2 21 9 28 16 21 23 16 30 11 23 4 16 11 9Z"/><path d="m16 8 8 8-8 8-8-8Z"/><path d="M16 2v28M4 16h24"/></svg>
+          <h2 id="timeline-period-title">THỜI TRẦN</h2>
+          <p id="timeline-period-years">1226–1400</p>
+        </header>
+        <div class="tl-period-intro">
+          <div class="tl-intro-copy">
+            <p id="timeline-period-description">Khám phá những dấu mốc từ khi triều Trần được thành lập, qua các cuộc kháng chiến chống Mông – Nguyên đến bước chuyển sang nhà Hồ.</p>
+          </div>
+          <figure class="tl-intro-figure">
+            <img id="timeline-period-image" data-asset="tranIntro" width="2172" height="724" alt="Minh họa AI lấy cảm hứng từ tháp Phổ Minh trong ánh nắng vàng; không phải ảnh tư liệu." fetchpriority="high">
+            <figcaption>Minh họa AI · Lấy cảm hứng từ tháp Phổ Minh</figcaption>
+          </figure>
+        </div>
+      </section>
+      <section class="tl-toolbar" aria-label="Lọc các mốc thời gian mẫu">
+        <div class="tl-toolbar-heading">
+          <h3 class="tl-toolbar-title">Các sự kiện tiêu biểu</h3>
+          <p id="timeline-status" class="tl-result-count" role="status" aria-live="polite">5 / 5 mốc</p>
+        </div>
+        <div class="tl-types" role="group" aria-label="Loại nội dung"></div>
+        <label class="tl-search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="6" stroke="currentColor" stroke-width="1.5"/><path d="m15 15 5 5" stroke="currentColor" stroke-width="1.5"/></svg><input id="timeline-query" type="search" placeholder="Tìm trong thời Trần…" aria-label="Tìm trong thời kỳ đang chọn"></label>
+        <label class="tl-year"><span class="tl-sr-only">Đến năm</span><select id="timeline-year"><option value="">Đến năm</option><option value="1226">1226</option><option value="1258">1258</option><option value="1285">1285</option><option value="1288">1288</option><option value="1400">1400</option></select></label>
+      </section>
+      <section class="tl-results" aria-label="Các sự kiện trong thời kỳ đang chọn">
+<!-- #timeline là vùng bàn giao; các thẻ dưới đây chỉ để xem bố cục. -->
+        <ol id="timeline" class="tl-list" aria-label="Các mốc thời gian mẫu">
+      <li class="tl-item" data-timeline-item data-year="1226" data-type="court" data-period="tran">
+        <span class="tl-node" aria-hidden="true"></span>
+        <details class="tl-card">
+          <summary>
+            <span class="tl-card-copy"><time datetime="1226">1226</time><span class="tl-card-title">Nhà Trần bắt đầu</span><span class="tl-tag" data-tag="court"></span><span class="tl-card-description">Trần Thái Tông lên ngôi, mở đầu triều Trần.</span></span>
+            <span class="tl-image-placeholder" aria-hidden="true"></span>
+            <span class="tl-card-toggle" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m9 5 7 7-7 7"/></svg></span>
+          </summary>
+          <div class="tl-card-body">
+            <p>Nội dung chi tiết cho mốc này đang được cập nhật.</p>
+            <button type="button" disabled title="Bài viết đang được cập nhật">Mở câu chuyện <span aria-hidden="true">→</span></button>
+          </div>
+        </details>
+      </li>
+      <li class="tl-item" data-timeline-item data-year="1258" data-type="defense" data-period="tran">
+        <span class="tl-node" aria-hidden="true"></span>
+        <details class="tl-card">
+          <summary>
+            <span class="tl-card-copy"><time datetime="1258">1258</time><span class="tl-card-title">Kháng chiến lần thứ nhất</span><span class="tl-tag" data-tag="defense"></span><span class="tl-card-description">Cuộc kháng chiến chống quân Mông Cổ.</span></span>
+            <span class="tl-image-placeholder" aria-hidden="true"></span>
+            <span class="tl-card-toggle" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m9 5 7 7-7 7"/></svg></span>
+          </summary>
+          <div class="tl-card-body">
+            <p>Nội dung chi tiết cho mốc này đang được cập nhật.</p>
+            <button type="button" disabled title="Bài viết đang được cập nhật">Mở câu chuyện <span aria-hidden="true">→</span></button>
+          </div>
+        </details>
+      </li>
+      <li class="tl-item" data-timeline-item data-year="1285" data-type="defense" data-period="tran">
+<span class="tl-node" aria-hidden="true"></span><details class="tl-card"><summary><span class="tl-card-copy"><time datetime="1285">1285</time><span class="tl-card-title">Kháng chiến lần thứ hai</span><span class="tl-tag" data-tag="defense"></span><span class="tl-card-description">Cuộc kháng chiến chống quân Nguyên.</span></span><span class="tl-image-placeholder" aria-hidden="true"></span><span class="tl-card-toggle" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m9 5 7 7-7 7"/></svg></span></summary><div class="tl-card-body"><p>Nội dung chi tiết cho mốc này đang được cập nhật.</p></div></details></li>
+      <li class="tl-item tl-item--featured" data-timeline-item data-year="1288" data-type="defense" data-period="tran">
+        <span class="tl-node" aria-hidden="true"></span>
+        <details class="tl-card tl-card--featured" open>
+          <summary>
+            <span class="tl-card-copy"><time datetime="1288">1288</time><span class="tl-card-title">Chiến thắng Bạch Đằng</span><span class="tl-tag" data-tag="defense"></span><span class="tl-card-description">Tìm hiểu bối cảnh, diễn biến và dấu tích còn lại.</span></span>
+            <span class="tl-image-placeholder" aria-hidden="true"></span>
+            <span class="tl-card-toggle" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m9 5 7 7-7 7"/></svg></span>
+          </summary>
+          <div class="tl-card-body">
+            <div class="tl-feature-image" role="img" aria-label="Hình minh họa lấy từ ảnh thiết kế tham chiếu, không phải ảnh tư liệu"></div>
+            <p class="tl-feature-description">Tìm hiểu bối cảnh, diễn biến và dấu tích còn lại.</p>
+            <div class="tl-related"><svg class="tl-book" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 5c-3-2-6-2-9-1v15c3-1 6-1 9 1 3-2 6-2 9-1V4c-3-1-6-1-9 1Zm0 0v15"/></svg><span>Nhân vật liên quan: <strong>Trần Hưng Đạo</strong> <span aria-hidden="true">→</span></span></div>
+            <button type="button" disabled title="Bài viết đang được cập nhật">Mở câu chuyện <span aria-hidden="true">→</span></button>
+          </div>
+        </details>
+      </li>
+      <li class="tl-item" data-timeline-item data-year="1400" data-type="court" data-period="tran">
+        <span class="tl-node" aria-hidden="true"></span>
+        <details class="tl-card"><summary>
+          <span class="tl-card-copy"><time datetime="1400">1400</time><span class="tl-card-title">Kết thúc triều Trần</span><span class="tl-tag" data-tag="court"></span><span class="tl-card-description">Mở sang thời Hồ.</span></span>
+          <span class="tl-image-placeholder" aria-hidden="true"></span><span class="tl-card-toggle" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m9 5 7 7-7 7"/></svg></span>
+        </summary><div class="tl-card-body"><p>Nội dung chi tiết cho mốc này đang được cập nhật.</p></div></details>
+      </li>
+        </ol>
+        <p class="tl-illustration-note">Ảnh trong các thẻ lấy từ bản mẫu để minh họa bố cục; chưa phải tư liệu lịch sử.</p>
+        <div id="timeline-empty" class="tl-empty" hidden><h3>Chưa có mục phù hợp</h3><p>Thử đổi từ khóa, bộ lọc hoặc chọn lại thời kỳ.</p><button type="button" id="timeline-reset">Đặt lại bộ lọc</button></div>
+      </section>
+    </div>
+  </main>
+  <div id="site-footer"></div>
+<script type="module" src="../js/core/component-loader.js"></script>
+  <script type="module" src="../js/pages/timeline.js"></script>
+</body>
+</html>

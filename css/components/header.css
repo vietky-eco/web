@@ -1,0 +1,149 @@
+.site-header {
+  position: relative;
+  z-index: 10;
+  background: var(--vk-surface);
+  color: var(--vk-text);
+}
+.vk-header-inner {
+  max-width: 1440px;
+  min-height: 76px;
+  margin: auto;
+  padding: 0 var(--vk-gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--vk-space-6);
+}
+.vk-brand {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--vk-action);
+  font: 400 26px/1.3 var(--vk-serif);
+  white-space: nowrap;
+}
+.vk-brand img { width: 36px; height: 36px; object-fit: contain; }
+.vk-desktop-nav { display: flex; align-items: center; gap: 4px; }
+.vk-desktop-nav a {
+  min-height: 44px;
+  padding: 11px 14px;
+  border-radius: var(--vk-radius-pill);
+  font: 400 15px/22px var(--vk-sans);
+  white-space: nowrap;
+}
+.vk-desktop-nav a:hover { color: var(--vk-action); }
+.vk-desktop-nav a[aria-current="page"] {
+  color: var(--vk-action);
+  background: rgb(139 30 30 / 8%);
+  font-weight: 600;
+}
+.vk-header-actions { display: flex; align-items: center; }
+.vk-search {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px;
+  border: 1px solid var(--vk-border);
+  border-radius: var(--vk-radius-pill);
+  background: var(--vk-surface);
+}
+.vk-search input {
+  width: 100%;
+  min-width: 0;
+  flex: 1;
+  padding: 8px 0 8px 12px;
+  border: 0;
+  border-radius: var(--vk-radius-pill);
+  color: var(--vk-text);
+  background: transparent;
+  font: 400 14px/1.5 var(--vk-sans);
+}
+.vk-search input::placeholder { color: var(--vk-text-muted); opacity: 1; }
+.vk-search button {
+  width: 44px;
+  height: 44px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--vk-surface-muted);
+  cursor: pointer;
+}
+.vk-search button:hover { background: var(--vk-surface-aged); }
+.vk-menu-button, .vk-mobile-search-icon, .vk-mobile-nav { display: none; }
+.vk-mobile-nav[hidden] { display: none; }
+.site-header a:focus-visible,
+.site-header button:focus-visible,
+.site-header input:focus-visible {
+  outline: 2px solid var(--vk-focus);
+  outline-offset: 3px;
+}
+/* Giữ cùng màu tìm kiếm trên desktop và mobile. */
+.vk-desktop-search { width: 280px; }
+.vk-search {
+  border-color: var(--vk-action);
+  background: var(--vk-action);
+}
+.vk-search input,
+.vk-search input::placeholder { color: var(--vk-on-action); }
+.vk-search button { background: transparent; }
+.vk-search button:hover { background: rgb(255 249 241 / 15%); }
+.vk-search button img { filter: brightness(0) invert(1); }
+.vk-search input:focus-visible,
+.vk-search button:focus-visible { outline-color: var(--vk-on-action); }
+.vk-search input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  margin: 0 8px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m4 4 8 8M12 4l-8 8' fill='none' stroke='%23FFF9F1' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  cursor: pointer;
+}
+@media (max-width: 1100px) {
+  body.vk-menu-open { overflow: hidden; }
+  .vk-header-inner { min-height: 64px; padding: 0 20px; }
+  .vk-brand { gap: 10px; font-size: 22px; }
+  .vk-brand img { width: 32px; height: 32px; }
+  .vk-desktop-nav, .vk-desktop-search { display: none; }
+  .vk-header-actions { gap: 8px; }
+  .vk-mobile-search-icon, .vk-menu-button {
+    width: 44px;
+    height: 44px;
+    flex: none;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+  .vk-menu-button { align-content: center; gap: 6px; }
+  .vk-menu-line { width: 20px; height: 2px; background: var(--vk-text); }
+  .vk-menu-close-icon { display: none; }
+  .vk-menu-button[aria-expanded="true"] .vk-menu-line { display: none; }
+  .vk-menu-button[aria-expanded="true"] .vk-menu-close-icon { display: block; }
+  .vk-mobile-nav {
+    display: block;
+    position: fixed;
+    inset: 64px 0 0;
+    overflow-y: auto;
+    padding: 32px 24px;
+    background: var(--vk-surface);
+  }
+  .vk-mobile-nav-title { margin: 0 0 6px; font: 400 31px/40px var(--vk-serif); }
+  .vk-mobile-nav > a {
+    min-height: 88px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    border-bottom: 1px solid var(--vk-border);
+    font: 400 24px/1.3 var(--vk-serif);
+  }
+  .vk-mobile-nav > a[aria-current="page"] { color: var(--vk-action); }
+  .vk-mobile-search { margin-top: 32px; }
+}

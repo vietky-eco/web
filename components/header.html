@@ -1,0 +1,39 @@
+<header class="site-header">
+  <div class="vk-header-inner">
+    <a class="vk-brand" href="/index.html" aria-label="Việt Ký - Trang chủ">
+      <img src="/assets/icons/favicon.svg" alt="" width="36" height="36">
+      <span>VIỆT KÝ</span>
+    </a>
+    <nav class="vk-desktop-nav" aria-label="Điều hướng chính">
+      <a href="/index.html">Trang chủ</a>
+      <a href="/pages/timeline.html">Dòng thời gian</a>
+      <a href="/pages/explore.html">Khám phá</a>
+      <a href="/pages/people.html">Nhân Vật</a>
+    </nav>
+    <div class="vk-header-actions">
+      <form class="vk-search vk-desktop-search" role="search" aria-label="Tìm kiếm trên website" action="/pages/search.html" method="get">
+        <input type="search" name="q" placeholder="Tìm sự kiện, nhân vật…" aria-label="Tìm sự kiện, nhân vật" required>
+        <button type="submit" aria-label="Tìm kiếm"><img src="/assets/icons/search-lens.svg" alt="" width="20" height="20"></button>
+      </form>
+      <button class="vk-mobile-search-icon" type="button" aria-label="Mở tìm kiếm" aria-controls="vk-mobile-nav" aria-expanded="false">
+        <img src="/assets/icons/search-lens.svg" alt="" width="20" height="20">
+      </button>
+      <button class="vk-menu-button" type="button" aria-label="Mở menu" aria-controls="vk-mobile-nav" aria-expanded="false">
+        <span class="vk-menu-line"></span>
+        <span class="vk-menu-line"></span>
+        <img class="vk-menu-close-icon" src="/assets/icons/menu-close.svg" alt="" width="20" height="20">
+      </button>
+    </div>
+  </div>
+  <nav id="vk-mobile-nav" class="vk-mobile-nav" aria-label="Điều hướng di động" hidden>
+    <p class="vk-mobile-nav-title">Đi tới</p>
+    <a href="/index.html">Trang chủ <span aria-hidden="true">→</span></a>
+    <a href="/pages/timeline.html">Dòng thời gian <span aria-hidden="true">→</span></a>
+    <a href="/pages/explore.html">Khám phá <span aria-hidden="true">→</span></a>
+    <a href="/pages/people.html">Nhân Vật <span aria-hidden="true">→</span></a>
+    <form class="vk-search vk-mobile-search" role="search" aria-label="Tìm kiếm trên di động" action="/pages/search.html" method="get">
+      <input type="search" name="q" placeholder="Tìm sự kiện, nhân vật…" aria-label="Tìm sự kiện, nhân vật" required>
+      <button type="submit" aria-label="Tìm kiếm"><img src="/assets/icons/search-lens.svg" alt="" width="20" height="20"></button>
+    </form>
+  </nav>
+</header>

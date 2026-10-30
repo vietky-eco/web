@@ -1,8 +1,27 @@
+@font-face {
+  font-family: "Noto Serif Display";
+  src: url("../assets/fonts/noto-serif-display.ttf") format("truetype");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: url("../assets/fonts/be-vietnam-pro.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
+  margin: 0;
   min-height: 100vh;
 
   background-color: var(--vk-bg);
@@ -11,6 +30,11 @@ body {
   font-family: var(--vk-sans);
   font-size: var(--vk-type-body);
   line-height: var(--vk-leading-body);
+}
+
+img {
+  display: block;
+  max-width: 100%;
 }
 
 a {
