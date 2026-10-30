@@ -32,7 +32,7 @@ export async function loadContent(id) {
   }
 
   if ("id" in content && content.id !== id) {
-    throw new Error(`ID trong JSON không khớp: yêu cầu "${id}", nhận "${content.id}".`);
+    throw new Error(`ID trong JSON không khớp: yêu cầu "${id}", nhận ${JSON.stringify(content.id)}.`);
   }
 
   return content;
