@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "IE104-45 local contract. Cross-file references and publication need separate validation and team review.",
+  "title": "Viet Ky Source",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "title",
+    "status"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 7,
+      "maxLength": 7,
+      "pattern": "^src[0-9]{4}$"
+    },
+    "title": {
+      "$ref": "#/$defs/text"
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "review",
+        "published"
+      ]
+    },
+    "citation": {
+      "$ref": "#/$defs/text"
+    },
+    "author": {
+      "$ref": "#/$defs/text"
+    },
+    "publisher": {
+      "$ref": "#/$defs/text"
+    },
+    "publicationYear": {
+      "type": "integer"
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https?://(?:\\[[^\\s\\[\\]]+\\]|[^\\s/?#@:\\[\\]]+)(?::[0-9]+)?(?:[/?#][^\\s]*)?$",
+      "not": {
+        "pattern": "\\s"
+      },
+      "description": "Absolute HTTP(S) reference URL with a nonempty host and no whitespace or userinfo."
+    },
+    "locator": {
+      "$ref": "#/$defs/text"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "published"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "citation"
+        ],
+        "anyOf": [
+          {
+            "required": [
+              "url"
+            ]
+          },
+          {
+            "required": [
+              "locator"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "$defs": {
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    }
+  }
+}

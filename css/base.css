@@ -22,7 +22,14 @@ html {
 
 body {
   margin: 0;
+  min-height: 100vh;
+
+  background-color: var(--vk-bg);
+  color: var(--vk-text);
+
   font-family: var(--vk-sans);
+  font-size: var(--vk-type-body);
+  line-height: var(--vk-leading-body);
 }
 
 img {
@@ -31,6 +38,34 @@ img {
 }
 
 a {
-  color: inherit;
+  color: var(--vk-link);
   text-decoration: none;
+}
+
+a:hover {
+  color: var(--vk-link-hover);
+}
+
+button {
+  font-family: inherit;
+}
+
+::selection {
+  background: var(--vk-paper-aged);
+  color: var(--vk-ink);
+}
+
+/* Hỗ trợ điều hướng bằng bàn phím */
+
+:focus-visible {
+  outline: 2px solid var(--vk-focus);
+  outline-offset: 3px;
+}
+
+/* Tôn trọng thiết lập giảm chuyển động */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
