@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$comment": "IE104-45 local contract. Cross-file references and publication need separate validation and team review.",
+  "$comment": "Viet Ky catalogue-aligned contract. ID/reference existence, historical accuracy, asset availability and publication need separate validation and human review.",
   "title": "Viet Ky Story",
   "type": "object",
   "additionalProperties": false,
@@ -264,6 +264,58 @@
                 "minItems": 1
               }
             }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "type",
+              "imageIds"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 6,
+                "maxLength": 6,
+                "pattern": "^scn[0-9]{3}$"
+              },
+              "type": {
+                "const": "gallery"
+              },
+              "heading": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "narration": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "imageIds": {
+                "type": "array",
+                "uniqueItems": true,
+                "items": {
+                  "type": "string",
+                  "minLength": 7,
+                  "maxLength": 7,
+                  "pattern": "^(img)[0-9]{4}$"
+                },
+                "minItems": 1
+              },
+              "sectionIds": {
+                "type": "array",
+                "uniqueItems": true,
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "minLength": 6,
+                  "maxLength": 6,
+                  "pattern": "^sec[0-9]{3}$"
+                }
+              }
+            }
           }
         ]
       },
@@ -280,6 +332,78 @@
       },
       "uniqueItems": true,
       "minItems": 0
+    },
+    "editorialNotes": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S",
+      "description": "Ghi chú biên tập nguyên văn; không phải nội dung lịch sử đã được duyệt."
+    },
+    "referencedByIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 7,
+        "maxLength": 7,
+        "pattern": "^(evt|per|ppl|plc|cul|art|sty|tml|src|img|map)[0-9]{4}$"
+      },
+      "description": "Tham chiếu ngược trong danh mục; không tự suy ra quan hệ lịch sử hoặc quan hệ có hướng."
+    },
+    "coverImageId": {
+      "type": "string",
+      "minLength": 7,
+      "maxLength": 7,
+      "pattern": "^(img)[0-9]{4}$",
+      "description": "Ảnh đại diện dự kiến; có ID không chứng minh tệp ảnh đã tồn tại."
+    },
+    "fallbackImageId": {
+      "type": "string",
+      "minLength": 7,
+      "maxLength": 7,
+      "pattern": "^(img)[0-9]{4}$",
+      "description": "Ảnh thay thế khi thiếu tệp; danh mục hiện dùng img0025, bản thân tệp cũng cần được tạo và duyệt."
+    },
+    "imageIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 7,
+        "maxLength": 7,
+        "pattern": "^(img)[0-9]{4}$"
+      }
+    },
+    "mapIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 7,
+        "maxLength": 7,
+        "pattern": "^(map)[0-9]{4}$"
+      }
+    },
+    "timelineIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 7,
+        "maxLength": 7,
+        "pattern": "^(tml)[0-9]{4}$"
+      }
+    },
+    "template": {
+      "type": "string",
+      "enum": [
+        "event",
+        "period",
+        "person",
+        "place",
+        "culture"
+      ],
+      "description": "Template theo chủ thể chính của Story trong danh mục."
     }
   },
   "allOf": [
@@ -297,7 +421,103 @@
       "then": {
         "properties": {
           "scenes": {
-            "minItems": 1
+            "minItems": 5,
+            "maxItems": 5
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "template": {
+            "const": "event"
+          }
+        },
+        "required": [
+          "template"
+        ]
+      },
+      "then": {
+        "properties": {
+          "entityId": {
+            "pattern": "^evt[0-9]{4}$"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "template": {
+            "const": "period"
+          }
+        },
+        "required": [
+          "template"
+        ]
+      },
+      "then": {
+        "properties": {
+          "entityId": {
+            "pattern": "^per[0-9]{4}$"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "template": {
+            "const": "person"
+          }
+        },
+        "required": [
+          "template"
+        ]
+      },
+      "then": {
+        "properties": {
+          "entityId": {
+            "pattern": "^ppl[0-9]{4}$"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "template": {
+            "const": "place"
+          }
+        },
+        "required": [
+          "template"
+        ]
+      },
+      "then": {
+        "properties": {
+          "entityId": {
+            "pattern": "^plc[0-9]{4}$"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "template": {
+            "const": "culture"
+          }
+        },
+        "required": [
+          "template"
+        ]
+      },
+      "then": {
+        "properties": {
+          "entityId": {
+            "pattern": "^cul[0-9]{4}$"
           }
         }
       }

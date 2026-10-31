@@ -1,0 +1,25 @@
+{
+  "id": "evt0004",
+  "type": "event",
+  "title": "Kháng chiến chống Tống (981)",
+  "status": "draft",
+  "summary": "Năm 981, Lê Hoàn lãnh đạo quân Đại Cồ Việt chống cuộc tiến công của nhà Tống và giành thắng lợi, bảo vệ nền độc lập.",
+  "time": {
+    "sortYear": 981,
+    "label": "981"
+  },
+  "periodIds": [
+    "per0002"
+  ],
+  "articleId": null,
+  "sourceIds": [
+    "src0002",
+    "src0003"
+  ],
+  "related": [
+    {
+      "targetId": "evt0002",
+      "label": "Bối cảnh biến động triều đình trước cuộc kháng chiến"
+    }
+  ]
+}

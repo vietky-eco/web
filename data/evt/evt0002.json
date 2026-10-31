@@ -1,0 +1,29 @@
+{
+  "id": "evt0002",
+  "type": "event",
+  "title": "Biến cố cung đình nhà Đinh (979)",
+  "status": "draft",
+  "summary": "Năm 979, Đinh Tiên Hoàng và Đinh Liễn bị sát hại. Đinh Toàn còn nhỏ lên nối ngôi; Lê Hoàn giữ vai trò nhiếp chính trong bối cảnh triều đình biến động.",
+  "time": {
+    "sortYear": 979,
+    "label": "979"
+  },
+  "periodIds": [
+    "per0001"
+  ],
+  "articleId": null,
+  "sourceIds": [
+    "src0002"
+  ],
+  "related": [
+    {
+      "targetId": "evt0001",
+      "label": "Bối cảnh hình thành vương triều Đinh"
+    },
+    {
+      "targetId": "evt0004",
+      "label": "Cuộc kháng chiến sau biến động triều đình"
+    }
+  ],
+  "editorialNotes": "Không trình bày giả thuyết về thủ phạm/chủ mưu như kết luận."
+}
