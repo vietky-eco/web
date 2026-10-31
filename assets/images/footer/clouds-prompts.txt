@@ -1,0 +1,14 @@
+Tool: built-in imagegen
+Edit target: /tmp/codex-clipboard-ceffdbfd-37c5-400e-b60b-c68a38bd8fc9.png
+Transparent background: true
+
+Desktop
+Edit target: the attached transparent PNG of dark vermilion Vietnamese traditional curling clouds. Create the DESKTOP website footer ornament version, exact output canvas 2880 x 720 pixels, wide 4:1 ratio. Preserve the existing cloud designs, thin transparent spiral cutouts, deep muted oxblood-red color #651919 and slightly textured ink surface. Recompose without stretching the curls: large cloud banks at far left and far right, smaller flowing curls linking them across the lower middle, open transparent space above the middle. Artwork occupies the bottom 70-85% at the sides and bottom 30-45% at center. The base is one continuous opaque red strip spanning the entire canvas width, touching the exact bottom edge with no transparent bottom padding, to join a solid-color footer. Genuine alpha transparency above and within cutouts; no black background, no cream background, no checkerboard baked in. No bird, no sun, no text, no logo, no frame, no shadow, no additional motifs. Output one PNG only.
+
+Mobile
+Edit target: the attached transparent PNG of muted dark red Vietnamese traditional cloud scrolls. Create a compact MOBILE website footer ornament, exact final canvas 1080 x 540 pixels (2:1). Preserve the reference's Vietnamese rounded curling cloud forms, spiral negative-space cutouts and muted dark oxblood #651919 ink with faint texture. Recompose the ornament for a narrower phone: one medium cloud cluster at left and another at right, only two or three small connecting curls in the bottom middle, no excessive tiny detail. The side clouds rise to about 65-75% of the height; center stays lower, leaving ample transparent space above the middle. Don't stretch the curves. One continuous opaque red base across the whole bottom width ending flush at the bottom edge, no transparent bottom padding. TRUE alpha transparent background above the clouds and in the cutouts. No opaque black or cream background, no baked checkerboard, no bird, no lettering, no logo, no gradients or shadows around the ornament. Output one standalone PNG.
+
+Export
+The desktop generation was cropped to 2103x526 at x=0, y=222 to remove excess transparent space, then resized to 2880x720.
+The mobile generation was resized to 1080x540.
+Both final exports retain RGBA transparency. Alpha below 3% was cleared to remove faint background specks.
