@@ -33,28 +33,39 @@
   <link rel="icon" href="./assets/icons/favicon-32x32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png" />
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="./css/base.css" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Design Tokens -->
   <link rel="stylesheet" href="./css/token.css">
+
+  <!-- Base Styles -->
+  <link rel="stylesheet" href="./css/base.css">
+
+  <!-- Components -->
   <link rel="stylesheet" href="./css/components/header.css">
   <link rel="stylesheet" href="./css/components/footer.css">
+
 </head>
 
 <body id="top">
-    <!-- Header -->
+  <!-- Header -->
   <div id="site-header"></div>
 
   <!-- Main -->
-  <main>
+  <!-- Tạm tăng chiều cao để kiểm tra navbar sticky; bỏ min-height khi có nội dung thật. -->
+  <main style="min-height: 200vh;">
     <p>TestTest</p>
   </main>
 
   <!-- Footer -->
- <div id="site-footer"></div>
+  <div id="site-footer"></div>
 
   <!-- JavaScript -->
   <script type="module" src="./js/pages/home.js"></script>
-  <script type="module" src="./js/core/component-loader.js"></script>
+  <script type="module" src="./js/core/component-loader.js?v=2"></script>
 </body>
 
 </html>
