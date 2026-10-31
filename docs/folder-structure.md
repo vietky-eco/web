@@ -1,5 +1,7 @@
 # Việt Ký — Giải thích cấu trúc thư mục
 
+Nút tìm kiếm trên navbar hiện là icon tĩnh; không mở popup hoặc trang tìm kiếm.
+
 Phần giải thích được đặt **ngay dưới tên thư mục hoặc file** trong cây để có thể đọc liên tục mà không phải tra bảng ở nơi khác.
 
 - `[Có nội dung]`: file có mã, văn bản hoặc dữ liệu tài nguyên; không đồng nghĩa đã tích hợp đầy đủ.
@@ -36,20 +38,53 @@ viet-ky/  (tên thư mục gốc thực tế: web/)
 │       ↳ [Rỗng] Khung đầu trang dùng chung: logo, menu và khu vực thao tác.
 │
 ├── pages/
-│   ↳ Khung HTML của các trang chức năng; nội dung chi tiết có thể được dựng từ JSON.
+│   ↳ Trang riêng cho từng danh mục; link chuẩn khai báo trong navigation-data.js.
+│   ├── about.html
+│   │   ↳ [Có nội dung] Về dự án
+│   ├── artifacts.html
+│   │   ↳ [Có nội dung] Hiện vật lịch sử
+│   ├── arts.html
+│   │   ↳ [Có nội dung] Nghệ thuật truyền thống
+│   ├── beliefs.html
+│   │   ↳ [Có nội dung] Tín ngưỡng & Tôn giáo
+│   ├── category.html
+│   │   ↳ [Có nội dung] Danh mục chung, hỗ trợ đường dẫn cũ
+│   ├── culture.html
+│   │   ↳ [Có nội dung] Văn hóa
+│   ├── customs.html
+│   │   ↳ [Có nội dung] Phong tục & Tập quán
 │   ├── detail.html
-│   │   ↳ [Rỗng] Trang chi tiết dùng chung cho thời kỳ, sự kiện, nhân vật, địa danh và văn hóa; dự kiến nhận ID
-│   │     qua URL.
+│   │   ↳ [Rỗng] Khung trang chưa triển khai.
+│   ├── events.html
+│   │   ↳ [Có nội dung] Sự kiện lịch sử
 │   ├── explore.html
-│   │   ↳ [Rỗng] Trang khám phá các tuyến nội dung theo chủ đề hoặc thứ tự.
+│   │   ↳ [Có nội dung] Khám phá
+│   ├── festivals.html
+│   │   ↳ [Có nội dung] Lễ hội & Đời sống
+│   ├── heritage.html
+│   │   ↳ [Có nội dung] Dấu xưa
+│   ├── history.html
+│   │   ↳ [Có nội dung] Chuyện sử
+│   ├── login.html
+│   │   ↳ [Có nội dung] Đăng nhập
 │   ├── map.html
-│   │   ↳ [Rỗng] Trang khám phá địa danh và nội dung theo vị trí địa lý.
+│   │   ↳ [Có nội dung] Bản đồ lịch sử
+│   ├── monuments.html
+│   │   ↳ [Có nội dung] Di tích & Kiến trúc
+│   ├── pages/
+│   │   ↳ Trang riêng cho từng danh mục; link chuẩn khai báo trong navigation-data.js.
+│   ├── people.html
+│   │   ↳ [Có nội dung] Nhân vật lịch sử
+│   ├── periods.html
+│   │   ↳ [Có nội dung] Các thời kỳ
+│   ├── places.html
+│   │   ↳ [Có nội dung] Địa danh lịch sử
 │   ├── quiz.html
-│   │   ↳ [Rỗng] Trang làm câu hỏi, xem phản hồi, đáp án và kết quả.
-│   ├── search.html
-│   │   ↳ [Rỗng] Trang nhập từ khóa, lọc và xem kết quả tìm kiếm.
+│   │   ↳ [Rỗng] Khung trang chưa triển khai.
+│   ├── sources.html
+│   │   ↳ [Có nội dung] Nguồn tư liệu
 │   └── timeline.html
-│       ↳ [Rỗng] Trang khám phá nội dung theo trục thời gian.
+│       ↳ [Có nội dung] Dòng thời gian
 │
 ├── css/
 │   ↳ Hệ thống kiểu dáng: nền tảng thiết kế, UI dùng chung, landing engine và từng trang.
@@ -85,8 +120,6 @@ viet-ky/  (tên thư mục gốc thực tế: web/)
 │   │   │   ↳ [Rỗng] Kiểu dáng khung bản đồ, marker và chú giải dùng chung.
 │   │   ├── navigation.css
 │   │   │   ↳ [Rỗng] Kiểu dáng menu, mục đang chọn và trạng thái tương tác.
-│   │   ├── search.css
-│   │   │   ↳ [Rỗng] Kiểu dáng ô tìm kiếm và các phần tìm kiếm dùng chung.
 │   │   └── timeline.css
 │   │       ↳ [Rỗng] Kiểu dáng mốc, đường nối, nhãn và thẻ của thành phần timeline.
 │   ├── engine/
@@ -111,8 +144,6 @@ viet-ky/  (tên thư mục gốc thực tế: web/)
 │       │   ↳ [Rỗng] Bố cục trang bản đồ: bản đồ, danh sách và bảng thông tin.
 │       ├── quiz.css
 │       │   ↳ [Rỗng] Bố cục câu hỏi, lựa chọn, tiến độ và kết quả quiz.
-│       ├── search.css
-│       │   ↳ [Rỗng] Bố cục trang tìm kiếm: bộ lọc, thông tin kết quả và lưới thẻ.
 │       └── timeline.css
 │           ↳ [Rỗng] Bố cục toàn trang timeline: tiêu đề, bộ lọc và vùng timeline.
 │
@@ -221,8 +252,6 @@ viet-ky/  (tên thư mục gốc thực tế: web/)
 │   │   │   ↳ [Rỗng] Chọn và hiển thị nội dung liên quan từ quan hệ dữ liệu.
 │   │   ├── related.js
 │   │   │   ↳ [Rỗng] File cũ gần nghĩa với related-content.js; được giữ nguyên, hiện rỗng.
-│   │   ├── search.js
-│   │   │   ↳ [Rỗng] Tìm nội dung theo từ khóa và trả kết quả phù hợp.
 │   │   ├── sources.js
 │   │   │   ↳ [Rỗng] File cũ dành cho xử lý/hiển thị nguồn; hiện rỗng, trách nhiệm chưa được chốt.
 │   │   └── timeline.js
@@ -237,10 +266,8 @@ viet-ky/  (tên thư mục gốc thực tế: web/)
 │   │   │   ↳ [Rỗng] Hành vi riêng của footer nếu cần; footer tĩnh có thể không cần JavaScript riêng.
 │   │   ├── header.js
 │   │   │   ↳ [Rỗng] Hành vi đầu trang, chẳng hạn mở và đóng menu trên điện thoại.
-│   │   ├── navigation.js
-│   │   │   ↳ [Rỗng] Quản lý mục đang chọn và hành vi menu điều hướng.
-│   │   └── search-bar.js
-│   │       ↳ [Rỗng] Nhận/gửi từ khóa và quản lý tương tác của ô tìm kiếm.
+│   │   └── navigation.js
+│   │       ↳ [Rỗng] Quản lý mục đang chọn và hành vi menu điều hướng.
 │   └── pages/
 │       ↳ Controller từng trang: ghép core, engine, features và UI để trang hoạt động.
 │       ├── detail.js
@@ -253,8 +280,6 @@ viet-ky/  (tên thư mục gốc thực tế: web/)
 │       │   ↳ [Rỗng] Khởi tạo bản đồ khám phá và kết nối dữ liệu địa danh với map-explorer.
 │       ├── quiz.js
 │       │   ↳ [Rỗng] Khởi tạo giao diện và dữ liệu câu hỏi, rồi kết nối logic quiz.
-│       ├── search.js
-│       │   ↳ [Rỗng] Kết nối từ khóa URL, ô tìm kiếm, bộ lọc và các thẻ kết quả.
 │       └── timeline.js
 │           ↳ [Rỗng] Kết nối dữ liệu, bộ lọc và tính năng timeline trên trang.
 │
@@ -415,7 +440,6 @@ viet-ky/  (tên thư mục gốc thực tế: web/)
 | --- | --- |
 | `id-resolver` / `content-loader` / `content-resolver` | Tìm đường dẫn / tải một tài nguyên / tập hợp các tài nguyên theo tham chiếu. |
 | HTML / CSS / JS của header | Cấu trúc / kiểu dáng / hành vi tương tác. |
-| `js/pages/search.js` / `js/features/search.js` | Ghép và khởi tạo cả trang / xử lý tìm kiếm. |
 | `css/components/timeline.css` / `css/pages/timeline.css` | Kiểu dáng thành phần dùng chung / bố cục riêng của trang timeline. |
 | Scene / block | Một cảnh tương đối lớn trong story / một đơn vị nhỏ của bài đọc. |
 | `scenes/timeline.js` / `blocks/timeline.js` / `features/timeline.js` | Cảnh timeline / timeline nhúng trong bài / hành vi tính năng timeline. |
