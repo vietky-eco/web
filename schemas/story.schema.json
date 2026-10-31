@@ -1,0 +1,306 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "IE104-45 local contract. Cross-file references and publication need separate validation and team review.",
+  "title": "Viet Ky Story",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "entityId",
+    "articleId",
+    "title",
+    "status",
+    "scenes"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 7,
+      "maxLength": 7,
+      "pattern": "^(sty)[0-9]{4}$"
+    },
+    "entityId": {
+      "type": "string",
+      "minLength": 7,
+      "maxLength": 7,
+      "pattern": "^(evt|per|ppl|plc|cul)[0-9]{4}$"
+    },
+    "articleId": {
+      "type": "string",
+      "minLength": 7,
+      "maxLength": 7,
+      "pattern": "^(art)[0-9]{4}$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "review",
+        "published"
+      ]
+    },
+    "scenes": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "type"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 6,
+                "maxLength": 6,
+                "pattern": "^scn[0-9]{3}$"
+              },
+              "type": {
+                "const": "hero"
+              },
+              "heading": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "narration": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "imageId": {
+                "type": "string",
+                "minLength": 7,
+                "maxLength": 7,
+                "pattern": "^(img)[0-9]{4}$"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "type",
+              "sectionIds"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 6,
+                "maxLength": 6,
+                "pattern": "^scn[0-9]{3}$"
+              },
+              "type": {
+                "const": "narrative"
+              },
+              "heading": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "narration": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "sectionIds": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 6,
+                  "maxLength": 6,
+                  "pattern": "^sec[0-9]{3}$"
+                },
+                "uniqueItems": true,
+                "minItems": 1
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "type",
+              "imageId"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 6,
+                "maxLength": 6,
+                "pattern": "^scn[0-9]{3}$"
+              },
+              "type": {
+                "const": "image"
+              },
+              "heading": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "narration": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "imageId": {
+                "type": "string",
+                "minLength": 7,
+                "maxLength": 7,
+                "pattern": "^(img)[0-9]{4}$"
+              },
+              "sectionIds": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 6,
+                  "maxLength": 6,
+                  "pattern": "^sec[0-9]{3}$"
+                },
+                "uniqueItems": true,
+                "minItems": 1
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "type",
+              "mapId"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 6,
+                "maxLength": 6,
+                "pattern": "^scn[0-9]{3}$"
+              },
+              "type": {
+                "const": "map"
+              },
+              "heading": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "narration": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "mapId": {
+                "type": "string",
+                "minLength": 7,
+                "maxLength": 7,
+                "pattern": "^(map)[0-9]{4}$"
+              },
+              "sectionIds": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 6,
+                  "maxLength": 6,
+                  "pattern": "^sec[0-9]{3}$"
+                },
+                "uniqueItems": true,
+                "minItems": 1
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "type",
+              "timelineId"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 6,
+                "maxLength": 6,
+                "pattern": "^scn[0-9]{3}$"
+              },
+              "type": {
+                "const": "timeline"
+              },
+              "heading": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "narration": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "timelineId": {
+                "type": "string",
+                "minLength": 7,
+                "maxLength": 7,
+                "pattern": "^(tml)[0-9]{4}$"
+              },
+              "sectionIds": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 6,
+                  "maxLength": 6,
+                  "pattern": "^sec[0-9]{3}$"
+                },
+                "uniqueItems": true,
+                "minItems": 1
+              }
+            }
+          }
+        ]
+      },
+      "uniqueItems": true,
+      "minItems": 0
+    },
+    "sourceIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 7,
+        "maxLength": 7,
+        "pattern": "^(src)[0-9]{4}$"
+      },
+      "uniqueItems": true,
+      "minItems": 0
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "published"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "scenes": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ]
+}

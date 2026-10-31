@@ -1,0 +1,306 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "IE104-45 local contract. Cross-file references and publication need separate validation and team review.",
+  "title": "Viet Ky Entity",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "type",
+    "title",
+    "status",
+    "sourceIds"
+  ],
+  "properties": {
+    "id": {
+      "$ref": "#/$defs/entityId"
+    },
+    "type": {
+      "enum": [
+        "event",
+        "period",
+        "person",
+        "place",
+        "culture"
+      ]
+    },
+    "title": {
+      "$ref": "#/$defs/text"
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "review",
+        "published"
+      ]
+    },
+    "summary": {
+      "$ref": "#/$defs/text"
+    },
+    "periodIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 7,
+        "maxLength": 7,
+        "pattern": "^per[0-9]{4}$"
+      }
+    },
+    "articleId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 7,
+      "maxLength": 7,
+      "pattern": "^art[0-9]{4}$"
+    },
+    "sourceIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 7,
+        "maxLength": 7,
+        "pattern": "^src[0-9]{4}$"
+      }
+    },
+    "related": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "targetId",
+          "label"
+        ],
+        "properties": {
+          "targetId": {
+            "type": "string",
+            "minLength": 7,
+            "maxLength": 7,
+            "pattern": "^(evt|ppl|plc)[0-9]{4}$"
+          },
+          "label": {
+            "$ref": "#/$defs/text"
+          }
+        }
+      }
+    },
+    "time": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sortYear",
+        "label"
+      ],
+      "properties": {
+        "sortYear": {
+          "type": "integer"
+        },
+        "label": {
+          "$ref": "#/$defs/text"
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "event"
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "id": {
+            "pattern": "^evt[0-9]{4}$"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "period"
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "id": {
+            "pattern": "^per[0-9]{4}$"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "person"
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "id": {
+            "pattern": "^ppl[0-9]{4}$"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "place"
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "id": {
+            "pattern": "^plc[0-9]{4}$"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "culture"
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "id": {
+            "pattern": "^cul[0-9]{4}$"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "published"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "summary"
+        ],
+        "properties": {
+          "sourceIds": {
+            "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "published"
+          },
+          "type": {
+            "enum": [
+              "event",
+              "person",
+              "place"
+            ]
+          }
+        },
+        "required": [
+          "status",
+          "type"
+        ]
+      },
+      "then": {
+        "required": [
+          "periodIds",
+          "articleId"
+        ],
+        "properties": {
+          "periodIds": {
+            "minItems": 1
+          },
+          "articleId": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "published"
+          },
+          "type": {
+            "const": "event"
+          }
+        },
+        "required": [
+          "status",
+          "type"
+        ]
+      },
+      "then": {
+        "required": [
+          "time",
+          "related"
+        ],
+        "properties": {
+          "related": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "entityId": {
+      "type": "string",
+      "minLength": 7,
+      "maxLength": 7,
+      "pattern": "^(evt|per|ppl|plc|cul)[0-9]{4}$"
+    }
+  }
+}
