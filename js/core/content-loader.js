@@ -1,5 +1,12 @@
 import { resolveId } from "./id-resolver.js";
 
+class ResourceNotFoundError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "ResourceNotFoundError";
+  }
+}
+
 /** Tải một object JSON; caller chịu trách nhiệm hiển thị dữ liệu hoặc lỗi. */
 export async function loadContent(id) {
   const url = resolveId(id);
@@ -13,7 +20,7 @@ export async function loadContent(id) {
 
   if (!response.ok) {
     if (response.status === 404) {
-      throw new Error(`Không tìm thấy tài nguyên "${id}" (HTTP 404).`);
+      throw new ResourceNotFoundError(`Không tìm thấy tài nguyên "${id}" (HTTP 404).`);
     }
 
     throw new Error(`Không thể tải tài nguyên "${id}" (HTTP ${response.status}).`);

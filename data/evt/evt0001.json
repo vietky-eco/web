@@ -3,5 +3,22 @@
   "type": "event",
   "title": "Thống nhất đất nước, lập Đại Cồ Việt (968)",
   "status": "draft",
-  "sourceIds": []
+  "summary": "Năm 968, Đinh Bộ Lĩnh kết thúc tình trạng cát cứ, lên ngôi hoàng đế, đặt quốc hiệu Đại Cồ Việt và chọn Hoa Lư làm kinh đô.",
+  "time": {
+    "sortYear": 968,
+    "label": "968"
+  },
+  "periodIds": [
+    "per0001"
+  ],
+  "articleId": null,
+  "sourceIds": [
+    "src0001"
+  ],
+  "related": [
+    {
+      "targetId": "evt0002",
+      "label": "Biến cố kế vị cuối thời Đinh"
+    }
+  ]
 }
