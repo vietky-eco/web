@@ -21,13 +21,7 @@ let type = "all";
 const desktopMotion = window.matchMedia("(min-width: 1101px) and (prefers-reduced-motion: no-preference)");
 let carouselFrame = 0;
 const assetVariables = {
-  "--tl-reference-image": ASSETS.eventCourt,
-  "--tl-event-court-image": ASSETS.eventCourt,
-  "--tl-event-defense-image": ASSETS.eventDefense,
-  "--tl-event-bach-dang-image": ASSETS.eventBachDang,
   "--tl-paper-texture": ASSETS.paperTexture,
-  "--tl-hero-far-image": ASSETS.heroMountains,
-  "--tl-hero-near-image": ASSETS.heroForeground,
   "--tl-deco-left-image": ASSETS.decoLeft,
   "--tl-deco-right-image": ASSETS.decoRight,
   "--tl-deco-bottom-image": ASSETS.decoBottom,

@@ -10,11 +10,6 @@
 .page-timeline .site-header { border-bottom: 1px solid var(--vk-border); }
 .tl-container { width: 100%; max-width: 1280px; margin-inline: auto; padding-inline: var(--vk-gutter); }
 .tl-hero { position: relative; isolation: isolate; padding-block: 28px 22px; }
-.tl-hero::before {
-  content: ""; position: absolute; z-index: -1; inset: 0 0 0 45%;
-  background: var(--tl-reference-image, none) 65.2% 6.25% / 344.5% auto no-repeat;
-  opacity: .36; mask-image: linear-gradient(to right, transparent, black 60%);
-}
 .tl-eyebrow { margin: 0 0 8px; color: var(--vk-text-muted); font: 400 11px/1.5 var(--vk-sans); letter-spacing: var(--vk-tracking-label); }
 .tl-hero h1 { margin: 0; font: 650 clamp(32px, 3.2vw, 44px)/1.16 var(--vk-serif); letter-spacing: var(--vk-tracking-tight); }
 .tl-lead { margin: 8px 0 0; color: var(--vk-text-muted); font: 400 18px/1.55 var(--vk-serif); }
@@ -125,7 +120,6 @@
 }
 @media (max-width: 600px) {
 .tl-hero { padding-block: 24px 18px; }
-.tl-hero::before { display: none; }
 .tl-eyebrow { font-size: 11px; }
 .tl-lead { font-size: 16px; }
 .tl-scroll-selector { padding-inline: 18px; }
@@ -153,9 +147,8 @@
 .tl-results { padding-block: 30px 44px; }
 .page-timeline .site-footer .vk-footer-inner { justify-content: center; text-align: center; }
 }
-.tl-scroll-banner, .tl-page-dots, .tl-hero-art, .tl-deco { display: none; }
+.tl-scroll-banner, .tl-page-dots, .tl-deco { display: none; }
 .tl-filter-icon { display: none; }
-.tl-illustration-note { margin: 24px 0 0; color: var(--vk-text-muted); font: 400 12px/1.6 var(--vk-sans); text-align: center; }
 /* Giao diện giấy dó chỉ áp dụng cho desktop. */
 @media (min-width: 1101px) {
 .page-timeline {
@@ -208,15 +201,6 @@
 .page-timeline .site-header { background: var(--vk-bg); border-color: var(--vk-border); }
 .tl-container { max-width: 1360px; }
 .tl-hero { min-height: 180px; padding-block: 30px 26px; }
-.tl-hero::before { display: none; }
-.tl-hero-art { display: block; position: absolute; z-index: -1; inset: -8px 0 -14px; pointer-events: none; }
-.tl-hero-layer {
-    position: absolute; inset: 0; display: block; background-repeat: no-repeat;
-    mask-image: linear-gradient(to right, transparent 12%, black 65%), linear-gradient(to bottom, transparent 0%, black 24%, black 65%, transparent 100%);
-    mask-composite: intersect;
-  }
-.tl-hero-layer--far { background-image: var(--tl-hero-far-image); background-size: 344.5% auto; background-position: 65.2% 5.8%; opacity: .18; filter: blur(1.5px); }
-.tl-hero-layer--near { background-image: var(--tl-hero-near-image); background-size: 344.5% auto; background-position: 65.2% 6.25%; opacity: .34; }
 .tl-eyebrow { color: var(--vk-text-muted); font-size: 12px; }
 .tl-hero h1 { font-size: 51px; font-weight: 650; letter-spacing: .01em; }
 .tl-lead { color: var(--vk-text-muted); font-size: 20px; }
@@ -282,7 +266,6 @@
 .tl-search input { height: 38px; }
 .tl-year select { width: 132px; height: 40px; min-height: 40px; padding: 8px 30px 8px 12px; border-color: var(--vk-border); background: var(--tl-paper-light); }
 .tl-results { padding-top: 34px; }
-.tl-illustration-note { color: var(--vk-text-muted); font-size: 12px; }
 .tl-deco { display: block; position: absolute; z-index: 0; pointer-events: none; opacity: .3; }
 .deco-left { top: 700px; left: 0; bottom: 100px; width: max(38px,calc((100vw - 1280px)/2)); background-image: var(--tl-deco-left-image, radial-gradient(ellipse at left, var(--tl-ink-wash), var(--tl-ink-clear) 70%)); background-size: contain; background-repeat: no-repeat; background-position: left bottom; }
 .deco-right { top: 380px; right: 0; bottom: 160px; width: max(38px,calc((100vw - 1280px)/2)); background-image: var(--tl-deco-right-image, radial-gradient(ellipse at right, var(--tl-ink-wash), var(--tl-ink-clear) 70%)); background-size: contain; background-repeat: no-repeat; background-position: right center; }
