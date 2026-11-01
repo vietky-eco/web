@@ -1,13 +1,12 @@
 // Điều khiển dropdown và menu trên điện thoại.
 import { renderHeaderGraphics } from "./header-graphics.js?v=2";
 import { createHeaderMotion } from "./header-motion.js?v=2";
-import { initHeaderBanners } from "./header-banners.js?v=2";
+import { initHeaderSearch } from "./header-search.js?v=2";
 
 // Chỉ khởi tạo sau khi fragment được chèn vào DOM.
 export function initHeader(header) {
   if (!header || header.dataset.initialized) return;
   renderHeaderGraphics(header);
-  const banners = initHeaderBanners(header);
   header.dataset.initialized = "true";
 
   const menuButton = header.querySelector("#vk-menu-toggle");
@@ -23,6 +22,9 @@ export function initHeader(header) {
   const motion = createHeaderMotion(header, {
     mobileQuery,
     reducedMotion,
+  });
+  const search = initHeaderSearch(header, {
+    onFocus: () => closePanel(false, true),
   });
 
   let activePanel = null;
@@ -48,9 +50,15 @@ export function initHeader(header) {
     header.classList.toggle("vk-has-open-menu", isOpen);
     motion.setBackdrop(isOpen);
     if (isOpen) {
+      const headerBottom = header.getBoundingClientRect().bottom;
+      const group = activeCategory.parentElement;
+      group.style.setProperty(
+        "--vk-dropdown-offset",
+        `${headerBottom - group.getBoundingClientRect().bottom - 1}px`,
+      );
       header.style.setProperty(
         "--vk-backdrop-top",
-        `${header.getBoundingClientRect().bottom}px`,
+        `${headerBottom}px`,
       );
     }
   }
@@ -118,6 +126,7 @@ export function initHeader(header) {
   }
 
   function openPanel(panel, trigger) {
+    search.close();
     if (activePanel === panel) {
       closePanel(true);
       return;
@@ -133,8 +142,9 @@ export function initHeader(header) {
     panel.querySelector("[data-vk-close]").focus();
   }
 
-  // Mở nhóm mới sẽ trả banner về tổng quan.
+  // Chuyển dropdown khi mở nhóm mới.
   function openCategory(button, source = "click") {
+    search.close();
     const wasOpen = activeCategory === button;
     if (wasOpen && (source === "hover" || source === "keyboard")) {
       clearHoverTimers();
@@ -167,7 +177,6 @@ export function initHeader(header) {
         ? -1
         : 1;
 
-    banners.reset(panel);
     motion.showCategory(panel, { previousPanel, direction });
     updateNavigationState();
   }
@@ -210,8 +219,6 @@ export function initHeader(header) {
       header.querySelector(`#${button.getAttribute("aria-controls")} a[href]`)?.focus();
     });
 
-    if (button.parentElement.querySelector('.vk-dropdown a[aria-current="page"]'))
-      button.classList.add("vk-has-current");
   });
 
   menuButton.addEventListener("click", () => {
@@ -248,7 +255,10 @@ export function initHeader(header) {
 
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
-      if (activeCategory) {
+      if (search.isOpen()) {
+        event.preventDefault();
+        search.close(true);
+      } else if (activeCategory) {
         event.preventDefault();
         const button = activeCategory;
         closeCategory();
@@ -276,10 +286,11 @@ export function initHeader(header) {
     }
   });
 
-  // Hai ngưỡng cuộn tránh navbar co giãn liên tục ở cùng một vị trí.
+  // Chỉ đổi màu và bóng; giữ nguyên kích thước khi rời đầu trang.
   const updateScroll = () => {
-    const threshold = header.classList.contains("vk-is-scrolled") ? 8 : 32;
-    header.classList.toggle("vk-is-scrolled", window.scrollY > threshold);
+    const isAtTop = window.scrollY <= 0;
+    header.classList.toggle("vk-is-scrolled", !isAtTop);
+    header.classList.toggle("vk-is-at-top", isAtTop);
   };
   updateScroll();
   window.addEventListener("scroll", updateScroll, { passive: true });
@@ -287,6 +298,12 @@ export function initHeader(header) {
   const navResizeObserver = new ResizeObserver(updateNavigationState);
   navResizeObserver.observe(navigation);
   navResizeObserver.observe(header.querySelector(".vk-header-inner"));
-  mobileQuery.addEventListener("change", () => closePanel(true, true));
-  window.addEventListener("pagehide", () => closePanel(false, true));
+  mobileQuery.addEventListener("change", () => {
+    search.close();
+    closePanel(true, true);
+  });
+  window.addEventListener("pagehide", () => {
+    search.close();
+    closePanel(false, true);
+  });
 }

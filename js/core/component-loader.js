@@ -1,5 +1,6 @@
-// Tải component, chuẩn hóa URL rồi khởi tạo navbar.
+// Tải component chung và chuẩn hóa URL theo gốc dự án.
 import { initHeader } from "../components/header.js?v=2";
+import { initScrollProgress } from "../components/scroll-progress.js";
 
 const COMPONENTS_URL = new URL("../../components/", import.meta.url);
 
@@ -46,9 +47,10 @@ function markActivePage() {
 
 async function initComponents() {
   // Một component tải lỗi không chặn component còn lại.
-  const [headerResult, footerResult] = await Promise.allSettled([
+  const [headerResult, footerResult, progressResult] = await Promise.allSettled([
     loadComponent("site-header", "header.html"),
     loadComponent("site-footer", "footer.html"),
+    loadComponent("site-scroll-progress", "scroll-progress.html"),
   ]);
 
   if (headerResult.status === "rejected") {
@@ -59,6 +61,12 @@ async function initComponents() {
 
   if (footerResult.status === "rejected") {
     console.error("Không tải được Footer:", footerResult.reason);
+  }
+
+  if (progressResult.status === "fulfilled") {
+    initScrollProgress(progressResult.value);
+  } else {
+    console.error("Không tải được thanh tiến độ:", progressResult.reason);
   }
 
   if (headerResult.status === "fulfilled") {

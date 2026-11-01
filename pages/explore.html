@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../css/token.css" />
     <link rel="stylesheet" href="../css/components/header.css" />
     <link rel="stylesheet" href="../css/components/footer.css" />
+    <link rel="stylesheet" href="../css/components/scroll-progress.css" />
     <link rel="stylesheet" href="../css/pages/information.css" />
   </head>
   <body class="vk-info-page">
@@ -21,12 +22,31 @@
       <p class="vk-info-eyebrow">KHÁM PHÁ VIỆT KÝ</p>
       <h1>Khám phá</h1>
       <p>Tìm hiểu lịch sử và văn hóa Việt Nam qua những câu chuyện và bối cảnh.</p>
-      <h2>Chọn chuyên mục</h2>
-      <nav aria-label="Chọn chuyên mục">
+      <h2 id="dau-xua">Dấu xưa</h2>
+      <nav aria-label="Danh mục Dấu xưa">
         <ul>
-          <li><a href="heritage.html">Dấu xưa</a></li>
-          <li><a href="culture.html">Văn hóa</a></li>
-          <li><a href="history.html">Chuyện sử</a></li>
+          <li><a href="dau-xua/places.html">Địa danh lịch sử</a></li>
+          <li><a href="dau-xua/monuments.html">Di tích &amp; Kiến trúc</a></li>
+          <li><a href="dau-xua/artifacts.html">Hiện vật lịch sử</a></li>
+          <li><a href="dau-xua/map.html">Bản đồ lịch sử</a></li>
+        </ul>
+      </nav>
+      <h2 id="van-hoa">Văn hóa</h2>
+      <nav aria-label="Danh mục Văn hóa">
+        <ul>
+          <li><a href="van-hoa/customs.html">Phong tục &amp; Tập quán</a></li>
+          <li><a href="van-hoa/beliefs.html">Tín ngưỡng &amp; Tôn giáo</a></li>
+          <li><a href="van-hoa/arts.html">Nghệ thuật truyền thống</a></li>
+          <li><a href="van-hoa/festivals.html">Lễ hội &amp; Đời sống</a></li>
+        </ul>
+      </nav>
+      <h2 id="chuyen-su">Chuyện sử</h2>
+      <nav aria-label="Danh mục Chuyện sử">
+        <ul>
+          <li><a href="chuyen-su/timeline.html">Dòng thời gian</a></li>
+          <li><a href="chuyen-su/periods.html">Các thời kỳ</a></li>
+          <li><a href="chuyen-su/events.html">Sự kiện lịch sử</a></li>
+          <li><a href="chuyen-su/people.html">Nhân vật lịch sử</a></li>
         </ul>
       </nav>
       <p class="vk-info-note">
@@ -34,6 +54,7 @@
       </p>
     </main>
     <div id="site-footer"></div>
+    <div id="site-scroll-progress"></div>
     <script type="module" src="../js/core/component-loader.js?v=2"></script>
   </body>
 </html>
