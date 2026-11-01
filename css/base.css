@@ -1,7 +1,18 @@
 @import url("./reset.css");
 
+/* Chrome, Edge, Safari */
+html::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox */
 html {
-  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+/* Vẫn cho phép cuộn */
+html {
+  overflow-y: auto;
 }
 
 body {

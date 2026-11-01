@@ -1,6 +1,6 @@
 # Việt Ký — Giải thích cấu trúc thư mục
 
-Nút tìm kiếm trên navbar hiện là icon tĩnh; không mở popup hoặc trang tìm kiếm.
+Ô tìm kiếm trên navbar luôn hiển thị cạnh Ký danh, gợi ý các danh mục hiện có và hỗ trợ tìm không dấu, điều hướng bằng bàn phím.
 
 Phần giải thích được đặt **ngay dưới tên thư mục hoặc file** trong cây để có thể đọc liên tục mà không phải tra bảng ở nơi khác.
 
@@ -38,53 +38,48 @@ viet-ky/  (tên thư mục gốc thực tế: web/)
 │       ↳ [Rỗng] Khung đầu trang dùng chung: logo, menu và khu vực thao tác.
 │
 ├── pages/
-│   ↳ Trang riêng cho từng danh mục; link chuẩn khai báo trong navigation-data.js.
+│   ↳ Trang mục phụ nằm trong thư mục mục chính; link chuẩn khai báo trong navigation-data.js.
+│   ├── dau-xua/
+│   │   ├── places.html
+│   │   │   ↳ [Có nội dung] Địa danh lịch sử
+│   │   ├── monuments.html
+│   │   │   ↳ [Có nội dung] Di tích & Kiến trúc
+│   │   ├── artifacts.html
+│   │   │   ↳ [Có nội dung] Hiện vật lịch sử
+│   │   └── map.html
+│   │       ↳ [Có nội dung] Bản đồ lịch sử
+│   ├── van-hoa/
+│   │   ├── customs.html
+│   │   │   ↳ [Có nội dung] Phong tục & Tập quán
+│   │   ├── beliefs.html
+│   │   │   ↳ [Có nội dung] Tín ngưỡng & Tôn giáo
+│   │   ├── arts.html
+│   │   │   ↳ [Có nội dung] Nghệ thuật truyền thống
+│   │   └── festivals.html
+│   │       ↳ [Có nội dung] Lễ hội & Đời sống
+│   ├── chuyen-su/
+│   │   ├── timeline.html
+│   │   │   ↳ [Có nội dung] Dòng thời gian
+│   │   ├── periods.html
+│   │   │   ↳ [Có nội dung] Các thời kỳ
+│   │   ├── events.html
+│   │   │   ↳ [Có nội dung] Sự kiện lịch sử
+│   │   └── people.html
+│   │       ↳ [Có nội dung] Nhân vật lịch sử
 │   ├── about.html
-│   │   ↳ [Có nội dung] Về dự án
-│   ├── artifacts.html
-│   │   ↳ [Có nội dung] Hiện vật lịch sử
-│   ├── arts.html
-│   │   ↳ [Có nội dung] Nghệ thuật truyền thống
-│   ├── beliefs.html
-│   │   ↳ [Có nội dung] Tín ngưỡng & Tôn giáo
+│   │   ↳ Về dự án
 │   ├── category.html
-│   │   ↳ [Có nội dung] Danh mục chung, hỗ trợ đường dẫn cũ
-│   ├── culture.html
-│   │   ↳ [Có nội dung] Văn hóa
-│   ├── customs.html
-│   │   ↳ [Có nội dung] Phong tục & Tập quán
+│   │   ↳ Chuyển URL danh mục cũ sang mục phụ hoặc Khám phá
 │   ├── detail.html
-│   │   ↳ [Rỗng] Khung trang chưa triển khai.
-│   ├── events.html
-│   │   ↳ [Có nội dung] Sự kiện lịch sử
+│   │   ↳ Khung trang chi tiết
 │   ├── explore.html
-│   │   ↳ [Có nội dung] Khám phá
-│   ├── festivals.html
-│   │   ↳ [Có nội dung] Lễ hội & Đời sống
-│   ├── heritage.html
-│   │   ↳ [Có nội dung] Dấu xưa
-│   ├── history.html
-│   │   ↳ [Có nội dung] Chuyện sử
+│   │   ↳ Khám phá
 │   ├── login.html
-│   │   ↳ [Có nội dung] Đăng nhập
-│   ├── map.html
-│   │   ↳ [Có nội dung] Bản đồ lịch sử
-│   ├── monuments.html
-│   │   ↳ [Có nội dung] Di tích & Kiến trúc
-│   ├── pages/
-│   │   ↳ Trang riêng cho từng danh mục; link chuẩn khai báo trong navigation-data.js.
-│   ├── people.html
-│   │   ↳ [Có nội dung] Nhân vật lịch sử
-│   ├── periods.html
-│   │   ↳ [Có nội dung] Các thời kỳ
-│   ├── places.html
-│   │   ↳ [Có nội dung] Địa danh lịch sử
+│   │   ↳ Đăng nhập
 │   ├── quiz.html
-│   │   ↳ [Rỗng] Khung trang chưa triển khai.
-│   ├── sources.html
-│   │   ↳ [Có nội dung] Nguồn tư liệu
-│   └── timeline.html
-│       ↳ [Có nội dung] Dòng thời gian
+│   │   ↳ Khung trang câu đố
+│   └── sources.html
+│       ↳ Nguồn tư liệu
 │
 ├── css/
 │   ↳ Hệ thống kiểu dáng: nền tảng thiết kế, UI dùng chung, landing engine và từng trang.

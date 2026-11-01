@@ -2,7 +2,7 @@
 export function createHeaderMotion(header, { mobileQuery, reducedMotion }) {
   const backdrop = header.querySelector(".vk-nav-backdrop");
 
-  // Khung nền dùng chung cho các dropdown desktop.
+  // Khung nền chuyển theo nhóm dropdown đang mở trên desktop.
   const frame = document.createElement("div");
   frame.className = "vk-menu-frame";
   frame.hidden = true;
@@ -68,13 +68,15 @@ export function createHeaderMotion(header, { mobileQuery, reducedMotion }) {
 
   // Đọc trạng thái hiện tại trước khi hủy để đổi nhóm không bị giật.
   function setFrame(panel) {
+    // Dùng cùng gốc định vị với panel, ngay bên dưới mục chính.
+    panel.parentElement.append(frame);
     const visible = !frame.hidden;
     const current = visible ? getComputedStyle(frame) : null;
     const start = {
       opacity: visible ? current.opacity : 0,
       transform: visible
         ? current.transform
-        : "translateX(-50%) translateY(-8px) scale(.975)",
+        : "translateX(-50%)",
       width: visible ? current.width : `${panel.offsetWidth}px`,
       height: visible ? current.height : `${panel.offsetHeight}px`,
     };
@@ -89,7 +91,7 @@ export function createHeaderMotion(header, { mobileQuery, reducedMotion }) {
         start,
         {
           opacity: 1,
-          transform: "translateX(-50%) translateY(0) scale(1)",
+          transform: "translateX(-50%)",
           width: frame.style.width,
           height: frame.style.height,
         },
@@ -121,7 +123,7 @@ export function createHeaderMotion(header, { mobileQuery, reducedMotion }) {
         start,
         {
           opacity: 0,
-          transform: "translateX(-50%) translateY(-5px) scale(.99)",
+          transform: "translateX(-50%)",
         },
       ],
       { duration: 180, easing: easeIn, fill: "both" },
@@ -254,6 +256,7 @@ export function createHeaderMotion(header, { mobileQuery, reducedMotion }) {
     if (previousPanel && previousPanel !== panel) {
       hideCategory(previousPanel, {
         keepFrame: !mobileQuery.matches,
+        immediate: !mobileQuery.matches,
         direction,
       });
     }

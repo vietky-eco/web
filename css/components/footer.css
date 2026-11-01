@@ -205,8 +205,6 @@
 
 .vk-footer-mail-icon { --vk-footer-icon-image: url("../../assets/images/footer/mail.svg"); }
 .vk-footer-bell-plus-icon { --vk-footer-icon-image: url("../../assets/images/footer/bell-plus.svg"); }
-.vk-footer-github-icon { --vk-footer-icon-image: url("../../assets/images/footer/github.svg"); }
-.vk-footer-facebook-icon { --vk-footer-icon-image: url("../../assets/images/footer/facebook.svg"); }
 
 .vk-footer-about {
   display: flex;
@@ -214,7 +212,7 @@
   align-items: center;
   align-self: center;
   justify-self: end;
-  gap: var(--vk-space-1);
+  gap: var(--vk-space-4);
   min-width: 0;
   text-align: center;
 }
@@ -223,7 +221,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--vk-space-6);
+  gap: var(--vk-space-4);
   min-height: 44px;
   font-family: var(--vk-serif);
   font-size: clamp(30px, 2.4vw, 46px);
@@ -242,35 +240,24 @@
   mask: url("../../assets/icons/brand-mark.svg") center / contain no-repeat;
 }
 
-.vk-footer-socials {
-  display: flex;
-  gap: var(--vk-space-3);
-}
-
-.vk-footer-socials .vk-footer-icon {
-  width: 24px;
-  height: 24px;
-}
-
-.vk-footer-socials a,
-.vk-footer-socials button {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  padding: 0;
-  border: 0;
-  border-radius: var(--vk-radius-sm);
-  background: transparent;
+.vk-footer-tagline {
+  max-width: 100%;
+  margin: 0;
   color: var(--vk-footer-text);
+  font: var(--vk-weight-medium) clamp(17px, 1.15vw, 20px) / var(--vk-leading-caption) var(--vk-serif);
+  text-wrap: balance;
 }
 
-.vk-footer-socials button:disabled {
+.vk-footer-credit {
+  margin: 0;
   color: var(--vk-footer-muted);
+  font: var(--vk-weight-regular) var(--vk-type-caption) / var(--vk-leading-body) var(--vk-sans);
+  text-wrap: balance;
 }
 
-.vk-footer-socials a:hover {
-  color: var(--vk-paper-aged);
+.vk-footer-credit span {
+  color: var(--vk-footer-text);
+  font-weight: var(--vk-weight-medium);
 }
 
 .vk-footer-copyright {
@@ -378,7 +365,6 @@
 
   .vk-footer-about {
     justify-self: center;
-    gap: var(--vk-space-2);
   }
 
   .vk-footer-brand {
@@ -391,10 +377,6 @@
     width: 44px;
   }
 
-  .vk-footer-socials .vk-footer-icon {
-    width: 22px;
-    height: 22px;
-  }
 }
 
 @media (max-width: 640px) {

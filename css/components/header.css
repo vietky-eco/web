@@ -4,24 +4,48 @@
   top: 0;
   z-index: 100;
   flex-shrink: 0;
+  /* Chiều cao không đổi giữa đầu trang và trạng thái đang cuộn. */
+  min-height: 81px;
+  padding: 12px var(--vk-gutter) 0;
 }
 
 .vk-header {
-  --vk-menu-bg: color-mix(in srgb, var(--vk-paper) 90%, var(--vk-white));
-  --vk-menu-surface: var(--vk-paper);
+  --vk-header-control-width: 200px;
+  --vk-menu-bg: #FFFDFA;
+  --vk-menu-surface: #FFFDFA;
   --vk-menu-accent: var(--vk-son);
+  --vk-menu-active-text: var(--vk-son-deep);
   --vk-menu-text: var(--vk-ink);
   --vk-menu-muted: var(--vk-ink-soft);
-  --vk-menu-line: color-mix(in srgb, var(--vk-line) 55%, transparent);
-  --vk-menu-hover: color-mix(in srgb, var(--vk-son) 6%, transparent);
-  --vk-dropdown-base: color-mix(in srgb, var(--vk-paper) 65%, var(--vk-white));
-  --vk-dropdown-surface: color-mix(in srgb, var(--vk-dropdown-base) 97%, transparent);
-  --vk-dropdown-line: color-mix(in srgb, var(--vk-line) 65%, transparent);
+  --vk-menu-line: color-mix(in srgb, var(--vk-earth) 40%, var(--vk-paper));
+  --vk-menu-hover: color-mix(in srgb, var(--vk-son) 5%, transparent);
+  --vk-menu-selected: color-mix(in srgb, var(--vk-son) 9%, transparent);
+
+  --vk-dropdown-surface: var(--vk-menu-bg);
+  --vk-dropdown-line: var(--vk-menu-line);
   position: relative;
   background: var(--vk-menu-bg);
   color: var(--vk-menu-text);
-  border-bottom: 1px solid var(--vk-menu-line);
+  border: 1px solid var(--vk-menu-line);
+  border-radius: 12px;
+  box-shadow: 0 3px 14px rgb(59 48 41 / 5%);
   font-family: var(--vk-sans);
+  transition:
+    background-color var(--vk-motion-fast) var(--vk-ease),
+    border-color var(--vk-motion-fast) var(--vk-ease),
+    box-shadow var(--vk-motion-fast) var(--vk-ease);
+}
+
+/* Khung sáng và khoảng hở tách navbar khỏi nền giấy của nội dung. */
+.vk-header.vk-is-scrolled {
+  box-shadow: 0 5px 18px rgb(59 48 41 / 9%);
+}
+
+/* Giữ kích thước khung để nội dung không dịch khi trở về đầu trang. */
+.vk-header.vk-is-at-top {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
 }
 
 .vk-header *,
@@ -75,14 +99,9 @@
   align-items: center;
   gap: 24px;
   max-width: none;
-  min-height: 79px;
-  margin-inline: auto;
-  padding-inline: var(--vk-gutter);
-  transition: min-height var(--vk-motion-fast) var(--vk-ease);
-}
-
-.vk-header.vk-is-scrolled .vk-header-inner {
   min-height: 67px;
+  margin-inline: auto;
+  padding-inline: 24px;
 }
 
 .vk-header .vk-brand {
@@ -102,7 +121,7 @@
   flex: none;
   width: 44px;
   height: 44px;
-  background: var(--vk-son);
+  background: currentColor;
   -webkit-mask: url("../../assets/icons/brand-mark.svg") center / contain no-repeat;
   mask: url("../../assets/icons/brand-mark.svg") center / contain no-repeat;
 }
@@ -130,26 +149,36 @@
   border: 0;
   border-radius: var(--vk-radius-sm);
   background: transparent;
-  color: color-mix(in srgb, var(--vk-ink) 85%, var(--vk-earth));
+  color: var(--vk-menu-text);
   font: 500 15px/1.5 var(--vk-sans);
   letter-spacing: normal;
   white-space: nowrap;
+  transition:
+    color var(--vk-motion-fast) var(--vk-ease),
+    background-color var(--vk-motion-fast) var(--vk-ease);
 }
 
-.vk-header .vk-nav-trigger:hover,
-.vk-header .vk-nav-trigger.vk-has-current,
 .vk-header .vk-nav-trigger.vk-is-highlighted,
-.vk-header .vk-nav-link:hover,
-.vk-header .vk-nav-link[aria-current="page"] {
+.vk-header .vk-nav-trigger:focus-visible,
+.vk-header .vk-nav-link:focus-visible {
   color: var(--vk-menu-accent);
   background: var(--vk-menu-hover);
+}
+
+.vk-header .vk-nav-trigger[aria-expanded="true"] {
+  color: var(--vk-menu-active-text);
+  background: var(--vk-menu-selected);
 }
 
 .vk-header .vk-nav-symbol {
   display: inline-flex;
   align-items: center;
   flex: none;
-  color: var(--vk-earth);
+  color: currentColor;
+  opacity: 0.65;
+  transition:
+    transform var(--vk-motion-fast) var(--vk-ease),
+    opacity var(--vk-motion-fast) var(--vk-ease);
 }
 
 .vk-header .vk-nav-symbol .lucide {
@@ -159,6 +188,7 @@
 
 .vk-header .vk-nav-trigger[aria-expanded="true"] .vk-nav-symbol {
   transform: rotate(180deg);
+  opacity: 1;
 }
 
 .vk-header.vk-has-open-menu .vk-nav-trigger:not(.vk-is-highlighted) .vk-nav-symbol {
@@ -204,36 +234,147 @@
   height: 21px;
 }
 
-.vk-header .vk-search-button svg {
+.vk-header .vk-search {
+  flex: none;
+  width: var(--vk-header-control-width);
+  height: 44px;
+}
+
+.vk-header .vk-search-form {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 44px;
+  margin: 0;
+  border: 1px solid var(--vk-menu-line);
+  border-radius: var(--vk-radius-sm);
+  background: var(--vk-menu-bg);
+}
+
+.vk-header .vk-search-form:focus-within {
+  border-color: color-mix(in srgb, var(--vk-son) 45%, var(--vk-line));
+}
+
+.vk-header .vk-search-form .vk-icon-button {
+  width: 32px;
+  height: 42px;
   color: var(--vk-son-deep);
-  width: 20px;
-  height: 20px;
+}
+
+.vk-header .vk-search-form .lucide {
+  width: 18px;
+  height: 18px;
+}
+
+.vk-header .vk-search-form input {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0 8px 0 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--vk-menu-text);
+  font: 400 14px/1.4 var(--vk-sans);
+  appearance: none;
+}
+
+.vk-header .vk-search-form input::placeholder {
+  color: var(--vk-menu-muted);
+  opacity: 1;
+}
+
+.vk-header .vk-search-results {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: min(320px, calc(100vw - 32px));
+  max-height: min(360px, calc(100dvh - 120px));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  margin: 0;
+  padding: 8px;
+  border: 1px solid var(--vk-menu-line);
+  border-radius: 16px;
+  background: var(--vk-menu-bg);
+  box-shadow: var(--vk-shadow-float);
+  list-style: none;
+}
+
+.vk-header .vk-search-results a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 44px;
+  padding: 10px 12px;
+  border-radius: var(--vk-radius-sm);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.vk-header .vk-search-results a:hover,
+.vk-header .vk-search-results a:focus-visible {
+  color: var(--vk-son);
+  background: var(--vk-menu-hover);
+  outline-offset: -2px;
+}
+
+.vk-header .vk-search-results small {
+  flex: none;
+  color: var(--vk-menu-muted);
+  font-size: 11px;
+}
+
+.vk-header .vk-search-empty {
+  padding: 12px;
+  color: var(--vk-menu-muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.vk-header .vk-search-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.vk-header .vk-desktop-login {
+  display: flex;
+  align-items: center;
 }
 
 .vk-header .vk-login {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  min-height: 46px;
-  padding: 0 20px;
+  min-width: 100px;
+  min-height: 40px;
+  padding: 0 14px;
   border: 1px solid transparent;
-  border-radius: var(--vk-radius-md);
+  border-radius: var(--vk-radius-sm);
   background: var(--vk-son-deep);
   color: var(--vk-paper);
-  font-size: 14px;
-  font-weight: var(--vk-weight-medium);
+  font: var(--vk-weight-semibold) 14px/1 var(--vk-sans);
+  letter-spacing: 0.025em;
   white-space: nowrap;
+  transition:
+    color var(--vk-motion-fast) var(--vk-ease),
+    background-color var(--vk-motion-fast) var(--vk-ease);
 }
 
 .vk-header .vk-login:hover {
-  background: var(--vk-son);
-  border-color: transparent;
+  background: color-mix(in srgb, var(--vk-son-deep) 85%, var(--vk-son));
 }
 
-.vk-header .vk-login .lucide {
-  width: 20px;
-  height: 20px;
+.vk-header .vk-login:active {
+  background: color-mix(in srgb, var(--vk-son-deep) 92%, var(--vk-ink));
 }
 
 .vk-header .vk-menu-button,
@@ -247,7 +388,7 @@
 .vk-header .vk-dropdown {
   position: absolute;
   top: calc(100% + 6px);
-  width: 720px;
+  width: 320px;
   max-width: calc(100vw - 32px);
   padding: 1px;
   border: 1px solid var(--vk-menu-line);
@@ -262,7 +403,6 @@
 
 .vk-header .vk-dropdown {
   left: 50%;
-  width: 620px;
   padding: var(--vk-space-4);
   border-radius: var(--vk-radius-lg);
   background: var(--vk-menu-surface);
@@ -329,10 +469,15 @@
   gap: var(--vk-space-3);
   border-radius: var(--vk-radius-md);
   background: transparent;
+  color: var(--vk-menu-text);
+  transition:
+    color var(--vk-motion-fast) var(--vk-ease),
+    background-color var(--vk-motion-fast) var(--vk-ease),
+    box-shadow var(--vk-motion-fast) var(--vk-ease);
 }
 
-.vk-header .vk-category:hover,
-.vk-header a.vk-category[aria-current="page"] {
+.vk-header .vk-category:focus-visible {
+  color: var(--vk-menu-accent);
   background: var(--vk-menu-hover);
 }
 
@@ -343,6 +488,10 @@
   width: 24px;
   height: 24px;
   color: var(--vk-son);
+  transition:
+    color var(--vk-motion-fast) var(--vk-ease),
+    background-color var(--vk-motion-fast) var(--vk-ease),
+    border-color var(--vk-motion-fast) var(--vk-ease);
 }
 
 .vk-header .vk-category-icon svg {
@@ -358,17 +507,8 @@
 
 .vk-header .vk-category-title {
   display: block;
-  color: var(--vk-menu-text);
+  color: inherit;
   font: 500 14px/var(--vk-leading-heading) var(--vk-sans);
-}
-
-.vk-header .vk-category-description {
-  display: block;
-  grid-column: 1 / -1;
-  margin-top: var(--vk-space-1);
-  color: var(--vk-menu-muted);
-  font-size: 11px;
-  line-height: var(--vk-leading-caption);
 }
 
 .vk-header .vk-coming-soon {
@@ -387,6 +527,9 @@
 .vk-header .vk-category-arrow {
   flex: none;
   color: var(--vk-menu-accent);
+  transition:
+    color var(--vk-motion-fast) var(--vk-ease),
+    transform var(--vk-motion-fast) var(--vk-ease);
 }
 
 .vk-header .vk-dropdown a:focus-visible {
@@ -396,148 +539,57 @@
 
 .vk-header a:focus-visible,
 .vk-header button:focus-visible {
-  outline: 2px solid var(--vk-son);
+  outline: 2px solid var(--vk-menu-accent);
   outline-offset: 4px;
 }
 
-/* Banner trái, danh sách phải; khung cố định khi đổi mục. */
-.vk-header .vk-category-banner {
-  position: relative;
-  display: block;
-  aspect-ratio: 1;
-  min-width: 0;
-  overflow: hidden;
-  border: 0;
-  border-radius: var(--vk-radius-md);
-  background: var(--vk-paper);
-}
-
-.vk-header .vk-banner-image {
-  position: absolute;
-  inset: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-/* Caption không nhận pointer để cả banner là một link. */
-.vk-header .vk-banner-caption {
-  position: absolute;
-  inset: auto 0 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--vk-space-1);
-  padding: var(--vk-space-8) var(--vk-space-4) var(--vk-space-3);
-  background: linear-gradient(
-    to bottom,
-    transparent,
-    color-mix(in srgb, var(--vk-ink) 72%, transparent) 58%,
-    color-mix(in srgb, var(--vk-ink) 88%, transparent)
-  );
-  color: var(--vk-paper);
-  pointer-events: none;
-}
-
-.vk-header .vk-banner-name {
-  font: 500 30px/var(--vk-leading-display) var(--vk-serif);
-  letter-spacing: -0.015em;
-  text-transform: uppercase;
-}
-
-.vk-header .vk-banner-bottom {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--vk-space-2);
-  padding-right: calc(var(--vk-space-8) + var(--vk-space-3));
-}
-
-.vk-header .vk-banner-tagline {
-  font: 400 12.5px/var(--vk-leading-caption) var(--vk-serif);
-}
-
-.vk-header .vk-banner-open {
-  position: absolute;
-  right: var(--vk-space-4);
-  bottom: var(--vk-space-3);
-  display: grid;
-  place-items: center;
-  flex: none;
-  width: 32px;
-  height: 32px;
-  border: var(--vk-stroke) solid var(--vk-paper);
-  border-radius: var(--vk-radius-pill);
-}
-
-.vk-header .vk-banner-open svg {
-  width: 17px;
-  height: 17px;
-}
-
-/* Mục con chỉ xem trước, không có slogan hoặc mũi tên. */
-.vk-header .vk-category-banner[data-preview-mode="category"] .vk-banner-caption {
-  gap: var(--vk-space-1);
-  padding-top: var(--vk-space-8);
-  background: linear-gradient(
-    to bottom,
-    transparent,
-    color-mix(in srgb, var(--vk-ink) 64%, transparent) 56%,
-    color-mix(in srgb, var(--vk-ink) 80%, transparent)
-  );
-}
-
-.vk-header .vk-category-banner[data-preview-mode="category"] .vk-banner-name {
-  font-size: 23px;
-  line-height: var(--vk-leading-heading);
-  text-transform: none;
-}
-
-.vk-header .vk-category-banner[data-preview-mode="category"] .vk-banner-bottom {
-  display: none;
-}
-
-.vk-header .vk-category.vk-preview-active {
-  background: var(--vk-menu-hover);
-}
-
 @media (min-width: 1101px) {
-  .vk-header .vk-nav-link[aria-current="page"] {
-    background: transparent;
+  /* Mỗi dropdown bám ngay dưới nút mở nhóm tương ứng. */
+  .vk-header .vk-nav-group {
+    position: relative;
   }
 
-  .vk-header .vk-nav-link[aria-current="page"]::after {
+  /* Cầu nối giữ hover khi chuột đi từ nút mở xuống phần menu. */
+  .vk-header .vk-nav-trigger[aria-expanded="true"]::before {
     content: "";
     position: absolute;
-    inset: auto 10px 5px;
-    height: 2px;
-    border-radius: var(--vk-radius-pill);
-    background: color-mix(in srgb, var(--vk-son) 55%, transparent);
+    top: 100%;
+    inset-inline: 0;
+    height: calc(var(--vk-dropdown-offset, 10px) + 10px);
+  }
+
+  /* Thẻ nổi độc lập, cách mép dưới navbar 8px ở mọi vị trí cuộn. */
+  .vk-header .vk-dropdown,
+  .vk-header .vk-menu-frame {
+    top: calc(100% + var(--vk-dropdown-offset, 10px) + 9px);
+    border-top-width: 1px;
+    border-radius: var(--vk-radius-lg);
+  }
+
+  .vk-header .vk-menu-frame {
+    border: 1px solid var(--vk-dropdown-line);
+    background: var(--vk-dropdown-surface);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    box-shadow: 0 12px 28px -8px rgb(43 43 43 / 12%);
   }
 
   .vk-header .vk-dropdown {
     --vk-menu-text: var(--vk-ink);
     --vk-menu-muted: var(--vk-ink-soft);
     --vk-menu-line: var(--vk-dropdown-line);
-    --vk-menu-accent: var(--vk-ink-soft);
+    --vk-menu-accent: var(--vk-son);
+    --vk-menu-active-text: var(--vk-son-deep);
     --vk-menu-hover: color-mix(in srgb, var(--vk-son) 6%, transparent);
-    width: 620px;
+    --vk-menu-selected: color-mix(in srgb, var(--vk-son) 10%, transparent);
+
+    width: 320px;
     height: auto;
     padding: var(--vk-space-3);
     background: var(--vk-dropdown-surface);
   }
 
-  .vk-header .vk-dropdown-body {
-    display: grid;
-    grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
-    grid-template-areas: "banner list";
-    gap: var(--vk-space-4);
-    align-items: stretch;
-  }
-
   .vk-header .vk-category-list {
-    grid-area: list;
     display: grid;
     grid-template-rows: repeat(4, minmax(0, 1fr));
     min-width: 0;
@@ -574,13 +626,6 @@
     height: 22px;
   }
 
-  .vk-header .vk-category:hover .vk-category-icon,
-  .vk-header .vk-category.vk-preview-active .vk-category-icon {
-    border-color: color-mix(in srgb, var(--vk-son) 28%, var(--vk-paper));
-    background: color-mix(in srgb, var(--vk-son) 14%, var(--vk-paper));
-    color: var(--vk-son);
-  }
-
   .vk-header .vk-category-copy {
     flex: 1;
   }
@@ -594,34 +639,51 @@
     color: var(--vk-earth);
   }
 
-  .vk-header .vk-category:hover .vk-category-arrow,
-  .vk-header .vk-category.vk-preview-active .vk-category-arrow {
-    color: var(--vk-son);
+  .vk-header .vk-category:focus-visible .vk-category-arrow {
+    color: currentColor;
   }
 
   .vk-header .vk-category-arrow svg {
     width: 20px;
     height: 20px;
   }
+}
 
-  /* Giữ kích thước khi caption xuống dòng. */
-  .vk-header .vk-category-banner {
-    grid-area: banner;
-    height: 264px;
-    min-height: 264px;
+@media (min-width: 1101px) and (max-width: 1280px) {
+  .vk-header .vk-search {
+    width: 128px;
+  }
+
+  .vk-header .vk-header-inner {
+    gap: 16px;
+    padding-inline: 16px;
+  }
+
+  .vk-header .vk-main-nav {
+    gap: 4px;
+  }
+
+  .vk-header .vk-nav-trigger,
+  .vk-header .vk-nav-link {
+    padding-inline: 8px;
   }
 }
 
 /* Breakpoint mobile phải khớp header.js. */
 @media (max-width: 1100px) {
+  #site-header {
+    min-height: 73px;
+    padding: 8px 8px 0;
+  }
+
   body.vk-header-panel-open {
     overflow: hidden;
   }
 
   .vk-header .vk-header-inner {
     grid-template-columns: minmax(0, 1fr) auto;
-    min-height: 71px;
-    padding-inline: 24px;
+    min-height: 63px;
+    padding-inline: 16px;
     gap: 16px;
   }
 
@@ -638,6 +700,10 @@
 
   .vk-header .vk-header-actions {
     gap: 4px;
+  }
+
+  .vk-header .vk-search-form input {
+    font-size: 16px;
   }
 
   .vk-header .vk-menu-button {
@@ -706,17 +772,9 @@
     background: transparent;
   }
 
-  .vk-header .vk-nav-trigger[aria-expanded="true"] {
-    color: var(--vk-menu-text);
-  }
-
-  .vk-header .vk-mobile-open .vk-nav-trigger {
-    color: var(--vk-menu-text);
-  }
-
   .vk-header .vk-mobile-open a:focus-visible,
   .vk-header .vk-mobile-open button:focus-visible {
-    outline-color: var(--vk-focus);
+    outline-color: var(--vk-menu-accent);
   }
 
   /* Accordion mobile nằm trong luồng trang. */
@@ -737,11 +795,6 @@
     animation: none;
   }
 
-  .vk-header .vk-category-banner {
-    width: min(100%, 240px);
-    margin: 12px auto 0;
-  }
-
   .vk-header .vk-dropdown-body {
     display: block;
     padding: 0;
@@ -751,7 +804,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: start;
-    min-height: 76px;
+    min-height: 60px;
     padding: 13px 8px;
     gap: 12px;
     border: 0;
@@ -764,18 +817,6 @@
 
   .vk-header .vk-category-icon {
     display: none;
-  }
-
-  .vk-header .vk-category-copy {
-    display: grid;
-    grid-template-columns: max-content minmax(0, 1fr);
-    align-items: center;
-    gap: var(--vk-space-1) var(--vk-space-2);
-  }
-
-  .vk-header .vk-category-description {
-    grid-column: 1 / -1;
-    margin-top: 0;
   }
 
   .vk-header .vk-category-arrow {
@@ -799,17 +840,54 @@
   }
 
   .vk-header .vk-mobile-login .vk-login {
+    display: flex;
     width: 100%;
     min-height: 50px;
-    font-size: 14px;
-    background: var(--vk-son);
-    color: var(--vk-paper);
-    border-color: var(--vk-son);
   }
 }
 @media (max-width: 480px) {
+  .vk-header .vk-search {
+    width: 128px;
+  }
+
   .vk-header .vk-header-inner {
     padding-inline: 16px;
+  }
+}
+
+@media (max-width: 400px) {
+  .vk-header .vk-header-inner > .vk-brand > span:last-child {
+    display: none;
+  }
+}
+
+/* Hover nhẹ, áp dụng như nhau cho mọi mục. */
+@media (hover: hover) and (pointer: fine) {
+  .vk-header .vk-nav-trigger:hover,
+  .vk-header .vk-nav-link:hover {
+    color: var(--vk-menu-accent);
+    background: var(--vk-menu-hover);
+  }
+
+  .vk-header .vk-nav-trigger[aria-expanded="true"]:hover {
+    color: var(--vk-menu-active-text);
+    background: var(--vk-menu-selected);
+  }
+
+  .vk-header .vk-category:hover {
+    color: var(--vk-menu-accent);
+    background: var(--vk-menu-hover);
+  }
+
+  .vk-header .vk-category:hover .vk-category-icon {
+    color: var(--vk-son);
+    border-color: color-mix(in srgb, var(--vk-son) 30%, var(--vk-paper));
+    background: color-mix(in srgb, var(--vk-son) 12%, var(--vk-paper));
+  }
+
+  .vk-header .vk-category:hover .vk-category-arrow {
+    color: var(--vk-menu-accent);
+    transform: translateX(3px);
   }
 }
 
