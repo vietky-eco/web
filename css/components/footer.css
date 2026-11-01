@@ -288,16 +288,22 @@
     grid-column: 1 / -1;
     grid-row: 1;
   }
+
+  .vk-footer-project {
+    inset-block-start: 0;
+  }
 }
 
-@media (max-width: 640px) {
+/* Mobile: bản tin trước, hai nhóm liên kết cạnh nhau, thương hiệu ở cuối. */
+@media (max-width: 800px) {
   .site-footer {
-    --vk-footer-overlap: var(--vk-space-2);
+    --vk-footer-gutter: clamp(var(--vk-space-4), 5vw, var(--vk-space-6));
+    --vk-footer-overlap: 0px;
+    --vk-footer-title-size: clamp(28px, 6vw, 36px);
   }
 
-  .vk-footer-art {
-    --vk-footer-art-image: url("../../assets/images/footer/clouds-mobile.png");
-    aspect-ratio: 25 / 11;
+  .vk-footer-inner {
+    padding-block: var(--vk-space-4) var(--vk-space-8);
   }
 
   .vk-footer-grid {
@@ -305,19 +311,35 @@
     gap: var(--vk-space-8);
   }
 
+  .vk-footer-invitation {
+    text-align: left;
+  }
+
+  .vk-footer-invitation h2 {
+    text-wrap: pretty;
+  }
+
+  .vk-footer-description {
+    margin-block: var(--vk-space-3) var(--vk-space-6);
+    margin-inline: 0;
+    font-size: var(--vk-type-body);
+    text-wrap: pretty;
+  }
+
   .vk-footer-newsletter {
-    gap: var(--vk-space-2);
+    max-width: none;
+    min-height: 56px;
     padding-left: var(--vk-space-3);
   }
 
-  .vk-footer-newsletter > .vk-footer-icon {
-    width: 20px;
-    height: 20px;
+  .vk-footer-newsletter input {
+    font-size: var(--vk-type-body);
   }
 
   .vk-footer-subscribe {
     min-width: 88px;
     padding-inline: var(--vk-space-3);
+    font-size: var(--vk-type-label);
   }
 
   .vk-footer-subscribe .vk-footer-icon {
@@ -325,8 +347,69 @@
     height: 16px;
   }
 
+  .vk-footer-project {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--vk-space-6) var(--vk-space-4);
+    min-width: 0;
+    font-size: var(--vk-type-reading);
+    line-height: var(--vk-leading-heading);
+  }
+
+  .vk-footer-link-group {
+    min-width: 0;
+  }
+
+  .vk-footer-eyebrow {
+    font-size: var(--vk-type-label);
+  }
+
   .vk-footer-project a,
   .vk-footer-project button {
+    gap: var(--vk-space-2);
+    max-width: 100%;
     min-height: 44px;
+    text-wrap: balance;
+  }
+
+  .vk-footer-project .vk-footer-arrow {
+    display: none;
+  }
+
+  .vk-footer-about {
+    justify-self: center;
+    gap: var(--vk-space-2);
+  }
+
+  .vk-footer-brand {
+    flex-direction: row;
+    gap: var(--vk-space-3);
+    font-size: 28px;
+  }
+
+  .vk-footer-brand-mark {
+    width: 44px;
+  }
+
+  .vk-footer-socials .vk-footer-icon {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+@media (max-width: 640px) {
+  .vk-footer-art {
+    --vk-footer-art-image: url("../../assets/images/footer/clouds-mobile.png");
+    aspect-ratio: 25 / 11;
+  }
+}
+
+@media (max-width: 359px) {
+  .vk-footer-newsletter > .vk-footer-icon {
+    display: none;
+  }
+
+  .vk-footer-project {
+    font-size: var(--vk-type-body);
   }
 }
