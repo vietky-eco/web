@@ -1,12 +1,14 @@
 import { ASSETS } from "../core/assets.js";
 
 export function ScrollBanner() {
-  const image = document.createElement("img");
-  image.className = "tl-scroll-banner";
-  image.src = ASSETS.scrollBanner;
-  image.alt = "";
-  image.width = 240;
-  image.height = 144;
-  image.setAttribute("aria-hidden", "true");
-  return image;
+  const frame = document.createElement("span");
+  frame.className = "tl-scroll-banner";
+  frame.setAttribute("aria-hidden", "true");
+  frame.style.setProperty("--tl-scroll-frame", `image-set(url("${ASSETS.scrollBanner}") 1x, url("${ASSETS.scrollBanner2x}") 2x, url("${ASSETS.scrollBanner3x}") 3x)`);
+  for (const side of ["left", "right"]) {
+    const roller = document.createElement("span");
+    roller.className = `tl-scroll-roller tl-scroll-roller--${side}`;
+    frame.append(roller);
+  }
+  return frame;
 }

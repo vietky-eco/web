@@ -30,6 +30,7 @@
       <section class="tl-navigation" aria-label="Chọn thời kỳ lịch sử">
         <div class="tl-scroll-selector">
           <button class="tl-period-step" id="timeline-previous" type="button" aria-label="Chọn thời kỳ trước"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></button>
+          <div class="tl-period-window">
           <div class="tl-periods" role="group" aria-label="Các thời kỳ; dùng phím mũi tên trái, phải để chọn">
             <button class="tl-period" type="button" data-period="early" data-title="Thời kỳ dựng nước" aria-label="Thời kỳ dựng nước" aria-pressed="false" tabindex="-1"><span>Thời kỳ dựng nước</span><small>Đến 179 TCN</small></button>
             <button class="tl-period" type="button" data-period="north" data-title="Bắc thuộc lần 1-2-3 và đấu tranh giành độc lập" aria-label="Bắc thuộc lần 1-2-3 và đấu tranh giành độc lập" aria-pressed="false" tabindex="-1"><span>Bắc thuộc</span><small>179 TCN–938</small></button>
@@ -47,13 +48,14 @@
             <button class="tl-period" type="button" data-period="resistance" data-title="Kháng chiến chống Pháp – Mỹ" aria-label="Kháng chiến chống Pháp – Mỹ" aria-pressed="false" tabindex="-1"><span>Kháng chiến Pháp – Mỹ</span><small>1945–1975</small></button>
             <button class="tl-period" type="button" data-period="modern" data-title="Xây dựng đất nước" aria-label="Xây dựng đất nước" aria-pressed="false" tabindex="-1"><span>Xây dựng đất nước</span><small>Từ 1975</small></button>
           </div>
+          </div>
           <button class="tl-period-step" id="timeline-next" type="button" aria-label="Chọn thời kỳ tiếp theo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg></button>
         </div>
         <div class="tl-period-position tl-pagination"><div class="tl-page-dots" role="group" aria-label="Chọn nhanh thời kỳ"></div><span id="timeline-period-position" aria-live="polite">5 / 15</span></div>
       </section>
       <section class="tl-period-section" aria-labelledby="timeline-period-title">
         <header class="tl-period-heading tl-period-heading--tran-seal">
-          <img class="tl-period-mark tl-period-seal" data-asset="tranSeal" width="50" height="50" alt="" aria-hidden="true">
+          <img class="tl-period-mark tl-period-seal" id="timeline-period-ornament" width="50" height="50" alt="" aria-hidden="true">
           <svg class="tl-period-mark tl-period-mark--fallback" hidden width="22" height="22" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M16 2 21 9 28 16 21 23 16 30 11 23 4 16 11 9Z"/><path d="m16 8 8 8-8 8-8-8Z"/><path d="M16 2v28M4 16h24"/></svg>
           <h2 id="timeline-period-title">THỜI TRẦN</h2>
           <p id="timeline-period-years">1226–1400</p>
@@ -63,8 +65,11 @@
             <p id="timeline-period-description">Khám phá những dấu mốc từ khi triều Trần được thành lập, qua các cuộc kháng chiến chống Mông – Nguyên đến bước chuyển sang nhà Hồ.</p>
           </div>
           <figure class="tl-intro-figure">
-            <img id="timeline-period-image" data-asset="tranIntro" width="2172" height="724" alt="Minh họa AI lấy cảm hứng từ tháp Phổ Minh trong ánh nắng vàng; không phải ảnh tư liệu." fetchpriority="high">
-            <figcaption>Minh họa AI · Lấy cảm hứng từ tháp Phổ Minh</figcaption>
+            <picture>
+              <source id="timeline-period-mobile" media="(max-width: 600px)">
+              <img id="timeline-period-image" width="1280" height="427" alt="Ảnh minh họa AI cho thời Trần; không phải tư liệu lịch sử." fetchpriority="high">
+            </picture>
+            <figcaption>Ảnh minh họa AI · Không phải tư liệu lịch sử</figcaption>
           </figure>
         </div>
       </section>

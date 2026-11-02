@@ -1,4 +1,4 @@
-import { ASSETS } from "../core/assets.js";
+import { ASSETS, TIMELINE_ART } from "../core/assets.js";
 import { EVENT_TAGS } from "../core/event-tags.js";
 import { ScrollBanner } from "../components/scroll-banner.js";
 
@@ -19,7 +19,6 @@ let period = "tran";
 let type = "all";
 
 const desktopMotion = window.matchMedia("(min-width: 1101px) and (prefers-reduced-motion: no-preference)");
-let carouselFrame = 0;
 const assetVariables = {
   "--tl-paper-texture": ASSETS.paperTexture,
   "--tl-deco-left-image": ASSETS.decoLeft,
@@ -28,9 +27,6 @@ const assetVariables = {
 };
 Object.entries(assetVariables).forEach(([name, url]) => {
   if (url) document.body.style.setProperty(name, `url("${url}")`);
-});
-document.querySelectorAll("[data-asset]").forEach((image) => {
-  image.src = ASSETS[image.dataset.asset];
 });
 
 const filterHost = document.querySelector(".tl-types");
@@ -106,23 +102,34 @@ function resetFilters() {
   });
 }
 
+// Chỉ chuyển dải bằng nút, chấm phân trang hoặc bàn phím; không có vùng cuộn ngang.
 function centerPeriod(button, animate = false) {
-  cancelAnimationFrame(carouselFrame);
   const rail = button.parentElement;
-  const target = Math.max(0, Math.min(rail.scrollWidth - rail.clientWidth,
-    button.offsetLeft - rail.offsetLeft - (rail.clientWidth - button.offsetWidth) / 2));
-  if (!animate || !desktopMotion.matches) {
-    rail.scrollTo({ left: target, behavior: "instant" });
-    return;
-  }
-  const start = rail.scrollLeft;
-  const started = performance.now();
-  function step(now) {
-    const progress = Math.min((now - started) / 360, 1);
-    rail.scrollLeft = start + (target - start) * (1 - (1 - progress) ** 3);
-    if (progress < 1) carouselFrame = requestAnimationFrame(step);
-  }
-  carouselFrame = requestAnimationFrame(step);
+  const viewport = rail.parentElement;
+  const target = Math.max(0, Math.min(rail.scrollWidth - viewport.clientWidth,
+    button.offsetLeft - (viewport.clientWidth - button.offsetWidth) / 2));
+  rail.style.transition = animate && desktopMotion.matches
+    ? "transform 360ms cubic-bezier(.2,.7,.2,1)" : "none";
+  rail.style.transform = `translateX(${-target}px)`;
+}
+
+function updatePeriodArtwork(button) {
+  const art = TIMELINE_ART[button.dataset.period];
+  const image = document.getElementById("timeline-period-image");
+  const ornament = document.getElementById("timeline-period-ornament");
+  ornament.hidden = !art;
+  document.querySelector(".tl-period-mark--fallback").hidden = Boolean(art);
+  document.querySelector(".tl-period-heading").classList.toggle("tl-period-heading--tran-seal", Boolean(art));
+  figure.hidden = !art;
+  intro.classList.toggle("tl-period-intro--empty", !art);
+  if (!art) return;
+  ornament.src = art.ornament;
+  image.hidden = false;
+  figure.classList.remove("tl-intro-figure--unavailable");
+  figure.querySelector("figcaption").textContent = "Ảnh minh họa AI · Không phải tư liệu lịch sử";
+  document.getElementById("timeline-period-mobile").srcset = art.mobile;
+  image.alt = `Ảnh minh họa AI cho ${button.dataset.title}; không phải tư liệu lịch sử.`;
+  image.src = art.desktop;
 }
 
 function selectPeriod(value, reset = true) {
@@ -143,11 +150,7 @@ function selectPeriod(value, reset = true) {
   pageDots.forEach((dot, dotIndex) => dot.setAttribute("aria-pressed", String(dotIndex === index)));
   previous.disabled = index === 0;
   next.disabled = index === periodButtons.length - 1;
-  document.querySelector(".tl-period-seal").hidden = value !== "tran";
-  document.querySelector(".tl-period-mark--fallback").hidden = value === "tran";
-  document.querySelector(".tl-period-heading").classList.toggle("tl-period-heading--tran-seal", value === "tran");
-  figure.hidden = value !== "tran";
-  intro.classList.toggle("tl-period-intro--empty", value !== "tran");
+  updatePeriodArtwork(button);
   description.textContent = value === "tran" ? tranDescription : `Nội dung giới thiệu về ${title} đang được cập nhật.`;
   yearSelect.replaceChildren(new Option("Đến năm", ""));
   const years = [...new Set(items.filter((item) => item.dataset.period === value).map((item) => item.dataset.year))].sort((a, b) => Number(a) - Number(b));
