@@ -14,8 +14,8 @@
   padding: var(--vk-section-gap) var(--vk-gutter);
 }
 .vk-info-eyebrow { margin: 0 0 12px; color: var(--vk-action); font-size: 14px; }
-.vk-info-main h1 { margin: 0 0 24px; font: 400 var(--vk-type-h1)/1.25 var(--vk-serif); }
-.vk-info-main h2 { margin: 32px 0 12px; font: 400 var(--vk-type-h3)/1.4 var(--vk-serif); }
+.vk-info-main h1 { margin: 0 0 24px; font: 700 var(--vk-type-h1)/1.25 var(--vk-serif); }
+.vk-info-main h2 { margin: 32px 0 12px; font: 600 var(--vk-type-h3)/1.4 var(--vk-serif); }
 .vk-info-main p, .vk-info-main li { font-size: 16px; line-height: var(--vk-leading-reading); }
 .vk-info-main ul { padding-left: 24px; }
 .vk-info-main li + li { margin-top: 8px; }

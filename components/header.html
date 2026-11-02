@@ -1,39 +1,368 @@
-<header class="site-header">
+<!-- Navbar dùng chung; sự kiện và icon được khởi tạo sau khi tải fragment. -->
+<header class="site-header vk-header">
+  <div class="vk-nav-backdrop" aria-hidden="true" hidden></div>
+
   <div class="vk-header-inner">
-    <a class="vk-brand" href="/index.html" aria-label="Việt Ký - Trang chủ">
-      <img src="/assets/icons/favicon.svg" alt="" width="36" height="36">
+    <a href="/index.html" class="vk-brand" aria-label="Việt Ký — Trang chủ">
+      <span class="vk-brand-mark" aria-hidden="true"></span>
       <span>VIỆT KÝ</span>
     </a>
-    <nav class="vk-desktop-nav" aria-label="Điều hướng chính">
-      <a href="/index.html">Trang chủ</a>
-      <a href="/pages/timeline.html">Dòng thời gian</a>
-      <a href="/pages/explore.html">Khám phá</a>
-      <a href="/pages/people.html">Nhân Vật</a>
-    </nav>
+
+    <!-- Một menu chung cho desktop và dialog mobile. -->
+    <div class="vk-navigation" id="vk-menu-panel">
+      <div class="vk-mobile-top">
+        <a href="/index.html" class="vk-brand" aria-label="Việt Ký — Trang chủ">
+          <span class="vk-brand-mark" aria-hidden="true"></span>
+          <span>VIỆT KÝ</span>
+        </a>
+        <button
+          class="vk-icon-button"
+          type="button"
+          data-vk-close
+          aria-label="Đóng menu"
+        >
+          <i data-lucide="panel-left-close" aria-hidden="true"></i>
+        </button>
+      </div>
+      <p class="vk-mobile-label" id="vk-menu-title">KHÁM PHÁ VIỆT KÝ</p>
+      <nav class="vk-main-nav" aria-label="Điều hướng chính">
+        <a class="vk-nav-link" href="/index.html">Trang chủ</a>
+
+        <div class="vk-nav-group">
+          <button
+            class="vk-nav-trigger"
+            id="vk-trigger-dau-xua"
+            type="button"
+            aria-expanded="false"
+            aria-controls="vk-dropdown-dau-xua"
+          >
+            <span class="vk-nav-label">
+              <span class="vk-nav-label-text">Dấu xưa</span>
+            </span>
+            <span class="vk-nav-symbol" aria-hidden="true">
+              <i data-lucide="chevron-down" aria-hidden="true"></i>
+            </span>
+          </button>
+          <section
+            class="vk-dropdown"
+            id="vk-dropdown-dau-xua"
+            aria-labelledby="vk-trigger-dau-xua"
+            hidden
+          >
+            <!-- Chỉ điều hướng đến các mục phụ trong nhóm. -->
+            <div class="vk-dropdown-body">
+              <div class="vk-category-list" aria-label="Danh mục Dấu xưa">
+                <a
+                  class="vk-category"
+                  data-vk-category="dia-danh"
+                  href="/pages/dau-xua/places.html"
+                >
+                  <span
+                    class="vk-category-icon"
+                    data-vk-graphic="place"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="vk-category-copy">
+                    <span class="vk-category-title">Địa danh lịch sử</span>
+                  </span>
+                  <span class="vk-category-arrow" aria-hidden="true">
+                    <i data-lucide="chevron-right"></i>
+                  </span>
+                </a>
+                <a
+                  class="vk-category"
+                  data-vk-category="di-tich"
+                  href="/pages/dau-xua/monuments.html"
+                >
+                  <span
+                    class="vk-category-icon"
+                    data-vk-graphic="architecture"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="vk-category-copy">
+                    <span class="vk-category-title">Di tích &amp; Kiến trúc</span>
+                  </span>
+                  <span class="vk-category-arrow" aria-hidden="true">
+                    <i data-lucide="chevron-right"></i>
+                  </span>
+                </a>
+                <a
+                  class="vk-category"
+                  data-vk-category="hien-vat"
+                  href="/pages/dau-xua/artifacts.html"
+                >
+                  <span
+                    class="vk-category-icon"
+                    data-vk-graphic="artifact"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="vk-category-copy">
+                    <span class="vk-category-title">Hiện vật lịch sử</span>
+                  </span>
+                  <span class="vk-category-arrow" aria-hidden="true">
+                    <i data-lucide="chevron-right"></i>
+                  </span>
+                </a>
+                <a class="vk-category" data-vk-category="ban-do" href="/pages/dau-xua/map.html">
+                  <span
+                    class="vk-category-icon"
+                    data-vk-graphic="map"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="vk-category-copy">
+                    <span class="vk-category-title">Bản đồ lịch sử</span>
+                  </span>
+                  <span class="vk-category-arrow" aria-hidden="true">
+                    <i data-lucide="chevron-right"></i>
+                  </span>
+                </a>
+              </div>
+
+            </div>
+          </section>
+        </div>
+
+        <div class="vk-nav-group">
+          <button
+            class="vk-nav-trigger"
+            id="vk-trigger-van-hoa"
+            type="button"
+            aria-expanded="false"
+            aria-controls="vk-dropdown-van-hoa"
+          >
+            <span class="vk-nav-label">
+              <span class="vk-nav-label-text">Văn hóa</span>
+            </span>
+            <span class="vk-nav-symbol" aria-hidden="true">
+              <i data-lucide="chevron-down" aria-hidden="true"></i>
+            </span>
+          </button>
+          <section
+            class="vk-dropdown"
+            id="vk-dropdown-van-hoa"
+            aria-labelledby="vk-trigger-van-hoa"
+            hidden
+          >
+            <div class="vk-dropdown-body">
+              <div class="vk-category-list" aria-label="Danh mục Văn hóa">
+                <a
+                  class="vk-category"
+                  data-vk-category="phong-tuc"
+                  href="/pages/van-hoa/customs.html"
+                >
+                  <span
+                    class="vk-category-icon"
+                    data-vk-graphic="custom"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="vk-category-copy">
+                    <span class="vk-category-title">Phong tục &amp; Tập quán</span>
+                  </span>
+                  <span class="vk-category-arrow" aria-hidden="true">
+                    <i data-lucide="chevron-right"></i>
+                  </span>
+                </a>
+                <a
+                  class="vk-category"
+                  data-vk-category="tin-nguong"
+                  href="/pages/van-hoa/beliefs.html"
+                >
+                  <span
+                    class="vk-category-icon"
+                    data-vk-graphic="belief"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="vk-category-copy">
+                    <span class="vk-category-title">Tín ngưỡng &amp; Tôn giáo</span>
+                  </span>
+                  <span class="vk-category-arrow" aria-hidden="true">
+                    <i data-lucide="chevron-right"></i>
+                  </span>
+                </a>
+                <a
+                  class="vk-category"
+                  data-vk-category="nghe-thuat"
+                  href="/pages/van-hoa/arts.html"
+                >
+                  <span
+                    class="vk-category-icon"
+                    data-vk-graphic="art"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="vk-category-copy">
+                    <span class="vk-category-title">Nghệ thuật truyền thống</span>
+                  </span>
+                  <span class="vk-category-arrow" aria-hidden="true">
+                    <i data-lucide="chevron-right"></i>
+                  </span>
+                </a>
+                <a
+                  class="vk-category"
+                  data-vk-category="le-hoi"
+                  href="/pages/van-hoa/festivals.html"
+                >
+                  <span
+                    class="vk-category-icon"
+                    data-vk-graphic="festival"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="vk-category-copy">
+                    <span class="vk-category-title">Lễ hội &amp; Đời sống</span>
+                  </span>
+                  <span class="vk-category-arrow" aria-hidden="true">
+                    <i data-lucide="chevron-right"></i>
+                  </span>
+                </a>
+              </div>
+
+            </div>
+          </section>
+        </div>
+
+        <div class="vk-nav-group">
+          <button
+            class="vk-nav-trigger"
+            id="vk-trigger-chuyen-su"
+            type="button"
+            aria-expanded="false"
+            aria-controls="vk-dropdown-chuyen-su"
+          >
+            <span class="vk-nav-label">
+              <span class="vk-nav-label-text">Chuyện sử</span>
+            </span>
+            <span class="vk-nav-symbol" aria-hidden="true">
+              <i data-lucide="chevron-down" aria-hidden="true"></i>
+            </span>
+          </button>
+          <section
+            class="vk-dropdown"
+            id="vk-dropdown-chuyen-su"
+            aria-labelledby="vk-trigger-chuyen-su"
+            hidden
+          >
+            <div class="vk-dropdown-body">
+              <div class="vk-category-list" aria-label="Danh mục Chuyện sử">
+                <a
+                  class="vk-category"
+                  data-vk-category="dong-thoi-gian"
+                  href="/pages/chuyen-su/timeline.html"
+                >
+                  <span
+                    class="vk-category-icon"
+                    data-vk-graphic="timeline"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="vk-category-copy">
+                    <span class="vk-category-title">Dòng thời gian</span>
+                  </span>
+                  <span class="vk-category-arrow" aria-hidden="true">
+                    <i data-lucide="chevron-right"></i>
+                  </span>
+                </a>
+                <a
+                  class="vk-category"
+                  data-vk-category="thoi-ky"
+                  href="/pages/chuyen-su/periods.html"
+                >
+                  <span
+                    class="vk-category-icon"
+                    data-vk-graphic="period"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="vk-category-copy">
+                    <span class="vk-category-title">Các thời kỳ</span>
+                  </span>
+                  <span class="vk-category-arrow" aria-hidden="true">
+                    <i data-lucide="chevron-right"></i>
+                  </span>
+                </a>
+                <a
+                  class="vk-category"
+                  data-vk-category="su-kien"
+                  href="/pages/chuyen-su/events.html"
+                >
+                  <span
+                    class="vk-category-icon"
+                    data-vk-graphic="event"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="vk-category-copy">
+                    <span class="vk-category-title">Sự kiện lịch sử</span>
+                  </span>
+                  <span class="vk-category-arrow" aria-hidden="true">
+                    <i data-lucide="chevron-right"></i>
+                  </span>
+                </a>
+                <a
+                  class="vk-category"
+                  data-vk-category="nhan-vat"
+                  href="/pages/chuyen-su/people.html"
+                >
+                  <span
+                    class="vk-category-icon"
+                    data-vk-graphic="person"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="vk-category-copy">
+                    <span class="vk-category-title">Nhân vật lịch sử</span>
+                  </span>
+                  <span class="vk-category-arrow" aria-hidden="true">
+                    <i data-lucide="chevron-right"></i>
+                  </span>
+                </a>
+              </div>
+
+            </div>
+          </section>
+        </div>
+
+        <a class="vk-nav-link" href="/pages/explore.html">Khám phá</a>
+      </nav>
+
+      <div class="vk-mobile-login">
+        <a class="vk-login" href="/pages/login.html">
+          <span>KÝ DANH</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Tìm kiếm, đăng nhập và menu mobile. -->
     <div class="vk-header-actions">
-      <form class="vk-search vk-desktop-search" role="search" aria-label="Tìm kiếm trên website" action="/pages/search.html" method="get">
-        <input type="search" name="q" placeholder="Tìm sự kiện, nhân vật…" aria-label="Tìm sự kiện, nhân vật" required>
-        <button type="submit" aria-label="Tìm kiếm"><img src="/assets/icons/search-lens.svg" alt="" width="20" height="20"></button>
-      </form>
-      <button class="vk-mobile-search-icon" type="button" aria-label="Mở tìm kiếm" aria-controls="vk-mobile-nav" aria-expanded="false">
-        <img src="/assets/icons/search-lens.svg" alt="" width="20" height="20">
-      </button>
-      <button class="vk-menu-button" type="button" aria-label="Mở menu" aria-controls="vk-mobile-nav" aria-expanded="false">
-        <span class="vk-menu-line"></span>
-        <span class="vk-menu-line"></span>
-        <img class="vk-menu-close-icon" src="/assets/icons/menu-close.svg" alt="" width="20" height="20">
+      <div class="vk-search">
+        <form class="vk-search-form" id="vk-search-form" role="search" aria-label="Tìm kiếm Việt Ký">
+          <button class="vk-icon-button" type="submit" aria-label="Tìm kiếm">
+            <i data-lucide="search" aria-hidden="true"></i>
+          </button>
+          <input
+            id="vk-search-input"
+            type="search"
+            name="q"
+            placeholder="Tìm kiếm"
+            aria-label="Tìm danh mục trong Việt Ký"
+            aria-controls="vk-search-results"
+            autocomplete="off"
+            spellcheck="false"
+            maxlength="100"
+          />
+          <ul class="vk-search-results" id="vk-search-results" aria-label="Kết quả tìm kiếm" hidden></ul>
+          <span class="vk-search-status" role="status" aria-live="polite"></span>
+        </form>
+      </div>
+      <div class="vk-desktop-login">
+        <a class="vk-login" href="/pages/login.html">
+          <span>KÝ DANH</span>
+        </a>
+      </div>
+      <button
+        class="vk-icon-button vk-menu-button"
+        id="vk-menu-toggle"
+        type="button"
+        aria-label="Mở menu"
+        aria-controls="vk-menu-panel"
+        aria-expanded="false"
+      >
+        <span data-vk-graphic="menu" aria-hidden="true"></span>
       </button>
     </div>
   </div>
-  <nav id="vk-mobile-nav" class="vk-mobile-nav" aria-label="Điều hướng di động" hidden>
-    <p class="vk-mobile-nav-title">Đi tới</p>
-    <a href="/index.html">Trang chủ <span aria-hidden="true">→</span></a>
-    <a href="/pages/timeline.html">Dòng thời gian <span aria-hidden="true">→</span></a>
-    <a href="/pages/explore.html">Khám phá <span aria-hidden="true">→</span></a>
-    <a href="/pages/people.html">Nhân Vật <span aria-hidden="true">→</span></a>
-    <form class="vk-search vk-mobile-search" role="search" aria-label="Tìm kiếm trên di động" action="/pages/search.html" method="get">
-      <input type="search" name="q" placeholder="Tìm sự kiện, nhân vật…" aria-label="Tìm sự kiện, nhân vật" required>
-      <button type="submit" aria-label="Tìm kiếm"><img src="/assets/icons/search-lens.svg" alt="" width="20" height="20"></button>
-    </form>
-  </nav>
 </header>
