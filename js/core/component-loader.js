@@ -3,6 +3,7 @@ import { initHeader } from "../components/header.js?v=2";
 import { initScrollProgress } from "../components/scroll-progress.js";
 
 const COMPONENTS_URL = new URL("../../components/", import.meta.url);
+const PROJECT_URL = new URL("../../", import.meta.url);
 
 async function loadComponent(hostId, fileName) {
   const host = document.getElementById(hostId);
@@ -18,26 +19,29 @@ async function loadComponent(hostId, fileName) {
   host.innerHTML = await response.text();
 
   // Quy đổi link theo gốc dự án để hỗ trợ triển khai trong thư mục con.
-  const projectUrl = new URL("../../", import.meta.url);
   host.querySelectorAll("[href], [src], [action]").forEach((element) => {
     ["href", "src", "action"].forEach((attribute) => {
       const value = element.getAttribute(attribute);
       if (value?.startsWith("/") && !value.startsWith("//")) {
-        element.setAttribute(attribute, new URL(value.slice(1), projectUrl).href);
+        element.setAttribute(attribute, new URL(value.slice(1), PROJECT_URL).href);
       }
     });
   });
   return host;
 }
 
+function normalizePagePath(pathname) {
+  return pathname.replace(/\/+$/, "").replace(/\.html$/, "").replace(/\/index$/, "") || "/";
+}
+
 function markActivePage() {
-  const currentPage = location.pathname.replace(/\/$/, "/index.html");
+  const currentPage = normalizePagePath(location.pathname);
   document
     .querySelectorAll(".site-header nav a, .site-footer nav a")
     .forEach((link) => {
       const target = new URL(link.href);
 
-      if (target.pathname === currentPage) {
+      if (target.origin === location.origin && normalizePagePath(target.pathname) === currentPage) {
         link.setAttribute("aria-current", "page");
       } else {
         link.removeAttribute("aria-current");
@@ -56,7 +60,7 @@ async function initComponents() {
   if (headerResult.status === "rejected") {
     console.error("Không tải được Header:", headerResult.reason);
     document.getElementById("site-header").innerHTML =
-      '<a href="/index.html">Việt Ký</a>';
+      '<a href="/">Việt Ký</a>';
   }
 
   if (footerResult.status === "rejected") {
