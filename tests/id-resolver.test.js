@@ -7,7 +7,11 @@ for (const [id, path] of [
   ["per0001", "../data/per/per0001.json"],
   ["ppl0001", "../data/ppl/ppl0001.json"],
   ["plc0001", "../data/plc/plc0001.json"],
-  ["src0001", "../data/src/src0001.json"]
+  ["src0001", "../data/src/src0001.json"],
+  ["cul0001", "../data/cul/cul0001.json"],
+  ["art0001", "../data/art/art0001.json"],
+  ["sty0001", "../data/sty/sty0001.json"],
+  ["tml0001", "../data/tml/tml0001.json"]
 ]) {
   test("resolveId trả URL đúng cho " + id, () => {
     const url = resolveId(id);
@@ -31,8 +35,8 @@ test("từ chối ID sai kiểu, dấu gạch nối, độ dài và ký tự", (
   }
 });
 
-test("từ chối prefix ngoài phạm vi evt/per/ppl/plc/src", () => {
-  for (const id of ["art0001", "cul0001", "sty0001", "tml0001", "img0001", "map0001", "abc0001"]) {
+test("từ chối prefix chưa có đường dẫn JSON thống nhất", () => {
+  for (const id of ["img0001", "map0001", "abc0001"]) {
     assert.throws(() => resolveId(id), error => {
       assert.equal(error.name, "InvalidResourceIdError");
       assert.ok(error.message.includes(id.slice(0, 3)));

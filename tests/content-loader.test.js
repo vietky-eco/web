@@ -16,7 +16,15 @@ const invalidJSON = new Map([
   ["evt9905", '"text"'], ["evt9906", "true"],
   ["evt9907", '{"id":"evt0002"}'],
   ["evt9908", '{"id":{"toString":null}}'],
-  ["evt9909", '{"title":"technical fixture"}']
+  ["evt9909", '{"title":"technical fixture"}'],
+  ["evt9910", '{"id":null}'],
+  ["evt9911", '{"id":23}']
+]);
+const typedFixtures = new Map([
+  ["/data/cul/cul9900.json", '{"id":"cul9900","title":"Culture fixture"}'],
+  ["/data/art/art9900.json", '{"id":"art9900","title":"Article fixture"}'],
+  ["/data/sty/sty9900.json", '{"id":"sty9900","title":"Story fixture"}'],
+  ["/data/tml/tml9900.json", '{"id":"tml9900","title":"Timeline fixture"}']
 ]);
 let server;
 let origin;
@@ -38,7 +46,7 @@ before(async () => {
       return;
     }
     const id = path.match(/^\/data\/evt\/(evt[0-9]{4})\.json$/)?.[1];
-    const body = samples.get(path) ?? invalidJSON.get(id);
+    const body = samples.get(path) ?? typedFixtures.get(path) ?? invalidJSON.get(id);
     response.writeHead(body === undefined ? 404 : 200, { "Content-Type": "application/json" });
     response.end(body ?? '{"error":"not found"}');
   });
@@ -88,11 +96,18 @@ test("tải 3 sự kiện mẫu và mọi tham chiếu qua HTTP", async t => {
   }
 });
 
+test("tải JSON cul/art/sty/tml qua đúng thư mục HTTP", async t => {
+  useHTTP(t);
+  for (const id of ["cul9900", "art9900", "sty9900", "tml9900"]) {
+    assert.equal((await loadContent(id)).id, id);
+  }
+});
+
 test("Loader từ chối ID sai trước khi gọi fetch", async t => {
   t.mock.method(globalThis, "fetch", () => {
     throw new Error("Không được gọi fetch cho ID sai");
   });
-  for (const id of ["evt-0001", "evt0001\n", "art0001"]) {
+  for (const id of ["evt-0001", "evt0001\n", "abc0001"]) {
     await assert.rejects(loadContent(id), { name: "InvalidResourceIdError" });
   }
 });
@@ -127,7 +142,7 @@ test("từ chối JSON null, array và giá trị nguyên thủy", async t => {
 
 test("ID không khớp luôn có thông báo rõ, kể cả ID là object", async t => {
   useHTTP(t);
-  for (const id of ["evt9907", "evt9908"]) {
+  for (const id of ["evt9907", "evt9908", "evt9910", "evt9911"]) {
     await assert.rejects(loadContent(id), error => {
       assert.match(error.message, /ID trong JSON không khớp/);
       assert.ok(error.message.includes(id));
@@ -154,15 +169,19 @@ test("mất kết nối trả lỗi có ID và cause", async t => {
   });
 });
 
-test("object không có trường id vẫn hợp lệ theo contract hiện tại", async t => {
+test("từ chối object thiếu id dù JSON đúng cú pháp", async t => {
   useHTTP(t);
-  assert.deepEqual(await loadContent("evt9909"), { title: "technical fixture" });
+  await assert.rejects(loadContent("evt9909"), error => {
+    assert.match(error.message, /evt9909.*thiếu.*id/);
+    return true;
+  });
 });
 
 test("sau lỗi 404 và JSON lỗi vẫn tải được sự kiện thật", async t => {
   useHTTP(t);
   await assert.rejects(loadContent("evt9999"), { name: "ResourceNotFoundError" });
   await assert.rejects(loadContent("evt9900"), /JSON.*không hợp lệ/);
+  await assert.rejects(loadContent("evt9909"), /thiếu.*id/);
   const event = await loadContent("evt0001");
   assert.equal(event.id, "evt0001");
   assert.equal(event.type, "event");

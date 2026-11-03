@@ -38,7 +38,11 @@ export async function loadContent(id) {
     throw new Error(`Dữ liệu của tài nguyên "${id}" phải là object JSON.`);
   }
 
-  if ("id" in content && content.id !== id) {
+  if (!Object.hasOwn(content, "id")) {
+    throw new Error(`Dữ liệu của tài nguyên "${id}" thiếu trường "id".`);
+  }
+
+  if (content.id !== id) {
     throw new Error(`ID trong JSON không khớp: yêu cầu "${id}", nhận ${JSON.stringify(content.id)}.`);
   }
 

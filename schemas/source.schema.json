@@ -73,7 +73,7 @@
         "pending",
         "verified"
       ],
-      "description": "Có URL không đồng nghĩa đã kiểm duyệt. Không suy trạng thái đã duyệt từ danh sách tham chiếu ngược."
+      "description": "Nguồn published phải có reviewStatus = verified; có URL không đồng nghĩa đã kiểm duyệt."
     },
     "accessedOn": {
       "type": "string",
@@ -97,7 +97,8 @@
       },
       "then": {
         "required": [
-          "citation"
+          "citation",
+          "reviewStatus"
         ],
         "anyOf": [
           {
@@ -110,23 +111,7 @@
               "locator"
             ]
           }
-        ]
-      }
-    },
-    {
-      "if": {
-        "properties": {
-          "status": {
-            "const": "published"
-          },
-          "reviewStatus": {}
-        },
-        "required": [
-          "status",
-          "reviewStatus"
-        ]
-      },
-      "then": {
+        ],
         "properties": {
           "reviewStatus": {
             "const": "verified"
