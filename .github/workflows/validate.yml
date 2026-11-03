@@ -50,7 +50,7 @@ jobs:
 
       - name: Lighthouse CI
         id: lighthouse
-        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        if: ${{ !cancelled() && steps.chromium.outcome == 'success' }}
         run: npm run lighthouse
 
       - name: Upload reports
