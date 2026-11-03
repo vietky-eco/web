@@ -1,0 +1,102 @@
+
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/index"
+    },
+    {
+      "source": "/chuyen-su/su-kien",
+      "destination": "/pages/chuyen-su/events"
+    },
+    {
+      "source": "/chuyen-su/nhan-vat",
+      "destination": "/pages/chuyen-su/people"
+    },
+    {
+      "source": "/chuyen-su/cac-thoi-ky",
+      "destination": "/pages/chuyen-su/periods"
+    },
+    {
+      "source": "/chuyen-su/dong-thoi-gian",
+      "destination": "/pages/chuyen-su/timeline"
+    },
+    {
+      "source": "/dau-xua/hien-vat",
+      "destination": "/pages/dau-xua/artifacts"
+    },
+    {
+      "source": "/dau-xua/ban-do",
+      "destination": "/pages/dau-xua/map"
+    },
+    {
+      "source": "/dau-xua/di-tich",
+      "destination": "/pages/dau-xua/monuments"
+    },
+    {
+      "source": "/dau-xua/dia-danh",
+      "destination": "/pages/dau-xua/places"
+    },
+    {
+      "source": "/van-hoa/nghe-thuat",
+      "destination": "/pages/van-hoa/arts"
+    },
+    {
+      "source": "/van-hoa/tin-nguong",
+      "destination": "/pages/van-hoa/beliefs"
+    },
+    {
+      "source": "/van-hoa/phong-tuc",
+      "destination": "/pages/van-hoa/customs"
+    },
+    {
+      "source": "/van-hoa/le-hoi",
+      "destination": "/pages/van-hoa/festivals"
+    },
+    {
+      "source": "/gioi-thieu",
+      "destination": "/pages/about"
+    },
+    {
+      "source": "/chuyen-muc",
+      "destination": "/pages/category"
+    },
+    {
+      "source": "/chi-tiet",
+      "destination": "/pages/detail"
+    },
+    {
+      "source": "/kham-pha",
+      "destination": "/pages/explore"
+    },
+    {
+      "source": "/trac-nghiem",
+      "destination": "/pages/quiz"
+    },
+    {
+      "source": "/nguon-tu-lieu",
+      "destination": "/pages/sources"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    }
+  ]
+}
