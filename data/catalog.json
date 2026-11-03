@@ -1,0 +1,47 @@
+[
+  {
+    "id": "evt0001",
+    "type": "event",
+    "title": "Thống nhất đất nước, lập Đại Cồ Việt (968)",
+    "summary": "Năm 968, Đinh Bộ Lĩnh kết thúc tình trạng cát cứ, lên ngôi hoàng đế, đặt quốc hiệu Đại Cồ Việt và chọn Hoa Lư làm kinh đô.",
+    "time": {
+      "sortYear": 968,
+      "label": "968"
+    },
+    "periodIds": [
+      "per0001"
+    ],
+    "status": "draft",
+    "articleId": null
+  },
+  {
+    "id": "evt0002",
+    "type": "event",
+    "title": "Biến cố cung đình nhà Đinh (979)",
+    "summary": "Năm 979, Đinh Tiên Hoàng và Đinh Liễn bị sát hại. Đinh Toàn còn nhỏ lên nối ngôi; Lê Hoàn giữ vai trò nhiếp chính trong bối cảnh triều đình biến động.",
+    "time": {
+      "sortYear": 979,
+      "label": "979"
+    },
+    "periodIds": [
+      "per0001"
+    ],
+    "status": "draft",
+    "articleId": null
+  },
+  {
+    "id": "evt0004",
+    "type": "event",
+    "title": "Kháng chiến chống Tống (981)",
+    "summary": "Năm 981, Lê Hoàn lãnh đạo quân Đại Cồ Việt chống cuộc tiến công của nhà Tống và giành thắng lợi, bảo vệ nền độc lập.",
+    "time": {
+      "sortYear": 981,
+      "label": "981"
+    },
+    "periodIds": [
+      "per0002"
+    ],
+    "status": "draft",
+    "articleId": null
+  }
+]
