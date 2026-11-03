@@ -11,8 +11,7 @@ permissions:
 
 jobs:
   validate:
-    name: Validate JS and JSON
-
+    name: Validate JS, JSON & Web Quality
     runs-on: ubuntu-latest
 
     steps:
@@ -23,7 +22,44 @@ jobs:
         uses: actions/setup-node@v7
         with:
           node-version: "24"
-          package-manager-cache: false
+          cache: npm
 
-      - name: Run validation
+      - name: Validate JS and JSON
+        id: validation
         run: node scripts/check-repo.mjs
+
+      - name: Install dependencies
+        id: install
+        if: ${{ !cancelled() }}
+        run: npm ci
+
+      - name: ESLint
+        id: eslint
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: npm run lint
+
+      - name: Install Chromium
+        id: chromium
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: npx playwright install --with-deps chromium
+
+      - name: Playwright
+        id: playwright
+        if: ${{ !cancelled() && steps.chromium.outcome == 'success' }}
+        run: npm run test:e2e
+
+      - name: Lighthouse CI
+        id: lighthouse
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: npm run lighthouse
+
+      - name: Upload reports
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: vietky-quality-reports
+          path: |
+            playwright-report/
+            test-results/
+            lhci-report/
+          if-no-files-found: ignore
