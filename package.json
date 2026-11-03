@@ -1,4 +1,10 @@
 {
+  "scripts": {
+    "start": "http-server . -a 127.0.0.1 -p 4173",
+    "lint": "eslint js",
+    "test:e2e": "playwright test",
+    "lighthouse": "lhci autorun"
+  },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@lhci/cli": "^0.16.0",

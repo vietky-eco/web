@@ -1,7 +1,9 @@
+const { chromium } = require("@playwright/test");
 
 module.exports = {
   ci: {
     collect: {
+      chromePath: process.env.CHROME_PATH || chromium.executablePath(),
       startServerCommand: "npm run start",
 
       startServerReadyPattern: "Available on:",
