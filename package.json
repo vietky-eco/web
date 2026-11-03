@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "http-server . -a 127.0.0.1 -p 4173",
+    "start": "node scripts/serve-local.mjs",
     "lint": "eslint js",
     "test:e2e": "playwright test",
     "lighthouse": "lhci autorun"
