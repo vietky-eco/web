@@ -1083,6 +1083,21 @@
                 }
             },
             {
+                id: 'content-invalid-json', module: 'content', title: 'JSON lỗi và phục hồi', description: 'Dùng JSON sai cú pháp trong iframe riêng, sau đó tải lại Entity thật.', expected: 'Loader reject có thông báo JSON lỗi và cause; lần tải tiếp theo thành công.', run: async ctx => {
+                    const fixture = await ctx.invalidJsonLoader();
+                    let caught;
+                    try {await fixture.loadContent('evt0001');} catch (error) {caught = error;}
+                    ctx.assert(isError(caught), 'Loader bắt và trả lỗi JSON');
+                    ctx.assert(fixture.reads() === 1, 'Đã dùng đúng một phản hồi JSON lỗi trong iframe', 1, fixture.reads());
+                    ctx.assert(/JSON/i.test(caught.message) && caught.message.includes('evt0001'), 'Thông báo xác định lỗi JSON và Resource ID');
+                    ctx.assert(caught.cause?.name === 'SyntaxError', 'Giữ nguyên lỗi parse trong cause', 'SyntaxError', caught.cause?.name);
+                    const result = await fixture.loadContent('evt0001');
+                    ctx.assert(result && typeof result === 'object' && result.id === 'evt0001', 'Sau lỗi vẫn tải được Entity thật');
+                    ctx.preview.replaceChildren(el('pre', JSON.stringify(result, null, 2), 'preview-data'));
+                    return 'Đã bắt JSON lỗi trong iframe và tải lại evt0001 qua HTTP; dữ liệu trên server không thay đổi.';
+                }
+            },
+            {
                 id: 'catalog-load', module: 'catalog', title: 'Catalog · Structure', description: 'Kiểu mảng, ID không rỗng và duy nhất; [] là cấu trúc hợp lệ.', expected: 'Loader bảo toàn số lượng và ID từ JSON nguồn; [] không chứng minh có dữ liệu.', run: async ctx => {
                     const data = await catalogData(ctx);
                     validateCatalog(ctx, data, 'Kết quả');
@@ -1179,7 +1194,7 @@
         const CASE_META = {
             tokens: 'VK-DESIGN-001', typography: 'VK-DESIGN-002',
             'resolver-valid': 'VK-RESOLVER-001', 'resolver-invalid': 'VK-RESOLVER-002',
-            'content-valid': 'VK-CONTENT-001', 'content-missing': 'VK-CONTENT-002',
+            'content-valid': 'VK-CONTENT-001', 'content-missing': 'VK-CONTENT-002', 'content-invalid-json': 'VK-CONTENT-003',
             'catalog-load': 'VK-CATALOG-001', 'catalog-populated': 'VK-CATALOG-002', 'catalog-empty': 'VK-CATALOG-003',
             'timeline-valid': 'VK-TIMELINE-001', 'timeline-empty': 'VK-TIMELINE-002',
             'search-match': 'VK-SEARCH-001', 'search-empty': 'VK-SEARCH-002', 'article-valid': 'VK-ARTICLE-001'
@@ -1432,6 +1447,33 @@
             });
             return checkExport(ctx, imported, 'loadCatalog');
         }
+        async function invalidJsonLoader(ctx, cleanup) {
+            const url = await moduleSource(ctx, '../js/core/content-loader.js');
+            const resourceURL = new URL('../data/evt/evt0001.json', import.meta.url);
+            const frame = document.createElement('iframe'); frame.hidden = true;
+            frame.setAttribute('aria-hidden', 'true'); frame.title = 'Content Loader JSON test realm';
+            document.body.append(frame); cleanup.push(() => frame.remove());
+            const realm = frame.contentWindow;
+            const originalFetch = realm.fetch.bind(realm);
+            let reads = 0;
+            realm.fetch = (input, options) => {
+                const target = new URL(typeof input === 'string' ? input : (input.url ?? input.href ?? String(input)), resourceURL);
+                if (reads === 0 && target.href === resourceURL.href) {
+                    reads++;
+                    ctx.log('Fixture cô lập: phản hồi 200 application/json có body "{"; không phải file dữ liệu trên server.');
+                    return Promise.resolve(new realm.Response('{', {status: 200, headers: {'Content-Type': 'application/json'}}));
+                }
+                return originalFetch(input, options);
+            };
+            const imported = await new Promise((resolve, reject) => {
+                realm.__playgroundResolve = resolve;
+                realm.__playgroundReject = error => reject(new Error(`Import content loader thất bại: ${error.message}`, {cause: error}));
+                const script = frame.contentDocument.createElement('script'); script.type = 'module';
+                script.textContent = `import(${JSON.stringify(url.href)}).then(window.__playgroundResolve, window.__playgroundReject);`;
+                frame.contentDocument.body.append(script);
+            });
+            return {loadContent: checkExport(ctx, imported, 'loadContent'), reads: () => reads};
+        }
         async function executeCase(test) {
             const logs = [], assertions = [], cleanup = [];
             const start = performance.now(); let message = '', status = 'fail';
@@ -1448,7 +1490,8 @@
                     if (!pass) throw new AssertionError(text);
                 },
                 export: (path, name) => getExport(ctx, path, name), resource: ensureResource,
-                fetch: fetchResource, catalogLoader: raw => isolatedCatalog(ctx, raw, cleanup)
+                fetch: fetchResource, catalogLoader: raw => isolatedCatalog(ctx, raw, cleanup),
+                invalidJsonLoader: () => invalidJsonLoader(ctx, cleanup)
             };
             const settings = {readiness: ctx.readiness, contract: CONTRACTS[test.module] ? structuredClone(CONTRACTS[test.module]) : null};
             logs.push(`Thiết lập lúc chạy: ${JSON.stringify(settings)}`);

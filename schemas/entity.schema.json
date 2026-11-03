@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$comment": "IE104-45 local contract. Cross-file references and publication need separate validation and team review.",
+  "$comment": "Viet Ky catalogue-aligned contract. ID/reference existence, historical accuracy, asset availability and publication need separate validation and human review.",
   "title": "Viet Ky Entity",
   "type": "object",
   "additionalProperties": false,
@@ -108,6 +108,252 @@
           "minimum": 0
         }
       }
+    },
+    "editorialNotes": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S",
+      "description": "Ghi chú biên tập nguyên văn; không phải nội dung lịch sử đã được duyệt."
+    },
+    "referencedByIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 7,
+        "maxLength": 7,
+        "pattern": "^(evt|per|ppl|plc|cul|art|sty|tml|src|img|map)[0-9]{4}$"
+      },
+      "description": "Tham chiếu ngược trong danh mục; không tự suy ra quan hệ lịch sử hoặc quan hệ có hướng."
+    },
+    "coverImageId": {
+      "type": "string",
+      "minLength": 7,
+      "maxLength": 7,
+      "pattern": "^(img)[0-9]{4}$",
+      "description": "Ảnh đại diện dự kiến; có ID không chứng minh tệp ảnh đã tồn tại."
+    },
+    "fallbackImageId": {
+      "type": "string",
+      "minLength": 7,
+      "maxLength": 7,
+      "pattern": "^(img)[0-9]{4}$",
+      "description": "Ảnh thay thế khi thiếu tệp; danh mục hiện dùng img0025, bản thân tệp cũng cần được tạo và duyệt."
+    },
+    "imageIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 7,
+        "maxLength": 7,
+        "pattern": "^(img)[0-9]{4}$"
+      }
+    },
+    "mapIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 7,
+        "maxLength": 7,
+        "pattern": "^(map)[0-9]{4}$"
+      }
+    },
+    "articleIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 7,
+        "maxLength": 7,
+        "pattern": "^(art)[0-9]{4}$"
+      },
+      "description": "Danh sách Bài được liệt kê trong ghi chú; không tự chọn bài chính hoặc suy từ số ID. articleId tiếp tục chọn bài chính."
+    },
+    "storyIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 7,
+        "maxLength": 7,
+        "pattern": "^(sty)[0-9]{4}$"
+      }
+    },
+    "timelineIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 7,
+        "maxLength": 7,
+        "pattern": "^(tml)[0-9]{4}$"
+      }
+    },
+    "personIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 7,
+        "maxLength": 7,
+        "pattern": "^(ppl)[0-9]{4}$"
+      }
+    },
+    "placeIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 7,
+        "maxLength": 7,
+        "pattern": "^(plc)[0-9]{4}$"
+      }
+    },
+    "eventIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 7,
+        "maxLength": 7,
+        "pattern": "^(evt)[0-9]{4}$"
+      }
+    },
+    "contextIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 7,
+        "maxLength": 7,
+        "pattern": "^(evt|per|ppl|plc|cul|art|sty|tml|src|img|map)[0-9]{4}$"
+      },
+      "description": "Các mục được nhắc hoặc dùng làm bối cảnh biên tập; không tự suy ra vai trò, quan hệ huyết thống hoặc bài chính."
+    },
+    "parentId": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 7,
+          "maxLength": 7,
+          "pattern": "^(per)[0-9]{4}$"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Thời kỳ cha theo phân cấp danh mục; nhóm gốc không có cha, không tự coi nhóm gốc là một triều đại."
+    },
+    "childIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 7,
+        "maxLength": 7,
+        "pattern": "^(per)[0-9]{4}$"
+      }
+    },
+    "order": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Thứ tự thời kỳ trong nhóm; không phải niên đại lịch sử."
+    },
+    "parentEventId": {
+      "type": "string",
+      "minLength": 7,
+      "maxLength": 7,
+      "pattern": "^(evt)[0-9]{4}$",
+      "description": "Cuộc kháng chiến/sự kiện lớn mà sự kiện này thuộc về theo ghi chú; cần đối chiếu nguồn."
+    },
+    "profileType": {
+      "type": "string",
+      "enum": [
+        "detail",
+        "name-only"
+      ],
+      "description": "Kế hoạch hồ sơ nhân vật. name-only chỉ là mục được nhắc, không phải bài chi tiết đã công bố."
+    },
+    "avatarImageId": {
+      "type": "string",
+      "minLength": 7,
+      "maxLength": 7,
+      "pattern": "^(img)[0-9]{4}$"
+    },
+    "personRelations": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "targetId",
+          "label",
+          "sourceIds",
+          "reviewStatus"
+        ],
+        "properties": {
+          "targetId": {
+            "type": "string",
+            "minLength": 7,
+            "maxLength": 7,
+            "pattern": "^(ppl)[0-9]{4}$"
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S",
+            "description": "Nhãn gốc theo người đang xem: ví dụ Cha nghĩa là targetId được ghi là cha của nhân vật hiện tại; không tự sinh chiều ngược."
+          },
+          "sourceIds": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 7,
+              "maxLength": 7,
+              "pattern": "^(src)[0-9]{4}$"
+            },
+            "description": "Nguồn cho chính quan hệ này; không tự sao chép toàn bộ nguồn của nhân vật để coi là chứng cứ."
+          },
+          "reviewStatus": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "verified"
+            ]
+          },
+          "notes": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "reviewStatus": {
+                  "const": "verified"
+                }
+              },
+              "required": [
+                "reviewStatus"
+              ]
+            },
+            "then": {
+              "properties": {
+                "sourceIds": {
+                  "minItems": 1
+                }
+              }
+            }
+          }
+        ]
+      },
+      "description": "Quan hệ có hướng chờ kiểm duyệt trong ghi chú. Chỉ trình bày quan hệ đã verified; pending không được hiểu là dữ kiện đã xác nhận."
     }
   },
   "allOf": [
@@ -285,6 +531,125 @@
         "properties": {
           "related": {
             "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "period"
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "else": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "parentId"
+              ]
+            },
+            {
+              "required": [
+                "childIds"
+              ]
+            },
+            {
+              "required": [
+                "order"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "event"
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "else": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "parentEventId"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "person"
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "else": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "profileType"
+              ]
+            },
+            {
+              "required": [
+                "avatarImageId"
+              ]
+            },
+            {
+              "required": [
+                "personRelations"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "profileType": {
+            "const": "name-only"
+          }
+        },
+        "required": [
+          "profileType"
+        ]
+      },
+      "then": {
+        "properties": {
+          "status": {
+            "enum": [
+              "draft",
+              "review"
+            ]
+          },
+          "articleId": {
+            "type": "null"
+          },
+          "summary": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
           }
         }
       }
