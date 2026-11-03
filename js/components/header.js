@@ -23,7 +23,7 @@ export function initHeader(header) {
     mobileQuery,
     reducedMotion,
   });
-  const search = initHeaderSearch(header, {
+  initHeaderSearch(header, {
     onFocus: () => closePanel(false, true),
   });
 
@@ -126,7 +126,6 @@ export function initHeader(header) {
   }
 
   function openPanel(panel, trigger) {
-    search.close();
     if (activePanel === panel) {
       closePanel(true);
       return;
@@ -144,7 +143,6 @@ export function initHeader(header) {
 
   // Chuyển dropdown khi mở nhóm mới.
   function openCategory(button, source = "click") {
-    search.close();
     const wasOpen = activeCategory === button;
     if (wasOpen && (source === "hover" || source === "keyboard")) {
       clearHoverTimers();
@@ -255,10 +253,7 @@ export function initHeader(header) {
 
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
-      if (search.isOpen()) {
-        event.preventDefault();
-        search.close(true);
-      } else if (activeCategory) {
+      if (activeCategory) {
         event.preventDefault();
         const button = activeCategory;
         closeCategory();
@@ -299,11 +294,9 @@ export function initHeader(header) {
   navResizeObserver.observe(navigation);
   navResizeObserver.observe(header.querySelector(".vk-header-inner"));
   mobileQuery.addEventListener("change", () => {
-    search.close();
     closePanel(true, true);
   });
   window.addEventListener("pagehide", () => {
-    search.close();
     closePanel(false, true);
   });
 }
