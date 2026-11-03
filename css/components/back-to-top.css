@@ -1,0 +1,93 @@
+/* Điểm neo ở ngay trước footer để nút dừng ở mép trên của footer. */
+.back-to-top-anchor {
+  position: sticky;
+  bottom: calc(var(--vk-space-8) + var(--vk-space-scroll));
+  z-index: 99;
+  height: 0;
+  pointer-events: none;
+}
+
+.back-to-top {
+  position: absolute;
+  right: calc(var(--vk-gutter) + 8px);
+  bottom: 12px;
+  pointer-events: auto;
+
+  width: 56px;
+  height: 56px;
+  padding: 0;
+
+  display: grid;
+  place-items: center;
+
+  background-color: var(--vk-paper);
+  color: var(--vk-son-deep);
+
+  border: var(--vk-stroke) solid var(--vk-son-deep);
+  border-radius: var(--vk-radius-pill);
+
+  cursor: pointer;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+
+  transition:
+    opacity var(--vk-motion-normal) var(--vk-ease),
+    visibility var(--vk-motion-normal) var(--vk-ease),
+    transform var(--vk-motion-normal) var(--vk-ease),
+    background-color var(--vk-motion-fast) var(--vk-ease),
+    border-color var(--vk-motion-fast) var(--vk-ease),
+    color var(--vk-motion-fast) var(--vk-ease);
+}
+
+.back-to-top svg {
+  width: 32px;
+  height: 32px;
+  display: block;
+
+  transition: transform var(--vk-motion-fast) var(--vk-ease);
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background-color: color-mix(
+    in srgb,
+    var(--vk-son) 6%,
+    var(--vk-paper)
+  );
+
+  border-color: var(--vk-son-deep);
+  color: var(--vk-son-deep);
+}
+
+.back-to-top:hover svg {
+  transform: translateY(-2px);
+}
+
+
+.back-to-top:focus-visible {
+  outline: var(--vk-stroke-strong) solid var(--vk-focus);
+  outline-offset: 3px;
+}
+
+@media (max-width: 767px) {
+  .back-to-top {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .back-to-top svg {
+    transition: none;
+  }
+
+  .back-to-top:hover svg {
+    transform: none;
+  }
+}
