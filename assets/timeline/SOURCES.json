@@ -1,0 +1,340 @@
+{
+  "date": "2026-11-02",
+  "status": "AI illustrations and UI adaptations; not historical evidence",
+  "assets": [
+    {
+      "file": "02-hung-vuong/banner-desktop-1280.webp",
+      "type": "banner-desktop",
+      "era": "Hùng Vương",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Tham chiếu văn hóa Đông Sơn qua trống Ngọc Lũ; không phục dựng Hùng Vương hay khẳng định đồng nhất niên đại.",
+      "reference": "https://baotanglichsu.vn/vi/Articles/1002/28053/trong-djong-ngoc-lu.html"
+    },
+    {
+      "file": "02-hung-vuong/banner-mobile-780.webp",
+      "type": "banner-mobile",
+      "era": "Hùng Vương",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Tham chiếu văn hóa Đông Sơn qua trống Ngọc Lũ; không phục dựng Hùng Vương hay khẳng định đồng nhất niên đại.",
+      "reference": "https://baotanglichsu.vn/vi/Articles/1002/28053/trong-djong-ngoc-lu.html"
+    },
+    {
+      "file": "02-hung-vuong/ornament-256.webp",
+      "type": "ornament",
+      "era": "Hùng Vương",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Tham chiếu văn hóa Đông Sơn qua trống Ngọc Lũ; không phục dựng Hùng Vương hay khẳng định đồng nhất niên đại.",
+      "reference": "https://baotanglichsu.vn/vi/Articles/1002/28053/trong-djong-ngoc-lu.html"
+    },
+    {
+      "file": "03-bac-thuoc/banner-desktop-1280.webp",
+      "type": "banner-desktop",
+      "era": "Bắc thuộc",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Đồ án trung tính cho nhóm thời gian rộng; chưa định danh mẫu hiện vật riêng.",
+      "reference": null
+    },
+    {
+      "file": "03-bac-thuoc/banner-mobile-780.webp",
+      "type": "banner-mobile",
+      "era": "Bắc thuộc",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Đồ án trung tính cho nhóm thời gian rộng; chưa định danh mẫu hiện vật riêng.",
+      "reference": null
+    },
+    {
+      "file": "03-bac-thuoc/ornament-256.webp",
+      "type": "ornament",
+      "era": "Bắc thuộc",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Đồ án trung tính cho nhóm thời gian rộng; chưa định danh mẫu hiện vật riêng.",
+      "reference": null
+    },
+    {
+      "file": "04-ngo-dinh-tien-le/banner-desktop-1280.webp",
+      "type": "banner-desktop",
+      "era": "Ngô–Đinh–Tiền Lê",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Tham chiếu vật liệu Hoa Lư; không tái dựng cung điện hay sao chữ trên gạch.",
+      "reference": "https://baotanglichsuquocgia.vn/vi/Articles/3101/17603/vat-lieu-kien-truc-thoi-djinh-tien-le-o-khu-trung-tam-di-tich-co-djo-hoa-lu.html"
+    },
+    {
+      "file": "04-ngo-dinh-tien-le/banner-mobile-780.webp",
+      "type": "banner-mobile",
+      "era": "Ngô–Đinh–Tiền Lê",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Tham chiếu vật liệu Hoa Lư; không tái dựng cung điện hay sao chữ trên gạch.",
+      "reference": "https://baotanglichsuquocgia.vn/vi/Articles/3101/17603/vat-lieu-kien-truc-thoi-djinh-tien-le-o-khu-trung-tam-di-tich-co-djo-hoa-lu.html"
+    },
+    {
+      "file": "04-ngo-dinh-tien-le/ornament-256.webp",
+      "type": "ornament",
+      "era": "Ngô–Đinh–Tiền Lê",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Tham chiếu vật liệu Hoa Lư; không tái dựng cung điện hay sao chữ trên gạch.",
+      "reference": "https://baotanglichsuquocgia.vn/vi/Articles/3101/17603/vat-lieu-kien-truc-thoi-djinh-tien-le-o-khu-trung-tam-di-tich-co-djo-hoa-lu.html"
+    },
+    {
+      "file": "05-ly/banner-desktop-1280.webp",
+      "type": "banner-desktop",
+      "era": "Lý",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Bám nghiên cứu ngói Lý và gốm An Biên; ảnh AI vẫn là chuyển thể, không phải bản sao hiện vật.",
+      "reference": "https://baotanglichsu.vn/VI/Articles/3101/71209/trang-tri-tren-ngoi-thoi-ly.html"
+    },
+    {
+      "file": "05-ly/banner-mobile-780.webp",
+      "type": "banner-mobile",
+      "era": "Lý",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Bám nghiên cứu ngói Lý và gốm An Biên; ảnh AI vẫn là chuyển thể, không phải bản sao hiện vật.",
+      "reference": "https://baotanglichsu.vn/VI/Articles/3101/71209/trang-tri-tren-ngoi-thoi-ly.html"
+    },
+    {
+      "file": "05-ly/ornament-256.webp",
+      "type": "ornament",
+      "era": "Lý",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Bám nghiên cứu ngói Lý và gốm An Biên; ảnh AI vẫn là chuyển thể, không phải bản sao hiện vật.",
+      "reference": "https://baotanglichsu.vn/VI/Articles/3101/71209/trang-tri-tren-ngoi-thoi-ly.html"
+    },
+    {
+      "file": "06-tran/banner-desktop-1280.webp",
+      "type": "banner-desktop",
+      "era": "Trần",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Sen cành và cánh sen hoa nâu đã nghiên cứu; bố cục là chuyển thể UI, không độc quyền thời Trần.",
+      "reference": "https://baotanglichsu.vn/VI/Articles/3101/18060/djo-gom-hoa-nau-thoi-ly-tran-the-ky-11-14.html"
+    },
+    {
+      "file": "06-tran/banner-mobile-780.webp",
+      "type": "banner-mobile",
+      "era": "Trần",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Sen cành và cánh sen hoa nâu đã nghiên cứu; bố cục là chuyển thể UI, không độc quyền thời Trần.",
+      "reference": "https://baotanglichsu.vn/VI/Articles/3101/18060/djo-gom-hoa-nau-thoi-ly-tran-the-ky-11-14.html"
+    },
+    {
+      "file": "06-tran/ornament-256.webp",
+      "type": "ornament",
+      "era": "Trần",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Sen cành và cánh sen hoa nâu đã nghiên cứu; bố cục là chuyển thể UI, không độc quyền thời Trần.",
+      "reference": "https://baotanglichsu.vn/VI/Articles/3101/18060/djo-gom-hoa-nau-thoi-ly-tran-the-ky-11-14.html"
+    },
+    {
+      "file": "07-ho/banner-desktop-1280.webp",
+      "type": "banner-desktop",
+      "era": "Hồ",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Cảm hứng khối đá Thành nhà Hồ; cụm trang trí và dải viền là cấu trúc UI mới.",
+      "reference": "https://whc.unesco.org/en/list/1358/"
+    },
+    {
+      "file": "07-ho/banner-mobile-780.webp",
+      "type": "banner-mobile",
+      "era": "Hồ",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Cảm hứng khối đá Thành nhà Hồ; cụm trang trí và dải viền là cấu trúc UI mới.",
+      "reference": "https://whc.unesco.org/en/list/1358/"
+    },
+    {
+      "file": "07-ho/ornament-256.webp",
+      "type": "ornament",
+      "era": "Hồ",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Cảm hứng khối đá Thành nhà Hồ; cụm trang trí và dải viền là cấu trúc UI mới.",
+      "reference": "https://whc.unesco.org/en/list/1358/"
+    },
+    {
+      "file": "08-le-so/banner-desktop-1280.webp",
+      "type": "banner-desktop",
+      "era": "Lê sơ",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Tham chiếu bối cảnh Lê sơ; đồ án gốm/trang trí chỉ là gợi ý UI, chưa xác minh độc quyền hay mẫu cụ thể.",
+      "reference": "https://hoangthanhthanglong.vn/dien-kinh-thien/"
+    },
+    {
+      "file": "08-le-so/banner-mobile-780.webp",
+      "type": "banner-mobile",
+      "era": "Lê sơ",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Tham chiếu bối cảnh Lê sơ; đồ án gốm/trang trí chỉ là gợi ý UI, chưa xác minh độc quyền hay mẫu cụ thể.",
+      "reference": "https://hoangthanhthanglong.vn/dien-kinh-thien/"
+    },
+    {
+      "file": "08-le-so/ornament-256.webp",
+      "type": "ornament",
+      "era": "Lê sơ",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Tham chiếu bối cảnh Lê sơ; đồ án gốm/trang trí chỉ là gợi ý UI, chưa xác minh độc quyền hay mẫu cụ thể.",
+      "reference": "https://hoangthanhthanglong.vn/dien-kinh-thien/"
+    },
+    {
+      "file": "09-mac/banner-desktop-1280.webp",
+      "type": "banner-desktop",
+      "era": "Mạc",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Loại hình chân đèn và màu men có nguồn; không sao minh văn, hoa văn là chuyển thể.",
+      "reference": "https://baotanglichsu.vn/vi/Articles/3101/19995/chan-djen-gom-men-lam-xam-co-minh-van-cua-djang-huyen-thong.html"
+    },
+    {
+      "file": "09-mac/banner-mobile-780.webp",
+      "type": "banner-mobile",
+      "era": "Mạc",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Loại hình chân đèn và màu men có nguồn; không sao minh văn, hoa văn là chuyển thể.",
+      "reference": "https://baotanglichsu.vn/vi/Articles/3101/19995/chan-djen-gom-men-lam-xam-co-minh-van-cua-djang-huyen-thong.html"
+    },
+    {
+      "file": "09-mac/ornament-256.webp",
+      "type": "ornament",
+      "era": "Mạc",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Loại hình chân đèn và màu men có nguồn; không sao minh văn, hoa văn là chuyển thể.",
+      "reference": "https://baotanglichsu.vn/vi/Articles/3101/19995/chan-djen-gom-men-lam-xam-co-minh-van-cua-djang-huyen-thong.html"
+    },
+    {
+      "file": "10-le-trung-hung/banner-desktop-1280.webp",
+      "type": "banner-desktop",
+      "era": "Lê trung hưng",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Chọn cảnh và họa tiết trung tính do chưa có mẫu đặc trưng đã kiểm chứng; không gọi là hoa văn riêng của triều.",
+      "reference": null
+    },
+    {
+      "file": "10-le-trung-hung/banner-mobile-780.webp",
+      "type": "banner-mobile",
+      "era": "Lê trung hưng",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Chọn cảnh và họa tiết trung tính do chưa có mẫu đặc trưng đã kiểm chứng; không gọi là hoa văn riêng của triều.",
+      "reference": null
+    },
+    {
+      "file": "10-le-trung-hung/ornament-256.webp",
+      "type": "ornament",
+      "era": "Lê trung hưng",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Chọn cảnh và họa tiết trung tính do chưa có mẫu đặc trưng đã kiểm chứng; không gọi là hoa văn riêng của triều.",
+      "reference": null
+    },
+    {
+      "file": "11-tay-son/banner-desktop-1280.webp",
+      "type": "banner-desktop",
+      "era": "Tây Sơn",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Gợi hình khối trống Cảnh Thịnh; không tái tạo đầy đủ đồ án linh vật hay minh văn.",
+      "reference": "https://baotanglichsu.vn/vi/Articles/1002/28553/trong-djong-canh-thinh-tieng-vong-ngan-nam.html"
+    },
+    {
+      "file": "11-tay-son/banner-mobile-780.webp",
+      "type": "banner-mobile",
+      "era": "Tây Sơn",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Gợi hình khối trống Cảnh Thịnh; không tái tạo đầy đủ đồ án linh vật hay minh văn.",
+      "reference": "https://baotanglichsu.vn/vi/Articles/1002/28553/trong-djong-canh-thinh-tieng-vong-ngan-nam.html"
+    },
+    {
+      "file": "11-tay-son/ornament-256.webp",
+      "type": "ornament",
+      "era": "Tây Sơn",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Gợi hình khối trống Cảnh Thịnh; không tái tạo đầy đủ đồ án linh vật hay minh văn.",
+      "reference": "https://baotanglichsu.vn/vi/Articles/1002/28553/trong-djong-canh-thinh-tieng-vong-ngan-nam.html"
+    },
+    {
+      "file": "12-nguyen/banner-desktop-1280.webp",
+      "type": "banner-desktop",
+      "era": "Nguyễn",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Bám ảnh pháp lam hiệu đề; chưa khẳng định nơi chế tác từng món. Không gọi mọi công trình hiện còn là nguyên trạng.",
+      "reference": "https://baotanglichsu.vn/vi/Articles/3096/69223/tham-suu-tap-phap-lam-hue-cua-loan-de-fontbrune-o-paris.html"
+    },
+    {
+      "file": "12-nguyen/banner-mobile-780.webp",
+      "type": "banner-mobile",
+      "era": "Nguyễn",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Bám ảnh pháp lam hiệu đề; chưa khẳng định nơi chế tác từng món. Không gọi mọi công trình hiện còn là nguyên trạng.",
+      "reference": "https://baotanglichsu.vn/vi/Articles/3096/69223/tham-suu-tap-phap-lam-hue-cua-loan-de-fontbrune-o-paris.html"
+    },
+    {
+      "file": "12-nguyen/ornament-256.webp",
+      "type": "ornament",
+      "era": "Nguyễn",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Bám ảnh pháp lam hiệu đề; chưa khẳng định nơi chế tác từng món. Không gọi mọi công trình hiện còn là nguyên trạng.",
+      "reference": "https://baotanglichsu.vn/vi/Articles/3096/69223/tham-suu-tap-phap-lam-hue-cua-loan-de-fontbrune-o-paris.html"
+    },
+    {
+      "file": "13-hien-dai/banner-desktop-1280.webp",
+      "type": "banner-desktop",
+      "era": "Hiện đại",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Biểu trưng và cảnh trang trí đương đại mới, không phải tư liệu của một sự kiện hay thập niên cụ thể.",
+      "reference": null
+    },
+    {
+      "file": "13-hien-dai/banner-mobile-780.webp",
+      "type": "banner-mobile",
+      "era": "Hiện đại",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Biểu trưng và cảnh trang trí đương đại mới, không phải tư liệu của một sự kiện hay thập niên cụ thể.",
+      "reference": null
+    },
+    {
+      "file": "13-hien-dai/ornament-256.webp",
+      "type": "ornament",
+      "era": "Hiện đại",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Biểu trưng và cảnh trang trí đương đại mới, không phải tư liệu của một sự kiện hay thập niên cụ thể.",
+      "reference": null
+    },
+    {
+      "file": "scroll-frame-320.webp",
+      "type": "shared scroll frame",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Khung UI mới dùng chung; không phải hoa văn hay hiện vật của một triều đại."
+    },
+    {
+      "file": "scroll-frame-640.webp",
+      "type": "shared scroll frame",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Khung UI mới dùng chung; không phải hoa văn hay hiện vật của một triều đại."
+    },
+    {
+      "file": "scroll-frame-960.webp",
+      "type": "shared scroll frame",
+      "caption": "Ảnh minh họa AI",
+      "evidence": "Khung UI mới dùng chung; không phải hoa văn hay hiện vật của một triều đại."
+    }
+  ],
+  "integration": {
+    "note": "AI mockup artwork, not verified historical reconstruction. Existing repository names and years unchanged.",
+    "periodFolders": {
+      "early": "02-hung-vuong",
+      "north": "03-bac-thuoc",
+      "ngo": "04-ngo-dinh-tien-le",
+      "ly": "05-ly",
+      "tran": "06-tran",
+      "ho": "07-ho",
+      "le": "08-le-so",
+      "north-south": "09-mac",
+      "trinh-nguyen": "10-le-trung-hung",
+      "tay-son": "11-tay-son",
+      "nguyen": "12-nguyen",
+      "modern": "13-hien-dai"
+    },
+    "withoutArtwork": [
+      "lam-son",
+      "patriotic",
+      "resistance"
+    ],
+    "associationNotes": {
+      "early": "Một minh họa Hùng Vương trong nhóm dựng nước rộng hơn.",
+      "north-south": "Minh họa nhà Mạc, một phía của giai đoạn Nam–Bắc triều.",
+      "trinh-nguyen": "Minh họa Lê trung hưng trong giai đoạn Trịnh–Nguyễn.",
+      "modern": "Minh họa chung hiện đại, không gán cho sự kiện cụ thể."
+    }
+  }
+}
