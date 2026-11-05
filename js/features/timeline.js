@@ -112,7 +112,7 @@ export function renderTimeline(container, events) {
     summary.append(copy);
     const body = timelineNode(document, "div", "tl-card-body");
     const link = timelineNode(document, "a", "tl-card-link", "Xem chi tiết: " + event.title);
-    const target = new URL("../../pages/detail.html", import.meta.url);
+    const target = new URL("../../chi-tiet", import.meta.url);
     target.searchParams.set("id", event.id);
     link.href = target.href;
     body.append(link);

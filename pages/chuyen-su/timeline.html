@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Lịch sử theo trình tự thời gian" />
+    <title>Dòng thời gian | Việt Ký</title>
+    <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/token.css" />
+    <link rel="stylesheet" href="/css/components/header.css" />
+    <link rel="stylesheet" href="/css/components/footer.css" />
+    <link rel="stylesheet" href="/css/components/scroll-progress.css" />
+    <link rel="stylesheet" href="/css/components/timeline.css" />
+    <link rel="stylesheet" href="/css/pages/timeline.css" />
+    <link rel="stylesheet" href="/css/pages/information.css" />
+  </head>
+  <body class="vk-info-page">
+    <div id="site-header"></div>
+    <main class="vk-info-main">
+      <p class="vk-info-eyebrow">CHUYỆN SỬ</p>
+      <h1>Dòng thời gian</h1>
+      <p>Lịch sử theo trình tự thời gian</p>
+      <p id="timeline-preview-note" class="vk-info-note" role="note" hidden>Bản xem thử dữ liệu draft/review để kiểm thử; nội dung chưa được công bố hoặc duyệt nguồn.</p>
+      <ol id="timeline" class="tl-list" aria-label="Các sự kiện theo thời gian" aria-busy="true">
+        <li data-timeline-loading role="status">Đang tải sự kiện…</li>
+      </ol>
+      <noscript>Bật JavaScript để tải dòng thời gian từ dữ liệu JSON.</noscript>
+      <h2>Cùng chuyên mục</h2>
+      <nav aria-label="Cùng chuyên mục">
+        <ul>
+          <li><a href="/chuyen-su/cac-thoi-ky">Các thời kỳ</a></li>
+          <li><a href="/chuyen-su/su-kien">Sự kiện lịch sử</a></li>
+          <li><a href="/chuyen-su/nhan-vat">Nhân vật lịch sử</a></li>
+        </ul>
+      </nav>
+    </main>
+    <div id="site-footer"></div>
+    <div id="site-scroll-progress"></div>
+    <script type="module" src="/js/core/component-loader.js?v=2"></script>
+    <script type="module" src="/js/pages/timeline.js"></script>
+  </body>
+</html>

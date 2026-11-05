@@ -1,16 +1,45 @@
+@import url("./reset.css");
+
+/* Chrome, Edge, Safari */
+html::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox */
 html {
-  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+/* Vẫn cho phép cuộn */
+html {
+  overflow-y: auto;
 }
 
 body {
+  --vk-paper-overlay: color-mix(in srgb, var(--vk-bg) 20%, transparent);
+
   min-height: 100vh;
 
   background-color: var(--vk-bg);
+  background-image:
+    linear-gradient(var(--vk-paper-overlay), var(--vk-paper-overlay)),
+    url("../assets/images/backgrounds/paper-cloud.webp");
+  /* Căn khoảng giấy giữa các cụm mây vào phía sau logo. */
+  background-position: left top, left calc(40px - 11.5vw);
+  background-repeat: no-repeat, repeat;
+  background-size: 100% 100%, 50% auto;
   color: var(--vk-text);
 
   font-family: var(--vk-sans);
   font-size: var(--vk-type-body);
   line-height: var(--vk-leading-body);
+}
+
+@media (max-width: 800px) {
+  body {
+    background-position: left top, left calc(40px - 23vw);
+    background-size: 100% 100%, 100% auto;
+  }
 }
 
 a {

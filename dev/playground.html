@@ -1150,7 +1150,7 @@
                         ctx.assert(item?.textContent.includes(event.summary), 'Có summary ' + event.id, event.summary, item?.textContent);
                         const link = item?.querySelector('a[href]');
                         const target = link ? new URL(link.href) : null;
-                        ctx.assert(target?.pathname === new URL('../pages/detail.html', import.meta.url).pathname && target?.searchParams.get('id') === event.id, 'Link dùng ID thực tế ' + event.id, event.id, target?.href);
+                        ctx.assert(target?.pathname === new URL('../chi-tiet', import.meta.url).pathname && target?.searchParams.get('id') === event.id, 'Link dùng ID thực tế ' + event.id, event.id, target?.href);
                     }
                     ctx.assert(!ctx.preview.textContent.includes('undefined'), 'Không xuất hiện undefined');
                     return 'Đã render dữ liệu JSON thật theo thứ tự tăng dần; đây là preview dữ liệu draft.';

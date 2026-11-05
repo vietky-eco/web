@@ -1,0 +1,22 @@
+.vk-scroll-progress {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 110;
+  height: var(--vk-space-scroll);
+  border-radius: var(--vk-radius-pill);
+  overflow: hidden;
+  background: color-mix(in srgb, var(vk-son-deep) 20%, transparent);
+  pointer-events: none;
+}
+
+.vk-scroll-progress-fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--vk-son-deep);
+  transform: scaleX(0);
+  transform-origin: left center;
+  border-radius: inherit;
+  transition: transform var(--vk-motion-fast) linear;
+}
