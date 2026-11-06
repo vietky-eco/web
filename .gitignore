@@ -20,3 +20,9 @@ lhci-report/
 playwright-report/
 test-results/
 
+.vercel
+.env*
+
+.codex
+.agents
+.aws

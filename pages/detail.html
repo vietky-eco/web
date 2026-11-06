@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Khám phá những dấu mốc, nhân vật và thời kỳ lịch sử Việt Nam cùng Việt Ký." />
+  <meta name="theme-color" content="#E1CFB8" />
+  <title>Đang tải nội dung | Việt Ký</title>
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Bài viết | Việt Ký" />
+  <meta property="og:description" content="Khám phá những dấu mốc, nhân vật và thời kỳ lịch sử Việt Nam cùng Việt Ký." />
+  <meta property="og:image" content="https://vietky.tdmdev.top/assets/images/og-cover.jpg" />
+  <meta property="og:locale" content="vi_VN" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Bài viết | Việt Ký" />
+  <meta name="twitter:description" content="Khám phá những dấu mốc, nhân vật và thời kỳ lịch sử Việt Nam cùng Việt Ký." />
+  <meta name="twitter:image" content="https://vietky.tdmdev.top/assets/images/og-cover.jpg" />
+
+  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/assets/icons/favicon.ico" sizes="any" />
+  <link rel="icon" href="/assets/icons/favicon-32x32.png" type="image/png" sizes="32x32" />
+  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link rel="stylesheet" href="/css/token.css" />
+  <link rel="stylesheet" href="/css/base.css" />
+  <link rel="stylesheet" href="/css/components/header.css" />
+  <link rel="stylesheet" href="/css/components/footer.css" />
+  <link rel="stylesheet" href="/css/components/scroll-progress.css" />
+  <link rel="stylesheet" href="/css/components/back-to-top.css" />
+  <link rel="stylesheet" href="/css/pages/detail.css" />
+</head>
+
+<body id="top" class="vk-detail-page">
+  <a class="vk-detail-skip-link" href="#main-content">Đến nội dung chính</a>
+
+  <!-- Các component chung được tải qua component-loader.js. -->
+  <div id="site-header"></div>
+
+  <main id="main-content" class="vk-detail-main">
+    <div class="vk-detail-container">
+      <!-- detail.js cập nhật đường dẫn chuyên mục và nhãn bài viết. -->
+      <nav class="vk-detail-breadcrumb" aria-label="Đường dẫn trang">
+        <ol>
+          <li><a href="/">Trang chủ</a></li>
+          <li><span class="vk-detail-breadcrumb-separator" aria-hidden="true">/</span></li>
+          <li><a id="detail-category-link" href="/chuyen-su/su-kien">Sự kiện lịch sử</a></li>
+          <li><span class="vk-detail-breadcrumb-separator" aria-hidden="true">/</span></li>
+          <li><span id="detail-breadcrumb-current" aria-current="page">Chi tiết</span></li>
+        </ol>
+      </nav>
+
+      <!-- Trạng thái lúc detail.js chưa tải xong dữ liệu. -->
+      <div id="detail-loading" class="vk-detail-state" role="status" aria-live="polite">
+        <span class="vk-detail-loading-mark" aria-hidden="true"></span>
+        <p>Đang mở trang sử...</p>
+      </div>
+
+      <!-- Trạng thái thiếu ID, slug không hợp lệ hoặc không tìm thấy JSON. -->
+      <section id="detail-error" class="vk-detail-state vk-detail-error" role="alert" hidden>
+        <p class="vk-detail-eyebrow">VIỆT KÝ · THÔNG BÁO</p>
+        <h1 id="detail-error-title">Không tìm thấy nội dung</h1>
+        <p id="detail-error-message">Không có tư liệu phù hợp với đường dẫn này.</p>
+        <a class="vk-detail-return" href="/">Về trang chủ <span aria-hidden="true">↗</span></a>
+      </section>
+
+      <!--
+        Dữ liệu bài viết do js/pages/detail.js + js/engine/article-renderer.js điền vào.
+        Chỉ bỏ thuộc tính `hidden` khi dữ liệu được xác thực và tải thành công.
+        Article Renderer không cần biết URL hay cách tra slug.
+      -->
+      <article id="detail-article" class="vk-detail-article" aria-labelledby="detail-title" hidden>
+        <header class="vk-detail-intro">
+          <p id="detail-eyebrow" class="vk-detail-eyebrow">CHUYỆN SỬ</p>
+          <h1 id="detail-title"></h1>
+          <div id="detail-meta" class="vk-detail-meta" hidden></div>
+          <p id="detail-summary" class="vk-detail-lead" hidden></p>
+        </header>
+
+        <!-- Ảnh chỉ xuất hiện nếu dữ liệu có ảnh và quyền sử dụng phù hợp. -->
+        <figure id="detail-cover" class="vk-detail-cover" hidden>
+          <img id="detail-cover-image" alt="" loading="lazy" decoding="async" />
+          <figcaption id="detail-cover-caption" hidden></figcaption>
+        </figure>
+
+        <div class="vk-detail-reading">
+          <section id="detail-context-section" class="vk-detail-context" aria-labelledby="detail-context-title" hidden>
+            <h2 id="detail-context-title">Bối cảnh lịch sử</h2>
+            <div id="detail-context" class="vk-detail-prose"></div>
+          </section>
+
+          <!-- Các section của bài viết xuất hiện sau bối cảnh dẫn nhập. -->
+          <div id="detail-content" class="vk-detail-prose"></div>
+
+          <section id="detail-sources" class="vk-detail-sources" aria-labelledby="detail-sources-title" hidden>
+            <h2 id="detail-sources-title">Nguồn tư liệu</h2>
+            <ol id="detail-source-list"></ol>
+          </section>
+
+          <nav id="detail-related" class="vk-detail-related" aria-labelledby="detail-related-title" hidden>
+            <h2 id="detail-related-title">Tìm hiểu thêm</h2>
+            <ul id="detail-related-list"></ul>
+          </nav>
+        </div>
+      </article>
+
+      <div id="detail-back" class="vk-detail-back" hidden>
+        <a id="detail-back-link" href="/chuyen-su/su-kien">
+          <span aria-hidden="true">←</span> Trở lại chuyên mục
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <div class="back-to-top-anchor"></div>
+  <div id="site-footer"></div>
+  <div id="site-scroll-progress"></div>
+
+  <script src="/js/components/back-to-top.js" defer></script>
+  <script type="module" src="/js/core/component-loader.js?v=2"></script>
+  <script type="module" src="/js/pages/detail.js"></script>
+</body>
+</html>

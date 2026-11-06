@@ -78,6 +78,54 @@
     {
       "source": "/nguon-tu-lieu",
       "destination": "/pages/sources"
+    },
+    {
+      "source": "/dau-xua/dia-danh/:slug",
+      "destination": "/pages/detail"
+    },
+    {
+      "source": "/dau-xua/di-tich/:slug",
+      "destination": "/pages/detail"
+    },
+    {
+      "source": "/dau-xua/hien-vat/:slug",
+      "destination": "/pages/detail"
+    },
+    {
+      "source": "/dau-xua/ban-do/:slug",
+      "destination": "/pages/detail"
+    },
+    {
+      "source": "/van-hoa/phong-tuc/:slug",
+      "destination": "/pages/detail"
+    },
+    {
+      "source": "/van-hoa/tin-nguong/:slug",
+      "destination": "/pages/detail"
+    },
+    {
+      "source": "/van-hoa/nghe-thuat/:slug",
+      "destination": "/pages/detail"
+    },
+    {
+      "source": "/van-hoa/le-hoi/:slug",
+      "destination": "/pages/detail"
+    },
+    {
+      "source": "/chuyen-su/dong-thoi-gian/:slug",
+      "destination": "/pages/detail"
+    },
+    {
+      "source": "/chuyen-su/cac-thoi-ky/:slug",
+      "destination": "/pages/detail"
+    },
+    {
+      "source": "/chuyen-su/su-kien/:slug",
+      "destination": "/pages/detail"
+    },
+    {
+      "source": "/chuyen-su/nhan-vat/:slug",
+      "destination": "/pages/detail"
     }
   ],
   "headers": [
