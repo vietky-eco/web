@@ -7,8 +7,10 @@
   ],
   "articleId": null,
   "status": "draft",
-  "sourceIds": [],
-  "editorialNotes": "Đối chiếu ngày 2026-11-06: BTLSQG đăng lại Đại Đoàn Kết, Trần Thái Tông, vị vua đầu tiên trong Triều Trần (1225–1400); đoạn đầu năm 1258 và phản công Đông Bộ Đầu: https://baotanglichsu.vn/VI/Articles/3098/14320/tran-thai-tong-vi-vua-djau-tien-trong-trieu-tran-1225-1400.html\nBản nháp chờ nhóm review nội dung; chuẩn hóa bản ghi Source/sourceIds trong IE104-64. Không coi ghi chú này là phê duyệt công bố.\nChỉ dùng mốc năm 1258; nguồn có cách ghi ngày tháng cần kiểm tra lịch trước khi bổ sung. Không gọi lực lượng xâm lược năm 1258 là nhà Nguyên.",
+  "sourceIds": [
+    "src0011"
+  ],
+  "editorialNotes": "Đối chiếu ngày 2026-11-06: Minh Vượng (tổng hợp), BTLSQG, Trần Thái Tông, vị vua đầu tiên trong Triều Trần (1225–1400); đoạn đầu năm 1258 và phản công Đông Bộ Đầu: https://baotanglichsu.vn/VI/Articles/3098/14320/tran-thai-tong-vi-vua-djau-tien-trong-trieu-tran-1225-1400.html\nBản nháp chờ nhóm review nội dung; sourceIds đã gắn với bản ghi nguồn. Việc truy xuất được nguồn không phải phê duyệt công bố.\nChỉ dùng mốc năm 1258; nguồn có cách ghi ngày tháng cần kiểm tra lịch trước khi bổ sung. Không gọi lực lượng xâm lược năm 1258 là nhà Nguyên.",
   "time": {
     "sortYear": 1258,
     "label": "1258"

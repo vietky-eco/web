@@ -49,5 +49,374 @@
       "label": "981"
     },
     "articleId": null
+  },
+  {
+    "id": "evt0006",
+    "type": "event",
+    "title": "Lý Công Uẩn lên ngôi (1009)",
+    "summary": "Năm 1009, Lý Công Uẩn lên ngôi tại Hoa Lư, mở đầu triều Lý sau nhà Tiền Lê.",
+    "year": 1009,
+    "periodId": null,
+    "periodIds": [
+      "per0002",
+      "per0003"
+    ],
+    "status": "draft",
+    "time": {
+      "sortYear": 1009,
+      "label": "1009"
+    },
+    "articleId": null
+  },
+  {
+    "id": "evt0007",
+    "type": "event",
+    "title": "Kháng chiến chống Mông Cổ (1258)",
+    "summary": "Năm 1258, quân Mông Cổ tiến vào Đại Việt. Sau khi rút lui bảo toàn lực lượng, quân Trần dưới sự chỉ huy của Trần Thái Tông phản công ở Đông Bộ Đầu, buộc đối phương rút khỏi Thăng Long.",
+    "year": 1258,
+    "periodId": "per0004",
+    "periodIds": [
+      "per0004"
+    ],
+    "status": "draft",
+    "time": {
+      "sortYear": 1258,
+      "label": "1258"
+    },
+    "articleId": null
+  },
+  {
+    "id": "evt0009",
+    "type": "event",
+    "title": "Trận Bạch Đằng (1288)",
+    "summary": "Năm 1288, quân Trần do Trần Hưng Đạo chỉ huy đánh bại đạo quân thủy Nguyên rút qua sông Bạch Đằng, sử dụng trận địa cọc kết hợp với thủy triều và quân mai phục.",
+    "year": 1288,
+    "periodId": "per0004",
+    "periodIds": [
+      "per0004"
+    ],
+    "status": "draft",
+    "time": {
+      "sortYear": 1288,
+      "label": "1288"
+    },
+    "articleId": null
+  },
+  {
+    "id": "evt0010",
+    "type": "event",
+    "title": "Dời đô ra Thăng Long (1010)",
+    "summary": "Năm 1010, vua Lý Thái Tổ dời đô từ Hoa Lư ra Thăng Long, mở đầu thời kỳ kinh đô đặt tại đây dưới triều Lý.",
+    "year": 1010,
+    "periodId": "per0003",
+    "periodIds": [
+      "per0003"
+    ],
+    "status": "draft",
+    "time": {
+      "sortYear": 1010,
+      "label": "1010"
+    },
+    "articleId": null
+  },
+  {
+    "id": "evt0011",
+    "type": "event",
+    "title": "Ban hành Hình thư (1042)",
+    "summary": "Năm 1042, dưới triều Lý Thái Tông, triều đình biên soạn và ban hành Hình thư, góp phần hệ thống hóa việc xét xử.",
+    "year": 1042,
+    "periodId": "per0003",
+    "periodIds": [
+      "per0003"
+    ],
+    "status": "draft",
+    "time": {
+      "sortYear": 1042,
+      "label": "1042"
+    },
+    "articleId": null
+  },
+  {
+    "id": "evt0012",
+    "type": "event",
+    "title": "Đổi quốc hiệu Đại Việt (1054)",
+    "summary": "Năm 1054, dưới triều vua Lý Thánh Tông, quốc hiệu được đổi thành Đại Việt. Đây là mốc thay đổi quốc hiệu trong thời Lý.",
+    "year": 1054,
+    "periodId": "per0003",
+    "periodIds": [
+      "per0003"
+    ],
+    "status": "draft",
+    "time": {
+      "sortYear": 1054,
+      "label": "1054"
+    },
+    "articleId": null
+  },
+  {
+    "id": "evt0013",
+    "type": "event",
+    "title": "Dựng Văn Miếu (1070)",
+    "summary": "Năm 1070, Văn Miếu được khởi dựng dưới triều vua Lý Thánh Tông để thờ Khổng Tử và các bậc tiên hiền, tiên nho.",
+    "year": 1070,
+    "periodId": "per0003",
+    "periodIds": [
+      "per0003"
+    ],
+    "status": "draft",
+    "time": {
+      "sortYear": 1070,
+      "label": "1070"
+    },
+    "articleId": null
+  },
+  {
+    "id": "evt0017",
+    "type": "event",
+    "title": "Phòng tuyến Như Nguyệt (1077)",
+    "summary": "Năm 1077, trong cuộc kháng chiến chống Tống, Lý Thường Kiệt tổ chức phòng tuyến trên sông Như Nguyệt để ngăn quân Tống tiến sâu vào Đại Việt.",
+    "year": 1077,
+    "periodId": "per0003",
+    "periodIds": [
+      "per0003"
+    ],
+    "status": "draft",
+    "time": {
+      "sortYear": 1077,
+      "label": "1077"
+    },
+    "articleId": null
+  },
+  {
+    "id": "evt0027",
+    "type": "event",
+    "title": "Hồ Quý Ly thay nhà Trần (1400)",
+    "summary": "Năm 1400, Hồ Quý Ly lên ngôi, lập nhà Hồ và đặt quốc hiệu Đại Ngu. Sự kiện kết thúc triều Trần và là mốc cuối của phạm vi dữ liệu 968–1400.",
+    "year": 1400,
+    "periodId": "per0004",
+    "periodIds": [
+      "per0004"
+    ],
+    "status": "draft",
+    "time": {
+      "sortYear": 1400,
+      "label": "1400"
+    },
+    "articleId": null
+  },
+  {
+    "id": "plc0001",
+    "type": "place",
+    "title": "Hoa Lư",
+    "summary": "Hoa Lư là kinh đô của Đại Cồ Việt dưới thời Đinh và Tiền Lê. Năm 1010, vua Lý Thái Tổ dời đô từ Hoa Lư ra Thăng Long.",
+    "year": null,
+    "periodId": null,
+    "periodIds": [
+      "per0001",
+      "per0002",
+      "per0003"
+    ],
+    "status": "draft",
+    "articleId": null
+  },
+  {
+    "id": "plc0002",
+    "type": "place",
+    "title": "Thăng Long",
+    "summary": "Thăng Long là nơi vua Lý Thái Tổ chuyển kinh đô đến năm 1010. Địa danh này cũng gắn với diễn biến cuộc kháng chiến chống Mông Cổ năm 1258 dưới thời Trần.",
+    "year": null,
+    "periodId": null,
+    "periodIds": [
+      "per0003",
+      "per0004"
+    ],
+    "status": "draft",
+    "articleId": null
+  },
+  {
+    "id": "plc0003",
+    "type": "place",
+    "title": "Sông Bạch Đằng",
+    "summary": "Sông Bạch Đằng gắn với các cuộc kháng chiến chống Tống năm 981 và chống Nguyên năm 1288. Trận đánh năm 1288 do Trần Hưng Đạo chỉ huy.",
+    "year": null,
+    "periodId": null,
+    "periodIds": [
+      "per0002",
+      "per0004"
+    ],
+    "status": "draft",
+    "articleId": null
+  },
+  {
+    "id": "plc0005",
+    "type": "place",
+    "title": "Thành Tây Đô",
+    "summary": "Thành Tây Đô ở Thanh Hóa được xây dựng năm 1397 và được chọn làm kinh đô khi Hồ Quý Ly lập nhà Hồ năm 1400.",
+    "year": null,
+    "periodId": "per0004",
+    "periodIds": [
+      "per0004"
+    ],
+    "status": "draft",
+    "articleId": null
+  },
+  {
+    "id": "plc0006",
+    "type": "place",
+    "title": "Văn Miếu",
+    "summary": "Văn Miếu được khởi dựng năm 1070 dưới triều Lý Thánh Tông để thờ Khổng Tử và các bậc tiên hiền, tiên nho. Di tích nằm phía nam kinh thành Thăng Long.",
+    "year": null,
+    "periodId": null,
+    "periodIds": [
+      "per0003",
+      "per0004"
+    ],
+    "status": "draft",
+    "articleId": null
+  },
+  {
+    "id": "plc0008",
+    "type": "place",
+    "title": "Sông Như Nguyệt",
+    "summary": "Sông Như Nguyệt, gắn với sông Cầu, là nơi Lý Thường Kiệt tổ chức phòng tuyến chống quân Tống năm 1077.",
+    "year": null,
+    "periodId": "per0003",
+    "periodIds": [
+      "per0003"
+    ],
+    "status": "draft",
+    "articleId": null
+  },
+  {
+    "id": "plc0018",
+    "type": "place",
+    "title": "Đông Bộ Đầu",
+    "summary": "Đông Bộ Đầu là địa điểm quân Trần phản công quân Mông Cổ năm 1258, trong quá trình giành lại Thăng Long.",
+    "year": null,
+    "periodId": "per0004",
+    "periodIds": [
+      "per0004"
+    ],
+    "status": "draft",
+    "articleId": null
+  },
+  {
+    "id": "ppl0001",
+    "type": "person",
+    "title": "Đinh Bộ Lĩnh (Đinh Tiên Hoàng)",
+    "summary": "Đinh Bộ Lĩnh, tức Đinh Tiên Hoàng, là người thống nhất các lực lượng cát cứ, lên ngôi năm 968, đặt quốc hiệu Đại Cồ Việt và đóng đô ở Hoa Lư.",
+    "year": null,
+    "periodId": "per0001",
+    "periodIds": [
+      "per0001"
+    ],
+    "status": "draft",
+    "articleId": null
+  },
+  {
+    "id": "ppl0002",
+    "type": "person",
+    "title": "Lê Hoàn (Lê Đại Hành)",
+    "summary": "Lê Hoàn, tức Lê Đại Hành, giữ vai trò nhiếp chính sau biến cố triều Đinh năm 979 và lãnh đạo cuộc kháng chiến chống Tống năm 981.",
+    "year": null,
+    "periodId": null,
+    "periodIds": [
+      "per0001",
+      "per0002"
+    ],
+    "status": "draft",
+    "articleId": null
+  },
+  {
+    "id": "ppl0003",
+    "type": "person",
+    "title": "Lý Công Uẩn (Lý Thái Tổ)",
+    "summary": "Lý Công Uẩn, tức Lý Thái Tổ, mở đầu triều Lý năm 1009. Năm 1010, ông quyết định dời đô từ Hoa Lư ra Thăng Long.",
+    "year": null,
+    "periodId": null,
+    "periodIds": [
+      "per0002",
+      "per0003"
+    ],
+    "status": "draft",
+    "articleId": null
+  },
+  {
+    "id": "ppl0004",
+    "type": "person",
+    "title": "Lý Thường Kiệt",
+    "summary": "Lý Thường Kiệt là tướng thời Lý, gắn với việc tổ chức phòng tuyến sông Như Nguyệt trong cuộc kháng chiến chống Tống năm 1077.",
+    "year": null,
+    "periodId": "per0003",
+    "periodIds": [
+      "per0003"
+    ],
+    "status": "draft",
+    "articleId": null
+  },
+  {
+    "id": "ppl0005",
+    "type": "person",
+    "title": "Trần Cảnh (Trần Thái Tông)",
+    "summary": "Trần Cảnh, tức Trần Thái Tông, là vị vua đầu tiên của triều Trần. Ông trực tiếp chỉ huy quân Trần trong cuộc kháng chiến chống Mông Cổ năm 1258.",
+    "year": null,
+    "periodId": "per0004",
+    "periodIds": [
+      "per0004"
+    ],
+    "status": "draft",
+    "articleId": null
+  },
+  {
+    "id": "ppl0006",
+    "type": "person",
+    "title": "Trần Quốc Tuấn (Trần Hưng Đạo)",
+    "summary": "Trần Quốc Tuấn, còn được biết đến là Trần Hưng Đạo, là người chỉ huy quân Trần trong trận Bạch Đằng năm 1288 chống quân Nguyên.",
+    "year": null,
+    "periodId": "per0004",
+    "periodIds": [
+      "per0004"
+    ],
+    "status": "draft",
+    "articleId": null
+  },
+  {
+    "id": "ppl0015",
+    "type": "person",
+    "title": "Lý Thái Tông",
+    "summary": "Lý Thái Tông là vua triều Lý, người cho biên soạn và ban hành Hình thư năm 1042.",
+    "year": null,
+    "periodId": "per0003",
+    "periodIds": [
+      "per0003"
+    ],
+    "status": "draft",
+    "articleId": null
+  },
+  {
+    "id": "ppl0016",
+    "type": "person",
+    "title": "Lý Thánh Tông",
+    "summary": "Lý Thánh Tông là vua triều Lý, gắn với việc đổi quốc hiệu Đại Việt năm 1054 và khởi dựng Văn Miếu năm 1070.",
+    "year": null,
+    "periodId": "per0003",
+    "periodIds": [
+      "per0003"
+    ],
+    "status": "draft",
+    "articleId": null
+  },
+  {
+    "id": "ppl0030",
+    "type": "person",
+    "title": "Hồ Quý Ly",
+    "summary": "Hồ Quý Ly lên ngôi năm 1400, lập nhà Hồ, đặt quốc hiệu Đại Ngu và đóng đô ở Thành Tây Đô.",
+    "year": null,
+    "periodId": "per0004",
+    "periodIds": [
+      "per0004"
+    ],
+    "status": "draft",
+    "articleId": null
   }
 ]

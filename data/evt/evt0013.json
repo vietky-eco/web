@@ -7,8 +7,10 @@
   ],
   "articleId": null,
   "status": "draft",
-  "sourceIds": [],
-  "editorialNotes": "Đối chiếu ngày 2026-11-06: Trung tâm Hoạt động VHKH Văn Miếu – Quốc Tử Giám, Nội tự Văn Miếu – Quốc Tử Giám; đoạn khởi dựng 1070 dưới triều Lý Thánh Tông: https://vanmieu.gov.vn/vi/inner-temple\nBản nháp chờ nhóm review nội dung; chuẩn hóa bản ghi Source/sourceIds trong IE104-64. Không coi ghi chú này là phê duyệt công bố.\nPhân biệt Văn Miếu năm 1070 với Quốc Tử Giám năm 1076; không coi toàn bộ kiến trúc hiện còn là kiến trúc thời Lý.",
+  "sourceIds": [
+    "src0007"
+  ],
+  "editorialNotes": "Đối chiếu ngày 2026-11-06: Trung tâm Hoạt động VHKH Văn Miếu – Quốc Tử Giám, Nội tự Văn Miếu – Quốc Tử Giám; đoạn khởi dựng 1070 dưới triều Lý Thánh Tông: https://vanmieu.gov.vn/vi/inner-temple\nBản nháp chờ nhóm review nội dung; sourceIds đã gắn với bản ghi nguồn. Việc truy xuất được nguồn không phải phê duyệt công bố.\nPhân biệt Văn Miếu năm 1070 với Quốc Tử Giám năm 1076; không coi toàn bộ kiến trúc hiện còn là kiến trúc thời Lý.",
   "time": {
     "sortYear": 1070,
     "label": "1070"
