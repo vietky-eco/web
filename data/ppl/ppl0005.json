@@ -7,8 +7,10 @@
   ],
   "articleId": null,
   "status": "draft",
-  "sourceIds": [],
-  "editorialNotes": "Đối chiếu ngày 2026-11-06: Minh Vượng (tổng hợp), BTLSQG, Trần Thái Tông, vị vua đầu tiên trong Triều Trần (1225–1400); đoạn đầu năm 1258 và phản công Đông Bộ Đầu: https://baotanglichsu.vn/VI/Articles/3098/14320/tran-thai-tong-vi-vua-djau-tien-trong-trieu-tran-1225-1400.html\nBản nháp chờ nhóm review nội dung; chuẩn hóa bản ghi Source/sourceIds trong IE104-64. Không coi ghi chú này là phê duyệt công bố.\nKhông tự thêm ngày sinh, ngày mất hoặc quan hệ gia đình ngoài nội dung đã đối chiếu.",
+  "sourceIds": [
+    "src0011"
+  ],
+  "editorialNotes": "Đối chiếu ngày 2026-11-06: Minh Vượng (tổng hợp), BTLSQG, Trần Thái Tông, vị vua đầu tiên trong Triều Trần (1225–1400); đoạn đầu năm 1258 và phản công Đông Bộ Đầu: https://baotanglichsu.vn/VI/Articles/3098/14320/tran-thai-tong-vi-vua-djau-tien-trong-trieu-tran-1225-1400.html\nBản nháp chờ nhóm review nội dung; sourceIds đã gắn với bản ghi nguồn. Việc truy xuất được nguồn không phải phê duyệt công bố.\nKhông tự thêm ngày sinh, ngày mất hoặc quan hệ gia đình ngoài nội dung đã đối chiếu.\nRà soát nguồn ngày 2026-11-06: src0011, phần giới thiệu Trần Cảnh/Trần Thái Tông và cuộc kháng chiến 1258; không dùng ngày tháng còn cần đối chiếu.",
   "title": "Trần Cảnh (Trần Thái Tông)",
   "eventIds": [
     "evt0007"

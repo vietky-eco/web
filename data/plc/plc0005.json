@@ -7,8 +7,11 @@
   ],
   "articleId": null,
   "status": "draft",
-  "sourceIds": [],
-  "editorialNotes": "Đối chiếu ngày 2026-11-06: BTLSQG, trang trưng bày Triều Hồ (1400–1407); đoạn Hồ Quý Ly lên ngôi năm 1400 và Thành Tây Đô xây năm 1397: https://baotanglichsu.vn/vi/Articles/4082/trieu-ho-1400-1407\nBản nháp chờ nhóm review nội dung; chuẩn hóa bản ghi Source/sourceIds trong IE104-64. Không coi ghi chú này là phê duyệt công bố.\nKhông suy diễn tọa độ, ranh giới hiện đại hoặc đồng nhất toàn bộ kiến trúc hiện còn với niên đại khởi dựng.",
+  "sourceIds": [
+    "src0016",
+    "src0032"
+  ],
+  "editorialNotes": "Đối chiếu ngày 2026-11-06: BTLSQG, trang trưng bày Triều Hồ (1400–1407); đoạn Hồ Quý Ly lên ngôi năm 1400 và Thành Tây Đô xây năm 1397: https://baotanglichsu.vn/vi/Articles/4082/trieu-ho-1400-1407\nBản nháp chờ nhóm review nội dung; sourceIds đã gắn với bản ghi nguồn. Việc truy xuất được nguồn không phải phê duyệt công bố.\nKhông suy diễn tọa độ, ranh giới hiện đại hoặc đồng nhất toàn bộ kiến trúc hiện còn với niên đại khởi dựng.\nRà soát nguồn ngày 2026-11-06: src0016 cho quyết định xây thành An Tôn trong bối cảnh 1397; src0032 xác định An Tôn/Tây Đô tại Thanh Hóa và chuyển tiếp nhà Hồ năm 1400. Không suy ra ngày hoàn thành từng hạng mục.",
   "title": "Thành Tây Đô",
   "eventIds": [
     "evt0027"

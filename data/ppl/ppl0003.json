@@ -8,8 +8,10 @@
   ],
   "articleId": null,
   "status": "draft",
-  "sourceIds": [],
-  "editorialNotes": "Đối chiếu ngày 2026-11-06: BTLSQG, Thể chế chính trị ở Việt Nam thế kỷ XI–XIII dưới thời Lý; mở đầu về 1009/Hoa Lư và phần pháp chế về Hình thư 1042: https://baotanglichsu.vn/VI/Articles/3096/7063/the-che-chinh-tri-o-viet-nam-the-ky-xi-xiii-duoi-thoi-ly.html\nĐối chiếu ngày 2026-11-06: Cổng TTĐT Chính phủ, The royal edict on the transfer of the capital of Thăng Long in the year 1010; lời dẫn về việc dời đô năm 1010: https://thanglong.chinhphu.vn/english/the-royal-edict-on-the-transfer-of-the-capital-of-thang-long-in-the-year-1010-110109.htm\nBản nháp chờ nhóm review nội dung; chuẩn hóa bản ghi Source/sourceIds trong IE104-64. Không coi ghi chú này là phê duyệt công bố.\nKhông tự thêm ngày sinh, ngày mất hoặc quan hệ gia đình ngoài nội dung đã đối chiếu.",
+  "sourceIds": [
+    "src0004"
+  ],
+  "editorialNotes": "Đối chiếu ngày 2026-11-06: BTLSQG, Thể chế chính trị ở Việt Nam thế kỷ XI–XIII dưới thời Lý; mở đầu về 1009/Hoa Lư và phần pháp chế về Hình thư 1042: https://baotanglichsu.vn/VI/Articles/3096/7063/the-che-chinh-tri-o-viet-nam-the-ky-xi-xiii-duoi-thoi-ly.html\nĐối chiếu ngày 2026-11-06: Cổng TTĐT Chính phủ, The royal edict on the transfer of the capital of Thăng Long in the year 1010; lời dẫn về việc dời đô năm 1010: https://thanglong.chinhphu.vn/english/the-royal-edict-on-the-transfer-of-the-capital-of-thang-long-in-the-year-1010-110109.htm\nBản nháp chờ nhóm review nội dung; sourceIds đã gắn với bản ghi nguồn. Việc truy xuất được nguồn không phải phê duyệt công bố.\nKhông tự thêm ngày sinh, ngày mất hoặc quan hệ gia đình ngoài nội dung đã đối chiếu.\nRà soát nguồn ngày 2026-11-06: src0004 cho danh tính Lý Công Uẩn/Lý Thái Tổ, mốc lên ngôi 1009 và dời đô 1010.",
   "title": "Lý Công Uẩn (Lý Thái Tổ)",
   "eventIds": [
     "evt0006",

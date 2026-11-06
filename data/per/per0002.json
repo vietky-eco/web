@@ -6,8 +6,9 @@
   "summary": "Lê Hoàn là vị vua mở đầu triều Tiền Lê, tiếp tục đặt trung tâm triều đình tại Hoa Lư. Năm 981, ông lãnh đạo cuộc kháng chiến chống quân Tống.",
   "sourceIds": [
     "src0002",
-    "src0003"
+    "src0003",
+    "src0004"
   ],
   "order": 2,
-  "editorialNotes": "Tên và mốc 980–1009 giữ theo catalogue quản lý nội bộ. Đối chiếu bổ sung ngày 31/10/2026: trang của Ủy ban Nhà nước về người Việt Nam ở nước ngoài, mục 5. Họ Lê (980–1009) và đoạn ghi nhà Tiền Lê đóng đô tại Hoa Lư: https://scov.gov.vn/ban-sac-van-hoa/viet-su-giai-thoai/the-thu-cac-trieu-dai-trong-buoi-dau-cua-ky-nguyen-doc-lap-tu-chu-va-thong-nhat.html . Nguồn bổ sung này chưa có ID trong catalogue; cần nhóm kiểm duyệt và thống nhất cách đưa vào danh mục nguồn trước khi công bố."
+  "editorialNotes": "Tên và mốc 980–1009 giữ theo catalogue quản lý nội bộ. Đối chiếu bổ sung ngày 31/10/2026: trang của Ủy ban Nhà nước về người Việt Nam ở nước ngoài, mục 5. Họ Lê (980–1009) và đoạn ghi nhà Tiền Lê đóng đô tại Hoa Lư: https://scov.gov.vn/ban-sac-van-hoa/viet-su-giai-thoai/the-thu-cac-trieu-dai-trong-buoi-dau-cua-ky-nguyen-doc-lap-tu-chu-va-thong-nhat.html . Nguồn bổ sung này chưa có ID trong catalogue; cần nhóm kiểm duyệt và thống nhất cách đưa vào danh mục nguồn trước khi công bố.\nRà soát nguồn ngày 2026-11-06: src0002/src0003 cho Lê Hoàn và kháng chiến 981; src0004 cho bối cảnh kết thúc Tiền Lê năm 1009. Mốc mở đầu 980 tiếp tục theo danh mục và URL SCOV đã ghi ở trên."
 }

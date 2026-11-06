@@ -3,8 +3,11 @@
   "type": "period",
   "summary": "Thời kỳ triều Lý, mở đầu với việc Lý Công Uẩn lên ngôi năm 1009. Triều đình chuyển kinh đô từ Hoa Lư ra Thăng Long và ban hành Hình thư.",
   "status": "draft",
-  "sourceIds": [],
-  "editorialNotes": "Đối chiếu ngày 2026-11-06: BTLSQG, Thể chế chính trị ở Việt Nam thế kỷ XI–XIII dưới thời Lý; mở đầu về 1009/Hoa Lư và phần pháp chế về Hình thư 1042: https://baotanglichsu.vn/VI/Articles/3096/7063/the-che-chinh-tri-o-viet-nam-the-ky-xi-xiii-duoi-thoi-ly.html\nĐối chiếu ngày 2026-11-06: Cổng TTĐT Chính phủ, The royal edict on the transfer of the capital of Thăng Long in the year 1010; lời dẫn về việc dời đô năm 1010: https://thanglong.chinhphu.vn/english/the-royal-edict-on-the-transfer-of-the-capital-of-thang-long-in-the-year-1010-110109.htm\nBản nháp chờ nhóm review nội dung; chuẩn hóa bản ghi Source/sourceIds trong IE104-64. Không coi ghi chú này là phê duyệt công bố.\nMốc năm giữ theo danh mục của nhóm và đối chiếu nguồn; không quy đổi ngày chuyển triều hoặc gắn thời kỳ cha chưa có dữ liệu.",
+  "sourceIds": [
+    "src0004",
+    "src0005"
+  ],
+  "editorialNotes": "Đối chiếu ngày 2026-11-06: BTLSQG, Thể chế chính trị ở Việt Nam thế kỷ XI–XIII dưới thời Lý; mở đầu về 1009/Hoa Lư và phần pháp chế về Hình thư 1042: https://baotanglichsu.vn/VI/Articles/3096/7063/the-che-chinh-tri-o-viet-nam-the-ky-xi-xiii-duoi-thoi-ly.html\nĐối chiếu ngày 2026-11-06: Cổng TTĐT Chính phủ, The royal edict on the transfer of the capital of Thăng Long in the year 1010; lời dẫn về việc dời đô năm 1010: https://thanglong.chinhphu.vn/english/the-royal-edict-on-the-transfer-of-the-capital-of-thang-long-in-the-year-1010-110109.htm\nBản nháp chờ nhóm review nội dung; sourceIds đã gắn với bản ghi nguồn. Việc truy xuất được nguồn không phải phê duyệt công bố.\nMốc năm giữ theo danh mục của nhóm và đối chiếu nguồn; không quy đổi ngày chuyển triều hoặc gắn thời kỳ cha chưa có dữ liệu.\nRà soát nguồn ngày 2026-11-06: src0004 cho Lý Công Uẩn lên ngôi và dời đô; src0005 cho Hình thư và thể chế thời Lý.\nLưu ý kiểm duyệt mốc chuyển tiếp Lý–Trần: danh mục nhóm và bài src0011 dùng 1225; trang BTLSQG giới thiệu sách Vương triều Lý (1009–1226) dùng 1226: https://baotanglichsu.vn/VI/Articles/3129/10148/vuong-trieu-ly-1009-1226.html . Mới đối chiếu trang giới thiệu, chưa đọc sách gốc. Giữ nhãn 1225 hiện tại để nhóm thống nhất trước công bố; không tự kết luận nguyên nhân khác biệt hoặc đổi năm.",
   "order": 3,
   "title": "Thời Lý (1009–1225)"
 }

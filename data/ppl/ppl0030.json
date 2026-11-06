@@ -7,8 +7,10 @@
   ],
   "articleId": null,
   "status": "draft",
-  "sourceIds": [],
-  "editorialNotes": "Đối chiếu ngày 2026-11-06: BTLSQG, trang trưng bày Triều Hồ (1400–1407); đoạn Hồ Quý Ly lên ngôi năm 1400 và Thành Tây Đô xây năm 1397: https://baotanglichsu.vn/vi/Articles/4082/trieu-ho-1400-1407\nBản nháp chờ nhóm review nội dung; chuẩn hóa bản ghi Source/sourceIds trong IE104-64. Không coi ghi chú này là phê duyệt công bố.\nKhông tự thêm ngày sinh, ngày mất hoặc quan hệ gia đình ngoài nội dung đã đối chiếu. per0004 là nhóm bối cảnh cuối thời Trần theo danh mục, không phân loại ông là vua Trần.",
+  "sourceIds": [
+    "src0032"
+  ],
+  "editorialNotes": "Đối chiếu ngày 2026-11-06: BTLSQG, trang trưng bày Triều Hồ (1400–1407); đoạn Hồ Quý Ly lên ngôi năm 1400 và Thành Tây Đô xây năm 1397: https://baotanglichsu.vn/vi/Articles/4082/trieu-ho-1400-1407\nBản nháp chờ nhóm review nội dung; sourceIds đã gắn với bản ghi nguồn. Việc truy xuất được nguồn không phải phê duyệt công bố.\nKhông tự thêm ngày sinh, ngày mất hoặc quan hệ gia đình ngoài nội dung đã đối chiếu. per0004 là nhóm bối cảnh cuối thời Trần theo danh mục, không phân loại ông là vua Trần.\nRà soát nguồn ngày 2026-11-06: src0032, đoạn chuyển ngôi năm 1400, quốc hiệu Đại Ngu và kinh thành Tây Đô; không lấy thông tin gia phả hoặc ngày sinh, ngày mất trong bài.",
   "title": "Hồ Quý Ly",
   "eventIds": [
     "evt0027"

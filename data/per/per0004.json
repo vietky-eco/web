@@ -3,8 +3,12 @@
   "type": "period",
   "summary": "Thời kỳ triều Trần, gắn với các cuộc kháng chiến chống Mông Cổ và quân Nguyên. Mốc kết thúc năm 1400 gắn với việc Hồ Quý Ly lập nhà Hồ.",
   "status": "draft",
-  "sourceIds": [],
-  "editorialNotes": "Đối chiếu ngày 2026-11-06: Minh Vượng (tổng hợp), BTLSQG, Trần Thái Tông, vị vua đầu tiên trong Triều Trần (1225–1400); đoạn đầu năm 1258 và phản công Đông Bộ Đầu: https://baotanglichsu.vn/VI/Articles/3098/14320/tran-thai-tong-vi-vua-djau-tien-trong-trieu-tran-1225-1400.html\nĐối chiếu ngày 2026-11-06: BTLSQG đăng lại kienthuc.net.vn, 10 trận thủy chiến kinh điển trong sử Việt (2); mục Trận Bạch Đằng năm 1288: https://baotanglichsu.vn/vi/Articles/2001/66590/10-tran-thuy-chien-kinh-djien-trong-su-viet-2.html\nĐối chiếu ngày 2026-11-06: BTLSQG, trang trưng bày Triều Hồ (1400–1407); đoạn Hồ Quý Ly lên ngôi năm 1400 và Thành Tây Đô xây năm 1397: https://baotanglichsu.vn/vi/Articles/4082/trieu-ho-1400-1407\nBản nháp chờ nhóm review nội dung; chuẩn hóa bản ghi Source/sourceIds trong IE104-64. Không coi ghi chú này là phê duyệt công bố.\nMốc năm giữ theo danh mục của nhóm và đối chiếu nguồn; không quy đổi ngày chuyển triều hoặc gắn thời kỳ cha chưa có dữ liệu.",
+  "sourceIds": [
+    "src0011",
+    "src0015",
+    "src0032"
+  ],
+  "editorialNotes": "Đối chiếu ngày 2026-11-06: Minh Vượng (tổng hợp), BTLSQG, Trần Thái Tông, vị vua đầu tiên trong Triều Trần (1225–1400); đoạn đầu năm 1258 và phản công Đông Bộ Đầu: https://baotanglichsu.vn/VI/Articles/3098/14320/tran-thai-tong-vi-vua-djau-tien-trong-trieu-tran-1225-1400.html\nĐối chiếu ngày 2026-11-06: BTLSQG đăng lại kienthuc.net.vn, 10 trận thủy chiến kinh điển trong sử Việt (2); mục Trận Bạch Đằng năm 1288: https://baotanglichsu.vn/vi/Articles/2001/66590/10-tran-thuy-chien-kinh-djien-trong-su-viet-2.html\nĐối chiếu ngày 2026-11-06: BTLSQG, trang trưng bày Triều Hồ (1400–1407); đoạn Hồ Quý Ly lên ngôi năm 1400 và Thành Tây Đô xây năm 1397: https://baotanglichsu.vn/vi/Articles/4082/trieu-ho-1400-1407\nBản nháp chờ nhóm review nội dung; sourceIds đã gắn với bản ghi nguồn. Việc truy xuất được nguồn không phải phê duyệt công bố.\nMốc năm giữ theo danh mục của nhóm và đối chiếu nguồn; không quy đổi ngày chuyển triều hoặc gắn thời kỳ cha chưa có dữ liệu.\nRà soát nguồn ngày 2026-11-06: src0011 cho thời Trần và kháng chiến 1258; src0015 cho quân Trần chống Nguyên năm 1288; src0032 cho việc Hồ Quý Ly lập nhà Hồ năm 1400.\nLưu ý kiểm duyệt mốc chuyển tiếp Lý–Trần: danh mục nhóm và bài src0011 dùng 1225; trang BTLSQG giới thiệu sách Vương triều Lý (1009–1226) dùng 1226: https://baotanglichsu.vn/VI/Articles/3129/10148/vuong-trieu-ly-1009-1226.html . Mới đối chiếu trang giới thiệu, chưa đọc sách gốc. Giữ nhãn 1225 hiện tại để nhóm thống nhất trước công bố; không tự kết luận nguyên nhân khác biệt hoặc đổi năm.",
   "order": 4,
   "title": "Thời Trần (1225–1400)"
 }
