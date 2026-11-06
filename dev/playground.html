@@ -1033,6 +1033,11 @@
             {id: 'evt0003', type: 'event', title: 'Sự kiện thử nghiệm Gamma', year: 1010, periodId: 'per0002', summary: 'Fixture 03', sourceIds: [], relatedIds: []}
         ];
         const fixture = () => structuredClone(EVENTS);
+        async function timelineFixture(ctx) {
+            const load = await ctx.export('../js/features/timeline.js', 'loadTimelineEvents');
+            ctx.log('Preview dùng Event JSON draft thật; không thay đổi trạng thái công bố.');
+            return load(['evt0004', 'evt0001', 'evt0002']);
+        }
         const CASES = [
             {
                 id: 'tokens', module: 'design', title: 'Color tokens', description: 'Các biến màu bắt buộc phải được định nghĩa.', expected: '7 token CSS có giá trị.', run: async ctx => {
@@ -1131,18 +1136,30 @@
                 }
             },
             {
-                id: 'timeline-valid', module: 'timeline', title: 'Timeline có dữ liệu', description: 'Render 3 sự kiện từ fixture.', expected: 'Hiển thị đủ 3 tiêu đề; không có undefined.', run: async ctx => {
-                    const render = await ctx.export('../js/features/timeline.js', 'renderTimeline'); const data = fixture();
-                    await render(ctx.preview, data); const text = ctx.preview.textContent ?? '';
-                    for (const item of data) ctx.assert(text.includes(item.title), `Có tiêu đề: ${item.title}`);
-                    ctx.assert(!text.includes('undefined'), 'Không xuất hiện undefined');
-                    return 'Đã xác nhận các tiêu đề Timeline.';
+                id: 'timeline-valid', module: 'timeline', title: 'Timeline có dữ liệu', description: 'Đọc 3 Event JSON thật, đảo thứ tự rồi render.', expected: 'Đủ năm, tiêu đề, summary và link; thứ tự 968 → 979 → 981.', run: async ctx => {
+                    const render = await ctx.export('../js/features/timeline.js', 'renderTimeline');
+                    const data = (await timelineFixture(ctx)).reverse();
+                    await render(ctx.preview, data);
+                    const items = [...ctx.preview.querySelectorAll('[data-timeline-item]')];
+                    ctx.assert(items.length === 3, 'Render đủ 3 Event JSON', 3, items.length);
+                    ctx.assert(items.map(item => item.dataset.eventId).join() === 'evt0001,evt0002,evt0004', 'Sắp theo năm tăng dần', 'evt0001,evt0002,evt0004', items.map(item => item.dataset.eventId));
+                    for (const event of data) {
+                        const item = items.find(node => node.dataset.eventId === event.id);
+                        ctx.assert(item?.textContent.includes(event.title), 'Có tiêu đề ' + event.id, event.title, item?.textContent);
+                        ctx.assert(item?.querySelector('time')?.textContent === event.time.label, 'Giữ nhãn niên đại ' + event.id, event.time.label, item?.querySelector('time')?.textContent);
+                        ctx.assert(item?.textContent.includes(event.summary), 'Có summary ' + event.id, event.summary, item?.textContent);
+                        const link = item?.querySelector('a[href]');
+                        const target = link ? new URL(link.href) : null;
+                        ctx.assert(target?.pathname === new URL('../chi-tiet', import.meta.url).pathname && target?.searchParams.get('id') === event.id, 'Link dùng ID thực tế ' + event.id, event.id, target?.href);
+                    }
+                    ctx.assert(!ctx.preview.textContent.includes('undefined'), 'Không xuất hiện undefined');
+                    return 'Đã render dữ liệu JSON thật theo thứ tự tăng dần; đây là preview dữ liệu draft.';
                 }
             },
             {
                 id: 'timeline-empty', module: 'timeline', title: 'Timeline rỗng', description: 'Render 3 sự kiện rồi render [] trong cùng container.', expected: 'Render ban đầu đủ 3 tiêu đề; sau [] không còn dữ liệu cũ và có empty state hiển thị đúng contract.', run: async ctx => {
                     const render = await ctx.export('../js/features/timeline.js', 'renderTimeline');
-                    const data = fixture(); await render(ctx.preview, data);
+                    const data = await timelineFixture(ctx); await render(ctx.preview, data);
                     for (const item of data) ctx.assert(ctx.preview.textContent.includes(item.title), `Trước khi xóa: ${item.title}`, item.title, ctx.preview.textContent);
                     const oldNodes = [...ctx.preview.querySelectorAll('*')].filter(node => data.some(item => node.textContent.includes(item.title)));
                     await render(ctx.preview, []);
@@ -1162,6 +1179,52 @@
                     ctx.assert(visible.length > 0, 'Có thông điệp empty state hiển thị', contract.selector + ' có nội dung và hiển thị', nodes.map(node => node.outerHTML));
                     ctx.assert(!visible.some(node => /undefined|null/.test(node.textContent)), 'Empty state không chứa dữ liệu lỗi', 'Không có undefined/null', visible.map(node => node.textContent));
                     return 'Đã kiểm tra chuyển 3 sự kiện → [] và empty state.';
+                }
+            },
+            {
+                id: 'timeline-loading', module: 'timeline', title: 'Loading → có dữ liệu → rỗng', description: 'Gọi loader thật và kiểm tra chuyển trạng thái.', expected: 'Loading trong lúc fetch; kết thúc có item hoặc empty, aria-busy về false.', run: async ctx => {
+                    const load = await ctx.export('../js/features/timeline.js', 'loadAndRenderTimeline');
+                    const pending = load(ctx.preview, ['evt0004', 'evt0001', 'evt0002']);
+                    ctx.assert(ctx.preview.getAttribute('aria-busy') === 'true' && Boolean(ctx.preview.querySelector('[data-timeline-loading]')), 'Hiện loading ngay khi bắt đầu tải');
+                    const events = await pending;
+                    ctx.assert(events?.length === 3 && ctx.preview.querySelectorAll('[data-timeline-item]').length === 3, 'Loading chuyển thành 3 item JSON thật');
+                    ctx.assert(ctx.preview.getAttribute('aria-busy') === 'false' && !ctx.preview.querySelector('[data-timeline-loading]'), 'Loading được dọn sau khi tải');
+                    const empty = await load(ctx.preview, JSON.parse('[]'));
+                    ctx.assert(Array.isArray(empty) && empty.length === 0, 'Danh sách JSON [] trả []');
+                    ctx.assert(Boolean(ctx.preview.querySelector('[data-timeline-empty]')) && ctx.preview.querySelectorAll('[data-timeline-item]').length === 0, 'Dữ liệu cũ được thay bằng empty state');
+                    ctx.assert(ctx.preview.getAttribute('aria-busy') === 'false', 'Không bị kẹt trạng thái busy');
+                    return 'Đã kiểm tra loading, dữ liệu thật và JSON [].';
+                }
+            },
+            {
+                id: 'timeline-error', module: 'timeline', title: 'Fetch lỗi và phục hồi', description: 'Tải evt9999 không tồn tại, sau đó tải lại evt0001.', expected: 'Có error state rõ ràng, không reject ngoài ý muốn; lần tải tiếp theo thành công.', run: async ctx => {
+                    const response = await ctx.fetch('../data/evt/evt9999.json');
+                    ctx.assert(response.status === 404, 'Xác minh ID lỗi thực sự trả 404', 404, response.status);
+                    const load = await ctx.export('../js/features/timeline.js', 'loadAndRenderTimeline');
+                    const result = await load(ctx.preview, ['evt9999']);
+                    const error = ctx.preview.querySelector('[data-timeline-error]');
+                    ctx.assert(result === null, 'Lỗi tải được xử lý và trả null', null, result);
+                    ctx.assert(error?.textContent.includes('evt9999') && error?.getAttribute('role') === 'alert', 'Error state có ID và role alert');
+                    ctx.assert(ctx.preview.getAttribute('aria-busy') === 'false' && !ctx.preview.querySelector('[data-timeline-loading]'), 'Không bị kẹt loading sau lỗi');
+                    const recovered = await load(ctx.preview, ['evt0001']);
+                    ctx.assert(recovered?.[0]?.id === 'evt0001' && ctx.preview.querySelectorAll('[data-timeline-item]').length === 1, 'Tải và render thành công sau lỗi');
+                    ctx.assert(!ctx.preview.querySelector('[data-timeline-error]'), 'Dọn error state cũ');
+                    return 'HTTP 404 là lỗi dự kiến; Timeline phục hồi và trang tiếp tục hoạt động.';
+                }
+            },
+            {
+                id: 'timeline-safe-text', module: 'timeline', title: 'Văn bản an toàn và render lại', description: 'Chuỗi trông như HTML phải được hiển thị dưới dạng văn bản.', expected: 'Không tạo img/script từ dữ liệu; hỗ trợ container ol và không giữ item cũ.', run: async ctx => {
+                    const render = await ctx.export('../js/features/timeline.js', 'renderTimeline');
+                    const data = await timelineFixture(ctx);
+                    const event = {...data[0], title: '<img src=x onerror="alert(1)">', summary: '<scr' + 'ipt>alert(1)</scr' + 'ipt>'};
+                    const list = el('ol'); ctx.preview.replaceChildren(list);
+                    await render(list, [event]);
+                    ctx.assert(list.children.length === 1 && list.firstElementChild.tagName === 'LI', 'Container ol nhận trực tiếp li, không lồng danh sách thừa');
+                    ctx.assert(list.textContent.includes(event.title) && list.textContent.includes(event.summary), 'Giữ nguyên chuỗi văn bản');
+                    ctx.assert(!list.querySelector('img, script'), 'Không tạo phần tử HTML từ title/summary');
+                    await render(list, [data[1]]);
+                    ctx.assert(list.querySelectorAll('[data-timeline-item]').length === 1 && !list.textContent.includes(event.title), 'Render lại thay thế item cũ');
+                    return 'Title/summary được xử lý bằng textContent; render lại không giữ dữ liệu cũ.';
                 }
             },
             {
@@ -1197,6 +1260,7 @@
             'content-valid': 'VK-CONTENT-001', 'content-missing': 'VK-CONTENT-002', 'content-invalid-json': 'VK-CONTENT-003',
             'catalog-load': 'VK-CATALOG-001', 'catalog-populated': 'VK-CATALOG-002', 'catalog-empty': 'VK-CATALOG-003',
             'timeline-valid': 'VK-TIMELINE-001', 'timeline-empty': 'VK-TIMELINE-002',
+            'timeline-loading': 'VK-TIMELINE-003', 'timeline-error': 'VK-TIMELINE-004', 'timeline-safe-text': 'VK-TIMELINE-005',
             'search-match': 'VK-SEARCH-001', 'search-empty': 'VK-SEARCH-002', 'article-valid': 'VK-ARTICLE-001'
         };
         // No Jira mapping was supplied. Keep unknown instead of inventing issue keys or URLs.

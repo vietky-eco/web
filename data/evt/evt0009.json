@@ -1,0 +1,35 @@
+{
+  "id": "evt0009",
+  "type": "event",
+  "summary": "Năm 1288, quân Trần do Trần Hưng Đạo chỉ huy đánh bại đạo quân thủy Nguyên rút qua sông Bạch Đằng, sử dụng trận địa cọc kết hợp với thủy triều và quân mai phục.",
+  "periodIds": [
+    "per0004"
+  ],
+  "articleId": null,
+  "status": "draft",
+  "sourceIds": [
+    "src0015"
+  ],
+  "editorialNotes": "Đối chiếu ngày 2026-11-06: BTLSQG đăng lại kienthuc.net.vn, 10 trận thủy chiến kinh điển trong sử Việt (2); mục Trận Bạch Đằng năm 1288: https://baotanglichsu.vn/vi/Articles/2001/66590/10-tran-thuy-chien-kinh-djien-trong-su-viet-2.html\nBản nháp chờ nhóm review nội dung; sourceIds đã gắn với bản ghi nguồn. Việc truy xuất được nguồn không phải phê duyệt công bố.\nPhân biệt trận Bạch Đằng với toàn bộ cuộc kháng chiến 1287–1288; không thêm quân số/ngày tháng.\nĐối chiếu bổ sung ngày 2026-11-06: BTLSQG, Tìm hiểu về những chiếc cọc Bạch Đằng (năm 1288) hiện đang trưng bày ở Bảo tàng Lịch sử quốc gia; đoạn về Trần Hưng Đạo/Trần Quốc Tuấn và thủy triều: https://baotanglichsu.vn/VI/Articles/3096/18594/tim-hieu-ve-nhung-chiec-coc-bach-djang-nam-1288-hien-djang-trung-bay-o-bao-tang-lich-su-quoc-gia.html",
+  "time": {
+    "sortYear": 1288,
+    "label": "1288"
+  },
+  "personIds": [
+    "ppl0006"
+  ],
+  "placeIds": [
+    "plc0003"
+  ],
+  "related": [
+    {
+      "targetId": "ppl0006",
+      "label": "Người chỉ huy trận Bạch Đằng"
+    },
+    {
+      "targetId": "plc0003",
+      "label": "Dòng sông diễn ra trận đánh"
+    }
+  ],
+  "title": "Trận Bạch Đằng (1288)"
+}

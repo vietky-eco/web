@@ -1,0 +1,35 @@
+{
+  "id": "evt0017",
+  "type": "event",
+  "summary": "Năm 1077, trong cuộc kháng chiến chống Tống, Lý Thường Kiệt tổ chức phòng tuyến trên sông Như Nguyệt để ngăn quân Tống tiến sâu vào Đại Việt.",
+  "periodIds": [
+    "per0003"
+  ],
+  "articleId": null,
+  "status": "draft",
+  "sourceIds": [
+    "src0009"
+  ],
+  "editorialNotes": "Đối chiếu ngày 2026-11-06: BTLSQG đăng lại baodatviet.vn, Sức mạnh thủy quân qua các vương triều Đại Việt (kỳ 2); đoạn Về tài thủy chiến, năm 1077: https://baotanglichsu.vn/vi/Articles/3096/8882/suc-manh-thuy-quan-qua-cac-vuong-trieu-djai-viet-ky-2.html\nBản nháp chờ nhóm review nội dung; sourceIds đã gắn với bản ghi nguồn. Việc truy xuất được nguồn không phải phê duyệt công bố.\nKhông khẳng định tác giả hoặc thời điểm sáng tác Nam quốc sơn hà; không thêm quân số hay ngày tháng chưa đối chiếu.",
+  "time": {
+    "sortYear": 1077,
+    "label": "1077"
+  },
+  "personIds": [
+    "ppl0004"
+  ],
+  "placeIds": [
+    "plc0008"
+  ],
+  "related": [
+    {
+      "targetId": "ppl0004",
+      "label": "Người tổ chức phòng tuyến"
+    },
+    {
+      "targetId": "plc0008",
+      "label": "Dòng sông gắn với phòng tuyến"
+    }
+  ],
+  "title": "Phòng tuyến Như Nguyệt (1077)"
+}

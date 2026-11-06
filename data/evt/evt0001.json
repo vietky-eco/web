@@ -20,5 +20,12 @@
       "targetId": "evt0002",
       "label": "Biến cố kế vị cuối thời Đinh"
     }
-  ]
+  ],
+  "personIds": [
+    "ppl0001"
+  ],
+  "placeIds": [
+    "plc0001"
+  ],
+  "editorialNotes": "Đối chiếu ngày 2026-11-06: BTLSQG, Nhà Đinh với sự nghiệp thống nhất đất nước; đoạn mở đầu về năm 968, Đinh Bộ Lĩnh và Hoa Lư: https://baotanglichsu.vn/VI/Articles/3096/10060/nha-djinh-voi-su-nghiep-thong-nhat-djat-nuoc.html\nBản nháp chờ nhóm review nội dung; chuẩn hóa bản ghi Source/sourceIds trong IE104-64. Không coi ghi chú này là phê duyệt công bố."
 }
