@@ -1,0 +1,149 @@
+.vk-not-found-main {
+  position: relative;
+  z-index: 3;
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
+  padding: clamp(var(--vk-space-6), 4vw, var(--vk-space-12)) var(--vk-gutter) 0;
+  text-align: center;
+}
+
+.vk-not-found-art {
+  width: 50vw;
+  max-width: 100%;
+  /* Thu gọn khoảng trong suốt của file, giữ đủ cả hai số 4 và mặt trống. */
+  aspect-ratio: 1448 / 580;
+  margin: 0 auto var(--vk-space-6);
+  overflow: hidden;
+}
+
+.vk-not-found-art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 55%;
+}
+
+.vk-not-found-panel {
+  z-index: 1;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: var(--vk-space-8);
+  color: var(--vk-text);
+  text-align: center;
+}
+
+.vk-not-found-panel h1 {
+  margin: 0;
+  font: var(--vk-weight-regular) calc(var(--vk-type-h1) * 1.1)/var(--vk-leading-heading) var(--vk-serif);
+  letter-spacing: var(--vk-tracking-tight);
+  text-wrap: balance;
+}
+
+.vk-not-found-description {
+  max-width: 48ch;
+  margin: var(--vk-space-3) auto 0;
+  color: var(--vk-text);
+  font: var(--vk-weight-regular) var(--vk-type-reading)/var(--vk-leading-body) var(--vk-sans);
+  text-wrap: balance;
+}
+
+.vk-not-found-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--vk-space-6);
+  margin: var(--vk-space-8) auto 0;
+}
+
+.vk-not-found-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--vk-space-2);
+  min-height: calc(var(--vk-space-12) + var(--vk-space-2));
+  box-sizing: border-box;
+  padding: var(--vk-space-3) var(--vk-space-6);
+  border: var(--vk-stroke) solid var(--vk-action);
+  border-radius: var(--vk-radius-sm);
+  background: var(--vk-action);
+  color: var(--vk-on-action);
+  font: var(--vk-weight-medium) var(--vk-type-reading)/var(--vk-leading-caption) var(--vk-sans);
+  transition:
+    background-color var(--vk-motion-fast) var(--vk-ease),
+    border-color var(--vk-motion-fast) var(--vk-ease),
+    transform var(--vk-motion-fast) var(--vk-ease);
+}
+
+.vk-not-found-button [data-lucide] {
+  display: block;
+  flex: none;
+  width: var(--vk-type-reading);
+  height: var(--vk-type-reading);
+  transition: transform var(--vk-motion-fast) var(--vk-ease);
+}
+
+.vk-not-found-button:hover {
+  border-color: var(--vk-action-hover);
+  background: var(--vk-action-hover);
+  color: var(--vk-on-action);
+}
+
+.vk-not-found-button:focus-visible {
+  outline: var(--vk-stroke-strong) solid var(--vk-focus);
+  outline-offset: var(--vk-space-1);
+}
+
+.vk-not-found-button:hover [data-lucide] {
+  transform: translate(var(--vk-stroke-strong), calc(-1 * var(--vk-stroke-strong)));
+}
+
+.vk-not-found-button:active {
+  transform: translateY(var(--vk-stroke));
+}
+
+.vk-not-found-secondary {
+  background: transparent;
+  color: var(--vk-action);
+}
+
+.vk-not-found-secondary:hover {
+  background: var(--vk-surface-aged);
+  color: var(--vk-action-hover);
+}
+
+.vk-not-found-secondary:hover [data-lucide] {
+  transform: translateX(calc(-1 * var(--vk-space-1)));
+}
+
+.vk-not-found-page #site-footer {
+  position: relative;
+  z-index: 2;
+  margin-top: calc(-1 * clamp(var(--vk-space-12), 7vw, calc(var(--vk-space-20) + var(--vk-space-8))));
+  /* Chữ và nút nằm trên vùng trong suốt phía trên mây. */
+  pointer-events: none;
+}
+
+.vk-not-found-page .vk-footer-surface {
+  pointer-events: auto;
+}
+
+@media (max-width: 640px) {
+  .vk-not-found-panel {
+    padding: var(--vk-space-6) 0;
+  }
+
+  .vk-not-found-art {
+    width: 100%;
+    margin-bottom: var(--vk-space-4);
+  }
+
+  .vk-not-found-button {
+    padding-inline: var(--vk-space-2);
+    font-size: var(--vk-type-body);
+  }
+}

@@ -18,7 +18,10 @@ html {
 body {
   --vk-paper-overlay: color-mix(in srgb, var(--vk-bg) 20%, transparent);
 
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
+  min-height: 100svh;
 
   background-color: var(--vk-bg);
   background-image:
@@ -33,6 +36,29 @@ body {
   font-family: var(--vk-sans);
   font-size: var(--vk-type-body);
   line-height: var(--vk-leading-body);
+}
+
+body > main {
+  flex: 1 0 auto;
+}
+
+#site-footer {
+  flex-shrink: 0;
+}
+
+.vk-skip-link {
+  position: fixed;
+  z-index: 200;
+  top: var(--vk-space-3);
+  left: var(--vk-gutter);
+  padding: var(--vk-space-3) var(--vk-space-4);
+  border-radius: var(--vk-radius-sm);
+  background: var(--vk-paper);
+  transform: translateY(calc(-100% - var(--vk-space-6)));
+}
+
+.vk-skip-link:focus {
+  transform: translateY(0);
 }
 
 @media (max-width: 800px) {
