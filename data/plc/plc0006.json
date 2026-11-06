@@ -1,0 +1,17 @@
+{
+  "id": "plc0006",
+  "type": "place",
+  "summary": "Văn Miếu được khởi dựng năm 1070 dưới triều Lý Thánh Tông để thờ Khổng Tử và các bậc tiên hiền, tiên nho. Di tích nằm phía nam kinh thành Thăng Long.",
+  "periodIds": [
+    "per0003",
+    "per0004"
+  ],
+  "articleId": null,
+  "status": "draft",
+  "sourceIds": [],
+  "editorialNotes": "Đối chiếu ngày 2026-11-06: Trung tâm Hoạt động VHKH Văn Miếu – Quốc Tử Giám, Nội tự Văn Miếu – Quốc Tử Giám; đoạn khởi dựng 1070 dưới triều Lý Thánh Tông: https://vanmieu.gov.vn/vi/inner-temple\nBản nháp chờ nhóm review nội dung; chuẩn hóa bản ghi Source/sourceIds trong IE104-64. Không coi ghi chú này là phê duyệt công bố.\nKhông suy diễn tọa độ, ranh giới hiện đại hoặc đồng nhất toàn bộ kiến trúc hiện còn với niên đại khởi dựng.",
+  "title": "Văn Miếu",
+  "eventIds": [
+    "evt0013"
+  ]
+}

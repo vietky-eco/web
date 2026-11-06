@@ -1,0 +1,24 @@
+{
+  "id": "plc0001",
+  "type": "place",
+  "summary": "Hoa Lư là kinh đô của Đại Cồ Việt dưới thời Đinh và Tiền Lê. Năm 1010, vua Lý Thái Tổ dời đô từ Hoa Lư ra Thăng Long.",
+  "periodIds": [
+    "per0001",
+    "per0002",
+    "per0003"
+  ],
+  "articleId": null,
+  "status": "draft",
+  "sourceIds": [
+    "src0001",
+    "src0002"
+  ],
+  "editorialNotes": "Đối chiếu ngày 2026-11-06: BTLSQG, Nhà Đinh với sự nghiệp thống nhất đất nước; đoạn mở đầu về năm 968, Đinh Bộ Lĩnh và Hoa Lư: https://baotanglichsu.vn/VI/Articles/3096/10060/nha-djinh-voi-su-nghiep-thong-nhat-djat-nuoc.html\nĐối chiếu ngày 2026-11-06: BTLSQG đăng lại kienthuc.net.vn, Những vua chúa đánh trận siêu đẳng trong sử Việt (2); mục Lê Đại Hành, đoạn 979 và 981: https://baotanglichsu.vn/vi/Articles/3098/14210/nhung-vua-chua-djanh-tran-sieu-djang-trong-su-viet-2.html\nĐối chiếu ngày 2026-11-06: Cổng TTĐT Chính phủ, The royal edict on the transfer of the capital of Thăng Long in the year 1010; lời dẫn về việc dời đô năm 1010: https://thanglong.chinhphu.vn/english/the-royal-edict-on-the-transfer-of-the-capital-of-thang-long-in-the-year-1010-110109.htm\nBản nháp chờ nhóm review nội dung; chuẩn hóa bản ghi Source/sourceIds trong IE104-64. Không coi ghi chú này là phê duyệt công bố.\nKhông suy diễn tọa độ, ranh giới hiện đại hoặc đồng nhất toàn bộ kiến trúc hiện còn với niên đại khởi dựng.",
+  "title": "Hoa Lư",
+  "eventIds": [
+    "evt0006",
+    "evt0010",
+    "evt0001",
+    "evt0002"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "id": "evt0011",
+  "type": "event",
+  "summary": "Năm 1042, dưới triều Lý Thái Tông, triều đình biên soạn và ban hành Hình thư, góp phần hệ thống hóa việc xét xử.",
+  "periodIds": [
+    "per0003"
+  ],
+  "articleId": null,
+  "status": "draft",
+  "sourceIds": [],
+  "editorialNotes": "Đối chiếu ngày 2026-11-06: BTLSQG, Thể chế chính trị ở Việt Nam thế kỷ XI–XIII dưới thời Lý; mở đầu về 1009/Hoa Lư và phần pháp chế về Hình thư 1042: https://baotanglichsu.vn/VI/Articles/3096/7063/the-che-chinh-tri-o-viet-nam-the-ky-xi-xiii-duoi-thoi-ly.html\nBản nháp chờ nhóm review nội dung; chuẩn hóa bản ghi Source/sourceIds trong IE104-64. Không coi ghi chú này là phê duyệt công bố.\nHình thư đã thất truyền; không tự phục dựng hoặc dẫn điều khoản như nguyên văn bộ luật còn lại.",
+  "time": {
+    "sortYear": 1042,
+    "label": "1042"
+  },
+  "personIds": [
+    "ppl0015"
+  ],
+  "placeIds": [],
+  "related": [
+    {
+      "targetId": "ppl0015",
+      "label": "Vị vua cho ban hành Hình thư"
+    }
+  ],
+  "title": "Ban hành Hình thư (1042)"
+}

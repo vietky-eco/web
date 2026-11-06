@@ -1,0 +1,20 @@
+{
+  "id": "plc0003",
+  "type": "place",
+  "summary": "Sông Bạch Đằng gắn với các cuộc kháng chiến chống Tống năm 981 và chống Nguyên năm 1288. Trận đánh năm 1288 do Trần Hưng Đạo chỉ huy.",
+  "periodIds": [
+    "per0002",
+    "per0004"
+  ],
+  "articleId": null,
+  "status": "draft",
+  "sourceIds": [
+    "src0002"
+  ],
+  "editorialNotes": "Đối chiếu ngày 2026-11-06: BTLSQG đăng lại kienthuc.net.vn, Những vua chúa đánh trận siêu đẳng trong sử Việt (2); mục Lê Đại Hành, đoạn 979 và 981: https://baotanglichsu.vn/vi/Articles/3098/14210/nhung-vua-chua-djanh-tran-sieu-djang-trong-su-viet-2.html\nĐối chiếu ngày 2026-11-06: BTLSQG đăng lại kienthuc.net.vn, 10 trận thủy chiến kinh điển trong sử Việt (2); mục Trận Bạch Đằng năm 1288: https://baotanglichsu.vn/vi/Articles/2001/66590/10-tran-thuy-chien-kinh-djien-trong-su-viet-2.html\nBản nháp chờ nhóm review nội dung; chuẩn hóa bản ghi Source/sourceIds trong IE104-64. Không coi ghi chú này là phê duyệt công bố.\nKhông suy diễn tọa độ, ranh giới hiện đại hoặc đồng nhất toàn bộ kiến trúc hiện còn với niên đại khởi dựng.\nĐối chiếu bổ sung ngày 2026-11-06: BTLSQG, Tìm hiểu về những chiếc cọc Bạch Đằng (năm 1288) hiện đang trưng bày ở Bảo tàng Lịch sử quốc gia; đoạn về Trần Hưng Đạo/Trần Quốc Tuấn và thủy triều: https://baotanglichsu.vn/VI/Articles/3096/18594/tim-hieu-ve-nhung-chiec-coc-bach-djang-nam-1288-hien-djang-trung-bay-o-bao-tang-lich-su-quoc-gia.html",
+  "title": "Sông Bạch Đằng",
+  "eventIds": [
+    "evt0009",
+    "evt0004"
+  ]
+}

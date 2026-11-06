@@ -1,0 +1,16 @@
+{
+  "id": "ppl0006",
+  "type": "person",
+  "summary": "Trần Quốc Tuấn, còn được biết đến là Trần Hưng Đạo, là người chỉ huy quân Trần trong trận Bạch Đằng năm 1288 chống quân Nguyên.",
+  "periodIds": [
+    "per0004"
+  ],
+  "articleId": null,
+  "status": "draft",
+  "sourceIds": [],
+  "editorialNotes": "Đối chiếu ngày 2026-11-06: BTLSQG đăng lại kienthuc.net.vn, 10 trận thủy chiến kinh điển trong sử Việt (2); mục Trận Bạch Đằng năm 1288: https://baotanglichsu.vn/vi/Articles/2001/66590/10-tran-thuy-chien-kinh-djien-trong-su-viet-2.html\nBản nháp chờ nhóm review nội dung; chuẩn hóa bản ghi Source/sourceIds trong IE104-64. Không coi ghi chú này là phê duyệt công bố.\nKhông tự thêm ngày sinh, ngày mất hoặc quan hệ gia đình ngoài nội dung đã đối chiếu.\nĐối chiếu bổ sung ngày 2026-11-06: BTLSQG, Tìm hiểu về những chiếc cọc Bạch Đằng (năm 1288) hiện đang trưng bày ở Bảo tàng Lịch sử quốc gia; đoạn về Trần Hưng Đạo/Trần Quốc Tuấn và thủy triều: https://baotanglichsu.vn/VI/Articles/3096/18594/tim-hieu-ve-nhung-chiec-coc-bach-djang-nam-1288-hien-djang-trung-bay-o-bao-tang-lich-su-quoc-gia.html",
+  "title": "Trần Quốc Tuấn (Trần Hưng Đạo)",
+  "eventIds": [
+    "evt0009"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "id": "evt0027",
+  "type": "event",
+  "summary": "Năm 1400, Hồ Quý Ly lên ngôi, lập nhà Hồ và đặt quốc hiệu Đại Ngu. Sự kiện kết thúc triều Trần và là mốc cuối của phạm vi dữ liệu 968–1400.",
+  "periodIds": [
+    "per0004"
+  ],
+  "articleId": null,
+  "status": "draft",
+  "sourceIds": [],
+  "editorialNotes": "Đối chiếu ngày 2026-11-06: BTLSQG, trang trưng bày Triều Hồ (1400–1407); đoạn Hồ Quý Ly lên ngôi năm 1400 và Thành Tây Đô xây năm 1397: https://baotanglichsu.vn/vi/Articles/4082/trieu-ho-1400-1407\nBản nháp chờ nhóm review nội dung; chuẩn hóa bản ghi Source/sourceIds trong IE104-64. Không coi ghi chú này là phê duyệt công bố.\nper0004 phân loại mốc chuyển tiếp cuối thời Trần theo danh mục, không có nghĩa Hồ Quý Ly là vua Trần. Không mở rộng dữ liệu sau 1400.",
+  "time": {
+    "sortYear": 1400,
+    "label": "1400"
+  },
+  "personIds": [
+    "ppl0030"
+  ],
+  "placeIds": [
+    "plc0005"
+  ],
+  "related": [
+    {
+      "targetId": "ppl0030",
+      "label": "Người lập nhà Hồ"
+    },
+    {
+      "targetId": "plc0005",
+      "label": "Kinh đô của nhà Hồ được nguồn ghi nhận"
+    }
+  ],
+  "title": "Hồ Quý Ly thay nhà Trần (1400)"
+}

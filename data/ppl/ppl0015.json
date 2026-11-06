@@ -1,0 +1,16 @@
+{
+  "id": "ppl0015",
+  "type": "person",
+  "summary": "Lý Thái Tông là vua triều Lý, người cho biên soạn và ban hành Hình thư năm 1042.",
+  "periodIds": [
+    "per0003"
+  ],
+  "articleId": null,
+  "status": "draft",
+  "sourceIds": [],
+  "editorialNotes": "Đối chiếu ngày 2026-11-06: BTLSQG, Thể chế chính trị ở Việt Nam thế kỷ XI–XIII dưới thời Lý; mở đầu về 1009/Hoa Lư và phần pháp chế về Hình thư 1042: https://baotanglichsu.vn/VI/Articles/3096/7063/the-che-chinh-tri-o-viet-nam-the-ky-xi-xiii-duoi-thoi-ly.html\nBản nháp chờ nhóm review nội dung; chuẩn hóa bản ghi Source/sourceIds trong IE104-64. Không coi ghi chú này là phê duyệt công bố.\nKhông tự thêm ngày sinh, ngày mất hoặc quan hệ gia đình ngoài nội dung đã đối chiếu.",
+  "title": "Lý Thái Tông",
+  "eventIds": [
+    "evt0011"
+  ]
+}

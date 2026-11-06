@@ -25,5 +25,12 @@
       "label": "Cuộc kháng chiến sau biến động triều đình"
     }
   ],
-  "editorialNotes": "Không trình bày giả thuyết về thủ phạm/chủ mưu như kết luận."
+  "editorialNotes": "Không trình bày giả thuyết về thủ phạm/chủ mưu như kết luận.\nĐối chiếu ngày 2026-11-06: BTLSQG đăng lại kienthuc.net.vn, Những vua chúa đánh trận siêu đẳng trong sử Việt (2); mục Lê Đại Hành, đoạn 979 và 981: https://baotanglichsu.vn/vi/Articles/3098/14210/nhung-vua-chua-djanh-tran-sieu-djang-trong-su-viet-2.html\nBản nháp chờ nhóm review nội dung; chuẩn hóa bản ghi Source/sourceIds trong IE104-64. Không coi ghi chú này là phê duyệt công bố.",
+  "personIds": [
+    "ppl0001",
+    "ppl0002"
+  ],
+  "placeIds": [
+    "plc0001"
+  ]
 }

@@ -1,0 +1,18 @@
+{
+  "id": "plc0002",
+  "type": "place",
+  "summary": "Thăng Long là nơi vua Lý Thái Tổ chuyển kinh đô đến năm 1010. Địa danh này cũng gắn với diễn biến cuộc kháng chiến chống Mông Cổ năm 1258 dưới thời Trần.",
+  "periodIds": [
+    "per0003",
+    "per0004"
+  ],
+  "articleId": null,
+  "status": "draft",
+  "sourceIds": [],
+  "editorialNotes": "Đối chiếu ngày 2026-11-06: Cổng TTĐT Chính phủ, The royal edict on the transfer of the capital of Thăng Long in the year 1010; lời dẫn về việc dời đô năm 1010: https://thanglong.chinhphu.vn/english/the-royal-edict-on-the-transfer-of-the-capital-of-thang-long-in-the-year-1010-110109.htm\nĐối chiếu ngày 2026-11-06: BTLSQG đăng lại Đại Đoàn Kết, Trần Thái Tông, vị vua đầu tiên trong Triều Trần (1225–1400); đoạn đầu năm 1258 và phản công Đông Bộ Đầu: https://baotanglichsu.vn/VI/Articles/3098/14320/tran-thai-tong-vi-vua-djau-tien-trong-trieu-tran-1225-1400.html\nBản nháp chờ nhóm review nội dung; chuẩn hóa bản ghi Source/sourceIds trong IE104-64. Không coi ghi chú này là phê duyệt công bố.\nKhông suy diễn tọa độ, ranh giới hiện đại hoặc đồng nhất toàn bộ kiến trúc hiện còn với niên đại khởi dựng.",
+  "title": "Thăng Long",
+  "eventIds": [
+    "evt0010",
+    "evt0007"
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "id": "evt0006",
+  "type": "event",
+  "summary": "Năm 1009, Lý Công Uẩn lên ngôi tại Hoa Lư, mở đầu triều Lý sau nhà Tiền Lê.",
+  "periodIds": [
+    "per0002",
+    "per0003"
+  ],
+  "articleId": null,
+  "status": "draft",
+  "sourceIds": [],
+  "editorialNotes": "Đối chiếu ngày 2026-11-06: BTLSQG, Thể chế chính trị ở Việt Nam thế kỷ XI–XIII dưới thời Lý; mở đầu về 1009/Hoa Lư và phần pháp chế về Hình thư 1042: https://baotanglichsu.vn/VI/Articles/3096/7063/the-che-chinh-tri-o-viet-nam-the-ky-xi-xiii-duoi-thoi-ly.html\nBản nháp chờ nhóm review nội dung; chuẩn hóa bản ghi Source/sourceIds trong IE104-64. Không coi ghi chú này là phê duyệt công bố.",
+  "time": {
+    "sortYear": 1009,
+    "label": "1009"
+  },
+  "personIds": [
+    "ppl0003"
+  ],
+  "placeIds": [
+    "plc0001"
+  ],
+  "related": [
+    {
+      "targetId": "ppl0003",
+      "label": "Người lên ngôi mở đầu triều Lý"
+    },
+    {
+      "targetId": "plc0001",
+      "label": "Kinh đô khi Lý Công Uẩn lên ngôi"
+    }
+  ],
+  "title": "Lý Công Uẩn lên ngôi (1009)"
+}

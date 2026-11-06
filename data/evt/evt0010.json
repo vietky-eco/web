@@ -1,0 +1,34 @@
+{
+  "id": "evt0010",
+  "type": "event",
+  "summary": "Năm 1010, vua Lý Thái Tổ dời đô từ Hoa Lư ra Thăng Long, mở đầu thời kỳ kinh đô đặt tại đây dưới triều Lý.",
+  "periodIds": [
+    "per0003"
+  ],
+  "articleId": null,
+  "status": "draft",
+  "sourceIds": [],
+  "editorialNotes": "Đối chiếu ngày 2026-11-06: Cổng TTĐT Chính phủ, The royal edict on the transfer of the capital of Thăng Long in the year 1010; lời dẫn về việc dời đô năm 1010: https://thanglong.chinhphu.vn/english/the-royal-edict-on-the-transfer-of-the-capital-of-thang-long-in-the-year-1010-110109.htm\nBản nháp chờ nhóm review nội dung; chuẩn hóa bản ghi Source/sourceIds trong IE104-64. Không coi ghi chú này là phê duyệt công bố.\nKhông đưa truyền thuyết rồng hiện vào summary như sự kiện đã kiểm chứng.",
+  "time": {
+    "sortYear": 1010,
+    "label": "1010"
+  },
+  "personIds": [
+    "ppl0003"
+  ],
+  "placeIds": [
+    "plc0001",
+    "plc0002"
+  ],
+  "related": [
+    {
+      "targetId": "ppl0003",
+      "label": "Vị vua quyết định dời đô"
+    },
+    {
+      "targetId": "plc0002",
+      "label": "Kinh đô sau cuộc dời đô"
+    }
+  ],
+  "title": "Dời đô ra Thăng Long (1010)"
+}

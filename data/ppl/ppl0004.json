@@ -1,0 +1,16 @@
+{
+  "id": "ppl0004",
+  "type": "person",
+  "summary": "Lý Thường Kiệt là tướng thời Lý, gắn với việc tổ chức phòng tuyến sông Như Nguyệt trong cuộc kháng chiến chống Tống năm 1077.",
+  "periodIds": [
+    "per0003"
+  ],
+  "articleId": null,
+  "status": "draft",
+  "sourceIds": [],
+  "editorialNotes": "Đối chiếu ngày 2026-11-06: BTLSQG đăng lại baodatviet.vn, Sức mạnh thủy quân qua các vương triều Đại Việt (kỳ 2); đoạn Về tài thủy chiến, năm 1077: https://baotanglichsu.vn/vi/Articles/3096/8882/suc-manh-thuy-quan-qua-cac-vuong-trieu-djai-viet-ky-2.html\nBản nháp chờ nhóm review nội dung; chuẩn hóa bản ghi Source/sourceIds trong IE104-64. Không coi ghi chú này là phê duyệt công bố.\nKhông tự thêm ngày sinh, ngày mất hoặc quan hệ gia đình ngoài nội dung đã đối chiếu.",
+  "title": "Lý Thường Kiệt",
+  "eventIds": [
+    "evt0017"
+  ]
+}
