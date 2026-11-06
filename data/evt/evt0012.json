@@ -1,0 +1,29 @@
+{
+  "id": "evt0012",
+  "type": "event",
+  "summary": "Năm 1054, dưới triều vua Lý Thánh Tông, quốc hiệu được đổi thành Đại Việt. Đây là mốc thay đổi quốc hiệu trong thời Lý.",
+  "periodIds": [
+    "per0003"
+  ],
+  "articleId": null,
+  "status": "draft",
+  "sourceIds": [
+    "src0006"
+  ],
+  "editorialNotes": "Đối chiếu ngày 2026-11-06: BTLSQG đăng lại kienthuc.net.vn, Những năm Ngọ trong sử Việt có gì đặc biệt?; mục Những năm Ngọ ý nghĩa về nội trị, đoạn 1054: https://baotanglichsu.vn/VI/Articles/3096/15550/nhung-nam-ngo-trong-su-viet-co-gi-djac-biet.html\nBản nháp chờ nhóm review nội dung; sourceIds đã gắn với bản ghi nguồn. Việc truy xuất được nguồn không phải phê duyệt công bố.",
+  "time": {
+    "sortYear": 1054,
+    "label": "1054"
+  },
+  "personIds": [
+    "ppl0016"
+  ],
+  "placeIds": [],
+  "related": [
+    {
+      "targetId": "ppl0016",
+      "label": "Vị vua đổi quốc hiệu"
+    }
+  ],
+  "title": "Đổi quốc hiệu Đại Việt (1054)"
+}

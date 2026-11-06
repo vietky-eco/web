@@ -1,0 +1,20 @@
+{
+  "id": "ppl0002",
+  "type": "person",
+  "summary": "Lê Hoàn, tức Lê Đại Hành, giữ vai trò nhiếp chính sau biến cố triều Đinh năm 979 và lãnh đạo cuộc kháng chiến chống Tống năm 981.",
+  "periodIds": [
+    "per0001",
+    "per0002"
+  ],
+  "articleId": null,
+  "status": "draft",
+  "sourceIds": [
+    "src0002"
+  ],
+  "editorialNotes": "Đối chiếu ngày 2026-11-06: BTLSQG đăng lại kienthuc.net.vn, Những vua chúa đánh trận siêu đẳng trong sử Việt (2); mục Lê Đại Hành, đoạn 979 và 981: https://baotanglichsu.vn/vi/Articles/3098/14210/nhung-vua-chua-djanh-tran-sieu-djang-trong-su-viet-2.html\nBản nháp chờ nhóm review nội dung; chuẩn hóa bản ghi Source/sourceIds trong IE104-64. Không coi ghi chú này là phê duyệt công bố.\nKhông tự thêm ngày sinh, ngày mất hoặc quan hệ gia đình ngoài nội dung đã đối chiếu.",
+  "title": "Lê Hoàn (Lê Đại Hành)",
+  "eventIds": [
+    "evt0002",
+    "evt0004"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": "ppl0001",
+  "type": "person",
+  "summary": "Đinh Bộ Lĩnh, tức Đinh Tiên Hoàng, là người thống nhất các lực lượng cát cứ, lên ngôi năm 968, đặt quốc hiệu Đại Cồ Việt và đóng đô ở Hoa Lư.",
+  "periodIds": [
+    "per0001"
+  ],
+  "articleId": null,
+  "status": "draft",
+  "sourceIds": [
+    "src0001"
+  ],
+  "editorialNotes": "Đối chiếu ngày 2026-11-06: BTLSQG, Nhà Đinh với sự nghiệp thống nhất đất nước; đoạn mở đầu về năm 968, Đinh Bộ Lĩnh và Hoa Lư: https://baotanglichsu.vn/VI/Articles/3096/10060/nha-djinh-voi-su-nghiep-thong-nhat-djat-nuoc.html\nBản nháp chờ nhóm review nội dung; chuẩn hóa bản ghi Source/sourceIds trong IE104-64. Không coi ghi chú này là phê duyệt công bố.\nKhông tự thêm ngày sinh, ngày mất hoặc quan hệ gia đình ngoài nội dung đã đối chiếu.",
+  "title": "Đinh Bộ Lĩnh (Đinh Tiên Hoàng)",
+  "eventIds": [
+    "evt0001",
+    "evt0002"
+  ]
+}
