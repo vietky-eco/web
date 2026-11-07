@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Tìm sự kiện, nhân vật, địa danh và văn hóa trong nội dung Việt Ký."
+    />
+    <title>Tìm kiếm | Việt Ký</title>
+    <link rel="icon" href="../assets/icons/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../css/token.css" />
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/components/header.css" />
+    <link rel="stylesheet" href="../css/components/footer.css" />
+    <link rel="stylesheet" href="../css/components/scroll-progress.css" />
+    <link
+      id="vk-search-css"
+      rel="stylesheet"
+      href="../css/components/search.css"
+    />
+    <link rel="stylesheet" href="../css/pages/search.css" />
+    <script type="module" src="../js/core/component-loader.js?v=2"></script>
+    <script type="module" src="../js/pages/search.js"></script>
+  </head>
+  <body class="page-search">
+    <a class="sr-skip" href="#search-main">Đến kết quả tìm kiếm</a>
+    <div id="site-header"></div>
+    <main id="search-main" class="search-main" tabindex="-1">
+      <nav class="search-breadcrumb" aria-label="Đường dẫn">
+        <a href="../index.html">Trang chủ</a><span aria-hidden="true">/</span
+        ><span aria-current="page">Tìm kiếm</span>
+      </nav>
+      <header class="search-heading">
+        <div>
+          <h1>Kết quả tìm kiếm</h1>
+          <p id="search-query-label">Nhập từ khóa trên thanh tìm kiếm.</p>
+        </div>
+        <p
+          id="search-count"
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+        ></p>
+      </header>
+      <section class="search-content" aria-label="Kết quả và bộ lọc">
+        <div class="search-toolbar">
+          <div
+            id="search-types"
+            class="search-types"
+            role="group"
+            aria-label="Lọc theo loại nội dung"
+          ></div>
+          <div class="search-controls">
+            <label class="search-sort"
+              >Sắp xếp
+              <select id="search-sort" class="search-select">
+                <option value="relevance">Liên quan</option>
+                <option value="year-asc">Năm tăng dần</option>
+                <option value="year-desc">Năm giảm dần</option>
+              </select></label
+            ><button
+              id="search-filter-open"
+              class="sr-outline-button"
+              type="button"
+              aria-haspopup="dialog"
+            >
+              Bộ lọc nâng cao
+            </button>
+          </div>
+        </div>
+        <div class="search-applied" id="search-applied"></div>
+        <div id="search-results" aria-busy="false"></div>
+        <div class="search-pagination-row">
+          <p id="search-range"></p>
+          <nav
+            id="search-pagination"
+            class="search-pagination"
+            aria-label="Phân trang kết quả tìm kiếm"
+            hidden
+          ></nav>
+        </div>
+        <p class="search-source-note">
+          Nội dung có nhãn “Bản nháp” hoặc “Chờ duyệt” chưa được phê duyệt công
+          bố. Nguồn tham khảo nằm trong từng bài.
+        </p>
+      </section>
+      <noscript
+        ><p>
+          Bật JavaScript để tìm và lọc nội dung. Bạn vẫn có thể mở
+          <a href="chuyen-su/timeline.html">Dòng thời gian</a> hoặc
+          <a href="sources.html">Nguồn tư liệu</a>.
+        </p></noscript
+      >
+    </main>
+    <dialog
+      id="search-filters"
+      class="sr-filter-dialog"
+      aria-labelledby="search-filter-title"
+    >
+      <form id="search-filter-form">
+        <div class="sr-dialog-top">
+          <h2 id="search-filter-title">Bộ lọc nâng cao</h2>
+          <button
+            class="sr-close"
+            id="search-filter-close"
+            type="button"
+            aria-label="Đóng bộ lọc"
+          >
+            ×
+          </button>
+        </div>
+        <p class="search-filter-intro">
+          Chọn thời kỳ hoặc giới hạn khoảng năm để thu hẹp kết quả.
+        </p>
+        <label
+          >Thời kỳ<select id="search-period" class="search-select">
+            <option value="">Tất cả thời kỳ</option>
+          </select></label
+        >
+        <fieldset>
+          <legend>Khoảng thời gian</legend>
+          <div class="search-year-fields">
+            <label
+              >Từ năm<input
+                id="search-from"
+                type="number"
+                min="-9999"
+                max="9999"
+                step="1"
+                placeholder="Chưa giới hạn" /></label
+            ><label
+              >Đến năm<input
+                id="search-to"
+                type="number"
+                min="-9999"
+                max="9999"
+                step="1"
+                placeholder="Chưa giới hạn"
+            /></label>
+          </div>
+        </fieldset>
+        <p class="search-filter-help">
+          Khoảng năm chỉ áp dụng cho mục có niên đại trong dữ liệu. Mục thiếu
+          niên đại sẽ không xuất hiện khi giới hạn năm.
+        </p>
+        <p
+          id="search-filter-preview"
+          class="search-filter-preview"
+          role="status"
+          aria-live="polite"
+        ></p>
+        <p class="search-filter-help">
+          Thay đổi chỉ có hiệu lực khi chọn Áp dụng.
+        </p>
+        <p id="search-filter-error" role="alert"></p>
+        <div class="search-filter-actions">
+          <button id="search-filter-clear" type="button" class="sr-text-button">
+            Đặt lại
+          </button>
+          <div>
+            <button
+              class="sr-outline-button"
+              id="search-filter-cancel"
+              type="button"
+            >
+              Hủy</button
+            ><button class="sr-button" type="submit">Áp dụng</button>
+          </div>
+        </div>
+      </form>
+    </dialog>
+    <div id="site-footer"></div>
+    <div id="site-scroll-progress"></div>
+  </body>
+</html>
