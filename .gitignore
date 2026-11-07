@@ -26,3 +26,8 @@ test-results/
 .codex
 .agents
 .aws
+
+# Local AI assistant instructions
+AGENTS.md
+AGENTS.override.md
+CLAUDE.md
