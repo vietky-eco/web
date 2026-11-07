@@ -2,6 +2,7 @@ import { expect, test } from "@playwright/test";
 
 const firstPath = "/chuyen-su/su-kien/thong-nhat-dat-nuoc-lap-dai-co-viet-968";
 const secondPath = "/chuyen-su/su-kien/bien-co-cung-dinh-nha-dinh-979";
+const personPath = "/chuyen-su/nhan-vat/dinh-bo-linh";
 
 for (const [path, id, title, year] of [
   [firstPath, "evt0001", "Thống nhất đất nước, lập Đại Cồ Việt (968)", "968"],
@@ -65,9 +66,20 @@ for (const [path, message] of [
   });
 }
 
-test("slug có trong index nhưng JSON chưa có được báo rõ", async ({ page }) => {
-  await page.goto("/chuyen-su/nhan-vat/dinh-bo-linh");
-  // ppl0001.json hiện là placeholder rỗng: không để màn hình tải mãi.
+test("slug nhân vật tải được dữ liệu Đinh Bộ Lĩnh", async ({ page }) => {
+  await page.goto(personPath);
+  await expect(page.locator("#detail-title")).toHaveText("Đinh Bộ Lĩnh (Đinh Tiên Hoàng)");
+  await expect(page.locator("#detail-article")).toBeVisible();
+  await expect(page.locator("#detail-error")).toBeHidden();
+});
+
+test("slug có trong index nhưng JSON không hợp lệ được báo rõ", async ({ page }) => {
+  await page.route("**/data/ppl/ppl0001.json", route => route.fulfill({
+    status: 200,
+    contentType: "application/json",
+    body: "",
+  }));
+  await page.goto(personPath);
   await expect(page.locator("#detail-error-title")).toHaveText("Không thể tải bài viết");
   await expect(page.locator("#detail-error-message")).toContainText(/JSON.*không hợp lệ/);
   await expect(page.locator("#detail-loading")).toBeHidden();
