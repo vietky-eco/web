@@ -14,7 +14,10 @@
       "sortYear": 968,
       "label": "968"
     },
-    "articleId": null
+    "articleId": null,
+    "placeIds": [
+      "plc0001"
+    ]
   },
   {
     "id": "evt0002",
@@ -31,7 +34,10 @@
       "sortYear": 979,
       "label": "979"
     },
-    "articleId": null
+    "articleId": null,
+    "placeIds": [
+      "plc0001"
+    ]
   },
   {
     "id": "evt0004",
@@ -48,7 +54,10 @@
       "sortYear": 981,
       "label": "981"
     },
-    "articleId": null
+    "articleId": null,
+    "placeIds": [
+      "plc0003"
+    ]
   },
   {
     "id": "evt0006",
@@ -66,7 +75,10 @@
       "sortYear": 1009,
       "label": "1009"
     },
-    "articleId": null
+    "articleId": null,
+    "placeIds": [
+      "plc0001"
+    ]
   },
   {
     "id": "evt0007",
@@ -83,7 +95,11 @@
       "sortYear": 1258,
       "label": "1258"
     },
-    "articleId": null
+    "articleId": null,
+    "placeIds": [
+      "plc0002",
+      "plc0018"
+    ]
   },
   {
     "id": "evt0009",
@@ -100,7 +116,10 @@
       "sortYear": 1288,
       "label": "1288"
     },
-    "articleId": null
+    "articleId": null,
+    "placeIds": [
+      "plc0003"
+    ]
   },
   {
     "id": "evt0010",
@@ -117,7 +136,11 @@
       "sortYear": 1010,
       "label": "1010"
     },
-    "articleId": null
+    "articleId": null,
+    "placeIds": [
+      "plc0001",
+      "plc0002"
+    ]
   },
   {
     "id": "evt0011",
@@ -168,7 +191,10 @@
       "sortYear": 1070,
       "label": "1070"
     },
-    "articleId": null
+    "articleId": null,
+    "placeIds": [
+      "plc0006"
+    ]
   },
   {
     "id": "evt0017",
@@ -185,7 +211,10 @@
       "sortYear": 1077,
       "label": "1077"
     },
-    "articleId": null
+    "articleId": null,
+    "placeIds": [
+      "plc0008"
+    ]
   },
   {
     "id": "evt0027",
@@ -202,7 +231,50 @@
       "sortYear": 1400,
       "label": "1400"
     },
-    "articleId": null
+    "articleId": null,
+    "placeIds": [
+      "plc0005"
+    ]
+  },
+  {
+    "id": "per0001",
+    "type": "period",
+    "title": "Thời Đinh (968–980)",
+    "summary": "Vương triều Đinh được thành lập sau khi Đinh Bộ Lĩnh thống nhất đất nước năm 968; kinh đô đặt ở Hoa Lư.",
+    "year": null,
+    "periodId": null,
+    "periodIds": [],
+    "status": "draft"
+  },
+  {
+    "id": "per0002",
+    "type": "period",
+    "title": "Thời Tiền Lê (980–1009)",
+    "summary": "Lê Hoàn là vị vua mở đầu triều Tiền Lê, tiếp tục đặt trung tâm triều đình tại Hoa Lư. Năm 981, ông lãnh đạo cuộc kháng chiến chống quân Tống.",
+    "year": null,
+    "periodId": null,
+    "periodIds": [],
+    "status": "draft"
+  },
+  {
+    "id": "per0003",
+    "type": "period",
+    "title": "Thời Lý (1009–1225)",
+    "summary": "Thời kỳ triều Lý, mở đầu với việc Lý Công Uẩn lên ngôi năm 1009. Triều đình chuyển kinh đô từ Hoa Lư ra Thăng Long và ban hành Hình thư.",
+    "year": null,
+    "periodId": null,
+    "periodIds": [],
+    "status": "draft"
+  },
+  {
+    "id": "per0004",
+    "type": "period",
+    "title": "Thời Trần (1225–1400)",
+    "summary": "Thời kỳ triều Trần, gắn với các cuộc kháng chiến chống Mông Cổ và quân Nguyên. Mốc kết thúc năm 1400 gắn với việc Hồ Quý Ly lập nhà Hồ.",
+    "year": null,
+    "periodId": null,
+    "periodIds": [],
+    "status": "draft"
   },
   {
     "id": "plc0001",

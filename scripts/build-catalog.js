@@ -22,7 +22,7 @@ async function main() {
   }
   const records = [];
   let skipped = 0;
-  for (const prefix of ["evt", "ppl", "plc"]) {
+  for (const prefix of ["evt", "ppl", "plc", "per", "cul"]) {
     const directory = new URL(prefix + "/", DATA_URL);
     const entries = await readdir(directory, {withFileTypes: true});
     for (const entry of entries.filter(item => item.isFile() && item.name.endsWith(".json")).sort((a, b) => a.name.localeCompare(b.name))) {
@@ -45,6 +45,8 @@ async function main() {
       };
       if (entity.time !== undefined) record.time = entity.time;
       if (entity.articleId !== undefined) record.articleId = entity.articleId;
+      if (entity.categoryId !== undefined) record.categoryId = entity.categoryId;
+      if (entity.placeIds?.length) record.placeIds = entity.placeIds;
       try { validateCatalog([record]); }
       catch (cause) { throw new Error(url.pathname + ": " + cause.message, {cause}); }
 

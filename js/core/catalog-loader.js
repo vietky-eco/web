@@ -24,6 +24,14 @@ export function validateCatalog(records) {
         record.periodId !== (record.periodIds.length === 1 ? record.periodIds[0] : null)) {
       throw new TypeError("Catalog " + record.id + ": periodIds/periodId không hợp lệ hoặc không khớp.");
     }
+    if (record.placeIds !== undefined && (!Array.isArray(record.placeIds) ||
+        new Set(record.placeIds).size !== record.placeIds.length ||
+        record.placeIds.some(id => typeof id !== "string" || !/^plc[0-9]{4}$/.test(id)))) {
+      throw new TypeError("Catalog " + record.id + ": placeIds không hợp lệ.");
+    }
+    if (record.categoryId !== undefined && typeof record.categoryId !== "string") {
+      throw new TypeError("Catalog " + record.id + ": categoryId không hợp lệ.");
+    }
     if (record.time !== undefined) {
       const time = record.time;
       if (!time || typeof time !== "object" || Array.isArray(time) ||

@@ -443,7 +443,7 @@ viet-ky/  (tên thư mục gốc thực tế: web/)
 
 ## Ví dụ cách các phần phối hợp khi đã triển khai
 
-1. Người dùng mở `pages/detail.html?id=evt0001`.
+1. Người dùng mở `/chi-tiet?id=evt0001`.
 2. `js/pages/detail.js` đọc ID từ URL.
 3. `id-resolver.js` xác định đường dẫn `data/evt/evt0001.json`.
 4. `content-loader.js` tải JSON; `content-resolver.js` tập hợp nội dung và tham chiếu cần thiết.

@@ -1,7 +1,11 @@
 import { loadContent } from "../core/content-loader.js";
+import {
+  detailPath,
+  indexDetailPaths,
+  loadSlugIndex,
+} from "../core/detail-routes.js";
 import { renderArticle } from "../engine/article-renderer.js";
 
-const SLUG_INDEX_URL = new URL("../../data/slug-index.json", import.meta.url);
 const CATEGORIES = {
   "/chuyen-su/su-kien": ["Sự kiện lịch sử", "CHUYỆN SỬ"],
   "/chuyen-su/nhan-vat": ["Nhân vật lịch sử", "CHUYỆN SỬ"],
@@ -22,17 +26,6 @@ const LEGACY_PATHS = new Set([
 ]);
 
 class DetailRouteError extends Error {}
-
-async function loadSlugIndex() {
-  const response = await fetch(SLUG_INDEX_URL);
-  if (!response.ok)
-    throw new Error("Không thể tải danh mục bài viết. Vui lòng thử lại sau.");
-  const index = await response.json();
-  if (!index || typeof index !== "object" || Array.isArray(index)) {
-    throw new Error("Danh mục bài viết không hợp lệ.");
-  }
-  return index;
-}
 
 async function resolveRoute() {
   let path;
@@ -124,14 +117,10 @@ async function initDetail() {
       throw new Error("Bài viết không khớp với tư liệu đang mở.");
     }
     const sources = await loadSources(entity, article);
-    const pathsById = new Map(
-      Object.entries(index).map(([url, targetId]) => [targetId, url]),
-    );
+    const pathsById = indexDetailPaths(index);
     const related = (entity.related ?? []).map((item) => ({
       label: item.label || item.targetId,
-      href:
-        pathsById.get(item.targetId) ??
-        `/chi-tiet?id=${encodeURIComponent(item.targetId)}`,
+      href: detailPath(item.targetId, pathsById),
     }));
     renderArticle(document.getElementById("detail-article"), entity, article, {
       sources,

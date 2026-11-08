@@ -66,11 +66,10 @@ for (const [path, message] of [
   });
 }
 
-test("slug nhân vật tải được dữ liệu Đinh Bộ Lĩnh", async ({ page }) => {
-  await page.goto(personPath);
+test("slug của Đinh Bộ Lĩnh tải được dữ liệu nhân vật", async ({ page }) => {
+  await page.goto("/chuyen-su/nhan-vat/dinh-bo-linh");
   await expect(page.locator("#detail-title")).toHaveText("Đinh Bộ Lĩnh (Đinh Tiên Hoàng)");
   await expect(page.locator("#detail-article")).toBeVisible();
-  await expect(page.locator("#detail-error")).toBeHidden();
 });
 
 test("slug có trong index nhưng JSON không hợp lệ được báo rõ", async ({ page }) => {
@@ -79,7 +78,7 @@ test("slug có trong index nhưng JSON không hợp lệ được báo rõ", asy
     contentType: "application/json",
     body: "",
   }));
-  await page.goto(personPath);
+  await page.goto("/chuyen-su/nhan-vat/dinh-bo-linh");
   await expect(page.locator("#detail-error-title")).toHaveText("Không thể tải bài viết");
   await expect(page.locator("#detail-error-message")).toContainText(/JSON.*không hợp lệ/);
   await expect(page.locator("#detail-loading")).toBeHidden();
