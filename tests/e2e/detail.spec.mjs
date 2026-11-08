@@ -2,6 +2,7 @@ import { expect, test } from "@playwright/test";
 
 const firstPath = "/chuyen-su/su-kien/thong-nhat-dat-nuoc-lap-dai-co-viet-968";
 const secondPath = "/chuyen-su/su-kien/bien-co-cung-dinh-nha-dinh-979";
+const personPath = "/chuyen-su/nhan-vat/dinh-bo-linh";
 
 for (const [path, id, title, year] of [
   [firstPath, "evt0001", "Thống nhất đất nước, lập Đại Cồ Việt (968)", "968"],
