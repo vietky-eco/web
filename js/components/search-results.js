@@ -131,7 +131,7 @@ export function resultCard(item, query) {
     copy.append(element("span", "sr-result-period", item.periodTitle));
   if (item.image && item.imageCredit)
     copy.append(element("span", "sr-image-credit", item.imageCredit));
-  const arrow = searchIcon("ArrowUpRight", "sr-result-arrow");
+  const arrow = searchIcon("ChevronRight", "sr-result-arrow");
   link.append(copy, arrow);
   row.append(link);
   return row;

@@ -15,19 +15,91 @@ function yearSnapPoints(min, max) {
   return points;
 }
 
+// Select lưu trạng thái, còn menu dùng chung cho thời kỳ và sắp xếp.
 export function createSearchSelect(label, options, className) {
-  const field = element("label", className);
+  const field = element("div", className);
   const caption = element("span", "sr-select-label", label);
-  const control = element("span", "sr-filter-select");
+  const control = element("div", "sr-filter-select");
   const select = element("select");
-  select.setAttribute("aria-label", label);
-  select.append(...options.map(([value, text]) => new Option(text, value)));
-  control.append(select, searchIcon("ChevronDown", "sr-filter-chevron"));
+  select.hidden = true;
+  const trigger = element("button", "sr-period-trigger");
+  trigger.type = "button";
+  trigger.setAttribute("aria-label", label);
+  trigger.setAttribute("aria-haspopup", "listbox");
+  trigger.setAttribute("aria-expanded", "false");
+  const value = element("span", "sr-period-value");
+  trigger.append(value, searchIcon("ChevronDown", "sr-filter-chevron"));
+  const list = element("div", "sr-period-options");
+  list.setAttribute("role", "listbox");
+  list.setAttribute("aria-label", label);
+  list.hidden = true;
+  control.append(select, trigger, list);
   field.append(caption, control);
-  return { field, select };
+
+  function close(focus = false) {
+    list.hidden = true;
+    trigger.setAttribute("aria-expanded", "false");
+    if (focus) trigger.focus();
+  }
+
+  function sync() {
+    value.textContent = select.selectedOptions[0]?.textContent || "";
+    list.replaceChildren(...Array.from(select.options, (option) => {
+      const item = element("button", "sr-period-option", option.textContent);
+      item.type = "button";
+      item.setAttribute("role", "option");
+      item.setAttribute("aria-selected", String(option.selected));
+      item.addEventListener("click", () => {
+        select.value = option.value;
+        sync();
+        select.dispatchEvent(new Event("change", { bubbles: true }));
+        close(true);
+      });
+      return item;
+    }));
+  }
+
+  function open() {
+    sync();
+    list.hidden = false;
+    trigger.setAttribute("aria-expanded", "true");
+    (list.querySelector('[aria-selected="true"]') || list.firstElementChild)?.focus();
+  }
+
+  trigger.addEventListener("click", () => list.hidden ? open() : close());
+  trigger.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+      event.preventDefault();
+      open();
+    }
+  });
+  list.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      event.stopPropagation();
+      close(true);
+      return;
+    }
+    const items = Array.from(list.children);
+    const current = items.indexOf(document.activeElement);
+    let next;
+    if (event.key === "ArrowDown") next = Math.min(current + 1, items.length - 1);
+    else if (event.key === "ArrowUp") next = Math.max(current - 1, 0);
+    else if (event.key === "Home") next = 0;
+    else if (event.key === "End") next = items.length - 1;
+    else return;
+    event.preventDefault();
+    items[next]?.focus();
+  });
+  control.addEventListener("focusout", (event) => {
+    if (!control.contains(event.relatedTarget)) close();
+  });
+  select.append(...options.map(([value, text]) => new Option(text, value)));
+  sync();
+  return { field, select, trigger, sync, close };
 }
 
-export function createSearchFilters({ onChange, onClear }) {
+export function createSearchFilters({ onChange }) {
   const toggle = element("button", "sr-filter-toggle");
   toggle.type = "button";
   toggle.id = "sr-filter-trigger";
@@ -46,24 +118,26 @@ export function createSearchFilters({ onChange, onClear }) {
   const title = element("h2");
   title.id = "sr-filter-title";
   title.append(searchIcon("SlidersHorizontal"), element("span", "", "Bộ lọc"));
-  const reset = element("button", "sr-text-button", "Xóa bộ lọc");
-  reset.type = "button";
-  reset.disabled = true;
-  reset.addEventListener("click", onClear);
-  heading.append(title, reset);
+  heading.append(title);
 
   const typePanel = element("section", "sr-filter-types");
   typePanel.id = "sr-filter-type";
   const typeTitle = element("h3", "", "Loại nội dung");
+  const typeHeading = element("div", "sr-filter-group-heading");
+  const resetTypes = element("button", "sr-filter-group-reset", "Đặt lại");
+  resetTypes.type = "button";
+  resetTypes.disabled = true;
+  resetTypes.setAttribute("aria-label", "Đặt lại loại nội dung");
+  typeHeading.append(typeTitle, resetTypes);
   const typeOptions = element("div", "sr-filter-type-options");
   typeOptions.setAttribute("role", "group");
   typeOptions.setAttribute("aria-label", "Loại nội dung");
-  typePanel.append(typeTitle, typeOptions);
+  typePanel.append(typeHeading, typeOptions);
   const quickTypes = new Map(["all", ...SEARCH_QUICK_TYPES].map((id) => {
     const button = element("button", "sr-quick-type");
     button.type = "button";
     button.setAttribute("aria-pressed", String(id === "all"));
-    button.append(searchIcon(TYPE_ICONS[id]), searchIcon("Check", "sr-quick-type-check"), element("span", "sr-quick-type-label", TYPES[id]));
+    button.append(searchIcon(TYPE_ICONS[id]), element("span", "sr-quick-type-label", TYPES[id]));
     button.addEventListener("click", () => {
       if (id === "all") selectedTypes.clear();
       else if (!selectedTypes.delete(id)) selectedTypes.add(id);
@@ -73,12 +147,10 @@ export function createSearchFilters({ onChange, onClear }) {
     return [id, button];
   }));
 
-  const { field: periodField, select: period } = createSearchSelect("Thời kỳ", [["", "Tất cả thời kỳ"]], "sr-period-field");
-  const years = element("details", "sr-year-filter");
-  years.open = true;
-  const yearToggle = element("summary", "sr-year-toggle", "Khoảng năm");
+  const periodSelect = createSearchSelect("Thời kỳ", [["", "Tất cả thời kỳ"]], "sr-period-field");
+  const { field: periodField, select: period } = periodSelect;
+  const years = element("div", "sr-year-filter");
   const yearValue = element("span", "sr-year-value");
-  yearToggle.append(yearValue, searchIcon("ChevronDown"));
   const yearSlider = element("div", "sr-year-slider");
   const yearTrack = element("span", "sr-year-track");
   yearTrack.setAttribute("aria-hidden", "true");
@@ -95,11 +167,18 @@ export function createSearchFilters({ onChange, onClear }) {
   const endLabel = element("span");
   yearLabels.append(startLabel, endLabel);
   const yearHint = element("p", "sr-year-hint");
-  years.append(yearToggle, yearSlider, yearLabels, yearHint);
+  years.append(yearSlider, yearLabels, yearHint);
 
-  const periodPanel = element("div");
+  const periodPanel = element("section", "sr-filter-time");
   periodPanel.id = "sr-filter-period";
-  periodPanel.append(periodField, years);
+  const timeHeading = element("div", "sr-filter-group-heading");
+  const timeTitle = element("h3", "", "Thời gian");
+  const resetTime = element("button", "sr-filter-group-reset", "Đặt lại");
+  resetTime.type = "button";
+  resetTime.disabled = true;
+  resetTime.setAttribute("aria-label", "Đặt lại thời gian");
+  timeHeading.append(timeTitle, resetTime);
+  periodPanel.append(timeHeading, yearValue, periodField, years);
   filters.append(heading, typePanel, periodPanel);
 
   let activeSection = "";
@@ -173,7 +252,8 @@ export function createSearchFilters({ onChange, onClear }) {
     renderYears();
     const total = selectedTypes.size + Number(Boolean(filters.period))
       + Number(filters.from != null || filters.to != null);
-    reset.disabled = !total;
+    resetTypes.disabled = !selectedTypes.size;
+    resetTime.disabled = !filters.period && filters.from == null && filters.to == null;
     totalBadge.hidden = !total;
     totalBadge.textContent = total ? `(${total})` : "";
     toggle.setAttribute("aria-label", total ? `Bộ lọc (${total} điều kiện)` : "Bộ lọc");
@@ -188,6 +268,7 @@ export function createSearchFilters({ onChange, onClear }) {
   function setFilters(filters) {
     selectedTypes = new Set(filters.types);
     period.value = filters.period || "";
+    periodSelect.sync();
     const samePeriod = period.value === (filters.period || "");
     resetYearRange(samePeriod ? filters.from : null, samePeriod ? filters.to : null);
     renderSelection(state());
@@ -198,10 +279,11 @@ export function createSearchFilters({ onChange, onClear }) {
     const wasHidden = filters.hidden;
     activeSection = key;
     filters.hidden = !key;
+    if (!key) periodSelect.close();
     toggle.setAttribute("aria-expanded", String(Boolean(key)));
     if (key && wasHidden) filters.scrollTop = 0;
     if (!focus) return;
-    if (key === "period") period.focus();
+    if (key === "period") periodSelect.trigger.focus();
     else if (key) quickTypes.get(selectedTypes.values().next().value ?? "all").focus();
     else toggle.focus({ preventScroll: true });
   }
@@ -212,6 +294,7 @@ export function createSearchFilters({ onChange, onClear }) {
       new Option("Tất cả thời kỳ", ""),
       ...Array.from(catalog.periods, ([id, { label }]) => new Option(label, id)),
     );
+    periodSelect.sync();
   }
 
   function snapYear(input, value) {
@@ -232,6 +315,18 @@ export function createSearchFilters({ onChange, onClear }) {
   }
 
   toggle.addEventListener("click", () => show(activeSection ? "" : "type"));
+  resetTypes.addEventListener("click", () => {
+    selectedTypes.clear();
+    commit();
+    quickTypes.get("all").focus();
+  });
+  resetTime.addEventListener("click", () => {
+    period.value = "";
+    periodSelect.sync();
+    resetYearRange();
+    commit();
+    periodSelect.trigger.focus();
+  });
   period.addEventListener("change", () => {
     resetYearRange();
     commit();

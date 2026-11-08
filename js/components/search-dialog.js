@@ -49,13 +49,14 @@ export function createSearchDialog(navbarInput) {
   clearQuery.append(searchIcon("Delete"));
   const queryIcon = searchIcon("Search", "sr-query-icon");
   search.append(queryIcon, queryInput, clearQuery);
-  const filters = createSearchFilters({ onChange: applyFilters, onClear: clearAllFilters });
+  const filters = createSearchFilters({ onChange: applyFilters });
   toolbar.append(search);
-  const { field: sortField, select: sort } = createSearchSelect("Sắp xếp", [
+  const sortSelect = createSearchSelect("Sắp xếp", [
     ["relevance", "Liên quan nhất"],
     ["year-asc", "Năm tăng dần"],
     ["year-desc", "Năm giảm dần"],
   ], "sr-sort-field");
+  const { field: sortField, select: sort } = sortSelect;
   sortField.hidden = true;
   const count = element("p", "sr-quick-count");
   count.setAttribute("role", "status");
@@ -63,11 +64,11 @@ export function createSearchDialog(navbarInput) {
   resultHeading.append(count, filters.toggle, sortField);
 
   const chips = element("div", "sr-chip-bar");
-  chips.hidden = true;
   const appliedFilters = element("ul", "sr-applied-filters");
   appliedFilters.setAttribute("aria-label", "Bộ lọc đang áp dụng");
   const clearFilters = element("button", "sr-text-button", "Xóa hết");
   clearFilters.type = "button";
+  clearFilters.hidden = true;
   clearFilters.setAttribute("aria-label", "Xóa hết bộ lọc");
   chips.append(appliedFilters, clearFilters);
   const suggestions = element("div", "sr-query-suggestions");
@@ -80,6 +81,7 @@ export function createSearchDialog(navbarInput) {
   content.append(resultHeading, chips, suggestions, resultArea.element);
   const pagination = createPagination({
     label: "Phân trang kết quả",
+    showSinglePage: true,
     onPageChange(target) {
       page = target;
       renderResults();
@@ -143,7 +145,8 @@ export function createSearchDialog(navbarInput) {
       entries.push([label, () => ({ ...applied, from: null, to: null })]);
     }
 
-    chips.hidden = !entries.length;
+    clearFilters.hidden = !entries.length;
+    appliedFilters.hidden = !entries.length;
     const limit = mobile.matches ? 1 : 3;
     const visible = showAllChips ? entries : entries.slice(0, limit);
     const rows = visible.map(([label, remove]) => {
@@ -209,6 +212,7 @@ export function createSearchDialog(navbarInput) {
     count.textContent = `${matches.length} kết quả`;
     sortField.hidden = !matches.length;
     pagination.update(page, totalPages);
+    pagination.element.hidden = matches.length === 0;
     renderSuggestions(activeFilters);
     results.removeAttribute("aria-busy");
     resultArea.viewport.scrollTop = 0;
@@ -272,6 +276,7 @@ export function createSearchDialog(navbarInput) {
       const savedSection = ["place", "categories"].includes(restore?.filterSection) ? "type" : restore?.filterSection;
       sectionAfterLoad = restore ? (savedSection ?? restoredSection) : defaultSection;
       sort.value = [...sort.options].some((option) => option.value === restore?.sort) ? restore.sort : "relevance";
+      sortSelect.sync();
       dialog.showModal();
       document.body.classList.add("sr-dialog-open");
       queryInput.focus({ preventScroll: true });
@@ -283,9 +288,11 @@ export function createSearchDialog(navbarInput) {
       sectionAfterLoad ||= filters.getActiveSection();
       filters.setEnabled(false);
       sortField.hidden = true;
-      chips.hidden = true;
+      clearFilters.hidden = true;
+      appliedFilters.hidden = true;
       suggestions.hidden = true;
       pagination.update(1, 1);
+      pagination.element.hidden = true;
       count.textContent = "Đang tìm kiếm…";
       showLoading(results);
       try {

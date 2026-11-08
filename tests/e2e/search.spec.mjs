@@ -23,6 +23,85 @@ async function openFilter(popup, key) {
   return panel;
 }
 
+async function selectPeriod(panel, name) {
+  await panel.getByRole("button", { name: "Thời kỳ", exact: true }).click();
+  await panel.getByRole("option", { name }).click();
+}
+
+for (const width of [390, 1440]) {
+  test(`empty search state centers its icon at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 844 });
+    await page.goto(previewHome);
+    const popup = await openSearch(page, "khongcotulieuphuophopzz");
+    const state = popup.locator(".sr-state");
+    await expect(state.getByRole("heading", { name: "Chưa tìm thấy nội dung phù hợp" })).toBeVisible();
+    const box = await state.boundingBox();
+    const icon = await state.locator(".sr-state-icon").boundingBox();
+    expect(Math.abs(box.x + box.width / 2 - (icon.x + icon.width / 2))).toBeLessThan(1);
+    await state.getByRole("button", { name: "Sửa từ khóa" }).click();
+    await expect(popup.getByRole("searchbox", { name: "Từ khóa tìm kiếm" })).toBeFocused();
+  });
+}
+
+test("filter chip row keeps its space when filters are cleared", async ({ page }) => {
+  await page.goto(previewHome);
+  const popup = await openSearch(page, "Lý");
+  const panel = await openFilter(popup, "type");
+  const row = popup.locator(".sr-chip-bar");
+  const emptyHeight = (await row.boundingBox()).height;
+  await expect(popup.getByRole("button", { name: "Xóa hết bộ lọc" })).toBeHidden();
+  await panel.getByRole("button", { name: "Sự kiện", exact: true }).click();
+  await expect(popup.getByRole("button", { name: "Xóa hết bộ lọc" })).toBeVisible();
+  expect((await row.boundingBox()).height).toBe(emptyHeight);
+  await popup.getByRole("button", { name: "Xóa hết bộ lọc" }).click();
+  expect((await row.boundingBox()).height).toBe(emptyHeight);
+});
+
+test("filter group resets only its own conditions", async ({ page }) => {
+  await page.goto(previewHome);
+  const popup = await openSearch(page, "");
+  const types = await openFilter(popup, "type");
+  const time = popup.locator("#sr-filter-period");
+  await expect(time.getByRole("heading", { name: "Thời gian" })).toBeVisible();
+  await expect(time.locator(".sr-year-value")).toHaveText("968–1400");
+  const resetTypes = types.getByRole("button", { name: "Đặt lại loại nội dung" });
+  const resetTime = time.getByRole("button", { name: "Đặt lại thời gian" });
+  await expect(resetTypes).toBeDisabled();
+  await expect(resetTime).toBeDisabled();
+  await types.getByRole("button", { name: "Sự kiện", exact: true }).click();
+  await selectPeriod(time, "Thời Lý (1009–1225)");
+  await expect(time.locator(".sr-year-value")).toHaveText("1009–1225");
+  await resetTypes.click();
+  await expect(types.getByRole("button", { name: "Tất cả", exact: true })).toHaveAttribute("aria-pressed", "true");
+  await expect(time.getByRole("button", { name: "Thời kỳ" })).toHaveText("Thời Lý (1009–1225)");
+  await types.getByRole("button", { name: "Nhân vật", exact: true }).click();
+  await resetTime.click();
+  await expect(time.getByRole("button", { name: "Thời kỳ" })).toHaveText("Tất cả thời kỳ");
+  await expect(time.getByRole("slider", { name: "Từ năm" })).toHaveValue("968");
+  await expect(types.getByRole("button", { name: "Nhân vật", exact: true })).toHaveAttribute("aria-pressed", "true");
+  await expect(resetTime).toBeDisabled();
+});
+
+test("period menu supports keyboard selection and Escape", async ({ page }) => {
+  await page.goto(previewHome);
+  const popup = await openSearch(page, "");
+  const panel = await openFilter(popup, "period");
+  const trigger = panel.getByRole("button", { name: "Thời kỳ", exact: true });
+  await trigger.focus();
+  await trigger.press("ArrowDown");
+  const list = panel.getByRole("listbox", { name: "Thời kỳ" });
+  await expect(list).toBeVisible();
+  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("Enter");
+  await expect(trigger).not.toHaveText("Tất cả thời kỳ");
+  await expect(trigger).toHaveAttribute("aria-expanded", "false");
+  await trigger.click();
+  await page.keyboard.press("Escape");
+  await expect(list).toBeHidden();
+  await expect(popup).toBeVisible();
+  await expect(trigger).toBeFocused();
+});
+
 test("public search lists only published records", async ({ page }) => {
   await page.route("**/data/catalog.json", (route) => route.fulfill({
     json: ["published", "draft", "review"].map((status, index) => ({
@@ -88,7 +167,7 @@ test("period year controls preserve BCE dates and exclude undated results only w
   await page.goto("/");
   const popup = await openSearch(page, "");
   const period = await openFilter(popup, "period");
-  await period.getByLabel("Thời kỳ", { exact: true }).selectOption("per0001");
+  await selectPeriod(period, "Giai đoạn mẫu (300–100 TCN)");
   const from = period.getByRole("slider", { name: "Từ năm" });
   await expect(from).toHaveValue("-300");
   await expect(from).toHaveAttribute("aria-valuetext", "300 TCN");
@@ -191,26 +270,27 @@ test("reload restores the search popup, pagination, and filters", async ({ page 
   await page.setViewportSize({ width: 1440, height: 844 });
   await page.goto(previewHome);
   const popup = await openSearch(page, "Lý");
-  const sort = popup.getByLabel("Sắp xếp");
-  await sort.selectOption("year-desc");
+  const sort = popup.getByRole("button", { name: "Sắp xếp" });
+  await sort.click();
+  await popup.getByRole("option", { name: "Năm giảm dần" }).click();
   await popup.getByRole("button", { name: "Trang 2", exact: true }).click();
   await page.reload();
   await expect(popup.getByRole("searchbox")).toHaveValue("Lý");
-  await expect(sort).toHaveValue("year-desc");
+  await expect(sort).toHaveText("Năm giảm dần");
   await expect(popup.getByRole("button", { name: "Trang 2", exact: true })).toHaveAttribute("aria-current", "page");
 
   const types = await openFilter(popup, "type");
   const event = types.getByRole("button", { name: "Sự kiện", exact: true });
   await event.click();
   const period = await openFilter(popup, "period");
-  await period.getByLabel("Thời kỳ", { exact: true }).selectOption("per0003");
+  await selectPeriod(period, "Thời Lý (1009–1225)");
   const from = period.getByRole("slider", { name: "Từ năm" });
   await from.press("ArrowRight");
   await expect(from).toHaveValue("1010");
   await page.reload();
   await expect(period).toBeVisible();
   await expect(popup.getByRole("button", { name: "Bỏ bộ lọc Từ năm 1010" })).toBeVisible();
-  await expect(period.getByLabel("Thời kỳ", { exact: true })).toHaveValue("per0003");
+  await expect(period.getByRole("button", { name: "Thời kỳ", exact: true })).toHaveText("Thời Lý (1009–1225)");
   await expect(from).toHaveValue("1010");
   await openFilter(popup, "type");
   await expect(event).toHaveAttribute("aria-pressed", "true");
@@ -312,7 +392,7 @@ test("desktop sidebar toggles multiple content types and keeps them when collaps
   const sidebar = popup.locator(".sr-filter-sidebar");
   const expanded = await results.boundingBox();
   expect((await sidebar.boundingBox()).x).toBeLessThan(expanded.x);
-  const tiles = types.getByRole("button");
+  const tiles = types.locator(".sr-filter-type-options").getByRole("button");
   await expect(tiles).toHaveText(["Tất cả", "Sự kiện", "Nhân vật", "Địa danh", "Hiện vật", "Văn hóa"]);
   const all = types.getByRole("button", { name: "Tất cả", exact: true });
   const event = types.getByRole("button", { name: "Sự kiện", exact: true });
@@ -323,8 +403,8 @@ test("desktop sidebar toggles multiple content types and keeps them when collaps
   await event.click();
   await expect(count).toHaveText("2 kết quả");
   await expect(all).toHaveAttribute("aria-pressed", "false");
-  await expect(place.locator(".sr-quick-type-check")).toBeVisible();
-  await expect(event.locator(".sr-quick-type-check")).toBeVisible();
+  await expect(place).toHaveAttribute("aria-pressed", "true");
+  await expect(event).toHaveAttribute("aria-pressed", "true");
   await toggle.click();
   await expect(types).toBeHidden();
   await expect(toggle).toBeFocused();
@@ -340,7 +420,7 @@ test("desktop sidebar toggles multiple content types and keeps them when collaps
   await expect(count).toHaveText("3 kết quả");
   await expect(all).toHaveAttribute("aria-pressed", "true");
   await place.click();
-  await sidebar.getByRole("button", { name: "Xóa bộ lọc", exact: true }).click();
+  await sidebar.getByRole("button", { name: "Đặt lại loại nội dung" }).click();
   await expect(count).toHaveText("3 kết quả");
   await expect(place).toHaveAttribute("aria-pressed", "false");
 });
@@ -376,7 +456,8 @@ for (const width of [390, 1440]) {
     await query.press("ArrowDown");
     await expect(popup.locator(".sr-result-link").first()).toBeFocused();
     await page.keyboard.press("ArrowUp");
-    await expect(popup.getByRole("navigation", { name: "Phân trang kết quả" })).toBeHidden();
+    await expect(pagination.getByRole("button", { name: "Trang 1", exact: true })).toHaveAttribute("aria-current", "page");
+    await expect(pagination.getByRole("button", { name: "Trang sau" })).toBeDisabled();
     await expect(query).toBeFocused();
 
     if (width > 680) await page.keyboard.press("Escape");
@@ -390,8 +471,9 @@ for (const width of [390, 1440]) {
 test("multi-select, period bounds, and snapping update results", async ({ page }) => {
   await page.goto(previewHome);
   const popup = await openSearch(page, "Bạch Đằng");
-  const sort = popup.getByLabel("Sắp xếp");
-  await sort.selectOption("year-desc");
+  const sort = popup.getByRole("button", { name: "Sắp xếp" });
+  await sort.click();
+  await popup.getByRole("option", { name: "Năm giảm dần" }).click();
   await expect(popup.locator(".sr-result-title").first()).toHaveText("Trận Bạch Đằng (1288)");
   const types = await openFilter(popup, "type");
   const event = types.getByRole("button", { name: "Sự kiện", exact: true });
@@ -401,8 +483,7 @@ test("multi-select, period bounds, and snapping update results", async ({ page }
   await expect(event).toHaveAttribute("aria-pressed", "true");
   await expect(person).toHaveAttribute("aria-pressed", "true");
   const time = await openFilter(popup, "period");
-  const period = time.getByLabel("Thời kỳ", { exact: true });
-  await period.selectOption("per0003");
+  await selectPeriod(time, "Thời Lý (1009–1225)");
   const from = time.getByRole("slider", { name: "Từ năm", exact: true });
   const to = time.getByRole("slider", { name: "Đến năm", exact: true });
   await expect(from).toHaveValue("1009");
@@ -422,7 +503,7 @@ test("multi-select, period bounds, and snapping update results", async ({ page }
   await page.mouse.up();
   await expect(badge).toHaveText("(4)");
 
-  await period.selectOption("per0004");
+  await selectPeriod(time, "Thời Trần (1225–1400)");
   await expect(from).toHaveValue("1225");
   await expect(to).toHaveValue("1400");
   await expect(popup.locator(".sr-quick-count")).toHaveText("2 kết quả");
@@ -430,7 +511,7 @@ test("multi-select, period bounds, and snapping update results", async ({ page }
   await expect(popup.getByRole("searchbox", { name: "Tìm địa phương" })).toHaveCount(0);
   await popup.getByRole("button", { name: "Xóa hết bộ lọc", exact: true }).click();
   await expect(popup.locator(".sr-quick-count")).toHaveText("3 kết quả");
-  await expect(sort).toHaveValue("year-desc");
+  await expect(sort).toHaveText("Năm giảm dần");
 
   const query = popup.getByRole("searchbox", { name: "Từ khóa tìm kiếm", exact: true });
   await query.evaluate((input) => {

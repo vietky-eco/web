@@ -1,6 +1,6 @@
 import "../../assets/vendor/lucide/lucide.min.js";
 
-export function createPagination({ label = "Phân trang", onPageChange }) {
+export function createPagination({ label = "Phân trang", onPageChange, showSinglePage = false }) {
   const nav = document.createElement("nav");
   nav.className = "vk-pagination";
   nav.setAttribute("aria-label", label);
@@ -53,7 +53,7 @@ export function createPagination({ label = "Phân trang", onPageChange }) {
     const numberHadFocus = range.contains(focused);
     total = Math.max(1, totalPages);
     page = Math.max(1, Math.min(currentPage, total));
-    nav.hidden = total === 1;
+    nav.hidden = total === 1 && !showSinglePage;
     first.disabled = previous.disabled = page === 1;
     next.disabled = last.disabled = page === total;
     if (nav.hidden) {
