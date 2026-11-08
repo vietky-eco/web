@@ -27,6 +27,9 @@
     "title": {
       "$ref": "#/$defs/text"
     },
+    "categoryId": {
+      "enum": ["dia-danh", "di-tich", "hien-vat", "phong-tuc", "tin-nguong", "nghe-thuat", "le-hoi"]
+    },
     "status": {
       "enum": [
         "draft",

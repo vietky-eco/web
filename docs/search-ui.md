@@ -1,17 +1,14 @@
 # Search UI
 
-- Tìm trên data/catalog.json bằng core/catalog-loader.js và features/search.js; lọc loại bằng features/filter.js.
-- Không sửa catalog, không fixture, không tạo ảnh. Catalog hiện có 28 mục event/person/place, tất cả draft. UI hiển thị trạng thái nội dung; không đổi draft thành published.
-- Tìm kiếm navbar: gợi ý khi nhập; Enter mở dialog tối đa 6 kết quả; liên kết xem tất cả mở pages/search.html?q=... . Trang Search cập nhật trực tiếp khi nhập lại trên navbar, không tạo input thứ hai.
-- Lọc loại/thời kỳ/khoảng năm; sắp xếp liên quan hoặc năm. periodIds hỗ trợ nhiều thời kỳ, nhãn lấy từ Entity bằng content-loader. Mục không có năm không nằm trong khoảng năm được lọc; UI không suy đoán năm sinh–mất.
-- Phân trang 6 kết quả/trang. Query/type/period/from/to/sort/page nằm trong URL; đổi từ khóa/bộ lọc/sort quay về trang 1, Back/reload giữ trạng thái.
-- Liên kết chi tiết dùng pages/detail.html?id=... được router hiện tại hỗ trợ. Bản thân kết quả không fetch toàn bộ bài, ảnh hoặc tự tạo nguồn.
-- Loading/empty/error có thông báo và hành động phục hồi; lỗi catalog không bị thay bằng dữ liệu giả. Lỗi nhãn thời kỳ chỉ fallback ID, không làm mất nội dung đã tải.
-- Header/footer dùng component hiện có; Newsreader/Be Vietnam Pro, token giấy/đỏ và nền mây từ repo. Không thêm dependency.
+- Tìm kiếm từ `data/catalog.json`, bỏ qua dấu tiếng Việt và dấu câu, chấp nhận đảo thứ tự từ và ưu tiên tiêu đề khớp sát nhất.
+- Ô tìm trên navbar cập nhật tối đa 10 gợi ý khi nhập. Enter, nút tìm và **Xem thêm** mở popup ngay trên trang đang xem. **Tìm kiếm nâng cao** mở bộ lọc **Loại**.
+- Popup mặc định dành toàn bộ chiều ngang cho kết quả, 10 mục mỗi trang. Khi chưa nhập từ khóa, popup hiện các nội dung phù hợp với bộ lọc hiện tại và gợi ý một vài thời kỳ nếu chưa có điều kiện.
+- Nút **Bộ lọc** nằm cạnh tùy chọn sắp xếp. Cột trái mở sẵn trên desktop, hiển thị loại nội dung, thời kỳ và khoảng năm. Trên điện thoại, bộ lọc mở phía trên kết quả. Các lựa chọn áp dụng ngay và quay về trang 1. Bấm lại **Bộ lọc** hoặc nhấn Escape để thu gọn.
+- Lưới loại nội dung cho phép bật hoặc tắt **Sự kiện**, **Nhân vật**, **Địa danh**, **Hiện vật** và **Văn hóa**. Chọn **Tất cả** để bỏ giới hạn loại. Thanh chip cho phép xóa từng điều kiện hoặc xóa hết ngay trên danh sách.
+- Khoảng năm dùng thanh kéo hai đầu có vạch bắt dính và cập nhật kết quả khi thả tay. Chọn thời kỳ giới hạn thanh trong khoảng của thời kỳ đó. Niên đại trước Công nguyên dùng năm âm trong dữ liệu và nhãn TCN trong bộ lọc. Nội dung chưa biết năm chỉ bị loại khi thu hẹp khoảng năm.
+- Có thể gắn `categoryId` trong JSON nguồn cho các mục Di tích, Hiện vật và Văn hóa. Tạo lại chỉ mục bằng `node scripts/build-catalog.js`. Bộ lọc Chủ đề có thể bổ sung khi catalog có dữ liệu thống nhất.
+- Gợi ý bài viết và danh sách kết quả công khai chỉ dùng trạng thái `published`. Để thử nội dung nháp, mở `/?preview=1` trên localhost. Dữ liệu mẫu hiện có 32 mục và đều là bản nháp.
+- Từ khóa, bộ lọc đã áp dụng, cách sắp xếp và trang hiện tại được giữ khi reload cùng trang trong cùng tab.
+- Danh sách dùng thanh tiến độ cuộn và component phân trang chung. Liên kết lấy từ `data/slug-index.json` hoặc dự phòng về `/chi-tiet?id=...`. Trạng thái chờ, trống và lỗi đều có thông báo.
 
-Kiểm thử tự động: tests/e2e/search.spec.mjs. Chạy server theo npm start (4173), sau đó npm run test:e2e -- tests/e2e/search.spec.mjs khi dependency phát triển đã cài. Search hoạt động ở URL HTML trên static HTTP server hoặc bản clean URL của hosting.
-
-
-Bộ lọc áp dụng được hiển thị bằng nhãn có thể gỡ từng điều kiện và nút Xóa tất cả bộ lọc; giữ q/sort khi gỡ lọc. Hộp lọc dùng bản nháp tạm: Đặt lại chỉ xóa lựa chọn trong form, Hủy/Esc không thay đổi kết quả, Áp dụng mới cập nhật URL/danh sách. Số kết quả dự kiến tính theo cả loại nội dung đang chọn. Hai select thời kỳ/sắp xếp dùng chung style native select với progressive enhancement và fallback hệ điều hành.
-
-Bố cục kết quả đã đổi theo apple-design: vùng ảnh nền màu ổn định theo ID khi chưa có ảnh, không mang ý nghĩa dữ liệu lịch sử. Desktop ảnh cạnh nội dung; mobile ảnh cạnh tiêu đề, mô tả xuống hàng rộng. Giữ Newsreader/Be Vietnam Pro, nền mây và header/footer. Các nhãn Bản nháp/Chờ duyệt được tách khỏi loại bài; không tự thêm niên đại cho dữ liệu thiếu năm.
+Chạy `npm run test:e2e -- tests/e2e/search.spec.mjs` sau khi cài dependency.

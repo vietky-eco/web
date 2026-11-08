@@ -1,25 +1,31 @@
 import { NAVIGATION_GROUPS, categoryURL } from "./navigation-data.js?v=2";
 import {
   loadCatalog,
-  normalize,
-  readSearchState,
   searchCatalog,
-  SEARCH_URL,
   TYPES,
 } from "../features/search-ui-adapter.js";
-import { element } from "./search-results.js";
+import { normalizeSearchText } from "../features/search.js";
+import { createScrollArea } from "./scroll-progress.js";
+import { element, resultTypeIcon, searchIcon, suggestionRow } from "./search-results.js";
 import { createSearchDialog } from "./search-dialog.js";
 
+const SUGGESTION_LIMIT = 10;
+const SUGGESTION_DELAY_MS = 110;
+const SEARCH_RELOAD_KEY = "vk-search-reload";
+
+// Dùng dữ liệu menu để gợi ý danh mục ngay cả khi catalog không tải được.
 const categories = NAVIGATION_GROUPS.flatMap((group) =>
   group.items.map((item) => ({
+    id: item.id,
     title: item.title,
     group: group.title,
     href: categoryURL(item),
-    keywords: normalize(`${item.title} ${group.title} ${item.description}`),
+    keywords: normalizeSearchText(`${item.title} ${group.title} ${item.description}`),
   })),
 );
 
 export function initHeaderSearch(header, { onFocus }) {
+  // Header dùng chung trên nhiều trang, nên nạp CSS tìm kiếm tại đây.
   if (!document.getElementById("vk-search-css")) {
     const sheet = document.createElement("link");
     sheet.id = "vk-search-css";
@@ -30,179 +36,143 @@ export function initHeaderSearch(header, { onFocus }) {
     ).href;
     document.head.append(sheet);
   }
-  const container = header.querySelector(".vk-search"),
-    form = header.querySelector("#vk-search-form");
+
+  const container = header.querySelector(".vk-search");
+  const form = header.querySelector("#vk-search-form");
   const input = form.querySelector("input");
-  const results = element("ul", "vk-search-results");
+  const results = element("div", "vk-search-results");
   results.id = "vk-search-results";
   results.hidden = true;
+  const suggestions = element("ul", "vk-search-suggestion-list");
+  const suggestionArea = createScrollArea(suggestions);
+  const footer = element("div", "vk-search-suggestion-footer");
+  const more = element("button", "vk-search-suggestion-more", "Xem thêm");
+  more.type = "submit";
+  more.append(searchIcon("ChevronRight", "vk-search-suggestion-arrow"));
+  const moreRow = element("li");
+  moreRow.append(more);
+  const advanced = element("button", "vk-search-suggestion-advanced");
+  advanced.type = "submit";
+  advanced.append(searchIcon("SlidersHorizontal"), element("span", "", "Tìm kiếm nâng cao"));
+  footer.append(advanced);
+  results.append(suggestionArea.element, footer);
   const status = element("span", "vk-search-status");
   status.setAttribute("role", "status");
   input.setAttribute("aria-controls", results.id);
-  input.setAttribute("aria-expanded", "false");
   form.append(results, status);
+
   const popup = createSearchDialog(input);
-  let timer,
-    request = 0,
-    suppressFocus = false;
-  input.setAttribute(
-    "aria-label",
-    "Tìm kiếm trong Việt Ký",
-  );
-  input.value = readSearchState().q;
-  form.action = SEARCH_URL.href;
-  form.method = "get";
-  function positionResults() {
-    if (results.hidden) return;
-    const bounds = form.getBoundingClientRect(),
-      width = Math.min(390, window.innerWidth - 32);
-    const left = Math.max(
-      16,
-      Math.min(bounds.right - width, window.innerWidth - width - 16),
-    );
-    results.style.width = `${width}px`;
-    results.style.right = `${bounds.right - left - width}px`;
-  }
+  let timer;
+  let suggestionVersion = 0;
+
+  // Đóng dropdown cũng vô hiệu hóa kết quả của lượt tìm đang chờ.
   function closeSuggestions() {
     clearTimeout(timer);
-    request++;
+    suggestionVersion++;
     results.hidden = true;
-    input.setAttribute("aria-expanded", "false");
     status.textContent = "";
   }
-  function restoreFocus() {
-    suppressFocus = true;
-    input.focus({ preventScroll: true });
-    queueMicrotask(() => {
-      suppressFocus = false;
-    });
-  }
-  function close(restore = false) {
-    closeSuggestions();
-    popup.close();
-    if (restore) restoreFocus();
-  }
-  function linkRow(title, subtitle, href) {
-    const row = element("li"),
-      link = element("a");
-    link.href = href;
-    link.append(element("span", "", title), element("small", "", subtitle));
-    row.append(link);
-    return row;
-  }
-  async function suggest() {
-    const q = input.value.trim().slice(0, 100);
-    if (!q) {
-      closeSuggestions();
-      return;
-    }
-    const token = ++request;
-    results.replaceChildren(
-      element("li", "vk-search-empty", "Đang tìm gợi ý…"),
-    );
-    results.hidden = false;
-    input.setAttribute("aria-expanded", "true");
-    positionResults();
-    let matches = [];
-    try {
-      const catalog = await loadCatalog();
-      matches = searchCatalog(catalog.records, { q, type: "all" }).slice(0, 4);
-    } catch {
-      /* Vẫn giữ lối vào danh mục và trang kết quả khi catalog lỗi. */
-    }
-    if (token !== request || popup.isOpen()) return;
-    const words = normalize(q).split(/\s+/).filter(Boolean);
+
+  // Ưu tiên nội dung trong catalog rồi điền chỗ còn trống bằng danh mục.
+  function renderSuggestions(q, matches) {
+    const words = normalizeSearchText(q).split(" ").filter(Boolean);
     const navigation = categories
-      .filter((item) => words.every((word) => item.keywords.includes(word)))
-      .slice(0, Math.max(0, 4 - matches.length));
-    results.replaceChildren(
+      .filter((item) => words.length && words.every((word) => item.keywords.includes(word)))
+      .slice(0, SUGGESTION_LIMIT - matches.length);
+    suggestions.replaceChildren(
       ...matches.map((item) =>
-        linkRow(
+        suggestionRow(
           item.title,
           [TYPES[item.type], item.year ?? ""].filter(Boolean).join(" · "),
           item.href,
+          resultTypeIcon(item.type),
         ),
       ),
-      ...navigation.map((item) =>
-        linkRow(item.title, `Danh mục · ${item.group}`, item.href),
-      ),
+      ...navigation.map((item) => {
+        const icon = header.querySelector(`[data-vk-category="${item.id}"] .vk-category-icon svg`);
+        return suggestionRow(
+          item.title,
+          `Danh mục · ${item.group}`,
+          item.href,
+          icon?.cloneNode(true) ?? searchIcon("Layers"),
+        );
+      }),
     );
-    if (!matches.length && !navigation.length)
-      results.append(
-        element(
-          "li",
-          "vk-search-empty",
-          "Chưa có gợi ý phù hợp. Nhấn Enter để tìm toàn bộ nội dung.",
-        ),
-      );
-    const row = element("li"),
-      button = element(
-        "button",
-        "sr-suggestion-all",
-        `Tìm “${q}” trong toàn bộ nội dung →`,
-      );
-    button.type = "button";
-    button.addEventListener("click", submit);
-    row.append(button);
-    results.append(row);
-    status.textContent = `${matches.length + navigation.length} gợi ý. Dùng phím mũi tên để chọn hoặc Enter để tìm toàn bộ.`;
-    positionResults();
+
+    const count = matches.length + navigation.length;
+    if (!count) {
+      suggestions.append(element("li", "vk-search-empty", "Chưa có gợi ý phù hợp."));
+    }
+    suggestions.append(moreRow);
+    suggestionArea.viewport.scrollTop = 0;
+    status.textContent = `${count} gợi ý. Dùng phím mũi tên để chọn.`;
   }
-  function submit() {
-    const q = input.value.trim();
-    if (!q) {
+
+  // Chỉ lượt tìm mới nhất được cập nhật dropdown sau khi tải dữ liệu.
+  async function suggest() {
+    const q = input.value.trim().slice(0, input.maxLength);
+    if (!q || popup.isOpen()) {
       closeSuggestions();
-      input.focus();
       return;
     }
-    closeSuggestions();
-    if (
-      location.pathname.replace(/\.html$/, "") ===
-      SEARCH_URL.pathname.replace(/\.html$/, "")
-    )
-      window.dispatchEvent(
-        new CustomEvent("vk:search-submit", { detail: { q } }),
-      );
-    else popup.open(q);
+    const version = ++suggestionVersion;
+    if (results.hidden) {
+      suggestions.replaceChildren(element("li", "vk-search-empty", "Đang tìm gợi ý…"));
+    }
+    results.hidden = false;
+
+    let matches = [];
+    try {
+      const catalog = await loadCatalog();
+      matches = searchCatalog(catalog.records, { q, type: "all" }).slice(0, SUGGESTION_LIMIT);
+    } catch {
+      // Vẫn hiện danh mục và nút mở popup để người dùng có thể thử lại.
+    }
+    if (version !== suggestionVersion || popup.isOpen()) return;
+    renderSuggestions(q, matches);
   }
-  input.addEventListener("focus", () => {
-    if (suppressFocus || input.dataset.searchReturn) return;
-    onFocus();
-    if (input.value.trim()) suggest();
-  });
-  input.addEventListener("input", (event) => {
-    clearTimeout(timer);
-    request++;
-    if (event.isComposing) return;
+
+  function queueSuggestions() {
     if (!input.value.trim()) {
       closeSuggestions();
       return;
     }
-    timer = setTimeout(suggest, 160);
-  });
-  input.addEventListener("compositionstart", () => {
     clearTimeout(timer);
-    request++;
+    suggestionVersion++;
+    timer = setTimeout(suggest, SUGGESTION_DELAY_MS);
+  }
+
+  // Quay lại ô tìm để tiếp tục từ khóa trước đó sau khi rời navbar.
+  input.addEventListener("focus", () => {
+    if (input.dataset.searchReturn) return;
+    onFocus();
+    if (results.hidden && input.value.trim()) suggest();
   });
-  input.addEventListener("compositionend", () => {
-    clearTimeout(timer);
-    timer = setTimeout(suggest, 160);
-  });
+
+  // Navbar nhận cả ký tự đang ghép dấu để gợi ý xuất hiện trước khi bấm Space.
+  input.addEventListener("input", queueSuggestions);
+  input.addEventListener("compositionend", queueSuggestions);
+
+  // Các nút tìm mở cùng popup. Tìm kiếm nâng cao mở thẳng bộ lọc.
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     if (event.isComposing) return;
     onFocus();
-    submit();
+    closeSuggestions();
+    popup.open(input.value, { showFilters: event.submitter === advanced });
   });
+
+  // Điều hướng gợi ý và đóng dropdown khi người dùng rời cụm tìm kiếm.
   form.addEventListener("keydown", (event) => {
     if (event.isComposing) return;
     if (event.key === "Escape") {
       event.preventDefault();
-      close(true);
+      if (results.contains(document.activeElement)) input.focus();
+      closeSuggestions();
       return;
     }
     if (!["ArrowDown", "ArrowUp"].includes(event.key) || results.hidden) return;
-    const links = [...results.querySelectorAll("a,button")],
+    const links = [...results.querySelectorAll("a, button")],
       index = links.indexOf(document.activeElement);
     if (!links.length) return;
     event.preventDefault();
@@ -214,18 +184,35 @@ export function initHeaderSearch(header, { onFocus }) {
     if (event.target.closest(".vk-search-results a")) closeSuggestions();
   });
   document.addEventListener("pointerdown", (event) => {
-    if (!container.contains(event.target)) closeSuggestions();
+    if (!container.contains(event.target) && !popup.isOpen()) closeSuggestions();
   });
   document.addEventListener("focusin", (event) => {
-    if (!container.contains(event.target)) closeSuggestions();
+    if (!container.contains(event.target) && !popup.isOpen()) closeSuggestions();
   });
-  window.addEventListener("vk:search-state", (event) => {
-    input.value = event.detail.q;
-    closeSuggestions();
+
+  // Chỉ khôi phục khi tải lại cùng trang trong tab hiện tại.
+  const route = location.pathname + location.search;
+  window.addEventListener("pagehide", () => {
+    try {
+      const state = popup.getState();
+      sessionStorage.setItem(SEARCH_RELOAD_KEY, JSON.stringify({
+        route: location.pathname + location.search,
+        query: state?.query ?? input.value,
+        popup: state,
+      }));
+    } catch {
+      // Tìm kiếm vẫn hoạt động nếu trình duyệt chặn bộ nhớ của tab.
+    }
   });
-  new ResizeObserver(positionResults).observe(
-    header.querySelector(".vk-header-inner"),
-  );
-  window.addEventListener("resize", positionResults);
-  return { close, isOpen: () => !results.hidden || popup.isOpen() };
+  if (performance.getEntriesByType("navigation")[0]?.type === "reload") {
+    try {
+      const state = JSON.parse(sessionStorage.getItem(SEARCH_RELOAD_KEY));
+      if (state?.route === route && typeof state.query === "string") {
+        input.value = state.query.slice(0, input.maxLength);
+        if (state.popup && typeof state.popup === "object") popup.open(input.value, { restore: state.popup });
+      }
+    } catch {
+      // Bỏ qua trạng thái cũ nếu bộ nhớ bị chặn hoặc dữ liệu không hợp lệ.
+    }
+  }
 }

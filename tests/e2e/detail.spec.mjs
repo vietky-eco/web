@@ -65,9 +65,19 @@ for (const [path, message] of [
   });
 }
 
-test("slug có trong index nhưng JSON chưa có được báo rõ", async ({ page }) => {
+test("slug của Đinh Bộ Lĩnh tải được dữ liệu nhân vật", async ({ page }) => {
   await page.goto("/chuyen-su/nhan-vat/dinh-bo-linh");
-  // ppl0001.json hiện là placeholder rỗng: không để màn hình tải mãi.
+  await expect(page.locator("#detail-title")).toHaveText("Đinh Bộ Lĩnh (Đinh Tiên Hoàng)");
+  await expect(page.locator("#detail-article")).toBeVisible();
+});
+
+test("slug có trong index nhưng JSON không hợp lệ được báo rõ", async ({ page }) => {
+  await page.route("**/data/ppl/ppl0001.json", route => route.fulfill({
+    status: 200,
+    contentType: "application/json",
+    body: "",
+  }));
+  await page.goto("/chuyen-su/nhan-vat/dinh-bo-linh");
   await expect(page.locator("#detail-error-title")).toHaveText("Không thể tải bài viết");
   await expect(page.locator("#detail-error-message")).toContainText(/JSON.*không hợp lệ/);
   await expect(page.locator("#detail-loading")).toBeHidden();

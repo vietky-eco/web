@@ -1,0 +1,100 @@
+.vk-pagination {
+  --vk-pagination-cell: clamp(26px, 8vw, 42px);
+  --vk-pagination-gap: clamp(6px, 1.4vw, 12px);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--vk-pagination-gap);
+  color: var(--vk-text);
+  font: 500 13px/1 var(--vk-sans);
+  font-variant-numeric: tabular-nums;
+}
+
+.vk-pagination[hidden] {
+  display: none;
+}
+
+.vk-pagination-arrows,
+.vk-pagination-range {
+  display: flex;
+}
+
+.vk-pagination-arrows {
+  gap: 4px;
+}
+
+.vk-pagination-range {
+  border: var(--vk-stroke) solid var(--vk-border-strong);
+  border-radius: var(--vk-radius-sm);
+}
+
+.vk-pagination :is(button, .vk-pagination-gap) {
+  display: grid;
+  place-items: center;
+  min-block-size: 42px;
+  padding: 0 4px;
+  background: var(--vk-panel-surface);
+  color: inherit;
+  font: inherit;
+}
+
+.vk-pagination button {
+  min-inline-size: var(--vk-pagination-cell);
+  cursor: pointer;
+}
+
+.vk-pagination-arrow {
+  border: var(--vk-stroke) solid var(--vk-border-strong);
+  border-radius: var(--vk-radius-sm);
+}
+
+.vk-pagination-arrow svg {
+  inline-size: 17px;
+  block-size: 17px;
+}
+
+.vk-pagination-number {
+  border: 0;
+}
+
+.vk-pagination-range > :first-child {
+  border-start-start-radius: calc(var(--vk-radius-sm) - var(--vk-stroke));
+  border-end-start-radius: calc(var(--vk-radius-sm) - var(--vk-stroke));
+}
+
+.vk-pagination-range > :last-child {
+  border-start-end-radius: calc(var(--vk-radius-sm) - var(--vk-stroke));
+  border-end-end-radius: calc(var(--vk-radius-sm) - var(--vk-stroke));
+}
+
+.vk-pagination-range > * + * {
+  border-inline-start: var(--vk-stroke) solid var(--vk-panel-border);
+}
+
+.vk-pagination .vk-pagination-gap {
+  min-inline-size: 18px;
+  color: var(--vk-text-muted);
+}
+
+.vk-pagination button:enabled:hover {
+  background: var(--vk-panel-icon-bg);
+  color: var(--vk-action-hover);
+}
+
+.vk-pagination button[aria-current="page"],
+.vk-pagination button[aria-current="page"]:hover {
+  background: var(--vk-action);
+  color: var(--vk-on-action);
+}
+
+.vk-pagination button:focus-visible {
+  z-index: 1;
+  outline: 2px solid var(--vk-focus);
+  outline-offset: 2px;
+}
+
+.vk-pagination button:disabled {
+  opacity: .45;
+  cursor: default;
+}

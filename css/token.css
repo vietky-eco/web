@@ -38,6 +38,12 @@
   --vk-surface-aged: var(--vk-paper-aged);
   --vk-surface-glass: rgb(255 249 241 / 88%);
 
+  --vk-panel-surface: #FFFDFA;
+  --vk-panel-border: color-mix(in srgb, var(--vk-earth) 40%, var(--vk-paper));
+  --vk-panel-rule: color-mix(in srgb, var(--vk-line) 32%, transparent);
+  --vk-panel-icon-bg: color-mix(in srgb, var(--vk-son) 9%, var(--vk-paper));
+  --vk-panel-icon-border: color-mix(in srgb, var(--vk-son) 18%, var(--vk-paper));
+
   /* Text */
   --vk-text: var(--vk-ink);
   --vk-text-muted: var(--vk-ink-soft);
@@ -109,6 +115,7 @@
   --vk-space-8: 2rem;
   --vk-space-12: 3rem;
   --vk-space-20: 5rem;
+  --vk-dropdown-gap: var(--vk-space-2);
 
   --vk-radius-sm: 8px;
   --vk-radius-md: 16px;

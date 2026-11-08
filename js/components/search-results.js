@@ -1,4 +1,23 @@
-import { TYPES, normalize } from "../features/search-ui-adapter.js";
+import { TYPES } from "../features/search-ui-adapter.js";
+import { normalize, normalizeSearchText } from "../features/search.js";
+import "../../assets/vendor/lucide/lucide.min.js";
+
+const RESULT_ICONS = { event: "CalendarDays", person: "UserRound", place: "MapPin" };
+
+// Icon và phần tử văn bản dùng chung cho navbar và popup.
+export function searchIcon(name, className = "sr-icon") {
+  const lucide = globalThis.lucide;
+  return lucide.createElement(lucide[name], {
+    class: className,
+    "stroke-width": 1.75,
+    "aria-hidden": "true",
+    focusable: "false",
+  });
+}
+
+export function resultTypeIcon(type) {
+  return searchIcon(RESULT_ICONS[type] ?? "ScrollText");
+}
 
 export function element(tag, className, text) {
   const node = document.createElement(tag);
@@ -7,11 +26,26 @@ export function element(tag, className, text) {
   return node;
 }
 
+// Dòng gợi ý trên navbar có thể trỏ đến bài viết hoặc danh mục.
+export function suggestionRow(title, subtitle, href, icon) {
+  const row = element("li", "vk-search-suggestion");
+  const link = element("a");
+  link.href = href;
+  const symbol = element("span", "vk-search-suggestion-icon");
+  const copy = element("span", "vk-search-suggestion-copy");
+  symbol.append(icon);
+  copy.append(element("span", "vk-search-suggestion-title", title), element("small", "", subtitle));
+  link.append(symbol, copy, searchIcon("ChevronRight", "vk-search-suggestion-arrow"));
+  row.append(link);
+  return row;
+}
+
+// Tìm vị trí từ khóa trên bản bỏ dấu, rồi tô sáng chữ gốc bằng thẻ <mark>.
 function highlighted(text, query) {
   const fragment = document.createDocumentFragment();
   const ranges = [];
   const normalized = normalize(text);
-  for (const word of normalize(query).split(/\s+/).filter(Boolean)) {
+  for (const word of normalizeSearchText(query).split(" ").filter(Boolean)) {
     let from = 0,
       index;
     while ((index = normalized.indexOf(word, from)) >= 0) {
@@ -33,27 +67,13 @@ function highlighted(text, query) {
   return fragment;
 }
 
+// Dòng kết quả trong popup có ảnh hoặc biểu tượng loại nội dung.
 export function resultCard(item, query) {
   const row = element("li", `sr-result sr-result--${item.type}`);
   const link = element("a", "sr-result-link");
   link.href = item.href;
-  if (!item.image) {
-    const tones = ["clay", "sage", "sand", "stone", "ochre"];
-    const tone =
-      tones[
-        [...item.id].reduce(
-          (total, letter) => total + letter.charCodeAt(0),
-          0,
-        ) % tones.length
-      ];
-    const media = element(
-      "span",
-      "sr-result-media sr-result-placeholder sr-result-placeholder--" + tone,
-    );
-    media.setAttribute("aria-hidden", "true");
-    media.append(element("span", "sr-placeholder-label", "Ảnh chờ bổ sung"));
-    link.append(media);
-  }
+  const typeIcon = resultTypeIcon(item.type);
+
   if (item.image) {
     const media = element("span", "sr-result-media");
     const image = element("img");
@@ -65,9 +85,8 @@ export function resultCard(item, query) {
     image.addEventListener(
       "error",
       () => {
-        media.replaceChildren(
-          element("span", "sr-image-missing", "Ảnh chưa tải được"),
-        );
+        media.className = "sr-result-symbol";
+        media.replaceChildren(typeIcon);
       },
       { once: true },
     );
@@ -75,8 +94,16 @@ export function resultCard(item, query) {
     if (item.imageIsAI)
       media.append(element("span", "sr-image-label", "Ảnh minh họa AI"));
     link.append(media);
+  } else {
+    const symbol = element("span", "sr-result-symbol");
+    symbol.append(typeIcon);
+    link.append(symbol);
   }
+
   const copy = element("span", "sr-result-copy");
+  const title = element("span", "sr-result-title");
+  title.append(highlighted(item.title, query));
+  copy.append(title);
   const meta = element("span", "sr-result-meta");
   meta.append(
     element(
@@ -98,26 +125,23 @@ export function resultCard(item, query) {
         : "";
   if (status) meta.append(element("span", "sr-result-status", status));
   copy.append(meta);
-  const title = element("span", "sr-result-title");
-  title.append(highlighted(item.title, query));
-  copy.append(title);
   if (item.summary)
     copy.append(element("span", "sr-result-summary", item.summary));
   if (item.periodTitle)
     copy.append(element("span", "sr-result-period", item.periodTitle));
   if (item.image && item.imageCredit)
     copy.append(element("span", "sr-image-credit", item.imageCredit));
-  const arrow = element("span", "sr-result-arrow", "→");
-  arrow.setAttribute("aria-hidden", "true");
+  const arrow = searchIcon("ArrowUpRight", "sr-result-arrow");
   link.append(copy, arrow);
   row.append(link);
   return row;
 }
 
-export function showState(host, { title, text, action, label = "Thử lại" }) {
+// Trạng thái chờ tải, trống hoặc lỗi thay thế nội dung trong vùng kết quả.
+export function showState(host, { title, text, action, label = "Thử lại", icon = "SearchX" }) {
   host.replaceChildren();
   const box = element("div", "sr-state");
-  box.append(element("h3", "", title), element("p", "", text));
+  box.append(searchIcon(icon, "sr-state-icon"), element("h3", "", title), element("p", "", text));
   if (action) {
     const button = element("button", "sr-button", label);
     button.type = "button";

@@ -54,7 +54,7 @@ export function initHeader(header) {
       const group = activeCategory.parentElement;
       group.style.setProperty(
         "--vk-dropdown-offset",
-        `${headerBottom - group.getBoundingClientRect().bottom - 1}px`,
+        `${headerBottom - group.getBoundingClientRect().bottom}px`,
       );
       header.style.setProperty(
         "--vk-backdrop-top",

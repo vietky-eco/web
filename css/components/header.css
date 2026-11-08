@@ -10,14 +10,13 @@
 }
 
 .vk-header {
-  --vk-header-control-width: 200px;
-  --vk-menu-bg: #FFFDFA;
-  --vk-menu-surface: #FFFDFA;
+  --vk-menu-bg: var(--vk-panel-surface);
+  --vk-menu-surface: var(--vk-panel-surface);
   --vk-menu-accent: var(--vk-son);
   --vk-menu-active-text: var(--vk-son-deep);
   --vk-menu-text: var(--vk-ink);
   --vk-menu-muted: var(--vk-ink-soft);
-  --vk-menu-line: color-mix(in srgb, var(--vk-earth) 40%, var(--vk-paper));
+  --vk-menu-line: var(--vk-panel-border);
   --vk-menu-hover: color-mix(in srgb, var(--vk-son) 5%, transparent);
   --vk-menu-selected: color-mix(in srgb, var(--vk-son) 9%, transparent);
 
@@ -26,7 +25,7 @@
   position: relative;
   background: var(--vk-menu-bg);
   color: var(--vk-menu-text);
-  border: 1px solid var(--vk-menu-line);
+  border: var(--vk-stroke) solid var(--vk-menu-line);
   border-radius: 12px;
   box-shadow: 0 3px 14px rgb(59 48 41 / 5%);
   font-family: var(--vk-sans);
@@ -204,6 +203,7 @@
 }
 
 .vk-header .vk-header-actions {
+  align-self: stretch;
   justify-self: end;
   display: flex;
   align-items: center;
@@ -235,40 +235,32 @@
 }
 
 .vk-header .vk-search {
-  flex: none;
-  width: var(--vk-header-control-width);
-  height: 44px;
+  position: relative;
+  z-index: 2;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  width: 200px;
+  min-width: 0;
 }
 
 .vk-header .vk-search-form {
-  position: relative;
   display: flex;
   align-items: center;
-  gap: 8px;
   width: 100%;
   height: 44px;
   margin: 0;
-  padding: 0 12px;
   border: 1.5px solid var(--vk-son-deep);
   border-radius: var(--vk-radius-sm);
-  background: color-mix(in srgb, var(--vk-paper) 55%, var(--vk-white));
-  transition:
-    background-color var(--vk-motion-fast) var(--vk-ease),
-    box-shadow var(--vk-motion-fast) var(--vk-ease);
-}
-
-.vk-header .vk-search-form:hover {
   background: var(--vk-menu-bg);
 }
 
 .vk-header .vk-search-form:focus-within {
-  background: var(--vk-menu-bg);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--vk-son-deep) 12%, transparent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--vk-son-deep) 22%, transparent);
 }
 
 .vk-header .vk-search-form .vk-icon-button {
-  width: 24px;
-  height: 32px;
+  height: 100%;
   border-radius: var(--vk-radius-sm);
   color: var(--vk-son-deep);
 }
@@ -284,7 +276,7 @@
   min-width: 0;
   width: 100%;
   height: 100%;
-  padding: 0;
+  padding: 0 0 0 12px;
   border: 0;
   outline: 0;
   background: transparent;
@@ -475,13 +467,13 @@
     position: absolute;
     top: 100%;
     inset-inline: 0;
-    height: calc(var(--vk-dropdown-offset, 10px) + 10px);
+    height: calc(var(--vk-dropdown-offset, 11px) + var(--vk-dropdown-gap) + 1px);
   }
 
-  /* Thẻ nổi độc lập, cách mép dưới navbar 8px ở mọi vị trí cuộn. */
+  /* Menu và gợi ý tìm kiếm cùng lấy mép dưới navbar làm mốc. */
   .vk-header .vk-dropdown,
   .vk-header .vk-menu-frame {
-    top: calc(100% + var(--vk-dropdown-offset, 10px) + 9px);
+    top: calc(100% + var(--vk-dropdown-offset, 11px) + var(--vk-dropdown-gap));
     border-top-width: 1px;
     border-radius: var(--vk-radius-lg);
   }
@@ -528,16 +520,15 @@
     position: absolute;
     inset: 0 10px auto 56px;
     height: 1px;
-    background: color-mix(in srgb, var(--vk-line) 32%, transparent);
+    background: var(--vk-panel-rule);
   }
 
   .vk-header .vk-category-icon {
     width: 36px;
     height: 36px;
-    border: var(--vk-stroke) solid
-      color-mix(in srgb, var(--vk-son) 18%, var(--vk-paper));
+    border: var(--vk-stroke) solid var(--vk-panel-icon-border);
     border-radius: var(--vk-radius-sm);
-    background: color-mix(in srgb, var(--vk-son) 9%, var(--vk-paper));
+    background: var(--vk-panel-icon-bg);
     color: var(--vk-son-deep);
   }
 
@@ -570,10 +561,6 @@
 }
 
 @media (min-width: 1101px) and (max-width: 1280px) {
-  .vk-header .vk-search {
-    width: 128px;
-  }
-
   .vk-header .vk-header-inner {
     gap: 16px;
     padding-inline: 16px;
@@ -601,7 +588,7 @@
   }
 
   .vk-header .vk-header-inner {
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: auto minmax(0, 1fr);
     min-height: 63px;
     padding-inline: 16px;
     gap: 16px;
@@ -619,6 +606,8 @@
   }
 
   .vk-header .vk-header-actions {
+    justify-content: flex-end;
+    width: 100%;
     gap: 4px;
   }
 
@@ -755,12 +744,9 @@
 
 }
 @media (max-width: 480px) {
-  .vk-header .vk-search {
-    width: 128px;
-  }
-
   .vk-header .vk-header-inner {
-    padding-inline: 16px;
+    padding-inline: 12px;
+    gap: 8px;
   }
 }
 
