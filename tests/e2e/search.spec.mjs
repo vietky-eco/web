@@ -23,6 +23,24 @@ async function openFilter(popup, key) {
   return panel;
 }
 
+test("Search mở đúng Detail và xử lý từ khóa không dấu, vô nghĩa", async ({ page }) => {
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto(previewHome);
+  const popup = await openSearch(page, "dinh bo linh");
+  const result = popup.locator('a[href$="/chuyen-su/nhan-vat/dinh-bo-linh"]');
+  await expect(result).toBeVisible();
+  await result.click();
+  await expect(page).toHaveURL("/chuyen-su/nhan-vat/dinh-bo-linh");
+  await expect(page.locator("#detail-title")).toHaveText("Đinh Bộ Lĩnh (Đinh Tiên Hoàng)");
+
+  await page.goto(previewHome);
+  const empty = await openSearch(page, "zzzz-khong-co-su-kien");
+  await expect(empty.locator(".sr-result")).toHaveCount(0);
+  await expect(empty.locator(".sr-quick-count")).toHaveText("0 kết quả");
+  expect(errors).toEqual([]);
+});
+
 test("public search lists only published records", async ({ page }) => {
   await page.route("**/data/catalog.json", (route) => route.fulfill({
     json: ["published", "draft", "review"].map((status, index) => ({
