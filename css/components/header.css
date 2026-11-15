@@ -626,12 +626,17 @@
   /* Chừa vùng home indicator trên điện thoại. */
   .vk-header .vk-navigation.vk-mobile-open {
     position: fixed;
+    z-index: 4;
     inset: 0;
     overflow-y: auto;
     overscroll-behavior: contain;
     padding: 0 24px max(32px, env(safe-area-inset-bottom));
     background: var(--vk-menu-bg);
     color: var(--vk-menu-text);
+  }
+
+  .vk-header .vk-navigation.vk-mobile-open ~ .vk-header-actions {
+    visibility: hidden;
   }
 
   .vk-header .vk-mobile-top {
