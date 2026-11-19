@@ -1,6 +1,6 @@
 # Việt Ký — Giải thích cấu trúc thư mục
 
-Ô tìm kiếm trên navbar luôn hiển thị cạnh Ký danh, gợi ý các danh mục hiện có và hỗ trợ tìm không dấu, điều hướng bằng bàn phím.
+Ô tìm kiếm trên navbar luôn hiển thị; hiện chỉ có giao diện nhập, chưa hiển thị popup gợi ý hay xử lý kết quả tìm kiếm.
 
 Phần giải thích được đặt **ngay dưới tên thư mục hoặc file** trong cây để có thể đọc liên tục mà không phải tra bảng ở nơi khác.
 
@@ -74,8 +74,6 @@ viet-ky/  (tên thư mục gốc thực tế: web/)
 │   │   ↳ Khung trang chi tiết
 │   ├── explore.html
 │   │   ↳ Khám phá
-│   ├── login.html
-│   │   ↳ Đăng nhập
 │   ├── quiz.html
 │   │   ↳ Khung trang câu đố
 │   └── sources.html
@@ -445,7 +443,7 @@ viet-ky/  (tên thư mục gốc thực tế: web/)
 
 ## Ví dụ cách các phần phối hợp khi đã triển khai
 
-1. Người dùng mở `pages/detail.html?id=evt0001`.
+1. Người dùng mở `/chi-tiet?id=evt0001`.
 2. `js/pages/detail.js` đọc ID từ URL.
 3. `id-resolver.js` xác định đường dẫn `data/evt/evt0001.json`.
 4. `content-loader.js` tải JSON; `content-resolver.js` tập hợp nội dung và tham chiếu cần thiết.

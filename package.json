@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "start": "node scripts/serve-local.mjs",
+    "lint": "eslint js",
+    "test:e2e": "playwright test",
+    "lighthouse": "lhci autorun"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@lhci/cli": "^0.16.0",
+    "@playwright/test": "^1.64.1",
+    "eslint": "^10.14.0",
+    "globals": "^17.14.0",
+    "http-server": "^14.1.1"
+  }
+}

@@ -20,3 +20,37 @@
   border-radius: inherit;
   transition: transform var(--vk-motion-fast) linear;
 }
+
+.vk-scroll-area {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-block-size: 0;
+  min-inline-size: 0;
+}
+
+.vk-scroll-area-viewport {
+  min-block-size: 0;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  scrollbar-width: none;
+}
+
+.vk-scroll-area-viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.vk-scroll-area > .vk-scroll-progress {
+  position: absolute;
+  inset-inline: var(--vk-scroll-area-inset, 0);
+  inset-block-end: 0;
+  z-index: 1;
+  height: calc(var(--vk-space-scroll) / 2);
+  background: var(--vk-panel-rule);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vk-scroll-area .vk-scroll-progress-fill {
+    transition: none;
+  }
+}

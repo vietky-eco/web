@@ -14,3 +14,20 @@
 node_modules/
 dist/
 
+# CI reports
+.lighthouseci/
+lhci-report/
+playwright-report/
+test-results/
+
+.vercel
+.env*
+
+.codex
+.agents
+.aws
+
+# Local AI assistant instructions
+AGENTS.md
+AGENTS.override.md
+CLAUDE.md

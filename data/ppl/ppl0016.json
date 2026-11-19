@@ -1,0 +1,20 @@
+{
+  "id": "ppl0016",
+  "type": "person",
+  "summary": "Lý Thánh Tông là vua triều Lý, gắn với việc đổi quốc hiệu Đại Việt năm 1054 và khởi dựng Văn Miếu năm 1070.",
+  "periodIds": [
+    "per0003"
+  ],
+  "articleId": null,
+  "status": "draft",
+  "sourceIds": [
+    "src0006",
+    "src0007"
+  ],
+  "editorialNotes": "Đối chiếu ngày 2026-11-06: BTLSQG đăng lại kienthuc.net.vn, Những năm Ngọ trong sử Việt có gì đặc biệt?; mục Những năm Ngọ ý nghĩa về nội trị, đoạn 1054: https://baotanglichsu.vn/VI/Articles/3096/15550/nhung-nam-ngo-trong-su-viet-co-gi-djac-biet.html\nĐối chiếu ngày 2026-11-06: Trung tâm Hoạt động VHKH Văn Miếu – Quốc Tử Giám, Nội tự Văn Miếu – Quốc Tử Giám; đoạn khởi dựng 1070 dưới triều Lý Thánh Tông: https://vanmieu.gov.vn/vi/inner-temple\nBản nháp chờ nhóm review nội dung; sourceIds đã gắn với bản ghi nguồn. Việc truy xuất được nguồn không phải phê duyệt công bố.\nKhông tự thêm ngày sinh, ngày mất hoặc quan hệ gia đình ngoài nội dung đã đối chiếu.\nRà soát nguồn ngày 2026-11-06: src0006 cho quốc hiệu Đại Việt năm 1054; src0007 cho Văn Miếu năm 1070.",
+  "title": "Lý Thánh Tông",
+  "eventIds": [
+    "evt0012",
+    "evt0013"
+  ]
+}

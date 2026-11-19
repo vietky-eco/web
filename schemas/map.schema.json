@@ -1,0 +1,184 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "Metadata cho kế hoạch tài nguyên; không tạo tệp media hoặc tự xác nhận quyền sử dụng.",
+  "title": "Viet Ky Map",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "title",
+    "status",
+    "sourceIds"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 7,
+      "maxLength": 7,
+      "pattern": "^(map)[0-9]{4}$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "review",
+        "published"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "sourceIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 7,
+        "maxLength": 7,
+        "pattern": "^(src)[0-9]{4}$"
+      }
+    },
+    "path": {
+      "type": "string",
+      "pattern": "^assets/map/map[0-9]{4}\\.(svg)$",
+      "not": {
+        "pattern": "\\s"
+      },
+      "description": "Đường dẫn dự kiến hoặc đã tạo; tên tệp phải khớp id, cần kiểm tra liên file và filesystem riêng."
+    },
+    "alt": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "caption": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "credit": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "license": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "fallbackImageId": {
+      "type": "string",
+      "minLength": 7,
+      "maxLength": 7,
+      "pattern": "^(img)[0-9]{4}$"
+    },
+    "subjectIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 7,
+        "maxLength": 7,
+        "pattern": "^(evt|per|ppl|plc|cul)[0-9]{4}$"
+      }
+    },
+    "articleIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 7,
+        "maxLength": 7,
+        "pattern": "^(art)[0-9]{4}$"
+      }
+    },
+    "storyIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 7,
+        "maxLength": 7,
+        "pattern": "^(sty)[0-9]{4}$"
+      }
+    },
+    "reviewStatus": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "verified"
+      ]
+    },
+    "editorialNotes": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S",
+      "description": "Ghi chú biên tập nguyên văn; không phải nội dung lịch sử đã được duyệt."
+    },
+    "referencedByIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 7,
+        "maxLength": 7,
+        "pattern": "^(evt|per|ppl|plc|cul|art|sty|tml|src|img|map)[0-9]{4}$"
+      },
+      "description": "Tham chiếu ngược trong danh mục; không tự suy ra quan hệ lịch sử hoặc quan hệ có hướng."
+    },
+    "layers": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "terrain",
+          "rivers",
+          "troopRoutes",
+          "markers",
+          "labels"
+        ]
+      },
+      "description": "Các lớp dự kiến; chỉ bật lớp phù hợp, không chứng minh tuyến hoặc tọa độ đã được kiểm chứng."
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "published"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "path",
+          "alt",
+          "caption",
+          "credit",
+          "license",
+          "reviewStatus"
+        ],
+        "properties": {
+          "reviewStatus": {
+            "const": "verified"
+          },
+          "sourceIds": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ]
+}

@@ -6,6 +6,6 @@ const group = NAVIGATION_GROUPS.find((entry) => entry.id === params.get("group")
 const section = group?.items.find((entry) => entry.id === params.get("section"));
 const destination = section
   ? categoryURL(section)
-  : new URL(`../../pages/explore.html${group ? `#${group.id}` : ""}`, import.meta.url).href;
+  : new URL(`../../kham-pha${group ? `#${group.id}` : ""}`, import.meta.url).href;
 
 location.replace(destination);

@@ -11,28 +11,28 @@ export const NAVIGATION_GROUPS = [
     items: [
       {
         id: "dia-danh",
-        href: "pages/dau-xua/places.html",
+        href: "dau-xua/dia-danh",
         title: "Địa danh lịch sử",
         graphic: "place",
         description: "Những vùng đất gắn liền với lịch sử",
       },
       {
         id: "di-tich",
-        href: "pages/dau-xua/monuments.html",
+        href: "dau-xua/di-tich",
         title: "Di tích & Kiến trúc",
         graphic: "architecture",
         description: "Những công trình lưu dấu thời gian",
       },
       {
         id: "hien-vat",
-        href: "pages/dau-xua/artifacts.html",
+        href: "dau-xua/hien-vat",
         title: "Hiện vật lịch sử",
         graphic: "artifact",
         description: "Những chứng tích từ quá khứ",
       },
       {
         id: "ban-do",
-        href: "pages/dau-xua/map.html",
+        href: "dau-xua/ban-do",
         title: "Bản đồ lịch sử",
         graphic: "map",
         description: "Lịch sử qua không gian địa lý",
@@ -47,28 +47,28 @@ export const NAVIGATION_GROUPS = [
     items: [
       {
         id: "phong-tuc",
-        href: "pages/van-hoa/customs.html",
+        href: "van-hoa/phong-tuc",
         title: "Phong tục & Tập quán",
         graphic: "custom",
         description: "Những nét đẹp trong đời sống người Việt",
       },
       {
         id: "tin-nguong",
-        href: "pages/van-hoa/beliefs.html",
+        href: "van-hoa/tin-nguong",
         title: "Tín ngưỡng & Tôn giáo",
         graphic: "belief",
         description: "Đời sống tín ngưỡng qua các thời kỳ",
       },
       {
         id: "nghe-thuat",
-        href: "pages/van-hoa/arts.html",
+        href: "van-hoa/nghe-thuat",
         title: "Nghệ thuật truyền thống",
         graphic: "art",
         description: "Những hình thức nghệ thuật và sáng tạo",
       },
       {
         id: "le-hoi",
-        href: "pages/van-hoa/festivals.html",
+        href: "van-hoa/le-hoi",
         title: "Lễ hội & Đời sống",
         graphic: "festival",
         description: "Những sinh hoạt văn hóa cộng đồng",
@@ -87,18 +87,18 @@ export const NAVIGATION_GROUPS = [
         title: "Dòng thời gian",
         graphic: "timeline",
         description: "Lịch sử theo trình tự thời gian",
-        href: "pages/chuyen-su/timeline.html",
+        href: "chuyen-su/dong-thoi-gian",
       },
       {
         id: "thoi-ky",
-        href: "pages/chuyen-su/periods.html",
+        href: "chuyen-su/cac-thoi-ky",
         title: "Các thời kỳ",
         graphic: "period",
         description: "Những giai đoạn và triều đại",
       },
       {
         id: "su-kien",
-        href: "pages/chuyen-su/events.html",
+        href: "chuyen-su/su-kien",
         title: "Sự kiện lịch sử",
         graphic: "event",
         description: "Những biến cố và dấu mốc quan trọng",
@@ -108,13 +108,13 @@ export const NAVIGATION_GROUPS = [
         title: "Nhân vật lịch sử",
         graphic: "person",
         description: "Những con người để lại dấu ấn",
-        href: "pages/chuyen-su/people.html",
+        href: "chuyen-su/nhan-vat",
       },
     ],
   },
 ];
 
-// Mỗi danh mục có trang HTML riêng trong pages.
+// Dùng route công khai của từng danh mục.
 export function categoryURL(item) {
   return new URL(item.href, PROJECT_URL).href;
 }

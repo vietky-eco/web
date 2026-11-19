@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$comment": "IE104-45 local contract. Cross-file references and publication need separate validation and team review.",
+  "$comment": "Viet Ky catalogue-aligned contract. ID/reference existence, historical accuracy, asset availability and publication need separate validation and human review.",
   "title": "Viet Ky Article",
   "type": "object",
   "additionalProperties": false,
@@ -84,6 +84,107 @@
       },
       "uniqueItems": true,
       "minItems": 0
+    },
+    "editorialNotes": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S",
+      "description": "Ghi chú biên tập nguyên văn; không phải nội dung lịch sử đã được duyệt."
+    },
+    "referencedByIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 7,
+        "maxLength": 7,
+        "pattern": "^(evt|per|ppl|plc|cul|art|sty|tml|src|img|map)[0-9]{4}$"
+      },
+      "description": "Tham chiếu ngược trong danh mục; không tự suy ra quan hệ lịch sử hoặc quan hệ có hướng."
+    },
+    "coverImageId": {
+      "type": "string",
+      "minLength": 7,
+      "maxLength": 7,
+      "pattern": "^(img)[0-9]{4}$",
+      "description": "Ảnh đại diện dự kiến; có ID không chứng minh tệp ảnh đã tồn tại."
+    },
+    "fallbackImageId": {
+      "type": "string",
+      "minLength": 7,
+      "maxLength": 7,
+      "pattern": "^(img)[0-9]{4}$",
+      "description": "Ảnh thay thế khi thiếu tệp; danh mục hiện dùng img0025, bản thân tệp cũng cần được tạo và duyệt."
+    },
+    "imageIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 7,
+        "maxLength": 7,
+        "pattern": "^(img)[0-9]{4}$"
+      }
+    },
+    "mapIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 7,
+        "maxLength": 7,
+        "pattern": "^(map)[0-9]{4}$"
+      }
+    },
+    "periodIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 7,
+        "maxLength": 7,
+        "pattern": "^(per)[0-9]{4}$"
+      }
+    },
+    "storyIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 7,
+        "maxLength": 7,
+        "pattern": "^(sty)[0-9]{4}$"
+      }
+    },
+    "timelineIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 7,
+        "maxLength": 7,
+        "pattern": "^(tml)[0-9]{4}$"
+      }
+    },
+    "contextIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 7,
+        "maxLength": 7,
+        "pattern": "^(evt|per|ppl|plc|cul|art|sty|tml|src|img|map)[0-9]{4}$"
+      },
+      "description": "Liên quan hoặc nhân vật bối cảnh bổ sung trong kế hoạch bài; không thay thế related có nhãn của Entity công bố."
+    },
+    "editorialLevel": {
+      "type": "string",
+      "enum": [
+        "Flagship",
+        "Featured",
+        "Standard"
+      ],
+      "description": "Mức biên tập trong danh mục; không phải trạng thái công bố hoặc mức độ đúng lịch sử."
     }
   },
   "allOf": [
