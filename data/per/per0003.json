@@ -1,6 +1,10 @@
 {
   "id": "per0003",
   "type": "period",
+  "capitals": [
+    { "placeId": "plc0001", "context": "khi lập triều năm 1009" },
+    { "placeId": "plc0002", "context": "từ năm 1010" }
+  ],
   "summary": "Thời kỳ triều Lý, mở đầu với việc Lý Công Uẩn lên ngôi năm 1009. Triều đình chuyển kinh đô từ Hoa Lư ra Thăng Long và ban hành Hình thư.",
   "status": "draft",
   "sourceIds": [

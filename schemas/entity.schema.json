@@ -214,6 +214,19 @@
         "pattern": "^(plc)[0-9]{4}$"
       }
     },
+    "capitals": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["placeId"],
+        "properties": {
+          "placeId": { "type": "string", "pattern": "^plc[0-9]{4}$" },
+          "context": { "$ref": "#/$defs/text" }
+        }
+      }
+    },
     "eventIds": {
       "type": "array",
       "uniqueItems": true,
@@ -557,6 +570,7 @@
                 "parentId"
               ]
             },
+            { "required": ["capitals"] },
             {
               "required": [
                 "childIds"

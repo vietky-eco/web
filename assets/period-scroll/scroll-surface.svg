@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 116" preserveAspectRatio="none">
+  <defs>
+    <filter id="fibres" x="-1%" y="-3%" width="102%" height="106%">
+      <feTurbulence baseFrequency=".19 .35" numOctaves="2" seed="14" result="grain"/>
+      <feDisplacementMap in="SourceGraphic" in2="grain" scale="1.2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  <g filter="url(#fibres)">
+  <path fill="black" d="M0 4 Q32 7 68 5 T129 4 C148 4 178 2 204 3 S245 6 276 5 S322 5 355 4 S423 1 457 3 S516 6 550 5 S606 5 644 4 S698 2 735 4 S800 7 844 5 S914 2 960 3
+    L960 112 Q928 110 893 112 T819 114 C780 115 755 112 721 112 S662 114 624 112 S559 111 530 113 S471 114 435 113 S378 110 340 112 S285 115 249 113 S199 110 163 111 S122 111 82 112 S31 114 0 113 Z"/>
+  </g>
+</svg>
