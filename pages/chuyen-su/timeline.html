@@ -33,18 +33,18 @@
   <link rel="stylesheet" href="/css/components/scroll-progress.css" />
   <link rel="stylesheet" href="/css/components/back-to-top.css" />
   <link rel="stylesheet" href="/css/pages/timeline.css" />
-  <link rel="stylesheet" href="/css/components/su-quyen.css" />
+  <link rel="stylesheet" href="/css/components/period-scroll.css" />
 </head>
 <body id="top">
   <a class="vk-skip-link" href="#main-content">Đến nội dung chính</a>
   <div id="site-header"></div>
-  <main id="main-content" class="sq-page">
-    <header class="sq-hero">
-      <p class="sq-kicker">DÒNG CHẢY LỊCH SỬ VIỆT NAM</p>
+  <main id="main-content" class="timeline-page">
+    <header class="timeline-page-hero">
+      <p class="timeline-page-kicker">DÒNG CHẢY LỊCH SỬ VIỆT NAM</p>
       <h1>Toàn cảnh lịch sử</h1>
       <p>Khám phá các thời kỳ, sự kiện và những dấu mốc tiêu biểu trong lịch sử Việt Nam.</p>
     </header>
-    <section class="su-quyen" hidden aria-label="Chọn thời kỳ lịch sử Việt Ký">
+    <section class="period-scroll" hidden aria-label="Chọn thời kỳ lịch sử Việt Ký">
     <div class="composition" data-selected="1">
       <button class="arrow previous" type="button" aria-label="Chọn thời kỳ trước"></button>
       <div class="scroll">
@@ -52,30 +52,30 @@
           <div class="sheet"><div class="pigment"></div></div>
         </div>
         <div class="periods" role="group" aria-label="Các thời kỳ"></div>
-        <img class="roller left" src="/assets/su-quyen/scroll-left.png" width="63" height="195" alt="">
-        <img class="roller right" src="/assets/su-quyen/scroll-right.png" width="63" height="195" alt="">
+        <img class="roller left" src="/assets/period-scroll/scroll-left.png" width="63" height="195" alt="">
+        <img class="roller right" src="/assets/period-scroll/scroll-right.png" width="63" height="195" alt="">
       </div>
       <button class="arrow next" type="button" aria-label="Chọn thời kỳ sau"></button>
       <div class="dots" aria-hidden="true" hidden></div>
     </div>
   </section>
-    <section class="sq-overview" aria-labelledby="period-name" hidden>
-      <div class="sq-chapter-title">
+    <section class="timeline-page-overview" aria-labelledby="period-name" hidden>
+      <div class="timeline-page-chapter-title">
         <h2 id="period-name"></h2>
         <p id="period-dates"></p>
       </div>
-      <div class="sq-chapter-copy">
+      <div class="timeline-page-chapter-copy">
         <p id="period-summary"></p>
-        <p class="sq-capital" hidden><span class="sq-capital-label">Kinh đô</span><span id="period-capital"></span></p>
+        <p class="timeline-page-capital" hidden><span class="timeline-page-capital-label">Kinh đô</span><span id="period-capital"></span></p>
       </div>
     </section>
-    <section class="sq-events" aria-labelledby="events-title">
-      <header class="sq-events-heading">
+    <section class="timeline-page-events" aria-labelledby="events-title">
+      <header class="timeline-page-events-heading">
         <h2 id="events-title">Các sự kiện tiêu biểu</h2>
         <p id="event-count" role="status">Đang tải…</p>
       </header>
       <ol id="timeline" aria-label="Các sự kiện theo thời gian"></ol>
-      <div class="sq-events-empty" hidden>
+      <div class="timeline-page-events-empty" hidden>
         <h3>Chưa có sự kiện tiêu biểu</h3>
         <p>Việt Ký đang tiếp tục cập nhật các mốc tiêu biểu cho thời kỳ này.</p>
       </div>
@@ -86,6 +86,6 @@
   <div id="site-scroll-progress"></div>
   <script src="/js/components/back-to-top.js" defer></script>
   <script type="module" src="/js/core/component-loader.js?v=2"></script>
-  <script type="module" src="/js/pages/su-quyen.js"></script>
+  <script type="module" src="/js/pages/period-scroll.js"></script>
 </body>
 </html>

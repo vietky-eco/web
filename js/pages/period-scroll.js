@@ -45,9 +45,9 @@ function renderOverview(period) {
     capitals.push(entry);
   }
   $("#period-capital").replaceChildren(...capitals);
-  $(".sq-capital").hidden = !capitals.length;
-  $(".sq-chapter-copy").hidden = !summary && !capitals.length;
-  $(".sq-overview").hidden = false;
+  $(".timeline-page-capital").hidden = !capitals.length;
+  $(".timeline-page-chapter-copy").hidden = !summary && !capitals.length;
+  $(".timeline-page-overview").hidden = false;
 }
 
 function select(index) {
@@ -75,11 +75,11 @@ function select(index) {
   [...dots.children].forEach((dot, i) => dot.classList.toggle("current", i === current));
   const inPeriod = events.filter(event => event.periodIds?.includes(period.id));
   renderOverview(period);
-  $(".sq-events-empty").hidden = inPeriod.length > 0;
+  $(".timeline-page-events-empty").hidden = inPeriod.length > 0;
   if (inPeriod.length) {
     renderTimeline(list, inPeriod);
     list.querySelectorAll("details").forEach(card => {
-      card.name = "su-quyen-events";
+      card.name = "period-scroll-events";
       const link = card.querySelector(".tl-card-link");
       link.setAttribute("aria-label", link.textContent);
       link.textContent = "Xem chi tiết";
@@ -113,7 +113,7 @@ async function init() {
       dots.hidden = false;
     }
     $(".previous").hidden = $(".next").hidden = periods.length === 1;
-    $(".su-quyen").hidden = false;
+    $(".period-scroll").hidden = false;
     select(Math.max(0, periods.findIndex(p => p.id === "per0004")));
   } catch {
     count.textContent = "Không thể tải dòng thời gian. Vui lòng tải lại trang.";
