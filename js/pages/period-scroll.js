@@ -8,8 +8,9 @@ const count = $("#event-count");
 const rail = $(".periods");
 const dots = $(".dots");
 const slots = 4;
-const preview = ["localhost", "127.0.0.1", "[::1]"].includes(location.hostname) &&
-  new URLSearchParams(location.search).get("preview") === "1";
+const preview = (["localhost", "127.0.0.1", "[::1]"].includes(location.hostname) &&
+  new URLSearchParams(location.search).get("preview") === "1") ||
+  /^vietky-git-feature-ie104-21-tim-[^.]+\.vercel\.app$/.test(location.hostname);
 const visible = record => preview || record.status === "published";
 let periods = [];
 let placesById = new Map();
