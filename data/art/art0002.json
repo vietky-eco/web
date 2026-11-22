@@ -1,0 +1,26 @@
+{
+  "id": "art0002",
+  "entityId": "evt0002",
+  "title": "Biến cố cung đình nhà Đinh (979)",
+  "status": "draft",
+  "context": "Năm 979, triều Đinh trải qua biến cố khi Đinh Tiên Hoàng và Đinh Liễn bị sát hại. Đinh Toàn còn nhỏ lên nối ngôi, trong khi Lê Hoàn giữ vai trò nhiếp chính. Sự thay đổi đột ngột ở ngôi vua diễn ra giữa lúc triều đình Hoa Lư có nhiều tranh chấp quyền lực.",
+  "sections": [
+    {
+      "id": "sec001",
+      "heading": "Biến cố năm 979 và việc kế vị",
+      "body": "Năm 979, Đinh Tiên Hoàng và Đinh Liễn bị sát hại. Sau biến cố, Đinh Toàn lên ngôi khi còn nhỏ tuổi. Bài viết được Bảo tàng Lịch sử quốc gia đăng lại ghi nhận Lê Hoàn trở thành người nhiếp chính cho vua Đinh Toàn. Những thông tin này cho thấy cuộc chuyển giao quyền lực diễn ra trong hoàn cảnh đặc biệt của triều Đinh."
+    },
+    {
+      "id": "sec002",
+      "heading": "Biến động trong triều đình Hoa Lư",
+      "body": "Sau khi Đinh Toàn nối ngôi, quyền lực trong triều đình không ổn định. Tư liệu được dẫn ghi nhận tranh chấp giữa phe Lê Hoàn và một số đại thần thân cận với Đinh Tiên Hoàng. Lê Hoàn dần củng cố quyền kiểm soát triều đình trong giai đoạn biến động này."
+    },
+    {
+      "id": "sec003",
+      "heading": "Bối cảnh trước cuộc kháng chiến chống Tống",
+      "body": "Theo nguồn tư liệu, nhà Tống nhận thấy tình hình triều Đinh rối ren và có ý định đưa quân vào Đại Cồ Việt. Sau đó Lê Hoàn lên ngôi, và năm 981 lãnh đạo cuộc kháng chiến chống quân Tống. Nhìn từ chuỗi sự kiện ấy, biến cố năm 979 là một phần bối cảnh quan trọng dẫn đến những thay đổi chính trị và quân sự tiếp theo."
+    }
+  ],
+  "sourceIds": ["src0002"],
+  "editorialNotes": "Bản nháp biên tập dựa trên src0002 (Hoàng Phương, Bảo tàng Lịch sử quốc gia đăng lại từ kienthuc.net.vn). Không khẳng định danh tính, động cơ hay chủ mưu vụ sát hại như một kết luận sử học đã kiểm chứng; chi tiết các phe phái và chuyển giao quyền lực cần người phụ trách sử liệu rà soát. Nguồn đang reviewStatus pending."
+}

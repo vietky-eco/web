@@ -1,0 +1,26 @@
+{
+  "id": "art0001",
+  "entityId": "evt0001",
+  "title": "Thống nhất đất nước, lập Đại Cồ Việt (968)",
+  "status": "draft",
+  "context": "Trước khi nhà Đinh được thành lập, tình trạng cát cứ của các sứ quân khiến đất nước bị chia cắt. Đinh Bộ Lĩnh tập hợp lực lượng ở Hoa Lư và từng bước đánh dẹp các sứ quân. Thắng lợi thống nhất đã mở đường cho việc thiết lập một triều đại mới vào năm 968.",
+  "sections": [
+    {
+      "id": "sec001",
+      "heading": "Từ cát cứ đến thống nhất",
+      "body": "Trong giai đoạn được sử sách gọi là loạn 12 sứ quân, nhiều thế lực kiểm soát các vùng đất khác nhau. Từ căn cứ Hoa Lư, Đinh Bộ Lĩnh tập hợp lực lượng và đánh dẹp các sứ quân, chấm dứt tình trạng cát cứ. Đây là bước chuyển quan trọng từ sự phân tán quyền lực sang một chính quyền thống nhất."
+    },
+    {
+      "id": "sec002",
+      "heading": "Lập triều Đinh và đặt quốc hiệu Đại Cồ Việt",
+      "body": "Năm 968, Đinh Bộ Lĩnh lên ngôi hoàng đế, xưng là Đại Thắng Minh Hoàng đế, đặt quốc hiệu Đại Cồ Việt và chọn Hoa Lư làm kinh đô. Sự kiện này đánh dấu sự ra đời của vương triều Đinh trong tiến trình xây dựng nhà nước độc lập, tự chủ."
+    },
+    {
+      "id": "sec003",
+      "heading": "Ý nghĩa của sự kiện",
+      "body": "Theo bài nghiên cứu do Bảo tàng Lịch sử quốc gia đăng tải, việc thống nhất đất nước, xưng đế và đặt quốc hiệu thể hiện ý chí tự chủ của triều Đinh. Cùng với việc xây dựng kinh đô ở Hoa Lư, đây là những dấu mốc quan trọng trong quá trình củng cố chính quyền sau thời kỳ chia cắt."
+    }
+  ],
+  "sourceIds": ["src0001"],
+  "editorialNotes": "Bản nháp biên tập dựa trên src0001 (Hồng Ánh, Bảo tàng Lịch sử quốc gia). Đã đối chiếu các đoạn về loạn 12 sứ quân, năm 968, việc xưng đế, quốc hiệu Đại Cồ Việt và kinh đô Hoa Lư. Cần người phụ trách sử liệu rà soát cách diễn đạt trước khi nâng status; nguồn đang reviewStatus pending."
+}
