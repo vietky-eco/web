@@ -1,6 +1,7 @@
 {
   "id": "per0001",
   "type": "period",
+  "capitals": [{ "placeId": "plc0001" }],
   "title": "Thời Đinh (968–980)",
   "status": "draft",
   "summary": "Vương triều Đinh được thành lập sau khi Đinh Bộ Lĩnh thống nhất đất nước năm 968; kinh đô đặt ở Hoa Lư.",
