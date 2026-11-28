@@ -1,0 +1,18 @@
+{
+  "id": "evt0018",
+  "type": "event",
+  "title": "Lập trang Vân Đồn (1149)",
+  "status": "draft",
+  "summary": "Dưới thời Lý Anh Tông, triều đình lập trang Vân Đồn để tập trung hoạt động buôn bán của thuyền buôn nước ngoài.",
+  "sourceIds": [
+    "src0010"
+  ],
+  "editorialNotes": "=== Bản ghi kế hoạch từ tab Sự kiện (evt) ===\nDòng workbook: 23\nNgười phụ trách: Chưa phân công\nTrạng thái trong bảng: Chưa viết\nNội dung chính trong bảng: Dưới thời Lý Anh Tông, triều đình lập trang Vân Đồn để tập trung hoạt động buôn bán của thuyền buôn nước ngoài.\nGhi chú gốc trong bảng:\nHồ sơ: Có nguồn tham khảo, chờ duyệt.\nẢnh đại diện: img0012. Dùng img0025 khi chưa có tệp.\nThời kỳ: per0003\nNhân vật: ppl0018\nĐịa danh: plc0004\nBài: art0041\nTimeline: tml0003\nẢnh: img0012\nBản đồ: map0005\nNguồn: src0010\nGhi chú: Các dòng tham chiếu trong workbook được giữ nguyên; chỉ đưa ID vào trường có cấu trúc khi file đích tồn tại và có nội dung.",
+  "periodIds": [
+    "per0003"
+  ],
+  "time": {
+    "sortYear": 1149,
+    "label": "1149"
+  }
+}

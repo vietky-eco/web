@@ -1,0 +1,24 @@
+{
+  "id": "evt0025",
+  "type": "event",
+  "title": "Phát hành tiền giấy (1396)",
+  "status": "draft",
+  "summary": "Triều đình cuối thời Trần phát hành tiền giấy Thông bảo hội sao trong chương trình cải cách gắn với Hồ Quý Ly.",
+  "sourceIds": [
+    "src0016"
+  ],
+  "editorialNotes": "=== Bản ghi kế hoạch từ tab Sự kiện (evt) ===\nDòng workbook: 30\nNgười phụ trách: Chưa phân công\nTrạng thái trong bảng: Chưa viết\nNội dung chính trong bảng: Triều đình cuối thời Trần phát hành tiền giấy Thông bảo hội sao trong chương trình cải cách gắn với Hồ Quý Ly.\nGhi chú gốc trong bảng:\nHồ sơ: Có nguồn tham khảo, chờ duyệt.\nẢnh đại diện: img0024. Dùng img0025 khi chưa có tệp.\nThời kỳ: per0004\nNhân vật: ppl0030\nĐịa danh: plc0002\nBài: art0074\nTimeline: tml0001, tml0010\nẢnh: img0024\nNguồn: src0016\nDiễn ra trước khi lập nhà Hồ năm 1400.\nGhi chú: Các dòng tham chiếu trong workbook được giữ nguyên; chỉ đưa ID vào trường có cấu trúc khi file đích tồn tại và có nội dung.",
+  "periodIds": [
+    "per0004"
+  ],
+  "personIds": [
+    "ppl0030"
+  ],
+  "placeIds": [
+    "plc0002"
+  ],
+  "time": {
+    "sortYear": 1396,
+    "label": "1396"
+  }
+}

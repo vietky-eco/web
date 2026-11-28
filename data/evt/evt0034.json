@@ -1,0 +1,21 @@
+{
+  "id": "evt0034",
+  "type": "event",
+  "title": "Quân Champa tiến vào Thăng Long (1371)",
+  "status": "draft",
+  "summary": "Quân Champa dưới thời Chế Bồng Nga tiến vào Thăng Long, phản ánh cuộc khủng hoảng quân sự và chính trị cuối triều Trần.",
+  "sourceIds": [
+    "src0031"
+  ],
+  "editorialNotes": "=== Bản ghi kế hoạch từ tab Sự kiện (evt) ===\nDòng workbook: 39\nNgười phụ trách: Chưa phân công\nTrạng thái trong bảng: Chưa viết\nNội dung chính trong bảng: Quân Champa dưới thời Chế Bồng Nga tiến vào Thăng Long, phản ánh cuộc khủng hoảng quân sự và chính trị cuối triều Trần.\nGhi chú gốc trong bảng:\nHồ sơ: Có nguồn tham khảo, chờ duyệt.\nẢnh đại diện: img0225. Dùng img0025 khi chưa có tệp.\nThời kỳ: per0004\nNhân vật: ppl0033\nĐịa danh: plc0002\nBài: art0070, art0075\nTimeline: tml0001, tml0010\nBản đồ: map0010\nNguồn: src0031, src0035\nNhân vật bối cảnh bổ sung: ppl0033, ppl0163, ppl0164. Liên kết biên tập, không tự suy ra vai trò chỉ huy.\nGhi chú: Các dòng tham chiếu trong workbook được giữ nguyên; chỉ đưa ID vào trường có cấu trúc khi file đích tồn tại và có nội dung.",
+  "periodIds": [
+    "per0004"
+  ],
+  "placeIds": [
+    "plc0002"
+  ],
+  "time": {
+    "sortYear": 1371,
+    "label": "1371"
+  }
+}

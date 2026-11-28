@@ -1,0 +1,18 @@
+{
+  "id": "evt0024",
+  "type": "event",
+  "title": "Trận Vân Đồn (1288)",
+  "status": "draft",
+  "summary": "Lực lượng do Trần Khánh Dư chỉ huy đánh đoàn thuyền lương của quân Nguyên, tác động đến hậu cần cuộc xâm lược.",
+  "sourceIds": [
+    "src0015"
+  ],
+  "editorialNotes": "=== Bản ghi kế hoạch từ tab Sự kiện (evt) ===\nDòng workbook: 29\nNgười phụ trách: Chưa phân công\nTrạng thái trong bảng: Chưa viết\nNội dung chính trong bảng: Lực lượng do Trần Khánh Dư chỉ huy đánh đoàn thuyền lương của quân Nguyên, tác động đến hậu cần cuộc xâm lược.\nGhi chú gốc trong bảng:\nHồ sơ: Có nguồn tham khảo, chờ duyệt.\nẢnh đại diện: img0012. Dùng img0025 khi chưa có tệp.\nThời kỳ: per0004\nNhân vật: ppl0028\nĐịa danh: plc0004\nBài: art0008, art0064, art0065\nTimeline: tml0001, tml0006\nẢnh: img0012\nBản đồ: map0005, map0008\nNguồn: src0015\nBối cảnh dẫn tới evt0009; không đồng nhất hai trận.\nNhân vật bối cảnh bổ sung: ppl0237, ppl0235. Liên kết biên tập, không tự suy ra vai trò chỉ huy.\nGhi chú: Các dòng tham chiếu trong workbook được giữ nguyên; chỉ đưa ID vào trường có cấu trúc khi file đích tồn tại và có nội dung.",
+  "periodIds": [
+    "per0004"
+  ],
+  "time": {
+    "sortYear": 1288,
+    "label": "1288"
+  }
+}

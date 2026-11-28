@@ -1,0 +1,21 @@
+{
+  "id": "evt0020",
+  "type": "event",
+  "title": "Hội nghị Bình Than (1282)",
+  "status": "draft",
+  "summary": "Triều Trần tổ chức hội nghị Bình Than bàn kế sách chống Nguyên và chuẩn bị lực lượng kháng chiến.",
+  "sourceIds": [
+    "src0012"
+  ],
+  "editorialNotes": "=== Bản ghi kế hoạch từ tab Sự kiện (evt) ===\nDòng workbook: 25\nNgười phụ trách: Chưa phân công\nTrạng thái trong bảng: Chưa viết\nNội dung chính trong bảng: Triều Trần tổ chức hội nghị Bình Than bàn kế sách chống Nguyên và chuẩn bị lực lượng kháng chiến.\nGhi chú gốc trong bảng:\nHồ sơ: Có nguồn tham khảo, chờ duyệt.\nẢnh đại diện: img0217. Dùng img0025 khi chưa có tệp.\nThời kỳ: per0004\nNhân vật: ppl0006, ppl0022, ppl0023, ppl0026\nĐịa danh: plc0014\nBài: art0012, art0053, art0055, art0062\nTimeline: tml0001, tml0006\nBản đồ: map0008\nNguồn: src0012\nGhi chú: Các dòng tham chiếu trong workbook được giữ nguyên; chỉ đưa ID vào trường có cấu trúc khi file đích tồn tại và có nội dung.",
+  "periodIds": [
+    "per0004"
+  ],
+  "personIds": [
+    "ppl0006"
+  ],
+  "time": {
+    "sortYear": 1282,
+    "label": "1282"
+  }
+}

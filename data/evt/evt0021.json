@@ -1,0 +1,14 @@
+{
+  "id": "evt0021",
+  "type": "event",
+  "title": "Hội nghị Diên Hồng (trước kháng chiến 1285)",
+  "status": "draft",
+  "summary": "Triều Trần triệu tập các bô lão tại điện Diên Hồng để bàn việc chống Nguyên. Nội dung cần phân biệt ghi chép sử liệu và ký ức về sau.",
+  "sourceIds": [
+    "src0012"
+  ],
+  "editorialNotes": "=== Bản ghi kế hoạch từ tab Sự kiện (evt) ===\nDòng workbook: 26\nNgười phụ trách: Chưa phân công\nTrạng thái trong bảng: Chưa viết\nNội dung chính trong bảng: Triều Trần triệu tập các bô lão tại điện Diên Hồng để bàn việc chống Nguyên. Nội dung cần phân biệt ghi chép sử liệu và ký ức về sau.\nGhi chú gốc trong bảng:\nHồ sơ: Có nguồn tham khảo, chờ duyệt.\nẢnh đại diện: img0218. Dùng img0025 khi chưa có tệp.\nThời kỳ: per0004\nNhân vật: ppl0022, ppl0023\nĐịa danh: plc0015\nBài: art0053, art0056\nTimeline: tml0001\nNguồn: src0012\nCần xác minh mốc 1284/1285 và cách chuyển lịch trước khi ghi ngày chính xác.\nGhi chú: Các dòng tham chiếu trong workbook được giữ nguyên; chỉ đưa ID vào trường có cấu trúc khi file đích tồn tại và có nội dung.",
+  "periodIds": [
+    "per0004"
+  ]
+}

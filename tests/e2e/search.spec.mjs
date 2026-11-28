@@ -5,6 +5,20 @@ const previewAbout = "/gioi-thieu?preview=1";
 const navbarInput = "#vk-search-input";
 const navbarButton = "#vk-search-form > button[type=submit]";
 
+async function readCatalog(page) {
+  return page.evaluate(async () => {
+    const response = await fetch("/data/catalog.json");
+    if (!response.ok) throw new Error("Catalog request failed: " + response.status);
+    return response.json();
+  });
+}
+
+function parseResultCount(text) {
+  const match = String(text).match(/^(\d+) kết quả$/);
+  expect(match, "Unexpected result count text: " + text).not.toBeNull();
+  return Number(match[1]);
+}
+
 async function openSearch(page, query) {
   const input = page.locator(navbarInput);
   await input.fill(query);
@@ -138,13 +152,15 @@ test("popup updates results during Vietnamese IME composition", async ({ page })
   await page.goto(previewHome);
   const popup = await openSearch(page, "");
   const query = popup.getByRole("searchbox", { name: "Từ khóa tìm kiếm" });
-  await expect(popup.locator(".sr-quick-count")).toHaveText("32 kết quả");
+  const count = popup.locator(".sr-quick-count");
+  await expect(count).toHaveText(/^\d+ kết quả$/);
+  const fullCountText = await count.textContent();
   await query.focus();
   const session = await page.context().newCDPSession(page);
   await session.send("Input.imeSetComposition", { text: "Đinh", selectionStart: 4, selectionEnd: 4 });
   await expect(query).toHaveValue("Đinh");
   await expect(popup.locator(".sr-result-title").first()).toContainText("Đinh");
-  await expect(popup.locator(".sr-quick-count")).not.toHaveText("32 kết quả");
+  await expect(count).not.toHaveText(fullCountText);
   await expect(query).toBeFocused();
 });
 
@@ -187,22 +203,27 @@ test("navbar suggestions and full search stay on the current page until opening 
 
 test("opening search without a query shows the full catalog and supports filters", async ({ page }) => {
   await page.goto(previewHome);
+  const catalog = await readCatalog(page);
+  const fullCount = catalog.length;
+  const placeCount = catalog.filter(({ type }) => type === "place").length;
+  expect(fullCount).toBeGreaterThan(10);
+
   await page.locator(navbarButton).click();
   const popup = page.locator(".sr-dialog[open]");
   const count = popup.locator(".sr-quick-count");
   await expect(popup.getByRole("searchbox")).toHaveValue("");
-  await expect(count).toHaveText("32 kết quả");
-  await expect(popup.locator(".sr-result")).toHaveCount(10);
+  await expect(count).toHaveText(fullCount + " kết quả");
+  await expect(popup.locator(".sr-result")).toHaveCount(Math.min(10, fullCount));
   await popup.getByRole("button", { name: "Trang cuối", exact: true }).click();
-  await expect(popup.locator(".sr-result")).toHaveCount(2);
+  await expect(popup.locator(".sr-result")).toHaveCount(fullCount % 10 || Math.min(10, fullCount));
 
   const type = await openFilter(popup, "type");
   await type.getByRole("button", { name: "Địa danh", exact: true }).click();
-  await expect(count).toHaveText("7 kết quả");
+  await expect(count).toHaveText(placeCount + " kết quả");
   await page.reload();
-  await expect(count).toHaveText("7 kết quả");
+  await expect(count).toHaveText(placeCount + " kết quả");
   await popup.getByRole("button", { name: "Xóa hết bộ lọc", exact: true }).click();
-  await expect(count).toHaveText("32 kết quả");
+  await expect(count).toHaveText(fullCount + " kết quả");
 });
 
 test("reload restores the search popup, pagination, and filters", async ({ page }) => {
@@ -367,18 +388,23 @@ for (const width of [390, 1440]) {
   test(`all results are reachable through modal pagination at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 844 });
     await page.goto(previewHome);
+    const fullCount = (await readCatalog(page)).length;
     const input = page.locator(navbarInput);
     await expect(input).toBeVisible();
     await input.fill("Lý");
     await page.getByRole("button", { name: "Xem thêm", exact: true }).click();
 
     const popup = page.locator(".sr-dialog[open]");
+    const count = popup.locator(".sr-quick-count");
+    await expect(count).toHaveText(/^\d+ kết quả$/);
+    const queryCount = parseResultCount(await count.textContent());
+    expect(queryCount).toBeGreaterThan(10);
     await expect(popup.locator(".sr-result")).toHaveCount(10);
     const pagination = popup.getByRole("navigation", { name: "Phân trang kết quả" });
     await expect(pagination.getByRole("button", { name: "Trang 1", exact: true })).toHaveAttribute("aria-current", "page");
     await popup.getByRole("button", { name: "Trang sau" }).click();
-    await expect(popup.locator(".sr-result")).toHaveCount(9);
-    await expect(popup.locator(".sr-quick-count")).toHaveText("19 kết quả");
+    await expect(popup.locator(".sr-result")).toHaveCount(Math.min(10, queryCount - 10));
+    await expect(count).toHaveText(queryCount + " kết quả");
     await expect(popup.getByRole("button", { name: "Trang sau" })).toBeDisabled();
     await expect(popup.getByRole("button", { name: "Trang trước" })).toBeFocused();
     expect(await popup.evaluate((dialog) => dialog.scrollWidth <= dialog.clientWidth)).toBe(true);
@@ -386,7 +412,7 @@ for (const width of [390, 1440]) {
 
     const query = popup.getByRole("searchbox", { name: "Từ khóa tìm kiếm", exact: true });
     await popup.getByRole("button", { name: "Xóa từ khóa" }).click();
-    await expect(popup.locator(".sr-quick-count")).toHaveText("32 kết quả");
+    await expect(count).toHaveText(fullCount + " kết quả");
     await query.pressSequentially("bach dang");
     await expect(query).toHaveValue("bach dang");
     await expect(popup.locator(".sr-quick-count")).toHaveText("3 kết quả");
@@ -451,13 +477,17 @@ test("multi-select, period bounds, and snapping update results", async ({ page }
   await expect(sort).toHaveValue("year-desc");
 
   const query = popup.getByRole("searchbox", { name: "Từ khóa tìm kiếm", exact: true });
+  const count = popup.locator(".sr-quick-count");
+  const beforeCompositionCount = await count.textContent();
   await query.evaluate((input) => {
     input.value = "Trần";
     input.dispatchEvent(new InputEvent("input", { bubbles: true, isComposing: true }));
   });
-  await expect(popup.locator(".sr-quick-count")).toHaveText("10 kết quả");
+  await expect(count).not.toHaveText(beforeCompositionCount);
+  const composingCount = await count.textContent();
+  expect(parseResultCount(composingCount)).toBeGreaterThan(0);
   await query.dispatchEvent("compositionend");
-  await expect(popup.locator(".sr-quick-count")).toHaveText("10 kết quả");
+  await expect(count).toHaveText(composingCount);
   await expect(page).toHaveURL(previewHome);
 });
 

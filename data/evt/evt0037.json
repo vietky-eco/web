@@ -1,0 +1,24 @@
+{
+  "id": "evt0037",
+  "type": "event",
+  "title": "Khủng hoảng kế vị Tiền Lê (1005)",
+  "status": "draft",
+  "summary": "Sau khi Lê Đại Hành qua đời, các hoàng tử tranh ngôi; Lê Long Việt và Lê Long Đĩnh gắn với chuỗi chuyển giao quyền lực này.",
+  "sourceIds": [
+    "src0021"
+  ],
+  "editorialNotes": "=== Bản ghi kế hoạch từ tab Sự kiện (evt) ===\nDòng workbook: 42\nNgười phụ trách: Chưa phân công\nTrạng thái trong bảng: Chưa viết\nNội dung chính trong bảng: Sau khi Lê Đại Hành qua đời, các hoàng tử tranh ngôi; Lê Long Việt và Lê Long Đĩnh gắn với chuỗi chuyển giao quyền lực này.\nGhi chú gốc trong bảng:\nHồ sơ: Có nguồn tham khảo, chờ duyệt.\nẢnh đại diện: img0226. Dùng img0025 khi chưa có tệp.\nThời kỳ: per0002\nNhân vật: ppl0002, ppl0010, ppl0011\nĐịa danh: plc0001\nBài: art0002, art0029\nTimeline: tml0002\nNguồn: src0021, src0035\nĐối chiếu thời gian ở ngôi thay vì lặp lại giai thoại.\nGhi chú: Các dòng tham chiếu trong workbook được giữ nguyên; chỉ đưa ID vào trường có cấu trúc khi file đích tồn tại và có nội dung.",
+  "periodIds": [
+    "per0002"
+  ],
+  "personIds": [
+    "ppl0002"
+  ],
+  "placeIds": [
+    "plc0001"
+  ],
+  "time": {
+    "sortYear": 1005,
+    "label": "1005"
+  }
+}

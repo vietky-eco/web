@@ -1,0 +1,23 @@
+{
+  "id": "evt0029",
+  "type": "event",
+  "title": "Cuộc tiến quân sang Champa (1069)",
+  "status": "draft",
+  "summary": "Chiến dịch thời Lý gắn với Lý Thánh Tông và Lý Thường Kiệt; đặt trong quan hệ Đại Việt – Champa, đối chiếu các biến động lãnh thổ.",
+  "sourceIds": [
+    "src0022",
+    "src0040"
+  ],
+  "editorialNotes": "=== Bản ghi kế hoạch từ tab Sự kiện (evt) ===\nDòng workbook: 34\nNgười phụ trách: Chưa phân công\nTrạng thái trong bảng: Chưa viết\nNội dung chính trong bảng: Chiến dịch thời Lý gắn với Lý Thánh Tông và Lý Thường Kiệt; đặt trong quan hệ Đại Việt – Champa, đối chiếu các biến động lãnh thổ.\nGhi chú gốc trong bảng:\nHồ sơ: Có nguồn tham khảo, chờ duyệt.\nẢnh đại diện: img0221. Dùng img0025 khi chưa có tệp.\nThời kỳ: per0003\nNhân vật: ppl0004, ppl0016\nĐịa danh: plc0022\nBài: art0032, art0039, art0077\nTimeline: tml0003, tml0010\nBản đồ: map0010\nNguồn: src0022, src0035, src0040\nKhông tự vẽ đường biên các châu khi chưa có căn cứ.\nGhi chú: Các dòng tham chiếu trong workbook được giữ nguyên; chỉ đưa ID vào trường có cấu trúc khi file đích tồn tại và có nội dung.",
+  "periodIds": [
+    "per0003"
+  ],
+  "personIds": [
+    "ppl0004",
+    "ppl0016"
+  ],
+  "time": {
+    "sortYear": 1069,
+    "label": "1069"
+  }
+}

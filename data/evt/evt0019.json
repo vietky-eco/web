@@ -1,0 +1,25 @@
+{
+  "id": "evt0019",
+  "type": "event",
+  "title": "Chuyển giao Lý – Trần (1225)",
+  "status": "draft",
+  "summary": "Lý Chiêu Hoàng nhường ngôi cho Trần Cảnh, mở đầu vương triều Trần. Đề cương làm rõ bối cảnh và vai trò các nhân vật.",
+  "sourceIds": [
+    "src0011"
+  ],
+  "editorialNotes": "=== Bản ghi kế hoạch từ tab Sự kiện (evt) ===\nDòng workbook: 24\nNgười phụ trách: Chưa phân công\nTrạng thái trong bảng: Chưa viết\nNội dung chính trong bảng: Lý Chiêu Hoàng nhường ngôi cho Trần Cảnh, mở đầu vương triều Trần. Đề cương làm rõ bối cảnh và vai trò các nhân vật.\nGhi chú gốc trong bảng:\nHồ sơ: Có nguồn tham khảo, chờ duyệt.\nẢnh đại diện: img0216. Dùng img0025 khi chưa có tệp.\nThời kỳ: per0003, per0004\nNhân vật: ppl0005, ppl0020, ppl0021, ppl0035, ppl0037\nĐịa danh: plc0002\nBài: art0003, art0004, art0048, art0049, art0050, art0051\nTimeline: tml0001, tml0003, tml0004\nNguồn: src0011\nDùng mốc 1225 theo kế hoạch; khi ghi ngày cần đối chiếu lịch âm/dương.\nNhân vật bối cảnh bổ sung: ppl0120, ppl0123, ppl0122, ppl0121, ppl0126, ppl0127, ppl0119. Liên kết biên tập, không tự suy ra vai trò chỉ huy.\nGhi chú: Các dòng tham chiếu trong workbook được giữ nguyên; chỉ đưa ID vào trường có cấu trúc khi file đích tồn tại và có nội dung.",
+  "periodIds": [
+    "per0003",
+    "per0004"
+  ],
+  "personIds": [
+    "ppl0005"
+  ],
+  "placeIds": [
+    "plc0002"
+  ],
+  "time": {
+    "sortYear": 1225,
+    "label": "1225"
+  }
+}

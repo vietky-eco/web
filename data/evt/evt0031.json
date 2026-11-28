@@ -1,0 +1,21 @@
+{
+  "id": "evt0031",
+  "type": "event",
+  "title": "Dựng chùa Diên Hựu (1049)",
+  "status": "draft",
+  "summary": "Triều Lý xây chùa Diên Hựu; biên soạn theo ghi chép và đối chiếu lịch sử công trình với các lần trùng tu về sau.",
+  "sourceIds": [
+    "src0029"
+  ],
+  "editorialNotes": "=== Bản ghi kế hoạch từ tab Sự kiện (evt) ===\nDòng workbook: 36\nNgười phụ trách: Chưa phân công\nTrạng thái trong bảng: Chưa viết\nNội dung chính trong bảng: Triều Lý xây chùa Diên Hựu; biên soạn theo ghi chép và đối chiếu lịch sử công trình với các lần trùng tu về sau.\nGhi chú gốc trong bảng:\nHồ sơ: Có nguồn tham khảo, chờ duyệt.\nẢnh đại diện: img0223. Dùng img0025 khi chưa có tệp.\nThời kỳ: per0003\nNhân vật: ppl0015\nĐịa danh: plc0020\nBài: art0031, art0044, art0045\nTimeline: tml0003, tml0008, tml0009\nBản đồ: map0003\nNguồn: src0029, src0035\nGhi chú: Các dòng tham chiếu trong workbook được giữ nguyên; chỉ đưa ID vào trường có cấu trúc khi file đích tồn tại và có nội dung.",
+  "periodIds": [
+    "per0003"
+  ],
+  "personIds": [
+    "ppl0015"
+  ],
+  "time": {
+    "sortYear": 1049,
+    "label": "1049"
+  }
+}

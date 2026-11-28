@@ -1,0 +1,25 @@
+{
+  "id": "evt0003",
+  "type": "event",
+  "title": "Lê Hoàn lên ngôi (980)",
+  "status": "draft",
+  "summary": "Trong bối cảnh khủng hoảng kế vị và nguy cơ chiến tranh, Lê Hoàn lên ngôi, mở đầu triều Tiền Lê.",
+  "sourceIds": [
+    "src0002"
+  ],
+  "editorialNotes": "=== Bản ghi kế hoạch từ tab Sự kiện (evt) ===\nDòng workbook: 8\nNgười phụ trách: Chưa phân công\nTrạng thái trong bảng: Chưa viết\nNội dung chính trong bảng: Trong bối cảnh khủng hoảng kế vị và nguy cơ chiến tranh, Lê Hoàn lên ngôi, mở đầu triều Tiền Lê.\nGhi chú gốc trong bảng:\nHồ sơ: Có nguồn tham khảo, chờ duyệt.\nẢnh đại diện: img0211. Dùng img0025 khi chưa có tệp.\nThời kỳ: per0001, per0002\nNhân vật: ppl0002, ppl0008, ppl0009\nĐịa danh: plc0001\nBài: art0002, art0020, art0021\nTimeline: tml0002, tml0004\nNguồn: src0002\nSự kiện chuyển tiếp Đinh – Tiền Lê.\nGhi chú: Các dòng tham chiếu trong workbook được giữ nguyên; chỉ đưa ID vào trường có cấu trúc khi file đích tồn tại và có nội dung.",
+  "periodIds": [
+    "per0001",
+    "per0002"
+  ],
+  "personIds": [
+    "ppl0002"
+  ],
+  "placeIds": [
+    "plc0001"
+  ],
+  "time": {
+    "sortYear": 980,
+    "label": "980"
+  }
+}

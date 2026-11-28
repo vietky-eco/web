@@ -1,0 +1,24 @@
+{
+  "id": "evt0026",
+  "type": "event",
+  "title": "Xây thành Tây Đô (1397)",
+  "status": "draft",
+  "summary": "Thành Tây Đô được xây dựng năm 1397, gắn với việc chuyển trung tâm quyền lực về Thanh Hóa cuối thời Trần.",
+  "sourceIds": [
+    "src0017"
+  ],
+  "editorialNotes": "=== Bản ghi kế hoạch từ tab Sự kiện (evt) ===\nDòng workbook: 31\nNgười phụ trách: Chưa phân công\nTrạng thái trong bảng: Chưa viết\nNội dung chính trong bảng: Thành Tây Đô được xây dựng năm 1397, gắn với việc chuyển trung tâm quyền lực về Thanh Hóa cuối thời Trần.\nGhi chú gốc trong bảng:\nHồ sơ: Có nguồn tham khảo, chờ duyệt.\nẢnh đại diện: img0016. Dùng img0025 khi chưa có tệp.\nThời kỳ: per0004\nNhân vật: ppl0030\nĐịa danh: plc0005, plc0025\nBài: art0009, art0074, art0075\nTimeline: tml0001, tml0004, tml0009, tml0010\nẢnh: img0016\nBản đồ: map0006\nNguồn: src0017\nGhi chú: Các dòng tham chiếu trong workbook được giữ nguyên; chỉ đưa ID vào trường có cấu trúc khi file đích tồn tại và có nội dung.",
+  "periodIds": [
+    "per0004"
+  ],
+  "personIds": [
+    "ppl0030"
+  ],
+  "placeIds": [
+    "plc0005"
+  ],
+  "time": {
+    "sortYear": 1397,
+    "label": "1397"
+  }
+}

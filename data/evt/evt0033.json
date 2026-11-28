@@ -1,0 +1,18 @@
+{
+  "id": "evt0033",
+  "type": "event",
+  "title": "Hôn nhân Huyền Trân – Chế Mân (1306)",
+  "status": "draft",
+  "summary": "Huyền Trân kết hôn với Chế Mân trong bối cảnh bang giao Đại Việt – Champa, gắn với việc chuyển giao hai châu Ô và Lý.",
+  "sourceIds": [
+    "src0030"
+  ],
+  "editorialNotes": "=== Bản ghi kế hoạch từ tab Sự kiện (evt) ===\nDòng workbook: 38\nNgười phụ trách: Chưa phân công\nTrạng thái trong bảng: Chưa viết\nNội dung chính trong bảng: Huyền Trân kết hôn với Chế Mân trong bối cảnh bang giao Đại Việt – Champa, gắn với việc chuyển giao hai châu Ô và Lý.\nGhi chú gốc trong bảng:\nHồ sơ: Có nguồn tham khảo, chờ duyệt.\nẢnh đại diện: img0021. Dùng img0025 khi chưa có tệp.\nThời kỳ: per0004\nNhân vật: ppl0023, ppl0031, ppl0032, ppl0038\nĐịa danh: plc0022, plc0023, plc0024\nBài: art0070, art0077\nTimeline: tml0001, tml0004, tml0010\nẢnh: img0021\nBản đồ: map0010\nNguồn: src0030, src0035\nKhông trình bày chuyện tình truyền tụng như dữ kiện đã xác nhận.\nNhân vật bối cảnh bổ sung: ppl0468, ppl0184, ppl0032, ppl0031. Liên kết biên tập, không tự suy ra vai trò chỉ huy.\nGhi chú: Các dòng tham chiếu trong workbook được giữ nguyên; chỉ đưa ID vào trường có cấu trúc khi file đích tồn tại và có nội dung.",
+  "periodIds": [
+    "per0004"
+  ],
+  "time": {
+    "sortYear": 1306,
+    "label": "1306"
+  }
+}

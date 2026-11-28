@@ -1,0 +1,21 @@
+{
+  "id": "evt0032",
+  "type": "event",
+  "title": "Dựng tháp Báo Thiên (1057)",
+  "status": "draft",
+  "summary": "Tháp Báo Thiên được xây dựng dưới thời Lý Thánh Tông. Các thông số về số tầng, chiều cao và vật liệu cần đối chiếu riêng.",
+  "sourceIds": [
+    "src0033"
+  ],
+  "editorialNotes": "=== Bản ghi kế hoạch từ tab Sự kiện (evt) ===\nDòng workbook: 37\nNgười phụ trách: Chưa phân công\nTrạng thái trong bảng: Chưa viết\nNội dung chính trong bảng: Tháp Báo Thiên được xây dựng dưới thời Lý Thánh Tông. Các thông số về số tầng, chiều cao và vật liệu cần đối chiếu riêng.\nGhi chú gốc trong bảng:\nHồ sơ: Có nguồn tham khảo, chờ duyệt.\nẢnh đại diện: img0224. Dùng img0025 khi chưa có tệp.\nThời kỳ: per0003\nNhân vật: ppl0016\nĐịa danh: plc0021\nBài: art0032, art0045\nTimeline: tml0003, tml0008, tml0009\nBản đồ: map0003\nNguồn: src0033, src0035\nKhông coi hình phục dựng là ảnh công trình nguyên gốc.\nGhi chú: Các dòng tham chiếu trong workbook được giữ nguyên; chỉ đưa ID vào trường có cấu trúc khi file đích tồn tại và có nội dung.",
+  "periodIds": [
+    "per0003"
+  ],
+  "personIds": [
+    "ppl0016"
+  ],
+  "time": {
+    "sortYear": 1057,
+    "label": "1057"
+  }
+}
