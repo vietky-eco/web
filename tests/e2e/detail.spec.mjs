@@ -25,6 +25,7 @@ test("mục lục lấy đúng đề mục và sao chép liên kết trên đi�
     "Ý nghĩa của sự kiện",
     "Nguồn tư liệu",
   ]);
+  await expect(contents.getByRole("button")).toHaveCount(0);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 
   const target = contents.getByRole("link", { name: "Lập triều Đinh và đặt quốc hiệu Đại Cồ Việt" });
@@ -32,10 +33,11 @@ test("mục lục lấy đúng đề mục và sao chép liên kết trên đi�
   await page.keyboard.press("Enter");
   await expect(page).toHaveURL(`${firstPath}#sec002`);
   await expect(page.locator("#sec002 h2")).toBeInViewport();
-  await contents.getByRole("button", { name: /Sao chép liên kết đến mục Ý nghĩa/ }).click();
-  await expect(contents.getByRole("status")).toContainText("Đã sao chép");
+  const section = page.locator("#sec002");
+  await section.getByRole("button", { name: /Sao chép liên kết đến mục Lập triều Đinh/ }).click();
+  await expect(section.getByRole("status")).toHaveText("Đã sao chép liên kết");
   const copied = await page.evaluate(() => navigator.clipboard.readText());
-  expect(copied).toBe(new URL(`${firstPath}#sec003`, page.url()).href);
+  expect(copied).toBe(new URL(`${firstPath}#sec002`, page.url()).href);
 });
 
 test("liên kết tới đề mục cuộn đúng vị trí sau khi tải dữ liệu", async ({ page }) => {
