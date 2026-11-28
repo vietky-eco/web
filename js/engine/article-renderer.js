@@ -55,27 +55,36 @@ function ensureMarkup(container) {
     .before(element(doc, "div", "", "detail-content"));
 }
 
-function renderCover(container, cover) {
-  const figure = container.querySelector("#detail-cover");
+function renderImageFigure(figure, media) {
   if (!figure) return;
   figure.hidden = true;
-  if (!/^assets\/img\/img[0-9]{4}\.(webp|png|jpe?g|svg)$/.test(cover?.path) ||
-      ![cover.alt, cover.caption, cover.credit, cover.license].every(value =>
+  if (!/^assets\/img\/img[0-9]{4}\.(webp|png|jpe?g|svg)$/.test(media?.path) ||
+      ![media.alt, media.caption, media.credit, media.license].every(value =>
         typeof value === "string" && value.trim(),
       )) return;
 
-  const doc = container.ownerDocument;
+  const doc = figure.ownerDocument;
   const image = figure.querySelector("img");
   const caption = figure.querySelector("figcaption");
-  image.alt = cover.alt;
+  image.alt = media.alt;
+  if ([media.width, media.height].every(size => Number.isInteger(size) && size > 0)) {
+    image.width = media.width;
+    image.height = media.height;
+  }
   image.onerror = () => { figure.hidden = true; };
-  image.src = `/${cover.path}`;
-  caption.replaceChildren(
-    doc.createTextNode(`${cover.caption} `),
-    safeLink(doc, `Ảnh: ${cover.credit} · ${cover.license}`, cover.sourceUrl),
-  );
+  caption.textContent = `${media.caption} `;
+  if (media.licenseUrl) {
+    caption.append(
+      safeLink(doc, `Ảnh: ${media.credit}`, media.sourceUrl),
+      doc.createTextNode(" · "),
+      safeLink(doc, media.license, media.licenseUrl),
+    );
+  } else {
+    caption.append(safeLink(doc, `Ảnh: ${media.credit} · ${media.license}`, media.sourceUrl));
+  }
   caption.hidden = false;
   figure.hidden = false;
+  image.src = `/${media.path}`;
 }
 
 /** Chỉ dựng DOM từ dữ liệu; không đọc URL, tra ID hoặc gọi mạng. */
@@ -83,7 +92,7 @@ export function renderArticle(
   container,
   entity,
   article = null,
-  { sources = [], related = [], cover = null } = {},
+  { sources = [], related = [], cover = null, sectionImages = new Map() } = {},
 ) {
   if (typeof entity?.title !== "string" || !entity.title.trim()) {
     throw new Error("Tư liệu chưa có tiêu đề hợp lệ.");
@@ -97,7 +106,7 @@ export function renderArticle(
   const date = entity.time?.label ?? entity.date;
   get("detail-meta").textContent = typeof date === "string" ? date : "";
   get("detail-meta").hidden = !get("detail-meta").textContent;
-  renderCover(container, cover);
+  renderImageFigure(get("detail-cover"), cover);
 
   const content = article ?? entity;
   paragraphs(get("detail-context"), content.context);
@@ -110,6 +119,17 @@ export function renderArticle(
     paragraphs(node, section.body ?? section.content);
     if (section.heading) node.prepend(element(doc, "h2", section.heading));
     if (section.id) node.id = section.id;
+    const media = sectionImages.get(section.imageId);
+    if (media) {
+      const figure = element(doc, "figure");
+      figure.className = "vk-detail-inline-image";
+      const image = element(doc, "img");
+      image.loading = "lazy";
+      image.decoding = "async";
+      figure.append(image, element(doc, "figcaption"));
+      renderImageFigure(figure, media);
+      node.append(figure);
+    }
     body.append(node);
   }
   if (!body.hasChildNodes() && !content.context) {

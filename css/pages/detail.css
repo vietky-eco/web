@@ -85,14 +85,28 @@
   margin: var(--vk-space-8) auto 0;
 }
 
-.vk-detail-cover img {
+.vk-detail-cover img,
+.vk-detail-inline-image img {
   display: block;
   width: 100%;
+}
+
+.vk-detail-cover img {
   aspect-ratio: 3 / 2;
   object-fit: cover;
 }
 
-.vk-detail-cover figcaption {
+.vk-detail-inline-image {
+  max-width: 17rem;
+  margin: var(--vk-space-4) auto var(--vk-space-8);
+}
+
+.vk-detail-inline-image img {
+  height: auto;
+}
+
+.vk-detail-cover figcaption,
+.vk-detail-inline-image figcaption {
   padding-block-start: var(--vk-space-2);
   color: var(--vk-text-muted);
   font-size: var(--vk-type-caption);
@@ -100,7 +114,8 @@
   overflow-wrap: anywhere;
 }
 
-.vk-detail-cover figcaption a {
+.vk-detail-cover figcaption a,
+.vk-detail-inline-image figcaption a {
   text-decoration: underline;
   text-underline-offset: 0.2em;
 }

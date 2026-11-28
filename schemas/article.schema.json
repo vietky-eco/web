@@ -68,6 +68,10 @@
             "type": "string",
             "minLength": 1,
             "pattern": "\\S"
+          },
+          "imageId": {
+            "type": "string",
+            "pattern": "^img[0-9]{4}$"
           }
         }
       },

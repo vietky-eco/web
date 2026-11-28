@@ -94,13 +94,20 @@ async function loadSources(entity, article) {
   );
 }
 
-async function loadCover(article) {
-  if (!article?.coverImageId) return null;
-  const image = await loadContent(article.coverImageId).catch(() => null);
-  if (!image) return null;
-  const sourceId = image.sourceIds?.[0];
-  const source = sourceId ? await loadContent(sourceId).catch(() => null) : null;
-  return { ...image, sourceUrl: source?.url };
+async function loadArticleImages(article) {
+  const ids = new Set([
+    article?.coverImageId,
+    ...(article?.sections ?? []).map(section => section.imageId),
+  ]);
+  ids.delete(undefined);
+  const images = await Promise.all([...ids].map(async id => {
+    const image = await loadContent(id).catch(() => null);
+    if (!image) return [id, null];
+    const sourceId = image.sourceIds?.[0];
+    const source = sourceId ? await loadContent(sourceId).catch(() => null) : null;
+    return [id, { ...image, sourceUrl: source?.url }];
+  }));
+  return new Map(images);
 }
 
 function showError(error) {
@@ -126,9 +133,9 @@ async function initDetail() {
     if (article && article.entityId !== entity.id) {
       throw new Error("Bài viết không khớp với tư liệu đang mở.");
     }
-    const [sources, cover] = await Promise.all([
+    const [sources, images] = await Promise.all([
       loadSources(entity, article),
-      loadCover(article),
+      loadArticleImages(article),
     ]);
     const pathsById = indexDetailPaths(index);
     const related = (entity.related ?? []).map((item) => ({
@@ -139,7 +146,8 @@ async function initDetail() {
     renderArticle(articleElement, entity, article, {
       sources,
       related,
-      cover,
+      cover: images.get(article?.coverImageId),
+      sectionImages: images,
     });
     updateCategory(path, id);
     document.title = `${entity.title} | Việt Ký`;

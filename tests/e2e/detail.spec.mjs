@@ -22,6 +22,16 @@ test("ảnh bài viết có chú thích và bài vẫn đọc được khi ảnh
     "href", "https://commons.wikimedia.org/wiki/File:Ninh_Binh_-_NinhBinh1659.jpg",
   );
 
+  const inlineFigure = page.locator("#sec003 figure");
+  await inlineFigure.scrollIntoViewIfNeeded();
+  await expect.poll(() => inlineFigure.getByRole("img").evaluate(image => image.naturalWidth)).toBeGreaterThan(0);
+  await expect(inlineFigure.getByRole("link", { name: "Ảnh: Nguyễn Thanh Quang" })).toHaveAttribute(
+    "href", /^https:\/\/commons\.wikimedia\.org\/wiki\/File:/,
+  );
+  await expect(inlineFigure.getByRole("link", { name: "CC BY-SA 3.0" })).toHaveAttribute(
+    "href", "https://creativecommons.org/licenses/by-sa/3.0/",
+  );
+
   await page.route("**/assets/img/img0001.webp", route => route.fulfill({ status: 404 }));
   await page.reload();
   await expect(cover).toBeHidden();

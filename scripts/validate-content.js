@@ -10,7 +10,7 @@ const REFERENCE_PREFIXES = {
   personIds: ["ppl"], placeIds: ["plc"], eventIds: ["evt"], parentEventId: ["evt"],
   articleId: ["art"], articleIds: ["art"], storyIds: ["sty"], timelineIds: ["tml"],
   entityId: Object.keys(ENTITY_TYPES), targetId: ["evt", "ppl", "plc"],
-  coverImageId: ["img"]
+  coverImageId: ["img"], imageId: ["img"]
 };
 
 function requireText(value, message) {
