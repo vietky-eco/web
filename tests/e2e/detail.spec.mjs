@@ -85,7 +85,6 @@ test.describe("chú giải trên thiết bị cảm ứng", () => {
 });
 
 test("trình phát Nghe câu chuyện hỗ trợ phát, tạm dừng, tua, tốc độ và ẩn khi không có audio", async ({ page }) => {
-  await attachSampleArticle(page);
   await page.goto(firstPath);
 
   const player = page.getByRole("region", { name: "Nghe câu chuyện" });
@@ -160,6 +159,10 @@ test("liên kết tới đề mục cuộn đúng vị trí sau khi tải dữ l
 });
 
 test("bài chỉ có tóm tắt ẩn mục lục; mã đề mục sai không làm mất bài", async ({ page }) => {
+  await page.route("**/data/evt/evt0001.json", async route => {
+    const response = await route.fetch();
+    await route.fulfill({ json: { ...await response.json(), articleId: null } });
+  });
   await page.goto(`${firstPath}#khong-co-muc-nay`);
   await expect(page.locator("#detail-article")).toBeVisible();
   await expect(page.getByRole("navigation", { name: "Mục lục bài viết" })).toHaveCount(0);
@@ -185,7 +188,7 @@ for (const [path, id, title, year] of [
     await expect(page.locator("#detail-summary")).not.toBeEmpty();
     await expect(page.locator("#detail-meta")).toHaveText(year);
     await expect(page.locator("#detail-sources")).toBeVisible();
-    await expect(page.locator("#detail-source-list a")).toHaveAttribute("href", /^https:\/\/baotanglichsu.vn\//);
+    await expect(page.locator('#detail-source-list a[href^="https://baotanglichsu.vn/"]').first()).toBeVisible();
     await expect(page.locator("#detail-loading")).toBeHidden();
     await expect(page.locator("#detail-error")).toBeHidden();
     await expect(page).toHaveTitle(`${title} | Việt Ký`);
@@ -309,6 +312,10 @@ test("renderer đọc articleId, context, sections và hiển thị văn bản a
 });
 
 test("nguồn lỗi không làm mất bài; chặn URL nguồn không an toàn", async ({ page }) => {
+  await page.route("**/data/evt/evt0001.json", async route => {
+    const response = await route.fetch();
+    await route.fulfill({ json: { ...await response.json(), articleId: null } });
+  });
   await page.route("**/data/src/src0001.json", route => route.fulfill({ json: {
     id: "src0001", title: "Nguồn thử nghiệm", url: "javascript:alert(1)",
   } }));
