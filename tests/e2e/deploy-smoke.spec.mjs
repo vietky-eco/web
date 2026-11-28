@@ -60,7 +60,8 @@ for (const viewport of widths) {
       await page.goto("/");
       const header = page.locator(".vk-header[data-initialized]");
       if (viewport.width <= 1100) {
-        const menu = header.getByRole("button", { name: "Mở menu" });
+        const menu = header.locator("#vk-menu-toggle");
+        await expect(menu).toHaveAccessibleName("Mở menu");
         await menu.click();
         await expect(menu).toHaveAttribute("aria-expanded", "true");
         const category = header.getByRole("button", { name: "Dấu xưa" });
