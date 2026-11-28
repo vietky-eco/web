@@ -3,16 +3,18 @@ import { expect, test } from "@playwright/test";
 const firstPath = "/chuyen-su/su-kien/thong-nhat-dat-nuoc-lap-dai-co-viet-968";
 const secondPath = "/chuyen-su/su-kien/bien-co-cung-dinh-nha-dinh-979";
 const personPath = "/chuyen-su/nhan-vat/dinh-bo-linh";
+const hoaLuPath = "/dau-xua/dia-danh/hoa-lu";
 
-async function attachSampleArticle(page) {
-  await page.route("**/data/evt/evt0001.json", async route => {
+async function attachSampleArticle(page, entity = "evt/evt0001", articleId = "art0001") {
+  await page.route(`**/data/${entity}.json`, async route => {
     const response = await route.fetch();
-    await route.fulfill({ json: { ...await response.json(), articleId: "art0001" } });
+    await route.fulfill({ json: { ...await response.json(), articleId } });
   });
 }
 
 test("ảnh bài viết có chú thích và bài vẫn đọc được khi ảnh lỗi", async ({ page }) => {
   await attachSampleArticle(page);
+  await attachSampleArticle(page, "plc/plc0001", "art0081");
   await page.goto(firstPath);
   const cover = page.locator("#detail-cover");
   await expect(cover.getByRole("img", { name: /Cố đô Hoa Lư/ })).toBeVisible();
@@ -22,7 +24,10 @@ test("ảnh bài viết có chú thích và bài vẫn đọc được khi ảnh
     "href", "https://commons.wikimedia.org/wiki/File:Ninh_Binh_-_NinhBinh1659.jpg",
   );
 
-  const inlineFigure = page.locator("#sec003 figure");
+  await expect(page.locator("#sec003 figure")).toHaveCount(0);
+  await page.getByRole("link", { name: "Tìm hiểu thêm về kinh đô Hoa Lư" }).click();
+  await expect(page).toHaveURL(hoaLuPath);
+  const inlineFigure = page.locator("#sec002 figure");
   await inlineFigure.scrollIntoViewIfNeeded();
   await expect.poll(() => inlineFigure.getByRole("img").evaluate(image => image.naturalWidth)).toBeGreaterThan(0);
   await expect(inlineFigure.getByRole("link", { name: "Ảnh: Nguyễn Thanh Quang" })).toHaveAttribute(
@@ -33,9 +38,9 @@ test("ảnh bài viết có chú thích và bài vẫn đọc được khi ảnh
   );
 
   await page.route("**/assets/img/img0001.webp", route => route.fulfill({ status: 404 }));
-  await page.reload();
-  await expect(cover).toBeHidden();
+  await page.goto(firstPath);
   await expect(page.locator("#sec003")).toBeVisible();
+  await expect(cover).toBeHidden();
 });
 
 test("mục lục lấy đúng đề mục và sao chép liên kết trên điện thoại", async ({ page, context }) => {
@@ -47,21 +52,21 @@ test("mục lục lấy đúng đề mục và sao chép liên kết trên đi�
   const contents = page.getByRole("navigation", { name: "Mục lục bài viết" });
   await expect(contents.getByRole("link")).toHaveText([
     "Bối cảnh lịch sử",
-    "Đinh Bộ Lĩnh tập hợp lực lượng",
-    "Lập triều Đinh và đặt quốc hiệu Đại Cồ Việt",
+    "Từ căn cứ Hoa Lư đến thống nhất",
+    "Năm 968, triều Đinh ra đời",
     "Vì sao chọn Hoa Lư làm kinh đô?",
     "Nguồn tư liệu",
   ]);
   await expect(contents.getByRole("button")).toHaveCount(0);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 
-  const target = contents.getByRole("link", { name: "Lập triều Đinh và đặt quốc hiệu Đại Cồ Việt" });
+  const target = contents.getByRole("link", { name: "Năm 968, triều Đinh ra đời" });
   await target.focus();
   await page.keyboard.press("Enter");
   await expect(page).toHaveURL(`${firstPath}#sec002`);
   await expect(page.locator("#sec002 h2")).toBeInViewport();
   const section = page.locator("#sec002");
-  await section.getByRole("button", { name: /Sao chép liên kết đến mục Lập triều Đinh/ }).click();
+  await section.getByRole("button", { name: /Sao chép liên kết đến mục Năm 968/ }).click();
   await expect(section.getByRole("status")).toHaveText("Đã sao chép liên kết");
   const copied = await page.evaluate(() => navigator.clipboard.readText());
   expect(copied).toBe(new URL(`${firstPath}#sec002`, page.url()).href);
@@ -116,7 +121,7 @@ for (const [path, id, title, year] of [
 
 test("liên kết bài liên quan dùng slug và điều hướng đúng", async ({ page }) => {
   await page.goto(firstPath);
-  await page.locator("#detail-related-list a").click();
+  await page.getByRole("link", { name: "Biến cố kế vị cuối thời Đinh" }).click();
   await expect(page).toHaveURL(secondPath);
   await expect(page.locator("#detail-title")).toHaveText("Biến cố cung đình nhà Đinh (979)");
   await expect(page.locator("#detail-category-link")).toHaveAttribute("href", "/chuyen-su/su-kien");
