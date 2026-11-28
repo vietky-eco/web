@@ -27,7 +27,8 @@ test("A11Y-01: dropdown desktop mở bằng bàn phím và Escape trả focus", 
 test("A11Y-02: menu mobile giữ focus trong dialog và trả về nút mở", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   const header = await loadHeader(page);
-  const trigger = header.getByRole("button", { name: "Mở menu" });
+  const trigger = header.locator("#vk-menu-toggle");
+  await expect(trigger).toHaveAccessibleName("Mở menu");
   await trigger.focus();
   await trigger.press("Enter");
   const panel = header.locator("#vk-menu-panel");
