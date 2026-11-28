@@ -43,6 +43,42 @@
       "minLength": 1,
       "pattern": "\\S"
     },
+    "readAloud": {
+      "type": "boolean"
+    },
+    "contextImageId": {
+      "type": "string",
+      "pattern": "^img[0-9]{4}$"
+    },
+    "contextImageAfterParagraph": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "glossary": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["term", "description"],
+        "properties": {
+          "term": { "type": "string", "pattern": "\\S" },
+          "description": { "type": "string", "pattern": "\\S" }
+        }
+      }
+    },
+    "references": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["citation", "url"],
+        "properties": {
+          "citation": { "type": "string", "pattern": "\\S" },
+          "url": { "type": "string", "format": "uri", "pattern": "^https://" },
+          "locator": { "type": "string", "pattern": "\\S" }
+        }
+      }
+    },
     "sections": {
       "type": "array",
       "items": {
@@ -72,6 +108,10 @@
           "imageId": {
             "type": "string",
             "pattern": "^img[0-9]{4}$"
+          },
+          "imageAfterParagraph": {
+            "type": "integer",
+            "minimum": 1
           }
         }
       },

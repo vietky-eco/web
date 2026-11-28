@@ -60,5 +60,11 @@ export function initArticleContents(article) {
     return;
   }
   const target = sections.find(section => section.id === id);
-  if (target) requestAnimationFrame(() => target.scrollIntoView());
+  if (target) {
+    const hash = window.location.hash;
+    requestAnimationFrame(async () => {
+      await document.fonts.ready;
+      if (window.location.hash === hash) target.scrollIntoView({ behavior: "instant" });
+    });
+  }
 }

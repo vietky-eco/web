@@ -6,6 +6,8 @@ import {
 } from "../core/detail-routes.js";
 import { renderArticle } from "../engine/article-renderer.js";
 import { initArticleContents } from "../components/article-contents.js";
+import { initArticleGlossary } from "../components/article-glossary.js";
+import { initArticleNarration } from "../components/article-narration.js";
 
 const CATEGORIES = {
   "/chuyen-su/su-kien": ["Sự kiện lịch sử", "CHUYỆN SỬ"],
@@ -97,6 +99,7 @@ async function loadSources(entity, article) {
 async function loadArticleImages(article) {
   const ids = new Set([
     article?.coverImageId,
+    article?.contextImageId,
     ...(article?.sections ?? []).map(section => section.imageId),
   ]);
   ids.delete(undefined);
@@ -133,9 +136,13 @@ async function initDetail() {
     if (article && article.entityId !== entity.id) {
       throw new Error("Bài viết không khớp với tư liệu đang mở.");
     }
-    const [sources, images] = await Promise.all([
+    const relatedIds = new Set((entity.related ?? []).map(item => item.targetId));
+    const personIds = [...new Set(entity.personIds ?? [])]
+      .filter(personId => personId !== entity.id && !relatedIds.has(personId));
+    const [sources, images, people] = await Promise.all([
       loadSources(entity, article),
       loadArticleImages(article),
+      Promise.all(personIds.map(personId => loadContent(personId).catch(() => null))),
     ]);
     const pathsById = indexDetailPaths(index);
     const related = (entity.related ?? []).map((item) => ({
@@ -146,6 +153,8 @@ async function initDetail() {
     renderArticle(articleElement, entity, article, {
       sources,
       related,
+      people: people.filter(person => person?.type === "person" && person.title)
+        .map(person => ({ label: person.title, href: detailPath(person.id, pathsById) })),
       cover: images.get(article?.coverImageId),
       sectionImages: images,
     });
@@ -158,6 +167,11 @@ async function initDetail() {
     articleElement.hidden = false;
     document.getElementById("detail-back").hidden = false;
     initArticleContents(articleElement);
+    if (article?.glossary?.length) {
+      articleElement.classList.add("vk-detail-article--glossary");
+      initArticleGlossary(articleElement, article.glossary);
+    }
+    if (article?.readAloud) initArticleNarration(articleElement, entity, article);
   } catch (error) {
     showError(error);
   } finally {
