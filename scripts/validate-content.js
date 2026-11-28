@@ -4,12 +4,13 @@ import { resolveId } from "../js/core/id-resolver.js";
 
 const DATA_URL = new URL("../data/", import.meta.url);
 const ENTITY_TYPES = { evt: "event", per: "period", ppl: "person", plc: "place", cul: "culture" };
-const PREFIXES = ["evt", "per", "ppl", "plc", "cul", "src", "art", "sty", "tml"];
+const PREFIXES = ["evt", "per", "ppl", "plc", "cul", "src", "art", "sty", "tml", "img"];
 const REFERENCE_PREFIXES = {
   sourceIds: ["src"], periodIds: ["per"], parentId: ["per"], childIds: ["per"],
   personIds: ["ppl"], placeIds: ["plc"], eventIds: ["evt"], parentEventId: ["evt"],
   articleId: ["art"], articleIds: ["art"], storyIds: ["sty"], timelineIds: ["tml"],
-  entityId: Object.keys(ENTITY_TYPES), targetId: ["evt", "ppl", "plc"]
+  entityId: Object.keys(ENTITY_TYPES), targetId: ["evt", "ppl", "plc"],
+  coverImageId: ["img"]
 };
 
 function requireText(value, message) {

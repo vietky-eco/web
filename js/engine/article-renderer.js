@@ -55,12 +55,35 @@ function ensureMarkup(container) {
     .before(element(doc, "div", "", "detail-content"));
 }
 
+function renderCover(container, cover) {
+  const figure = container.querySelector("#detail-cover");
+  if (!figure) return;
+  figure.hidden = true;
+  if (!/^assets\/img\/img[0-9]{4}\.(webp|png|jpe?g|svg)$/.test(cover?.path) ||
+      ![cover.alt, cover.caption, cover.credit, cover.license].every(value =>
+        typeof value === "string" && value.trim(),
+      )) return;
+
+  const doc = container.ownerDocument;
+  const image = figure.querySelector("img");
+  const caption = figure.querySelector("figcaption");
+  image.alt = cover.alt;
+  image.onerror = () => { figure.hidden = true; };
+  image.src = `/${cover.path}`;
+  caption.replaceChildren(
+    doc.createTextNode(`${cover.caption} `),
+    safeLink(doc, `Ảnh: ${cover.credit} · ${cover.license}`, cover.sourceUrl),
+  );
+  caption.hidden = false;
+  figure.hidden = false;
+}
+
 /** Chỉ dựng DOM từ dữ liệu; không đọc URL, tra ID hoặc gọi mạng. */
 export function renderArticle(
   container,
   entity,
   article = null,
-  { sources = [], related = [] } = {},
+  { sources = [], related = [], cover = null } = {},
 ) {
   if (typeof entity?.title !== "string" || !entity.title.trim()) {
     throw new Error("Tư liệu chưa có tiêu đề hợp lệ.");
@@ -74,6 +97,7 @@ export function renderArticle(
   const date = entity.time?.label ?? entity.date;
   get("detail-meta").textContent = typeof date === "string" ? date : "";
   get("detail-meta").hidden = !get("detail-meta").textContent;
+  renderCover(container, cover);
 
   const content = article ?? entity;
   paragraphs(get("detail-context"), content.context);

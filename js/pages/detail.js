@@ -94,6 +94,15 @@ async function loadSources(entity, article) {
   );
 }
 
+async function loadCover(article) {
+  if (!article?.coverImageId) return null;
+  const image = await loadContent(article.coverImageId).catch(() => null);
+  if (!image) return null;
+  const sourceId = image.sourceIds?.[0];
+  const source = sourceId ? await loadContent(sourceId).catch(() => null) : null;
+  return { ...image, sourceUrl: source?.url };
+}
+
 function showError(error) {
   const notFound =
     error instanceof DetailRouteError ||
@@ -117,7 +126,10 @@ async function initDetail() {
     if (article && article.entityId !== entity.id) {
       throw new Error("Bài viết không khớp với tư liệu đang mở.");
     }
-    const sources = await loadSources(entity, article);
+    const [sources, cover] = await Promise.all([
+      loadSources(entity, article),
+      loadCover(article),
+    ]);
     const pathsById = indexDetailPaths(index);
     const related = (entity.related ?? []).map((item) => ({
       label: item.label || item.targetId,
@@ -127,6 +139,7 @@ async function initDetail() {
     renderArticle(articleElement, entity, article, {
       sources,
       related,
+      cover,
     });
     updateCategory(path, id);
     document.title = `${entity.title} | Việt Ký`;

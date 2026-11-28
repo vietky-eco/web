@@ -80,6 +80,31 @@
   line-height: var(--vk-leading-reading);
 }
 
+.vk-detail-cover {
+  max-width: var(--vk-reading-width);
+  margin: var(--vk-space-8) auto 0;
+}
+
+.vk-detail-cover img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+.vk-detail-cover figcaption {
+  padding-block-start: var(--vk-space-2);
+  color: var(--vk-text-muted);
+  font-size: var(--vk-type-caption);
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+.vk-detail-cover figcaption a {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
 .vk-detail-reading {
   padding-top: var(--vk-space-8);
   overflow-wrap: anywhere;

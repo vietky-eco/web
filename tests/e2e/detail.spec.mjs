@@ -11,6 +11,23 @@ async function attachSampleArticle(page) {
   });
 }
 
+test("ảnh bài viết có chú thích và bài vẫn đọc được khi ảnh lỗi", async ({ page }) => {
+  await attachSampleArticle(page);
+  await page.goto(firstPath);
+  const cover = page.locator("#detail-cover");
+  await expect(cover.getByRole("img", { name: /Cố đô Hoa Lư/ })).toBeVisible();
+  await expect.poll(() => cover.getByRole("img").evaluate(image => image.naturalWidth)).toBeGreaterThan(0);
+  await expect(cover.locator("figcaption")).toContainText("Ảnh chụp hiện đại");
+  await expect(cover.getByRole("link", { name: /lumoplank.*CC0/ })).toHaveAttribute(
+    "href", "https://commons.wikimedia.org/wiki/File:Ninh_Binh_-_NinhBinh1659.jpg",
+  );
+
+  await page.route("**/assets/img/img0001.webp", route => route.fulfill({ status: 404 }));
+  await page.reload();
+  await expect(cover).toBeHidden();
+  await expect(page.locator("#sec003")).toBeVisible();
+});
+
 test("mục lục lấy đúng đề mục và sao chép liên kết trên điện thoại", async ({ page, context }) => {
   await context.grantPermissions(["clipboard-read", "clipboard-write"]);
   await page.setViewportSize({ width: 390, height: 844 });
@@ -20,9 +37,9 @@ test("mục lục lấy đúng đề mục và sao chép liên kết trên đi�
   const contents = page.getByRole("navigation", { name: "Mục lục bài viết" });
   await expect(contents.getByRole("link")).toHaveText([
     "Bối cảnh lịch sử",
-    "Từ cát cứ đến thống nhất",
+    "Đinh Bộ Lĩnh tập hợp lực lượng",
     "Lập triều Đinh và đặt quốc hiệu Đại Cồ Việt",
-    "Ý nghĩa của sự kiện",
+    "Vì sao chọn Hoa Lư làm kinh đô?",
     "Nguồn tư liệu",
   ]);
   await expect(contents.getByRole("button")).toHaveCount(0);
