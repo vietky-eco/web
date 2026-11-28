@@ -43,8 +43,27 @@
       "minLength": 1,
       "pattern": "\\S"
     },
-    "readAloud": {
-      "type": "boolean"
+    "audio": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path"],
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^assets/audio/[a-z0-9-]+\\.mp3$",
+          "not": { "pattern": "\\s" },
+          "description": "Đường dẫn tệp MP3 trong assets/audio/."
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "durationSeconds": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
     },
     "contextImageId": {
       "type": "string",

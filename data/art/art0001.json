@@ -105,5 +105,9 @@
       "description": "Chức chỉ huy quân đội mà Lê Hoàn giữ dưới triều Đinh."
     }
   ],
-  "readAloud": true
+  "audio": {
+    "path": "assets/audio/art0001.mp3",
+    "title": "Nghe câu chuyện",
+    "durationSeconds": 305
+  }
 }

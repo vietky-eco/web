@@ -1,5 +1,5 @@
 // Kiểm tra JSON/ID/nguồn/tham chiếu; không thay thế kiểm định JSON Schema hoặc review sử liệu.
-import { readdir, readFile } from "node:fs/promises";
+import { access, readdir, readFile } from "node:fs/promises";
 import { resolveId } from "../js/core/id-resolver.js";
 
 const DATA_URL = new URL("../data/", import.meta.url);
@@ -78,6 +78,24 @@ async function main() {
         }
       }
       if (prefix === "src") validateSource(record);
+      if (prefix === "art" && record.audio !== undefined) {
+        if (!record.audio || typeof record.audio !== "object" || Array.isArray(record.audio)) {
+          throw new Error(id + ": audio phải là object.");
+        }
+        if (typeof record.audio.path !== "string" || !/^assets\/audio\/[a-z0-9-]+\.mp3$/.test(record.audio.path)) {
+          throw new Error(id + ": audio.path phải có dạng assets/audio/<slug>.mp3.");
+        }
+        if (record.audio.title !== undefined) requireText(record.audio.title, id + ": audio.title không hợp lệ.");
+        if (record.audio.durationSeconds !== undefined &&
+            (!Number.isInteger(record.audio.durationSeconds) || record.audio.durationSeconds < 1)) {
+          throw new Error(id + ": audio.durationSeconds phải là số nguyên dương.");
+        }
+        try {
+          await access(new URL("../" + record.audio.path, import.meta.url));
+        } catch {
+          throw new Error(id + ": không tìm thấy tệp audio " + record.audio.path + ".");
+        }
+      }
       records.set(id, record);
     }
   }

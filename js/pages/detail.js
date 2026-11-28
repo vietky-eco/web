@@ -7,7 +7,7 @@ import {
 import { renderArticle } from "../engine/article-renderer.js";
 import { initArticleContents } from "../components/article-contents.js";
 import { initArticleGlossary } from "../components/article-glossary.js";
-import { initArticleNarration } from "../components/article-narration.js";
+import { initArticleAudio, isValidArticleAudio } from "../components/article-audio.js";
 
 const CATEGORIES = {
   "/chuyen-su/su-kien": ["Sự kiện lịch sử", "CHUYỆN SỬ"],
@@ -171,7 +171,9 @@ async function initDetail() {
       articleElement.classList.add("vk-detail-article--glossary");
       initArticleGlossary(articleElement, article.glossary);
     }
-    if (article?.readAloud) initArticleNarration(articleElement, entity, article);
+    if (isValidArticleAudio(article?.audio)) {
+      initArticleAudio(articleElement, article.audio);
+    }
   } catch (error) {
     showError(error);
   } finally {

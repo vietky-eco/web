@@ -84,39 +84,42 @@ test.describe("chú giải trên thiết bị cảm ứng", () => {
   });
 });
 
-test("trình nghe chỉ đọc văn bản bài và hỗ trợ tạm dừng, dừng", async ({ page }) => {
-  await page.addInitScript(() => {
-    const read = [];
-    const voice = { lang: "vi-VN" };
-    window.readLog = read;
-    Object.defineProperties(window, {
-      SpeechSynthesisUtterance: { value: class {
-        constructor(text) { this.text = text; }
-      } },
-      speechSynthesis: { value: {
-        getVoices: () => [voice],
-        pause: () => {},
-        resume: () => {},
-        cancel: () => {},
-        speak: segment => {
-          read.push(segment.text);
-          window.finishSegment = segment.onend;
-        },
-      } },
-    });
-  });
+test("trình phát Nghe câu chuyện hỗ trợ phát, tạm dừng, tua, tốc độ và ẩn khi không có audio", async ({ page }) => {
   await attachSampleArticle(page);
   await page.goto(firstPath);
-  await page.getByRole("button", { name: "Nghe bài viết" }).click();
-  await page.getByRole("button", { name: "Tạm dừng" }).click();
-  await page.getByRole("button", { name: "Nghe tiếp" }).click();
-  await page.evaluate(() => { for (let i = 0; i < 7; i++) window.finishSegment(); });
-  const read = await page.evaluate(() => window.readLog.join(" "));
-  expect(read).toContain("Trần Lãm");
-  expect(read).not.toContain("Còn gọi là Trần Minh Công, thủ lĩnh");
-  expect(read).not.toContain("CC0");
-  await page.getByRole("button", { name: "Dừng đọc" }).click();
-  await expect(page.getByRole("button", { name: "Nghe bài viết" })).toBeFocused();
+
+  const player = page.getByRole("region", { name: "Nghe câu chuyện" });
+  await expect(player).toBeVisible();
+
+  const audio = player.locator("audio");
+  await expect(audio).toHaveAttribute("preload", "none");
+  await expect(audio).not.toHaveAttribute("autoplay", "");
+  expect(await audio.evaluate(el => el.paused)).toBe(true);
+  await expect(player).toContainText("0:00 / 5:05");
+
+  const playButton = player.getByRole("button", { name: "Phát câu chuyện" });
+  await playButton.click();
+  await expect(player.getByRole("button", { name: "Tạm dừng" })).toBeVisible();
+  await expect.poll(() => audio.evaluate(el => !el.paused)).toBe(true);
+  await expect.poll(() => audio.evaluate(el => Number.isFinite(el.duration) && el.duration > 0)).toBe(true);
+
+  const seek = player.getByRole("slider", { name: "Tua thời gian phát" });
+  await seek.fill("50");
+  await expect.poll(() => audio.evaluate(el => el.currentTime)).toBeGreaterThan(100);
+
+  const speed = player.getByRole("button", { name: /Tốc độ phát/ });
+  await expect(speed).toHaveText("1x");
+  await speed.click();
+  await expect(speed).toHaveText("1.25x");
+  expect(await audio.evaluate(el => el.playbackRate)).toBe(1.25);
+
+  await player.getByRole("button", { name: "Tạm dừng" }).click();
+  await expect(player.getByRole("button", { name: "Phát câu chuyện" })).toBeVisible();
+  expect(await audio.evaluate(el => el.paused)).toBe(true);
+
+  await page.goto(secondPath);
+  await expect(page.locator("#detail-article")).toBeVisible();
+  await expect(page.locator(".vk-detail-audio")).toHaveCount(0);
 });
 
 test("mục lục lấy đúng đề mục và sao chép liên kết trên điện thoại", async ({ page, context }) => {

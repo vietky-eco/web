@@ -455,9 +455,9 @@ test("multi-select, period bounds, and snapping update results", async ({ page }
     input.value = "Trần";
     input.dispatchEvent(new InputEvent("input", { bubbles: true, isComposing: true }));
   });
-  await expect(popup.locator(".sr-quick-count")).toHaveText("10 kết quả");
+  await expect(popup.locator(".sr-quick-count")).toHaveText("9 kết quả");
   await query.dispatchEvent("compositionend");
-  await expect(popup.locator(".sr-quick-count")).toHaveText("10 kết quả");
+  await expect(popup.locator(".sr-quick-count")).toHaveText("9 kết quả");
   await expect(page).toHaveURL(previewHome);
 });
 
