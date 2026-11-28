@@ -1,0 +1,21 @@
+{
+  "id": "evt0035",
+  "type": "event",
+  "title": "Ban hành phép hạn điền (1397)",
+  "status": "draft",
+  "summary": "Chính sách hạn điền được thực hiện trong các cải cách cuối thời Trần gắn với Hồ Quý Ly. Đánh giá tác động cần phân biệt chủ trương và kết quả.",
+  "sourceIds": [
+    "src0032"
+  ],
+  "editorialNotes": "=== Bản ghi kế hoạch từ tab Sự kiện (evt) ===\nDòng workbook: 40\nNgười phụ trách: Chưa phân công\nTrạng thái trong bảng: Chưa viết\nNội dung chính trong bảng: Chính sách hạn điền được thực hiện trong các cải cách cuối thời Trần gắn với Hồ Quý Ly. Đánh giá tác động cần phân biệt chủ trương và kết quả.\nGhi chú gốc trong bảng:\nHồ sơ: Có nguồn tham khảo, chờ duyệt.\nẢnh đại diện: img0024. Dùng img0025 khi chưa có tệp.\nThời kỳ: per0004\nNhân vật: ppl0030\nBài: art0067, art0074\nTimeline: tml0001, tml0010\nẢnh: img0024\nNguồn: src0032, src0035\nKhông gộp hạn nô 1401 vào nhóm cải cách trước 1400.\nGhi chú: Các dòng tham chiếu trong workbook được giữ nguyên; chỉ đưa ID vào trường có cấu trúc khi file đích tồn tại và có nội dung.",
+  "periodIds": [
+    "per0004"
+  ],
+  "personIds": [
+    "ppl0030"
+  ],
+  "time": {
+    "sortYear": 1397,
+    "label": "1397"
+  }
+}

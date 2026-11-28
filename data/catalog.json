@@ -40,6 +40,26 @@
     ]
   },
   {
+    "id": "evt0003",
+    "type": "event",
+    "title": "Lê Hoàn lên ngôi (980)",
+    "summary": "Trong bối cảnh khủng hoảng kế vị và nguy cơ chiến tranh, Lê Hoàn lên ngôi, mở đầu triều Tiền Lê.",
+    "year": 980,
+    "periodId": null,
+    "periodIds": [
+      "per0001",
+      "per0002"
+    ],
+    "status": "draft",
+    "time": {
+      "sortYear": 980,
+      "label": "980"
+    },
+    "placeIds": [
+      "plc0001"
+    ]
+  },
+  {
     "id": "evt0004",
     "type": "event",
     "title": "Kháng chiến chống Tống (981)",
@@ -58,6 +78,22 @@
     "placeIds": [
       "plc0003"
     ]
+  },
+  {
+    "id": "evt0005",
+    "type": "event",
+    "title": "Cuộc tiến quân sang Champa (982)",
+    "summary": "Lê Hoàn tổ chức cuộc tiến quân sang Champa. Cần đặt sự kiện trong quan hệ ngoại giao và xung đột giữa hai quốc gia.",
+    "year": 982,
+    "periodId": "per0002",
+    "periodIds": [
+      "per0002"
+    ],
+    "status": "draft",
+    "time": {
+      "sortYear": 982,
+      "label": "982"
+    }
   },
   {
     "id": "evt0006",
@@ -99,6 +135,25 @@
     "placeIds": [
       "plc0002",
       "plc0018"
+    ]
+  },
+  {
+    "id": "evt0008",
+    "type": "event",
+    "title": "Kháng chiến chống Nguyên (1285)",
+    "summary": "Đại Việt chống cuộc xâm lược của nhà Nguyên. Đề cương gồm chuẩn bị lực lượng, rút lui chiến lược và các đợt phản công năm 1285.",
+    "year": 1285,
+    "periodId": "per0004",
+    "periodIds": [
+      "per0004"
+    ],
+    "status": "draft",
+    "time": {
+      "sortYear": 1285,
+      "label": "1285"
+    },
+    "placeIds": [
+      "plc0002"
     ]
   },
   {
@@ -197,6 +252,57 @@
     ]
   },
   {
+    "id": "evt0014",
+    "type": "event",
+    "title": "Khoa thi Nho học đầu tiên (1075)",
+    "summary": "Triều Lý Nhân Tông tổ chức khoa thi Nho học năm 1075. Đề cương tập trung vào tuyển chọn nhân tài và bước đầu của khoa cử.",
+    "year": 1075,
+    "periodId": "per0003",
+    "periodIds": [
+      "per0003"
+    ],
+    "status": "draft",
+    "time": {
+      "sortYear": 1075,
+      "label": "1075"
+    },
+    "placeIds": [
+      "plc0002"
+    ]
+  },
+  {
+    "id": "evt0015",
+    "type": "event",
+    "title": "Lập Quốc Tử Giám (1076)",
+    "summary": "Quốc Tử Giám được lập dưới thời Lý Nhân Tông, đánh dấu sự phát triển của thiết chế giáo dục triều đình.",
+    "year": 1076,
+    "periodId": "per0003",
+    "periodIds": [
+      "per0003"
+    ],
+    "status": "draft",
+    "time": {
+      "sortYear": 1076,
+      "label": "1076"
+    }
+  },
+  {
+    "id": "evt0016",
+    "type": "event",
+    "title": "Tiến công Ung – Khâm – Liêm (1075–1076)",
+    "summary": "Quân Đại Việt mở cuộc tiến công vào các căn cứ của nhà Tống ở Ung, Khâm, Liêm trong chiến tranh 1075–1077.",
+    "year": 1075,
+    "periodId": "per0003",
+    "periodIds": [
+      "per0003"
+    ],
+    "status": "draft",
+    "time": {
+      "sortYear": 1075,
+      "label": "1075–1076"
+    }
+  },
+  {
     "id": "evt0017",
     "type": "event",
     "title": "Phòng tuyến Như Nguyệt (1077)",
@@ -214,6 +320,156 @@
     "articleId": null,
     "placeIds": [
       "plc0008"
+    ]
+  },
+  {
+    "id": "evt0018",
+    "type": "event",
+    "title": "Lập trang Vân Đồn (1149)",
+    "summary": "Dưới thời Lý Anh Tông, triều đình lập trang Vân Đồn để tập trung hoạt động buôn bán của thuyền buôn nước ngoài.",
+    "year": 1149,
+    "periodId": "per0003",
+    "periodIds": [
+      "per0003"
+    ],
+    "status": "draft",
+    "time": {
+      "sortYear": 1149,
+      "label": "1149"
+    }
+  },
+  {
+    "id": "evt0019",
+    "type": "event",
+    "title": "Chuyển giao Lý – Trần (1225)",
+    "summary": "Lý Chiêu Hoàng nhường ngôi cho Trần Cảnh, mở đầu vương triều Trần. Đề cương làm rõ bối cảnh và vai trò các nhân vật.",
+    "year": 1225,
+    "periodId": null,
+    "periodIds": [
+      "per0003",
+      "per0004"
+    ],
+    "status": "draft",
+    "time": {
+      "sortYear": 1225,
+      "label": "1225"
+    },
+    "placeIds": [
+      "plc0002"
+    ]
+  },
+  {
+    "id": "evt0020",
+    "type": "event",
+    "title": "Hội nghị Bình Than (1282)",
+    "summary": "Triều Trần tổ chức hội nghị Bình Than bàn kế sách chống Nguyên và chuẩn bị lực lượng kháng chiến.",
+    "year": 1282,
+    "periodId": "per0004",
+    "periodIds": [
+      "per0004"
+    ],
+    "status": "draft",
+    "time": {
+      "sortYear": 1282,
+      "label": "1282"
+    }
+  },
+  {
+    "id": "evt0021",
+    "type": "event",
+    "title": "Hội nghị Diên Hồng (trước kháng chiến 1285)",
+    "summary": "Triều Trần triệu tập các bô lão tại điện Diên Hồng để bàn việc chống Nguyên. Nội dung cần phân biệt ghi chép sử liệu và ký ức về sau.",
+    "year": null,
+    "periodId": "per0004",
+    "periodIds": [
+      "per0004"
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "evt0022",
+    "type": "event",
+    "title": "Chiến thắng Hàm Tử (1285)",
+    "summary": "Quân Trần giành thắng lợi ở Hàm Tử trong đợt phản công chống Nguyên năm 1285, gắn với vai trò Trần Nhật Duật.",
+    "year": 1285,
+    "periodId": "per0004",
+    "periodIds": [
+      "per0004"
+    ],
+    "status": "draft",
+    "time": {
+      "sortYear": 1285,
+      "label": "1285"
+    }
+  },
+  {
+    "id": "evt0023",
+    "type": "event",
+    "title": "Chiến thắng Chương Dương (1285)",
+    "summary": "Quân Trần giành thắng lợi ở Chương Dương trong cuộc phản công năm 1285, gắn với vai trò Trần Quang Khải.",
+    "year": 1285,
+    "periodId": "per0004",
+    "periodIds": [
+      "per0004"
+    ],
+    "status": "draft",
+    "time": {
+      "sortYear": 1285,
+      "label": "1285"
+    }
+  },
+  {
+    "id": "evt0024",
+    "type": "event",
+    "title": "Trận Vân Đồn (1288)",
+    "summary": "Lực lượng do Trần Khánh Dư chỉ huy đánh đoàn thuyền lương của quân Nguyên, tác động đến hậu cần cuộc xâm lược.",
+    "year": 1288,
+    "periodId": "per0004",
+    "periodIds": [
+      "per0004"
+    ],
+    "status": "draft",
+    "time": {
+      "sortYear": 1288,
+      "label": "1288"
+    }
+  },
+  {
+    "id": "evt0025",
+    "type": "event",
+    "title": "Phát hành tiền giấy (1396)",
+    "summary": "Triều đình cuối thời Trần phát hành tiền giấy Thông bảo hội sao trong chương trình cải cách gắn với Hồ Quý Ly.",
+    "year": 1396,
+    "periodId": "per0004",
+    "periodIds": [
+      "per0004"
+    ],
+    "status": "draft",
+    "time": {
+      "sortYear": 1396,
+      "label": "1396"
+    },
+    "placeIds": [
+      "plc0002"
+    ]
+  },
+  {
+    "id": "evt0026",
+    "type": "event",
+    "title": "Xây thành Tây Đô (1397)",
+    "summary": "Thành Tây Đô được xây dựng năm 1397, gắn với việc chuyển trung tâm quyền lực về Thanh Hóa cuối thời Trần.",
+    "year": 1397,
+    "periodId": "per0004",
+    "periodIds": [
+      "per0004"
+    ],
+    "status": "draft",
+    "time": {
+      "sortYear": 1397,
+      "label": "1397"
+    },
+    "placeIds": [
+      "plc0005"
     ]
   },
   {
@@ -235,6 +491,183 @@
     "placeIds": [
       "plc0005"
     ]
+  },
+  {
+    "id": "evt0028",
+    "type": "event",
+    "title": "Lễ tịch điền Đọi Sơn (987)",
+    "summary": "Theo ghi chép chính sử, Lê Đại Hành cày ruộng tịch điền ở núi Đọi năm 987, thể hiện sự quan tâm của triều đình đến nông nghiệp.",
+    "year": 987,
+    "periodId": "per0002",
+    "periodIds": [
+      "per0002"
+    ],
+    "status": "draft",
+    "time": {
+      "sortYear": 987,
+      "label": "987"
+    }
+  },
+  {
+    "id": "evt0029",
+    "type": "event",
+    "title": "Cuộc tiến quân sang Champa (1069)",
+    "summary": "Chiến dịch thời Lý gắn với Lý Thánh Tông và Lý Thường Kiệt; đặt trong quan hệ Đại Việt – Champa, đối chiếu các biến động lãnh thổ.",
+    "year": 1069,
+    "periodId": "per0003",
+    "periodIds": [
+      "per0003"
+    ],
+    "status": "draft",
+    "time": {
+      "sortYear": 1069,
+      "label": "1069"
+    }
+  },
+  {
+    "id": "evt0031",
+    "type": "event",
+    "title": "Dựng chùa Diên Hựu (1049)",
+    "summary": "Triều Lý xây chùa Diên Hựu; biên soạn theo ghi chép và đối chiếu lịch sử công trình với các lần trùng tu về sau.",
+    "year": 1049,
+    "periodId": "per0003",
+    "periodIds": [
+      "per0003"
+    ],
+    "status": "draft",
+    "time": {
+      "sortYear": 1049,
+      "label": "1049"
+    }
+  },
+  {
+    "id": "evt0032",
+    "type": "event",
+    "title": "Dựng tháp Báo Thiên (1057)",
+    "summary": "Tháp Báo Thiên được xây dựng dưới thời Lý Thánh Tông. Các thông số về số tầng, chiều cao và vật liệu cần đối chiếu riêng.",
+    "year": 1057,
+    "periodId": "per0003",
+    "periodIds": [
+      "per0003"
+    ],
+    "status": "draft",
+    "time": {
+      "sortYear": 1057,
+      "label": "1057"
+    }
+  },
+  {
+    "id": "evt0033",
+    "type": "event",
+    "title": "Hôn nhân Huyền Trân – Chế Mân (1306)",
+    "summary": "Huyền Trân kết hôn với Chế Mân trong bối cảnh bang giao Đại Việt – Champa, gắn với việc chuyển giao hai châu Ô và Lý.",
+    "year": 1306,
+    "periodId": "per0004",
+    "periodIds": [
+      "per0004"
+    ],
+    "status": "draft",
+    "time": {
+      "sortYear": 1306,
+      "label": "1306"
+    }
+  },
+  {
+    "id": "evt0034",
+    "type": "event",
+    "title": "Quân Champa tiến vào Thăng Long (1371)",
+    "summary": "Quân Champa dưới thời Chế Bồng Nga tiến vào Thăng Long, phản ánh cuộc khủng hoảng quân sự và chính trị cuối triều Trần.",
+    "year": 1371,
+    "periodId": "per0004",
+    "periodIds": [
+      "per0004"
+    ],
+    "status": "draft",
+    "time": {
+      "sortYear": 1371,
+      "label": "1371"
+    },
+    "placeIds": [
+      "plc0002"
+    ]
+  },
+  {
+    "id": "evt0035",
+    "type": "event",
+    "title": "Ban hành phép hạn điền (1397)",
+    "summary": "Chính sách hạn điền được thực hiện trong các cải cách cuối thời Trần gắn với Hồ Quý Ly. Đánh giá tác động cần phân biệt chủ trương và kết quả.",
+    "year": 1397,
+    "periodId": "per0004",
+    "periodIds": [
+      "per0004"
+    ],
+    "status": "draft",
+    "time": {
+      "sortYear": 1397,
+      "label": "1397"
+    }
+  },
+  {
+    "id": "evt0036",
+    "type": "event",
+    "title": "Hịch tướng sĩ trong chuẩn bị kháng chiến chống Nguyên",
+    "summary": "Tác phẩm được sử dụng để bàn về trách nhiệm của tướng sĩ và ý thức bảo vệ quốc gia trong bối cảnh chống Nguyên.",
+    "year": null,
+    "periodId": "per0004",
+    "periodIds": [
+      "per0004"
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "evt0037",
+    "type": "event",
+    "title": "Khủng hoảng kế vị Tiền Lê (1005)",
+    "summary": "Sau khi Lê Đại Hành qua đời, các hoàng tử tranh ngôi; Lê Long Việt và Lê Long Đĩnh gắn với chuỗi chuyển giao quyền lực này.",
+    "year": 1005,
+    "periodId": "per0002",
+    "periodIds": [
+      "per0002"
+    ],
+    "status": "draft",
+    "time": {
+      "sortYear": 1005,
+      "label": "1005"
+    },
+    "placeIds": [
+      "plc0001"
+    ]
+  },
+  {
+    "id": "evt0038",
+    "type": "event",
+    "title": "Lý Huệ Tông nhường ngôi cho Lý Chiêu Hoàng (1224)",
+    "summary": "Lý Chiêu Hoàng lên ngôi trong bối cảnh suy yếu cuối triều Lý, trước cuộc chuyển giao sang nhà Trần.",
+    "year": 1224,
+    "periodId": "per0003",
+    "periodIds": [
+      "per0003"
+    ],
+    "status": "draft",
+    "time": {
+      "sortYear": 1224,
+      "label": "1224"
+    },
+    "placeIds": [
+      "plc0002"
+    ]
+  },
+  {
+    "id": "evt0039",
+    "type": "event",
+    "title": "Trần Nhân Tông tu hành và sự hình thành Trúc Lâm",
+    "summary": "Trần Nhân Tông gắn với đời sống tu hành tại Yên Tử và sự phát triển truyền thống Trúc Lâm cuối thế kỷ XIII – đầu XIV.",
+    "year": null,
+    "periodId": "per0004",
+    "periodIds": [
+      "per0004"
+    ],
+    "status": "draft"
   },
   {
     "id": "per0001",

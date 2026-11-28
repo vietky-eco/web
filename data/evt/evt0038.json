@@ -1,0 +1,21 @@
+{
+  "id": "evt0038",
+  "type": "event",
+  "title": "Lý Huệ Tông nhường ngôi cho Lý Chiêu Hoàng (1224)",
+  "status": "draft",
+  "summary": "Lý Chiêu Hoàng lên ngôi trong bối cảnh suy yếu cuối triều Lý, trước cuộc chuyển giao sang nhà Trần.",
+  "sourceIds": [
+    "src0023"
+  ],
+  "editorialNotes": "=== Bản ghi kế hoạch từ tab Sự kiện (evt) ===\nDòng workbook: 43\nNgười phụ trách: Chưa phân công\nTrạng thái trong bảng: Chưa viết\nNội dung chính trong bảng: Lý Chiêu Hoàng lên ngôi trong bối cảnh suy yếu cuối triều Lý, trước cuộc chuyển giao sang nhà Trần.\nGhi chú gốc trong bảng:\nHồ sơ: Có nguồn tham khảo, chờ duyệt.\nẢnh đại diện: img0227. Dùng img0025 khi chưa có tệp.\nThời kỳ: per0003\nNhân vật: ppl0020, ppl0035, ppl0037\nĐịa danh: plc0002\nBài: art0048, art0049, art0050\nTimeline: tml0003\nNguồn: src0023, src0035\nGhi chú: Các dòng tham chiếu trong workbook được giữ nguyên; chỉ đưa ID vào trường có cấu trúc khi file đích tồn tại và có nội dung.",
+  "periodIds": [
+    "per0003"
+  ],
+  "placeIds": [
+    "plc0002"
+  ],
+  "time": {
+    "sortYear": 1224,
+    "label": "1224"
+  }
+}

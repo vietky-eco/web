@@ -1,0 +1,26 @@
+{
+  "id": "evt0008",
+  "type": "event",
+  "title": "Kháng chiến chống Nguyên (1285)",
+  "status": "draft",
+  "summary": "Đại Việt chống cuộc xâm lược của nhà Nguyên. Đề cương gồm chuẩn bị lực lượng, rút lui chiến lược và các đợt phản công năm 1285.",
+  "sourceIds": [
+    "src0012",
+    "src0013",
+    "src0014"
+  ],
+  "editorialNotes": "=== Bản ghi kế hoạch từ tab Sự kiện (evt) ===\nDòng workbook: 13\nNgười phụ trách: Chưa phân công\nTrạng thái trong bảng: Chưa viết\nNội dung chính trong bảng: Đại Việt chống cuộc xâm lược của nhà Nguyên. Đề cương gồm chuẩn bị lực lượng, rút lui chiến lược và các đợt phản công năm 1285.\nGhi chú gốc trong bảng:\nHồ sơ: Có nguồn tham khảo, chờ duyệt.\nẢnh đại diện: img0020. Dùng img0025 khi chưa có tệp.\nThời kỳ: per0004\nNhân vật: ppl0006, ppl0022, ppl0023, ppl0024, ppl0025, ppl0026, ppl0027\nĐịa danh: plc0002, plc0016, plc0017\nBài: art0004, art0012, art0057, art0058, art0062, art0063, art0065\nTimeline: tml0001, tml0004, tml0006\nBản đồ: map0008\nNguồn: src0012, src0013, src0014\nCác trận tiêu biểu: evt0022, evt0023.\nNhân vật bối cảnh bổ sung: ppl0233, ppl0234, ppl0235, ppl0232, ppl0176, ppl0177, ppl0178, ppl0179, ppl0138. Liên kết biên tập, không tự suy ra vai trò chỉ huy.\nGhi chú: Các dòng tham chiếu trong workbook được giữ nguyên; chỉ đưa ID vào trường có cấu trúc khi file đích tồn tại và có nội dung.",
+  "periodIds": [
+    "per0004"
+  ],
+  "personIds": [
+    "ppl0006"
+  ],
+  "placeIds": [
+    "plc0002"
+  ],
+  "time": {
+    "sortYear": 1285,
+    "label": "1285"
+  }
+}

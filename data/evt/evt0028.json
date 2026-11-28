@@ -1,0 +1,21 @@
+{
+  "id": "evt0028",
+  "type": "event",
+  "title": "Lễ tịch điền Đọi Sơn (987)",
+  "status": "draft",
+  "summary": "Theo ghi chép chính sử, Lê Đại Hành cày ruộng tịch điền ở núi Đọi năm 987, thể hiện sự quan tâm của triều đình đến nông nghiệp.",
+  "sourceIds": [
+    "src0018"
+  ],
+  "editorialNotes": "=== Bản ghi kế hoạch từ tab Sự kiện (evt) ===\nDòng workbook: 33\nNgười phụ trách: Chưa phân công\nTrạng thái trong bảng: Chưa viết\nNội dung chính trong bảng: Theo ghi chép chính sử, Lê Đại Hành cày ruộng tịch điền ở núi Đọi năm 987, thể hiện sự quan tâm của triều đình đến nông nghiệp.\nGhi chú gốc trong bảng:\nHồ sơ: Có nguồn tham khảo, chờ duyệt.\nẢnh đại diện: img0018. Dùng img0025 khi chưa có tệp.\nThời kỳ: per0002\nNhân vật: ppl0002\nĐịa danh: plc0013\nBài: art0021, art0026\nTimeline: tml0002\nẢnh: img0018\nBản đồ: map0013\nNguồn: src0018\nPhân biệt ghi chép lịch sử với nghi thức lễ hội phục dựng.\nGhi chú: Các dòng tham chiếu trong workbook được giữ nguyên; chỉ đưa ID vào trường có cấu trúc khi file đích tồn tại và có nội dung.",
+  "periodIds": [
+    "per0002"
+  ],
+  "personIds": [
+    "ppl0002"
+  ],
+  "time": {
+    "sortYear": 987,
+    "label": "987"
+  }
+}

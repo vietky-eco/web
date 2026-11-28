@@ -1,0 +1,18 @@
+{
+  "id": "evt0022",
+  "type": "event",
+  "title": "Chiến thắng Hàm Tử (1285)",
+  "status": "draft",
+  "summary": "Quân Trần giành thắng lợi ở Hàm Tử trong đợt phản công chống Nguyên năm 1285, gắn với vai trò Trần Nhật Duật.",
+  "sourceIds": [
+    "src0013"
+  ],
+  "editorialNotes": "=== Bản ghi kế hoạch từ tab Sự kiện (evt) ===\nDòng workbook: 27\nNgười phụ trách: Chưa phân công\nTrạng thái trong bảng: Chưa viết\nNội dung chính trong bảng: Quân Trần giành thắng lợi ở Hàm Tử trong đợt phản công chống Nguyên năm 1285, gắn với vai trò Trần Nhật Duật.\nGhi chú gốc trong bảng:\nHồ sơ: Có nguồn tham khảo, chờ duyệt.\nẢnh đại diện: img0020. Dùng img0025 khi chưa có tệp.\nThời kỳ: per0004\nNhân vật: ppl0025\nĐịa danh: plc0016\nBài: art0058, art0059, art0061\nTimeline: tml0001, tml0006\nẢnh: img0020\nBản đồ: map0008\nNguồn: src0013\nThuộc cuộc kháng chiến: evt0008.\nGhi chú: Các dòng tham chiếu trong workbook được giữ nguyên; chỉ đưa ID vào trường có cấu trúc khi file đích tồn tại và có nội dung.",
+  "periodIds": [
+    "per0004"
+  ],
+  "time": {
+    "sortYear": 1285,
+    "label": "1285"
+  }
+}

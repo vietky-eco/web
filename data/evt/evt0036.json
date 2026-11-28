@@ -1,0 +1,17 @@
+{
+  "id": "evt0036",
+  "type": "event",
+  "title": "Hịch tướng sĩ trong chuẩn bị kháng chiến chống Nguyên",
+  "status": "draft",
+  "summary": "Tác phẩm được sử dụng để bàn về trách nhiệm của tướng sĩ và ý thức bảo vệ quốc gia trong bối cảnh chống Nguyên.",
+  "sourceIds": [
+    "src0012"
+  ],
+  "editorialNotes": "=== Bản ghi kế hoạch từ tab Sự kiện (evt) ===\nDòng workbook: 41\nNgười phụ trách: Chưa phân công\nTrạng thái trong bảng: Chưa viết\nNội dung chính trong bảng: Tác phẩm được sử dụng để bàn về trách nhiệm của tướng sĩ và ý thức bảo vệ quốc gia trong bối cảnh chống Nguyên.\nGhi chú gốc trong bảng:\nHồ sơ: Có nguồn tham khảo, chờ duyệt.\nẢnh đại diện: img0007. Dùng img0025 khi chưa có tệp.\nThời kỳ: per0004\nNhân vật: ppl0006\nBài: art0012, art0057, art0058\nTimeline: tml0001, tml0006\nẢnh: img0007\nNguồn: src0012, src0035\nNiên đại sáng tác cần đối chiếu; không mặc định năm cụ thể.\nGhi chú: Các dòng tham chiếu trong workbook được giữ nguyên; chỉ đưa ID vào trường có cấu trúc khi file đích tồn tại và có nội dung.",
+  "periodIds": [
+    "per0004"
+  ],
+  "personIds": [
+    "ppl0006"
+  ]
+}

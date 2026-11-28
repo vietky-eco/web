@@ -1,0 +1,21 @@
+{
+  "id": "evt0014",
+  "type": "event",
+  "title": "Khoa thi Nho học đầu tiên (1075)",
+  "status": "draft",
+  "summary": "Triều Lý Nhân Tông tổ chức khoa thi Nho học năm 1075. Đề cương tập trung vào tuyển chọn nhân tài và bước đầu của khoa cử.",
+  "sourceIds": [
+    "src0008"
+  ],
+  "editorialNotes": "=== Bản ghi kế hoạch từ tab Sự kiện (evt) ===\nDòng workbook: 19\nNgười phụ trách: Chưa phân công\nTrạng thái trong bảng: Chưa viết\nNội dung chính trong bảng: Triều Lý Nhân Tông tổ chức khoa thi Nho học năm 1075. Đề cương tập trung vào tuyển chọn nhân tài và bước đầu của khoa cử.\nGhi chú gốc trong bảng:\nHồ sơ: Có nguồn tham khảo, chờ duyệt.\nẢnh đại diện: img0019. Dùng img0025 khi chưa có tệp.\nThời kỳ: per0003\nNhân vật: ppl0017\nĐịa danh: plc0002\nBài: art0033, art0043, art0079\nTimeline: tml0003, tml0007\nẢnh: img0019\nNguồn: src0008\nGhi chú: Các dòng tham chiếu trong workbook được giữ nguyên; chỉ đưa ID vào trường có cấu trúc khi file đích tồn tại và có nội dung.",
+  "periodIds": [
+    "per0003"
+  ],
+  "placeIds": [
+    "plc0002"
+  ],
+  "time": {
+    "sortYear": 1075,
+    "label": "1075"
+  }
+}

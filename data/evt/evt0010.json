@@ -10,7 +10,7 @@
   "sourceIds": [
     "src0004"
   ],
-  "editorialNotes": "Đối chiếu ngày 2026-11-06: Cổng TTĐT Chính phủ, The royal edict on the transfer of the capital of Thăng Long in the year 1010; lời dẫn về việc dời đô năm 1010: https://thanglong.chinhphu.vn/english/the-royal-edict-on-the-transfer-of-the-capital-of-thang-long-in-the-year-1010-110109.htm\nBản nháp chờ nhóm review nội dung; sourceIds đã gắn với bản ghi nguồn. Việc truy xuất được nguồn không phải phê duyệt công bố.\nKhông đưa truyền thuyết rồng hiện vào summary như sự kiện đã kiểm chứng.",
+  "editorialNotes": "Đối chiếu ngày 2026-11-06: Cổng TTĐT Chính phủ, The royal edict on the transfer of the capital of Thăng Long in the year 1010; lời dẫn về việc dời đô năm 1010: https://thanglong.chinhphu.vn/english/the-royal-edict-on-the-transfer-of-the-capital-of-thang-long-in-the-year-1010-110109.htm\nBản nháp chờ nhóm review nội dung; sourceIds đã gắn với bản ghi nguồn. Việc truy xuất được nguồn không phải phê duyệt công bố.\nKhông đưa truyền thuyết rồng hiện vào summary như sự kiện đã kiểm chứng.\n\n=== Bản ghi kế hoạch từ tab Sự kiện (evt) ===\nDòng workbook: 15\nNgười phụ trách: Chưa phân công\nTrạng thái trong bảng: Chưa viết\nNội dung chính trong bảng: Lý Thái Tổ dời đô từ Hoa Lư ra Đại La và đổi tên kinh đô thành Thăng Long.\nGhi chú gốc trong bảng:\nHồ sơ: Có nguồn tham khảo, chờ duyệt.\nẢnh đại diện: img0003. Dùng img0025 khi chưa có tệp.\nThời kỳ: per0003\nNhân vật: ppl0003\nĐịa danh: plc0001, plc0002\nBài: art0003, art0006, art0011, art0013, art0014\nTimeline: tml0003, tml0004, tml0009\nẢnh: img0003\nBản đồ: map0002, map0003\nNguồn: src0004\nTham chiếu ngược: sty0006.",
   "time": {
     "sortYear": 1010,
     "label": "1010"

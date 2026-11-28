@@ -1,0 +1,21 @@
+{
+  "id": "evt0016",
+  "type": "event",
+  "title": "Tiến công Ung – Khâm – Liêm (1075–1076)",
+  "status": "draft",
+  "summary": "Quân Đại Việt mở cuộc tiến công vào các căn cứ của nhà Tống ở Ung, Khâm, Liêm trong chiến tranh 1075–1077.",
+  "sourceIds": [
+    "src0009"
+  ],
+  "editorialNotes": "=== Bản ghi kế hoạch từ tab Sự kiện (evt) ===\nDòng workbook: 21\nNgười phụ trách: Chưa phân công\nTrạng thái trong bảng: Chưa viết\nNội dung chính trong bảng: Quân Đại Việt mở cuộc tiến công vào các căn cứ của nhà Tống ở Ung, Khâm, Liêm trong chiến tranh 1075–1077.\nGhi chú gốc trong bảng:\nHồ sơ: Có nguồn tham khảo, chờ duyệt.\nẢnh đại diện: img0006. Dùng img0025 khi chưa có tệp.\nThời kỳ: per0003\nNhân vật: ppl0004, ppl0017\nĐịa danh: plc0009, plc0010, plc0011\nBài: art0007, art0036, art0037\nTimeline: tml0003, tml0005\nBản đồ: map0007\nNguồn: src0009\nNhân vật bối cảnh bổ sung: ppl0225, ppl0222, ppl0224, ppl0227, ppl0228. Liên kết biên tập, không tự suy ra vai trò chỉ huy.\nGhi chú: Các dòng tham chiếu trong workbook được giữ nguyên; chỉ đưa ID vào trường có cấu trúc khi file đích tồn tại và có nội dung.",
+  "periodIds": [
+    "per0003"
+  ],
+  "personIds": [
+    "ppl0004"
+  ],
+  "time": {
+    "sortYear": 1075,
+    "label": "1075–1076"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "evt0015",
+  "type": "event",
+  "title": "Lập Quốc Tử Giám (1076)",
+  "status": "draft",
+  "summary": "Quốc Tử Giám được lập dưới thời Lý Nhân Tông, đánh dấu sự phát triển của thiết chế giáo dục triều đình.",
+  "sourceIds": [
+    "src0007"
+  ],
+  "editorialNotes": "=== Bản ghi kế hoạch từ tab Sự kiện (evt) ===\nDòng workbook: 20\nNgười phụ trách: Chưa phân công\nTrạng thái trong bảng: Chưa viết\nNội dung chính trong bảng: Quốc Tử Giám được lập dưới thời Lý Nhân Tông, đánh dấu sự phát triển của thiết chế giáo dục triều đình.\nGhi chú gốc trong bảng:\nHồ sơ: Có nguồn tham khảo, chờ duyệt.\nẢnh đại diện: img0019. Dùng img0025 khi chưa có tệp.\nThời kỳ: per0003\nNhân vật: ppl0017\nĐịa danh: plc0007\nBài: art0033, art0043, art0079\nTimeline: tml0003, tml0007\nẢnh: img0019\nBản đồ: map0003\nNguồn: src0007\nGhi chú: Các dòng tham chiếu trong workbook được giữ nguyên; chỉ đưa ID vào trường có cấu trúc khi file đích tồn tại và có nội dung.",
+  "periodIds": [
+    "per0003"
+  ],
+  "time": {
+    "sortYear": 1076,
+    "label": "1076"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "evt0039",
+  "type": "event",
+  "title": "Trần Nhân Tông tu hành và sự hình thành Trúc Lâm",
+  "status": "draft",
+  "summary": "Trần Nhân Tông gắn với đời sống tu hành tại Yên Tử và sự phát triển truyền thống Trúc Lâm cuối thế kỷ XIII – đầu XIV.",
+  "sourceIds": [
+    "src0025"
+  ],
+  "editorialNotes": "=== Bản ghi kế hoạch từ tab Sự kiện (evt) ===\nDòng workbook: 44\nNgười phụ trách: Chưa phân công\nTrạng thái trong bảng: Chưa viết\nNội dung chính trong bảng: Trần Nhân Tông gắn với đời sống tu hành tại Yên Tử và sự phát triển truyền thống Trúc Lâm cuối thế kỷ XIII – đầu XIV.\nGhi chú gốc trong bảng:\nHồ sơ: Có nguồn tham khảo, chờ duyệt.\nẢnh đại diện: img0011. Dùng img0025 khi chưa có tệp.\nThời kỳ: per0004\nNhân vật: ppl0023\nĐịa danh: plc0019\nBài: art0016, art0071\nTimeline: tml0001, tml0008\nẢnh: img0011\nBản đồ: map0009\nNguồn: src0025, src0038\nKhông gán một ngày thành lập tông phái nếu nguồn không xác định.\nGhi chú: Các dòng tham chiếu trong workbook được giữ nguyên; chỉ đưa ID vào trường có cấu trúc khi file đích tồn tại và có nội dung.",
+  "periodIds": [
+    "per0004"
+  ]
+}
