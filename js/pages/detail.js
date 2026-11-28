@@ -5,6 +5,7 @@ import {
   loadSlugIndex,
 } from "../core/detail-routes.js";
 import { renderArticle } from "../engine/article-renderer.js";
+import { initArticleContents } from "../components/article-contents.js";
 
 const CATEGORIES = {
   "/chuyen-su/su-kien": ["Sự kiện lịch sử", "CHUYỆN SỬ"],
@@ -122,7 +123,8 @@ async function initDetail() {
       label: item.label || item.targetId,
       href: detailPath(item.targetId, pathsById),
     }));
-    renderArticle(document.getElementById("detail-article"), entity, article, {
+    const articleElement = document.getElementById("detail-article");
+    renderArticle(articleElement, entity, article, {
       sources,
       related,
     });
@@ -132,8 +134,9 @@ async function initDetail() {
       entity.summary || entity.title;
     document.getElementById("detail-breadcrumb-current").textContent =
       entity.title;
-    document.getElementById("detail-article").hidden = false;
+    articleElement.hidden = false;
     document.getElementById("detail-back").hidden = false;
+    initArticleContents(articleElement);
   } catch (error) {
     showError(error);
   } finally {

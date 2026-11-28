@@ -4,6 +4,59 @@ const firstPath = "/chuyen-su/su-kien/thong-nhat-dat-nuoc-lap-dai-co-viet-968";
 const secondPath = "/chuyen-su/su-kien/bien-co-cung-dinh-nha-dinh-979";
 const personPath = "/chuyen-su/nhan-vat/dinh-bo-linh";
 
+async function attachSampleArticle(page) {
+  await page.route("**/data/evt/evt0001.json", async route => {
+    const response = await route.fetch();
+    await route.fulfill({ json: { ...await response.json(), articleId: "art0001" } });
+  });
+}
+
+test("mục lục lấy đúng đề mục và sao chép liên kết trên điện thoại", async ({ page, context }) => {
+  await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await attachSampleArticle(page);
+  await page.goto(firstPath);
+
+  const contents = page.getByRole("navigation", { name: "Mục lục bài viết" });
+  await expect(contents.getByRole("link")).toHaveText([
+    "Bối cảnh lịch sử",
+    "Từ cát cứ đến thống nhất",
+    "Lập triều Đinh và đặt quốc hiệu Đại Cồ Việt",
+    "Ý nghĩa của sự kiện",
+    "Nguồn tư liệu",
+  ]);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+
+  const target = contents.getByRole("link", { name: "Lập triều Đinh và đặt quốc hiệu Đại Cồ Việt" });
+  await target.focus();
+  await page.keyboard.press("Enter");
+  await expect(page).toHaveURL(`${firstPath}#sec002`);
+  await expect(page.locator("#sec002 h2")).toBeInViewport();
+  await contents.getByRole("button", { name: /Sao chép liên kết đến mục Ý nghĩa/ }).click();
+  await expect(contents.getByRole("status")).toContainText("Đã sao chép");
+  const copied = await page.evaluate(() => navigator.clipboard.readText());
+  expect(copied).toBe(new URL(`${firstPath}#sec003`, page.url()).href);
+});
+
+test("liên kết tới đề mục cuộn đúng vị trí sau khi tải dữ liệu", async ({ page }) => {
+  await attachSampleArticle(page);
+  await page.goto(`${firstPath}#sec002`);
+  await expect(page.locator("#sec002 h2")).toBeInViewport();
+  await page.reload();
+  await expect(page.locator("#sec002 h2")).toBeInViewport();
+});
+
+test("bài chỉ có tóm tắt ẩn mục lục; mã đề mục sai không làm mất bài", async ({ page }) => {
+  await page.goto(`${firstPath}#khong-co-muc-nay`);
+  await expect(page.locator("#detail-article")).toBeVisible();
+  await expect(page.getByRole("navigation", { name: "Mục lục bài viết" })).toHaveCount(0);
+
+  await attachSampleArticle(page);
+  await page.reload();
+  await expect(page.getByRole("navigation", { name: "Mục lục bài viết" })).toBeVisible();
+  await expect(page.locator("#detail-error")).toBeHidden();
+});
+
 for (const [path, id, title, year] of [
   [firstPath, "evt0001", "Thống nhất đất nước, lập Đại Cồ Việt (968)", "968"],
   [secondPath, "evt0002", "Biến cố cung đình nhà Đinh (979)", "979"],
