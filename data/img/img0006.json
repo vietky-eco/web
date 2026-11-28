@@ -1,0 +1,19 @@
+{
+  "id": "img0006",
+  "title": "Phong cảnh Hoa Lư",
+  "status": "draft",
+  "sourceIds": [
+    "src0040"
+  ],
+  "path": "assets/img/img0006.webp",
+  "alt": "Phong cảnh Hoa Lư, Ninh Bình, với các dãy núi phía xa",
+  "width": 1280,
+  "height": 960,
+  "caption": "Núi đá và mặt nước ở Hoa Lư, Ninh Bình.",
+  "credit": "Deborah Hong",
+  "license": "CC BY 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+  "kind": "photograph",
+  "reviewStatus": "pending",
+  "editorialNotes": "Ảnh chụp năm 2007, được thu nhỏ và chuyển sang WebP."
+}

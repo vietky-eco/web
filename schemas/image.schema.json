@@ -58,6 +58,14 @@
       "minLength": 1,
       "pattern": "\\S"
     },
+    "width": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "height": {
+      "type": "integer",
+      "minimum": 1
+    },
     "caption": {
       "type": "string",
       "minLength": 1,
@@ -72,6 +80,11 @@
       "type": "string",
       "minLength": 1,
       "pattern": "\\S"
+    },
+    "licenseUrl": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://"
     },
     "fallbackImageId": {
       "type": "string",

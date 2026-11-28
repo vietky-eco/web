@@ -5,6 +5,9 @@ import {
   loadSlugIndex,
 } from "../core/detail-routes.js";
 import { renderArticle } from "../engine/article-renderer.js";
+import { initArticleContents } from "../components/article-contents.js";
+import { initArticleGlossary } from "../components/article-glossary.js";
+import { initArticleAudio, isValidArticleAudio } from "../components/article-audio.js";
 
 const CATEGORIES = {
   "/chuyen-su/su-kien": ["Sự kiện lịch sử", "CHUYỆN SỬ"],
@@ -93,6 +96,23 @@ async function loadSources(entity, article) {
   );
 }
 
+async function loadArticleImages(article) {
+  const ids = new Set([
+    article?.coverImageId,
+    article?.contextImageId,
+    ...(article?.sections ?? []).map(section => section.imageId),
+  ]);
+  ids.delete(undefined);
+  const images = await Promise.all([...ids].map(async id => {
+    const image = await loadContent(id).catch(() => null);
+    if (!image) return [id, null];
+    const sourceId = image.sourceIds?.[0];
+    const source = sourceId ? await loadContent(sourceId).catch(() => null) : null;
+    return [id, { ...image, sourceUrl: source?.url }];
+  }));
+  return new Map(images);
+}
+
 function showError(error) {
   const notFound =
     error instanceof DetailRouteError ||
@@ -116,15 +136,27 @@ async function initDetail() {
     if (article && article.entityId !== entity.id) {
       throw new Error("Bài viết không khớp với tư liệu đang mở.");
     }
-    const sources = await loadSources(entity, article);
+    const relatedIds = new Set((entity.related ?? []).map(item => item.targetId));
+    const personIds = [...new Set(entity.personIds ?? [])]
+      .filter(personId => personId !== entity.id && !relatedIds.has(personId));
+    const [sources, images, people] = await Promise.all([
+      loadSources(entity, article),
+      loadArticleImages(article),
+      Promise.all(personIds.map(personId => loadContent(personId).catch(() => null))),
+    ]);
     const pathsById = indexDetailPaths(index);
     const related = (entity.related ?? []).map((item) => ({
       label: item.label || item.targetId,
       href: detailPath(item.targetId, pathsById),
     }));
-    renderArticle(document.getElementById("detail-article"), entity, article, {
+    const articleElement = document.getElementById("detail-article");
+    renderArticle(articleElement, entity, article, {
       sources,
       related,
+      people: people.filter(person => person?.type === "person" && person.title)
+        .map(person => ({ label: person.title, href: detailPath(person.id, pathsById) })),
+      cover: images.get(article?.coverImageId),
+      sectionImages: images,
     });
     updateCategory(path, id);
     document.title = `${entity.title} | Việt Ký`;
@@ -132,8 +164,16 @@ async function initDetail() {
       entity.summary || entity.title;
     document.getElementById("detail-breadcrumb-current").textContent =
       entity.title;
-    document.getElementById("detail-article").hidden = false;
+    articleElement.hidden = false;
     document.getElementById("detail-back").hidden = false;
+    initArticleContents(articleElement);
+    if (article?.glossary?.length) {
+      articleElement.classList.add("vk-detail-article--glossary");
+      initArticleGlossary(articleElement, article.glossary);
+    }
+    if (isValidArticleAudio(article?.audio)) {
+      initArticleAudio(articleElement, article.audio);
+    }
   } catch (error) {
     showError(error);
   } finally {

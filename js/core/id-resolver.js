@@ -1,4 +1,4 @@
-// JSON nội dung; img/map chưa có quy ước thư mục JSON metadata trong dự án.
+// Bản ghi JSON được tổ chức theo tiền tố ID.
 const RESOURCE_DIRECTORIES = {
   evt: "evt",
   per: "per",
@@ -8,7 +8,8 @@ const RESOURCE_DIRECTORIES = {
   cul: "cul",
   art: "art",
   sty: "sty",
-  tml: "tml"
+  tml: "tml",
+  img: "img"
 };
 
 const DATA_BASE_URL = new URL("../../data/", import.meta.url);

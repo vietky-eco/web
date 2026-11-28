@@ -1,0 +1,22 @@
+{
+  "id": "art0081",
+  "entityId": "plc0001",
+  "title": "Hoa Lư",
+  "status": "draft",
+  "context": "Nhắc đến Hoa Lư, người ta thường nhớ đến các đền thờ và những dãy núi bao quanh khu di tích. Để hình dung kinh đô thời Đinh và Tiền Lê, có thể bắt đầu từ câu chuyện chọn đất dựng đô rồi nhìn vào những dấu tích tìm thấy dưới lòng đất.",
+  "sections": [
+    {
+      "id": "sec001",
+      "heading": "Từ căn cứ đến kinh đô",
+      "body": "Năm 968, sau khi lên ngôi, Đinh Bộ Lĩnh đặt kinh đô tại Hoa Lư. Đây là nơi ông từng xây dựng lực lượng. Theo Phạm Như Thơm, chỗ dựa sẵn có ở địa phương và địa thế có núi, sông bao quanh giúp giải thích lựa chọn ấy.\n\nHoa Lư tiếp tục là kinh đô dưới thời Tiền Lê. Năm 1010, Lý Thái Tổ quyết định dời đô ra Thăng Long. Tuy triều đình đã chuyển đi, dấu tích của các công trình thời trước vẫn còn trong lòng đất Hoa Lư."
+    },
+    {
+      "id": "sec002",
+      "heading": "Dấu tích xây dựng kinh đô",
+      "body": "Trong đợt khai quật bắt đầu năm 2009 ở khu trung tâm Hoa Lư, các nhà khảo cổ ghi nhận dấu tích móng tường, nền đất nện và nhiều mảnh vật liệu kiến trúc. Những phát hiện này cho thấy người xưa đã gia cố nền và dùng nhiều loại gạch, ngói cho các công trình tại đây.\n\nMột hiện vật tiêu biểu là gạch đất nung in chữ “Đại Việt quốc quân thành chuyên”. Bảo tàng Lịch sử quốc gia giới thiệu đây là loại gạch dùng để xây thành thời Đinh và Tiền Lê. Hàng chữ trên bề mặt giúp nhận diện loại gạch này trong số các vật liệu tìm được ở Hoa Lư.",
+      "imageId": "img0002"
+    }
+  ],
+  "sourceIds": ["src0001", "src0004", "src0033", "src0036", "src0037"],
+  "editorialNotes": "Bản nháp địa danh Hoa Lư. src0037 là báo cáo kết quả khai quật bước đầu. Ảnh img0002 minh họa loại hiện vật mô tả trong bài."
+}

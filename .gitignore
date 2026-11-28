@@ -19,6 +19,12 @@ dist/
 lhci-report/
 playwright-report/
 test-results/
+playwright-report-deploy/
+test-results-deploy/
+test-results-review/
+
+# Local audio masters
+assets/audio/*.wav
 
 .vercel
 .env*

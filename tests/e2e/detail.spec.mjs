@@ -3,6 +3,175 @@ import { expect, test } from "@playwright/test";
 const firstPath = "/chuyen-su/su-kien/thong-nhat-dat-nuoc-lap-dai-co-viet-968";
 const secondPath = "/chuyen-su/su-kien/bien-co-cung-dinh-nha-dinh-979";
 const personPath = "/chuyen-su/nhan-vat/dinh-bo-linh";
+const hoaLuPath = "/dau-xua/dia-danh/hoa-lu";
+
+async function attachSampleArticle(page, entity = "evt/evt0001", articleId = "art0001") {
+  await page.route(`**/data/${entity}.json`, async route => {
+    const response = await route.fetch();
+    await route.fulfill({ json: { ...await response.json(), articleId } });
+  });
+}
+
+test("ảnh bài viết có chú thích và bài vẫn đọc được khi ảnh lỗi", async ({ page }) => {
+  await attachSampleArticle(page);
+  await attachSampleArticle(page, "plc/plc0001", "art0081");
+  await page.goto(firstPath);
+  const map = page.locator("#detail-context > p + figure:has(+ p)");
+  await map.scrollIntoViewIfNeeded();
+  await expect.poll(() => map.getByRole("img", {name: /Lược đồ/}).evaluate(image => image.naturalWidth)).toBe(960);
+  await expect(map.locator("figcaption")).toContainText("Phạm vi công cộng");
+  const cover = page.locator("#sec003 figure");
+  await cover.scrollIntoViewIfNeeded();
+  await expect(cover.getByRole("img", { name: /Phong cảnh Hoa Lư/ })).toBeVisible();
+  await expect.poll(() => cover.getByRole("img").evaluate(image => image.naturalWidth)).toBeGreaterThan(0);
+  await expect(cover.locator("figcaption")).toContainText("Núi đá và mặt nước ở Hoa Lư");
+  await expect(cover.locator("figcaption")).not.toContainText(/WebP|Ảnh chụp năm/);
+  await expect(cover.getByRole("link", { name: "Ảnh: Deborah Hong" })).toHaveAttribute(
+    "href", "https://commons.wikimedia.org/wiki/File:Hoa_Lu_landscape.jpg",
+  );
+  await expect(page.locator("#detail-content section > p + figure + p")).toHaveCount(3);
+
+  await expect(page.locator("#detail-cover")).toBeHidden();
+  await page.getByRole("link", { name: "Tìm hiểu thêm về kinh đô Hoa Lư" }).click();
+  await expect(page).toHaveURL(hoaLuPath);
+  const inlineFigure = page.locator("#sec002 figure");
+  await inlineFigure.scrollIntoViewIfNeeded();
+  await expect.poll(() => inlineFigure.getByRole("img").evaluate(image => image.naturalWidth)).toBeGreaterThan(0);
+  await expect(inlineFigure.getByRole("link", { name: "Ảnh: Nguyễn Thanh Quang" })).toHaveAttribute(
+    "href", /^https:\/\/commons\.wikimedia\.org\/wiki\/File:/,
+  );
+  await expect(inlineFigure.getByRole("link", { name: "CC BY-SA 3.0" })).toHaveAttribute(
+    "href", "https://creativecommons.org/licenses/by-sa/3.0/",
+  );
+
+  await page.route("**/assets/img/img0006.webp", route => route.fulfill({ status: 404 }));
+  await page.goto(firstPath);
+  await expect(page.locator("#sec003")).toBeVisible();
+  await cover.scrollIntoViewIfNeeded();
+  await expect(cover).toBeHidden();
+});
+
+test("chú giải chỉ gắn ở lần xuất hiện đầu và hỗ trợ chuột, bàn phím", async ({ page }) => {
+  await attachSampleArticle(page);
+  await page.goto(firstPath);
+  const term = page.getByRole("button", { name: "Trần Lãm", exact: true });
+  await expect(term).toHaveCount(1);
+  const tooltip = page.getByRole("tooltip");
+  await term.hover();
+  await expect(tooltip).toContainText("Trần Minh Công");
+  await page.keyboard.press("Escape");
+  await expect(tooltip).toBeHidden();
+  await page.getByRole("button", { name: "Ngô Xương Văn" }).focus();
+  await page.keyboard.press("Tab");
+  await expect(term).toBeFocused();
+  await expect(tooltip).toContainText("Bố Hải Khẩu");
+});
+
+test.describe("chú giải trên thiết bị cảm ứng", () => {
+  test.use({ hasTouch: true, viewport: { width: 390, height: 844 } });
+  test("chạm để mở và đóng chú giải", async ({ page }) => {
+    await attachSampleArticle(page);
+    await page.goto(firstPath);
+    const term = page.getByRole("button", { name: "cát cứ", exact: true });
+    await term.tap();
+    const tooltip = page.getByRole("tooltip");
+    await expect(tooltip).toBeVisible();
+    const box = await tooltip.boundingBox();
+    expect(box.x).toBeGreaterThanOrEqual(0);
+    expect(box.x + box.width).toBeLessThanOrEqual(390);
+    await term.tap();
+    await expect(tooltip).toBeHidden();
+  });
+});
+
+test("trình phát Nghe câu chuyện hỗ trợ phát, tạm dừng, tua, tốc độ và ẩn khi không có audio", async ({ page }) => {
+  await page.goto(firstPath);
+
+  const player = page.getByRole("region", { name: "Nghe câu chuyện" });
+  await expect(player).toBeVisible();
+
+  const audio = player.locator("audio");
+  await expect(audio).toHaveAttribute("preload", "none");
+  await expect(audio).not.toHaveAttribute("autoplay", "");
+  expect(await audio.evaluate(el => el.paused)).toBe(true);
+  await expect(player).toContainText("0:00 / 5:05");
+
+  const playButton = player.getByRole("button", { name: "Phát câu chuyện" });
+  await playButton.click();
+  await expect(player.getByRole("button", { name: "Tạm dừng" })).toBeVisible();
+  await expect.poll(() => audio.evaluate(el => !el.paused)).toBe(true);
+  await expect.poll(() => audio.evaluate(el => Number.isFinite(el.duration) && el.duration > 0)).toBe(true);
+
+  const seek = player.getByRole("slider", { name: "Tua thời gian phát" });
+  await seek.fill("50");
+  await expect.poll(() => audio.evaluate(el => el.currentTime)).toBeGreaterThan(100);
+
+  const speed = player.getByRole("button", { name: /Tốc độ phát/ });
+  await expect(speed).toHaveText("1x");
+  await speed.click();
+  await expect(speed).toHaveText("1.25x");
+  expect(await audio.evaluate(el => el.playbackRate)).toBe(1.25);
+
+  await player.getByRole("button", { name: "Tạm dừng" }).click();
+  await expect(player.getByRole("button", { name: "Phát câu chuyện" })).toBeVisible();
+  expect(await audio.evaluate(el => el.paused)).toBe(true);
+
+  await page.goto(secondPath);
+  await expect(page.locator("#detail-article")).toBeVisible();
+  await expect(page.locator(".vk-detail-audio")).toHaveCount(0);
+});
+
+test("mục lục lấy đúng đề mục và sao chép liên kết trên điện thoại", async ({ page, context }) => {
+  await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await attachSampleArticle(page);
+  await page.goto(firstPath);
+
+  const contents = page.getByRole("navigation", { name: "Mục lục bài viết" });
+  await expect(contents.getByRole("link")).toHaveText([
+    "Bối cảnh lịch sử",
+    "Từ căn cứ Hoa Lư đến thống nhất",
+    "Năm 968, triều Đinh ra đời",
+    "Vì sao chọn Hoa Lư làm kinh đô?",
+    "Nguồn tư liệu",
+  ]);
+  await expect(contents.getByRole("button")).toHaveCount(0);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+
+  const target = contents.getByRole("link", { name: "Năm 968, triều Đinh ra đời" });
+  await target.focus();
+  await page.keyboard.press("Enter");
+  await expect(page).toHaveURL(`${firstPath}#sec002`);
+  await expect(page.locator("#sec002 h2")).toBeInViewport();
+  const section = page.locator("#sec002");
+  await section.getByRole("button", { name: /Sao chép liên kết đến mục Năm 968/ }).click();
+  await expect(section.getByRole("status")).toHaveText("Đã sao chép liên kết");
+  const copied = await page.evaluate(() => navigator.clipboard.readText());
+  expect(copied).toBe(new URL(`${firstPath}#sec002`, page.url()).href);
+});
+
+test("liên kết tới đề mục cuộn đúng vị trí sau khi tải dữ liệu", async ({ page }) => {
+  await attachSampleArticle(page);
+  await page.goto(`${firstPath}#sec002`);
+  await expect(page.locator("#sec002 h2")).toBeInViewport();
+  await page.reload();
+  await expect(page.locator("#sec002 h2")).toBeInViewport();
+});
+
+test("bài chỉ có tóm tắt ẩn mục lục; mã đề mục sai không làm mất bài", async ({ page }) => {
+  await page.route("**/data/evt/evt0001.json", async route => {
+    const response = await route.fetch();
+    await route.fulfill({ json: { ...await response.json(), articleId: null } });
+  });
+  await page.goto(`${firstPath}#khong-co-muc-nay`);
+  await expect(page.locator("#detail-article")).toBeVisible();
+  await expect(page.getByRole("navigation", { name: "Mục lục bài viết" })).toHaveCount(0);
+
+  await attachSampleArticle(page);
+  await page.reload();
+  await expect(page.getByRole("navigation", { name: "Mục lục bài viết" })).toBeVisible();
+  await expect(page.locator("#detail-error")).toBeHidden();
+});
 
 for (const [path, id, title, year] of [
   [firstPath, "evt0001", "Thống nhất đất nước, lập Đại Cồ Việt (968)", "968"],
@@ -19,7 +188,7 @@ for (const [path, id, title, year] of [
     await expect(page.locator("#detail-summary")).not.toBeEmpty();
     await expect(page.locator("#detail-meta")).toHaveText(year);
     await expect(page.locator("#detail-sources")).toBeVisible();
-    await expect(page.locator("#detail-source-list a")).toHaveAttribute("href", /^https:\/\/baotanglichsu.vn\//);
+    await expect(page.locator('#detail-source-list a[href^="https://baotanglichsu.vn/"]').first()).toBeVisible();
     await expect(page.locator("#detail-loading")).toBeHidden();
     await expect(page.locator("#detail-error")).toBeHidden();
     await expect(page).toHaveTitle(`${title} | Việt Ký`);
@@ -34,10 +203,37 @@ for (const [path, id, title, year] of [
 
 test("liên kết bài liên quan dùng slug và điều hướng đúng", async ({ page }) => {
   await page.goto(firstPath);
-  await page.locator("#detail-related-list a").click();
+  await page.getByRole("link", { name: "Biến cố kế vị cuối thời Đinh" }).click();
   await expect(page).toHaveURL(secondPath);
   await expect(page.locator("#detail-title")).toHaveText("Biến cố cung đình nhà Đinh (979)");
   await expect(page.locator("#detail-category-link")).toHaveAttribute("href", "/chuyen-su/su-kien");
+});
+
+test("nhân vật liên quan lấy từ personIds và mở được trang nhân vật", async ({ page }) => {
+  await page.goto(firstPath);
+  const people = page.getByRole("navigation", { name: "Nhân vật liên quan" });
+  const person = people.getByRole("link", { name: "Đinh Bộ Lĩnh (Đinh Tiên Hoàng)" });
+  await expect(person).toHaveCount(1);
+  await person.click();
+  await expect(page.locator("#detail-title")).toHaveText("Đinh Bộ Lĩnh (Đinh Tiên Hoàng)");
+});
+
+test("personIds trùng related không lặp liên kết; nguồn nhân vật lỗi không làm mất bài", async ({ page }) => {
+  await page.route("**/data/evt/evt0001.json", async route => {
+    const response = await route.fetch();
+    const entity = await response.json();
+    await route.fulfill({ json: {
+      ...entity,
+      personIds: ["ppl0001", "ppl0001", "ppl9999"],
+      related: [...entity.related, { targetId: "ppl0001", label: "Đinh Bộ Lĩnh" }],
+    } });
+  });
+  await page.route("**/data/ppl/ppl9999.json", route => route.fulfill({ status: 404 }));
+  await page.goto(firstPath);
+  await expect(page.locator("#detail-title")).toContainText("Đại Cồ Việt");
+  await expect(page.locator("#detail-related-list").getByRole("link", { name: "Đinh Bộ Lĩnh" })).toHaveCount(1);
+  await expect(page.locator("#detail-people")).toHaveCount(0);
+  await expect(page.locator("#detail-error")).toBeHidden();
 });
 
 test("URL cũ ?id= và thực thể thời kỳ vẫn hoạt động", async ({ page }) => {
@@ -116,6 +312,10 @@ test("renderer đọc articleId, context, sections và hiển thị văn bản a
 });
 
 test("nguồn lỗi không làm mất bài; chặn URL nguồn không an toàn", async ({ page }) => {
+  await page.route("**/data/evt/evt0001.json", async route => {
+    const response = await route.fetch();
+    await route.fulfill({ json: { ...await response.json(), articleId: null } });
+  });
   await page.route("**/data/src/src0001.json", route => route.fulfill({ json: {
     id: "src0001", title: "Nguồn thử nghiệm", url: "javascript:alert(1)",
   } }));
